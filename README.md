@@ -10,3 +10,7 @@
 zombie_game->Properties->VC++ Directories
 
 ![SFML](guide.png)
+
+After changing your include and lib directories run:
+```git update-index --assume-unchanged zombie_game/zombie_game.vcxproj```
+to ignore any changes made to the vcxproj file
