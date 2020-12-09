@@ -72,13 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\TI\SFML-2.5.1-windows-vc15-32-bit\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\TI\SFML-2.5.1-windows-vc15-32-bit\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>Dependencies\SFML-2.5.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>Dependencies\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>E:\TI\SFML-2.5.1-windows-vc15-32-bit\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\TI\SFML-2.5.1-windows-vc15-32-bit\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>Dependencies\SFML-2.5.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>Dependencies\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
