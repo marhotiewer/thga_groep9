@@ -6,11 +6,3 @@
 ## Dependencies
 
 * [SFML-2.5.1 Visual C++ 15 (2017) - 32-bit](https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip)
-
-zombie_game->Properties->VC++ Directories
-
-![SFML](guide.png)
-
-After changing your include and lib directories run:
-```git update-index --assume-unchanged zombie_game/zombie_game.vcxproj```
-to ignore any changes made to the vcxproj file

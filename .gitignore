@@ -3,9 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# Custom stuff
-zombie_game/zombie_game.vcxproj
-
 # User-specific files
 *.rsuser
 *.suo
