@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Include SFML debugging files
+!zombie_game/Dependencies/SFML-2.5.1/lib/*.pdb
