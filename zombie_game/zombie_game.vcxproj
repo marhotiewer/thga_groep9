@@ -45,12 +45,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Dependencies/SFML-2.5.1/include;$(IncludePath)</IncludePath>
+    <IncludePath>Dependencies/nlohmann;Dependencies/SFML-2.5.1/include;Dependencies/macaron;$(IncludePath)</IncludePath>
     <LibraryPath>Dependencies/SFML-2.5.1/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>Dependencies/SFML-2.5.1/include;$(IncludePath)</IncludePath>
+    <IncludePath>Dependencies/nlohmann;Dependencies/SFML-2.5.1/include;Dependencies/macaron;$(IncludePath)</IncludePath>
     <LibraryPath>Dependencies/SFML-2.5.1/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
