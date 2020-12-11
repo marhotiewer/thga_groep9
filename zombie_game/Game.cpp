@@ -4,7 +4,7 @@
 #include <iostream>
 #include <Windows.h>
 #include "json.hpp"
-#include "Base64.h"
+#include "base64.hpp"
 
 Game::Game()
 {
