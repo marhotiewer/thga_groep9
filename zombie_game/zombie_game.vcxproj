@@ -45,8 +45,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>Dependencies/nlohmann;Dependencies/SFML-2.5.1/include;Dependencies/macaron;$(IncludePath)</IncludePath>
-    <LibraryPath>Dependencies/SFML-2.5.1/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\libs\nlohmann;$(SolutionDir)\libs\sfml-2.5.1\include;$(SolutionDir)\libs\macaron;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\libs\sfml-2.5.1\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -64,10 +65,10 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;vorbisfile.lib;vorbisenc.lib;opengl32.lib;freetype.lib;openal32.lib;vorbis.lib;winmm.lib;gdi32.lib;flac.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;vorbisfile.lib;vorbisenc.lib;opengl32.lib;openal32.lib;freetype.lib;vorbis.lib;ws2_32.lib;winmm.lib;gdi32.lib;flac.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(ProjectDir)Dependencies\SFML-2.5.1\openal32.dll" "$(OutDir)"</Command>
+      <Command>xcopy /y "$(SolutionDir)libs\sfml-2.5.1\extlib\openal32.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
