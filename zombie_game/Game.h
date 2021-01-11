@@ -6,7 +6,9 @@
 #include <windows.h>
 #include <vector>
 
-#include "GameObject.h"
+#include "Drawable.h"
+#include "Wall.h"
+#include "Floor.h"
 
 class Game {
 	public:
@@ -18,9 +20,10 @@ class Game {
 		void update();
 		void render();
 
-		std::vector<std::unique_ptr<GameObject>> gameObjects;
+		std::vector<Drawable*> drawables;
 	private:
 		sf::RenderWindow* window;
+		AssetManager assets;
 		sf::Event event;
 };
 
