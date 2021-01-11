@@ -68,6 +68,10 @@ void Game::update()
 		delta += sf::Vector2f(+1.0f + speed, 0.0f);
 	}
 
+	if (delta.x != 0.f && delta.y != 0.f) {
+		delta *= 0.75f;
+	}
+
 	this->player->updateLookDirection(*this->window);
 	this->viewport.move(delta);
 	this->player->move(delta);
