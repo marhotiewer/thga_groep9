@@ -7,7 +7,7 @@
 class Wall : public Static
 {
 	public:
-		Wall(AssetManager& assets, sf::Vector2f pos, sf::Vector2f size);
+		Wall(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 };
 
 #endif

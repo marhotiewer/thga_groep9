@@ -6,11 +6,11 @@ Game::Game()
 	this->window->setVerticalSyncEnabled(true);
 	this->event = sf::Event();
 
-	this->drawables.push_back(new Floor(this->assets, sf::Vector2f(0, 0), sf::Vector2f(640, 480)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2f(10, 480)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2f(10, 480)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2f(620, 10)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2f(620, 10)));
+	this->drawables.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
+	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));
+	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));
+	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));
+	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));
 }
 
 Game::~Game()
