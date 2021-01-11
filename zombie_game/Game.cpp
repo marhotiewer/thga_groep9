@@ -49,18 +49,23 @@ void Game::update()
 {
 	this->pollEvents();
 	sf::Vector2f delta(0.f, 0.f);
+	float speed = 0.f;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+		speed = 1.f;
+	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		delta += sf::Vector2f(0.f, -1.0f);
+		delta += sf::Vector2f(0.f, -1.0f - speed);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		delta += sf::Vector2f(-1.0f, 0.0f);
+		delta += sf::Vector2f(-1.0f - speed, 0.0f);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		delta += sf::Vector2f(0.f, +1.0f);
+		delta += sf::Vector2f(0.f, +1.0f + speed);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		delta += sf::Vector2f(+1.0f, 0.0f);
+		delta += sf::Vector2f(+1.0f + speed, 0.0f);
 	}
 
 	this->player->updateLookDirection(*this->window);
