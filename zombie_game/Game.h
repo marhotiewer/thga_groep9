@@ -2,13 +2,15 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include <functional>
+#include <algorithm>
 #include <iostream>
-#include <windows.h>
 #include <vector>
 
 #include "Drawable.h"
 #include "Wall.h"
 #include "Floor.h"
+#include "Player.h"
 
 class Game {
 	public:
@@ -24,7 +26,9 @@ class Game {
 	private:
 		sf::RenderWindow* window;
 		AssetManager assets;
+		sf::View viewport;
 		sf::Event event;
+		Player *player;
 };
 
 #endif GAME_H

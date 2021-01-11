@@ -6,3 +6,8 @@ Floor::Floor(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size) : Static
 	this->sprite.setTextureRect(sf::IntRect(0, 0, size.x, size.y));
 	this->sprite.setPosition(pos);
 }
+
+bool Floor::isColliding(Drawable& drawable)
+{
+	return false;
+}
