@@ -4,6 +4,7 @@ Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 {
 	this->sprite.setTexture(assets.skeletonSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(17, 15, 30, 46));
+	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
 	this->sprite.setPosition(pos);
 }
 
@@ -23,15 +24,20 @@ void Player::updateLookDirection(sf::RenderWindow &window)
 	int anglediff = (angle + 180 + 360) % 360 - 180;
 
 	if (anglediff <= 45 && anglediff >= -45) {
-		std::cout << "facing right\n";
+		// facing right
+		this->sprite.setTextureRect(sf::IntRect(21, 207, 20, 47));
 	}
 	else if (anglediff <= -45 && anglediff >= -145) {
-		std::cout << "facing up\n";
+		// facing up
+		this->sprite.setTextureRect(sf::IntRect(17, 15, 30, 46));
 	}
 	else if (anglediff <= 145 && anglediff >= -145) {
-		std::cout << "facing down\n";
+		// facing down
+		this->sprite.setTextureRect(sf::IntRect(17, 143, 30, 47));
 	}
 	else {
-		std::cout << "facing left\n";
+		// facing left
+		this->sprite.setTextureRect(sf::IntRect(23, 79, 20, 47));
 	}
+	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
 }
