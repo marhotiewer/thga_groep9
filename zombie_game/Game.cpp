@@ -43,8 +43,6 @@ void Game::pollEvents()
 	}
 }
 
-#include <iostream>
-
 void Game::update()
 {
 	this->pollEvents();
@@ -87,10 +85,24 @@ void Game::update()
 
 void Game::render()
 {
+	const sf::Vertex vertexes[][2] = {
+		{
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, 0)).x, window->mapPixelToCoords(sf::Vector2i(0, 0)).y), sf::Color::Red),
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, this->window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, this->window->getSize().y)).y), sf::Color::Red)
+		},
+		{
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, 0)).x, window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, 0)).y), sf::Color::Red),
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, this->window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(0, this->window->getSize().y)).y), sf::Color::Red)
+		}
+	};
+
 	this->window->clear();
 	this->window->setView(this->viewport);
 	for (Drawable *drawable : this->drawables) {
 		drawable->draw(this->window);
+	}
+	for (const sf::Vertex *vertex : vertexes) {
+		this->window->draw(vertex, 2, sf::Lines);
 	}
 	this->window->display();
 }
