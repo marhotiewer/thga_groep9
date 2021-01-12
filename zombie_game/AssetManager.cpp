@@ -1297,6 +1297,6 @@ AssetManager::AssetManager()
 
     this->floorTexture.setRepeated(true);
     this->floorTexture.loadFromMemory(grass_map, sizeof(grass_map));
-
+    
     this->skeletonSpriteMap.loadFromFile("image.png");
 }

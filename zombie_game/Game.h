@@ -19,7 +19,7 @@ class Game {
 
 		bool running();
 		void pollEvents();
-		void update();
+		void update(float deltaTime);
 		void render();
 
 		std::vector<Drawable*> drawables;
@@ -29,6 +29,7 @@ class Game {
 		sf::View viewport;
 		sf::Event event;
 		Player *player;
+		bool noKeyPressed = false;
 };
 
 #endif GAME_H

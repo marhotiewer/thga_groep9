@@ -3,6 +3,8 @@
 Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 {
 	this->sprite.setTexture(assets.skeletonSpriteMap);
+	this->playerForward[0] = sf::IntRect(17, 15, 30, 47); this->playerForward[1] = sf::IntRect(81, 15, 30, 47); this->playerForward[2] = sf::IntRect(145, 15, 30, 47); this->playerForward[3] = sf::IntRect(209, 15, 30, 46); this->playerForward[4] = sf::IntRect(273, 15, 30, 46); this->playerForward[5] = sf::IntRect(337, 15, 30, 46); this->playerForward[6] = sf::IntRect(401, 15, 30, 46); this->playerForward[7] = sf::IntRect(465, 15, 30, 46); this->playerForward[8] = sf::IntRect(529, 15, 30, 46);
+	this->playerDown[0] = sf::IntRect(17, 143, 30, 47); this->playerDown[1] = sf::IntRect(81, 143, 30, 47); this->playerDown[2] = sf::IntRect(145, 143, 30, 47); this->playerDown[3] = sf::IntRect(209, 143, 30, 47); this->playerDown[4] = sf::IntRect(273, 143, 30, 47); this->playerDown[5] = sf::IntRect(337, 143, 30, 47); this->playerDown[6] = sf::IntRect(401, 143, 30, 47); this->playerDown[7] = sf::IntRect(465, 143, 30, 47); this->playerDown[8] = sf::IntRect(529, 143, 30, 47);
 	this->sprite.setTextureRect(sf::IntRect(17, 15, 30, 46));
 	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
 	this->sprite.setPosition(pos);
@@ -29,15 +31,28 @@ void Player::updateLookDirection(sf::RenderWindow &window)
 	}
 	else if (anglediff <= -45 && anglediff >= -145) {
 		// facing up
-		this->sprite.setTextureRect(sf::IntRect(17, 15, 30, 46));
+		this->sprite.setTextureRect(playerForward[counter]);
 	}
 	else if (anglediff <= 145 && anglediff >= -145) {
 		// facing down
-		this->sprite.setTextureRect(sf::IntRect(17, 143, 30, 47));
+		this->sprite.setTextureRect(playerDown[counter]);
 	}
 	else {
 		// facing left
 		this->sprite.setTextureRect(sf::IntRect(23, 79, 20, 47));
 	}
 	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
+}
+
+void Player::update(float deltaTime) {
+	currentTime += deltaTime;
+	//std::cout << "2currentTime: " << currentTime << std::endl;
+	if (currentTime >= sf::seconds(0.5).asSeconds()) {
+		std::cout << "currentTime: " << currentTime << std::endl;
+		currentTime = 0;
+		counter++;
+		if (counter >= 9) {
+			counter = 0;
+		}
+	}
 }

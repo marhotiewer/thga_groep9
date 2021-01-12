@@ -12,6 +12,7 @@ class Entity : public Drawable
 		void draw(sf::RenderWindow *window) override;
 		sf::Vector2f getPos() override;
 		sf::Vector2i getSize() override;
+		virtual void update(float deltaTime) = 0;
 	protected:
 		sf::Sprite sprite;
 };

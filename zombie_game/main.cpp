@@ -5,9 +5,14 @@ int main()
 {
     Game game;
 
+    sf::Clock clock;
+    float deltaTime;
+
     while (game.running())
     {
-        game.update();
+        deltaTime = clock.getElapsedTime().asSeconds();
+        clock.restart();
+        game.update(deltaTime);
         game.render();
     }
 

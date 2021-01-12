@@ -43,7 +43,7 @@ void Game::pollEvents()
 	}
 }
 
-void Game::update()
+void Game::update(float deltaTime)//elke zoveel seconden frame wisselt
 {
 	this->pollEvents();
 	sf::Vector2f delta(0.f, 0.f);
@@ -54,23 +54,31 @@ void Game::update()
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		this->player->update(deltaTime);
 		delta += sf::Vector2f(0.f, -1.0f - speed);
 	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		this->player->update(deltaTime);
 		delta += sf::Vector2f(-1.0f - speed, 0.0f);
 	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		this->player->update(deltaTime);
 		delta += sf::Vector2f(0.f, +1.0f + speed);
 	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		this->player->update(deltaTime);
 		delta += sf::Vector2f(+1.0f + speed, 0.0f);
 	}
 
 	if (delta.x != 0.f && delta.y != 0.f) {
 		delta *= 0.75f;
 	}
-
+	
 	this->player->updateLookDirection(*this->window);
+	
 	this->viewport.move(delta);
 	this->player->move(delta);
 
