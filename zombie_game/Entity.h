@@ -9,11 +9,12 @@ class Entity : public Drawable
 {
 	public:
 		Entity(AssetManager &assets);
+		virtual void update(sf::RenderWindow& window, float deltaTime) = 0;
 		void draw(sf::RenderWindow *window) override;
-		sf::Vector2f getPos() override;
 		sf::Vector2i getSize() override;
-		//virtual void update(float deltaTime) = 0;
+		sf::Vector2f getPos() override;
 	protected:
+		sf::Vector2f delta;
 		sf::Sprite sprite;
 };
 

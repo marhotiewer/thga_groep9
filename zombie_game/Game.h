@@ -21,15 +21,14 @@ class Game {
 		void pollEvents();
 		void update(float deltaTime);
 		void render();
-
-		std::vector<Drawable*> drawables;
 	private:
+		std::vector<Drawable*> drawables;
+		std::vector<Entity*> entities;
+		bool noKeyPressed = false;
 		sf::RenderWindow* window;
 		AssetManager assets;
-		sf::View viewport;
 		sf::Event event;
 		Player *player;
-		bool noKeyPressed = false;
 };
 
 #endif GAME_H

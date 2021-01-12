@@ -10,13 +10,12 @@ class Player : public Entity
 {
 	public:
 		Player(AssetManager& assets, sf::Vector2f pos);
+		void update(sf::RenderWindow& window, float deltaTime);
 		void move(sf::Vector2f delta);
-		void updateLookDirection(sf::RenderWindow &window);
-		void updateAnimation(float deltaTime, float speed);
-	
 	private:
 		float currentTime = 0;
 		int counter = 0;
+
 		std::array<sf::IntRect, 9> playerForward;
 		std::array<sf::IntRect, 9> playerLeft;
 		std::array<sf::IntRect, 9> playerRight;

@@ -12,15 +12,15 @@ Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 
 void Player::move(sf::Vector2f delta)
 {
-	this->sprite.setPosition(this->getPos()+delta);
+	this->delta = delta;
 }
 
 #include <iostream>
 
-void Player::updateLookDirection(sf::RenderWindow &window)
+void Player::update(sf::RenderWindow& window, float deltaTime)
 {
-	sf::Vector2f playerPos = this->getPos();
 	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+	sf::Vector2f playerPos = this->getPos();
 
 	int angle = int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f);
 	int anglediff = (angle + 180 + 360) % 360 - 180;
@@ -41,15 +41,19 @@ void Player::updateLookDirection(sf::RenderWindow &window)
 		// facing left
 		this->sprite.setTextureRect(sf::IntRect(23, 79, 20, 47));
 	}
-	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
-}
 
-void Player::updateAnimation(float deltaTime, float speed) {
+	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
+	this->sprite.setPosition(this->getPos());
+
+	sf::View view = window.getView();
+	view.move(this->delta);
+	window.setView(view);
+
 	currentTime += deltaTime;
-	//std::cout << "2currentTime: " << currentTime << std::endl;
-	if (currentTime >= sf::seconds(0.5f/ speed).asSeconds()) {
-		std::cout << "currentTime: " << currentTime << std::endl;
-		currentTime = 0;
+	if (currentTime >= 0.05f && delta != sf::Vector2f(0.f, 0.f)) {
+		std::cout << "tick\n";
+		currentTime = 0.f;
+
 		counter++;
 		if (counter >= 9) {
 			counter = 0;
