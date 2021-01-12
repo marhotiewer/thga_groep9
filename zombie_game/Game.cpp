@@ -47,30 +47,30 @@ void Game::update(float deltaTime)//elke zoveel seconden frame wisselt
 {
 	this->pollEvents();
 	sf::Vector2f delta(0.f, 0.f);
-	float speed = 0.f;
+	float speed = 1.f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-		speed = 1.f;
+		speed = 2.f;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		this->player->update(deltaTime);
-		delta += sf::Vector2f(0.f, -1.0f - speed);
+		this->player->updateAnimation(deltaTime, speed);
+		delta += sf::Vector2f(0.f, -speed);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		this->player->update(deltaTime);
-		delta += sf::Vector2f(-1.0f - speed, 0.0f);
+		this->player->updateAnimation(deltaTime, speed);
+		delta += sf::Vector2f(-speed, 0.0f);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		this->player->update(deltaTime);
-		delta += sf::Vector2f(0.f, +1.0f + speed);
+		this->player->updateAnimation(deltaTime, speed);
+		delta += sf::Vector2f(0.f, speed);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		this->player->update(deltaTime);
-		delta += sf::Vector2f(+1.0f + speed, 0.0f);
+		this->player->updateAnimation(deltaTime, speed);
+		delta += sf::Vector2f(speed, 0.0f);
 	}
 
 	if (delta.x != 0.f && delta.y != 0.f) {

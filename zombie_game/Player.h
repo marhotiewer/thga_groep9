@@ -12,7 +12,7 @@ class Player : public Entity
 		Player(AssetManager& assets, sf::Vector2f pos);
 		void move(sf::Vector2f delta);
 		void updateLookDirection(sf::RenderWindow &window);
-		void update(float deltaTime) override;
+		void updateAnimation(float deltaTime, float speed);
 	
 	private:
 		float currentTime = 0;
@@ -21,7 +21,6 @@ class Player : public Entity
 		std::array<sf::IntRect, 9> playerLeft;
 		std::array<sf::IntRect, 9> playerRight;
 		std::array<sf::IntRect, 9> playerDown;
-		std::array<sf::IntRect, 9> currentPlayerAnimation = playerForward;
 };
 
 #endif

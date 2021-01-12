@@ -44,10 +44,10 @@ void Player::updateLookDirection(sf::RenderWindow &window)
 	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
 }
 
-void Player::update(float deltaTime) {
+void Player::updateAnimation(float deltaTime, float speed) {
 	currentTime += deltaTime;
 	//std::cout << "2currentTime: " << currentTime << std::endl;
-	if (currentTime >= sf::seconds(0.5).asSeconds()) {
+	if (currentTime >= sf::seconds(0.5f/ speed).asSeconds()) {
 		std::cout << "currentTime: " << currentTime << std::endl;
 		currentTime = 0;
 		counter++;
