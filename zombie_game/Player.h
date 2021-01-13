@@ -10,8 +10,11 @@ class Player : public Entity
 {
 	public:
 		Player(AssetManager& assets, sf::Vector2f pos);
+		void getScore();
 		void update(sf::RenderWindow& window, float deltaTime);
 		void move(sf::Vector2f delta);
+		sf::Vector2f getHitBoxPos() override;
+		sf::Vector2i getHitBoxSize() override;
 	private:
 		std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> playerAnimation;
 		int playerAnimationIndex = 0;

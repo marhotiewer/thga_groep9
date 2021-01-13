@@ -11,6 +11,8 @@ Game::Game()
 	this->statics.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));
 	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));
 	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));
+	this->statics.push_back(new Tree(this->assets, sf::Vector2f(300, 50)));
+	this->statics.push_back(new Tree(this->assets, sf::Vector2f(100, 50)));
 	
 	this->player = new Player(this->assets, sf::Vector2f(100, 100));
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
@@ -102,9 +104,12 @@ void Game::render()
 		}
 	};
 
+	std::multimap<float, Drawable*> drawables;
+	for (Static* _static : this->statics) drawables.insert(std::make_pair(_static->getHitBoxPos().y, _static));
+	for (Entity* _entity : this->entities) drawables.insert(std::make_pair(_entity->getHitBoxPos().y, _entity));
+
 	this->window->clear();
-	for (Static *drawable : this->statics) drawable->draw(this->window);
-	for (Entity* entity : this->entities) entity->draw(this->window);
+	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);
 	for (const sf::Vertex *vertex : vertexes) this->window->draw(vertex, 2, sf::Lines);
 	this->window->display();
 }
