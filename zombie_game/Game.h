@@ -29,6 +29,7 @@ class Game {
 		AssetManager assets;
 		sf::Event event;
 		Player *player;
+		bool debug;
 };
 
 #endif GAME_H

@@ -5,6 +5,7 @@ Game::Game()
 	this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
 	this->window->setFramerateLimit(144);
 	this->event = sf::Event();
+	this->debug = false;
 
 	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
 	this->statics.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));
@@ -51,6 +52,9 @@ void Game::pollEvents()
 				// enter fullscreen mode (close the game for now)
 				window->close();
 			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
+				this->debug = !this->debug;
+			}
 			break;
 		}
 	}
@@ -93,23 +97,16 @@ void Game::update(float deltaTime)
 
 void Game::render()
 {
-	const sf::Vertex vertexes[][2] = {
-		{
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, 0)).x, window->mapPixelToCoords(sf::Vector2i(0, 0)).y), sf::Color::Red),
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, this->window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, this->window->getSize().y)).y), sf::Color::Red)
-		},
-		{
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, 0)).x, window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, 0)).y), sf::Color::Red),
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, this->window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(0, this->window->getSize().y)).y), sf::Color::Red)
-		}
-	};
-
 	std::multimap<float, Drawable*> drawables;
 	for (Static* _static : this->statics) drawables.insert(std::make_pair(_static->getHitbox().top, _static));
 	for (Entity* _entity : this->entities) drawables.insert(std::make_pair(_entity->getHitbox().top, _entity));
 
 	this->window->clear();
-	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);
-	for (const sf::Vertex *vertex : vertexes) this->window->draw(vertex, 2, sf::Lines);
+	for (std::pair<float, Drawable*> drawable : drawables)
+		drawable.second->draw(this->window);
+	if (this->debug) {
+		for (std::pair<float, Drawable*> drawable : drawables)
+			drawable.second->debug_draw(this->window, sf::Color::Green);
+	}
 	this->window->display();
 }

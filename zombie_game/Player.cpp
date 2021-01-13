@@ -82,8 +82,31 @@ Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 	};
 }
 
-void Player::getScore() {
+void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
+{
+	sf::FloatRect rect = this->getHitbox();
 
+	sf::Vertex lines[5] = {
+		sf::Vertex(sf::Vector2f(rect.left, rect.top), color),
+		sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top), color),
+		sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top + rect.height), color),
+		sf::Vertex(sf::Vector2f(rect.left, rect.top + rect.height), color),
+		sf::Vertex(sf::Vector2f(rect.left, rect.top), color)
+	};
+
+	const sf::Vertex vertexes[][2] = {
+		{
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, 0)).x, window->mapPixelToCoords(sf::Vector2i(0, 0)).y), sf::Color::Red),
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(window->getSize().x, window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(window->getSize().x, window->getSize().y)).y), sf::Color::Red)
+		},
+		{
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(window->getSize().x, 0)).x, window->mapPixelToCoords(sf::Vector2i(window->getSize().x, 0)).y), sf::Color::Red),
+			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).y), sf::Color::Red)
+		}
+	};
+
+	for (const sf::Vertex* vertex : vertexes) window->draw(vertex, 2, sf::Lines);
+	window->draw(lines, 5, sf::LinesStrip);
 }
 
 void Player::move(sf::Vector2f delta)
