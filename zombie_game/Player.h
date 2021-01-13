@@ -16,10 +16,10 @@ class Player : public Entity
 		float currentTime = 0;
 		int counter = 0;
 
-		std::array<sf::IntRect, 9> playerForward;
-		std::array<sf::IntRect, 9> playerLeft;
-		std::array<sf::IntRect, 9> playerRight;
-		std::array<sf::IntRect, 9> playerDown;
+		int direction = 0;
+		int mode = 0;
+
+		std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> playerAnimation;
 };
 
 #endif

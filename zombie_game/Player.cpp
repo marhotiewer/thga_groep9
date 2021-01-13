@@ -2,58 +2,86 @@
 
 Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 {
-	this->sprite.setTexture(assets.skeletonSpriteMap);
+	this->sprite.setTexture(assets.adamSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(17, 15, 30, 46));
 	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
 	this->sprite.setPosition(pos);
 
-	this->playerForward = {
-		sf::IntRect(17,  15, 30, 47),
-		sf::IntRect(81,  15, 30, 47),
-		sf::IntRect(145, 15, 30, 47),
-		sf::IntRect(209, 15, 30, 47),
-		sf::IntRect(273, 15, 30, 47),
-		sf::IntRect(337, 15, 30, 47),
-		sf::IntRect(401, 15, 30, 47),
-		sf::IntRect(465, 15, 30, 47),
-		sf::IntRect(529, 15, 30, 47)
+	this->playerAnimation = std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> {
+		std::array<std::array<sf::IntRect, 6>, 2> {
+			std::array<sf::IntRect, 6> { //Forward walking
+				sf::IntRect(192, 144, 32, 48),
+				sf::IntRect(224, 144, 32, 48),
+				sf::IntRect(256, 144, 32, 48),
+				sf::IntRect(288, 144, 32, 48),
+				sf::IntRect(320, 144, 32, 48),
+				sf::IntRect(352, 144, 32, 48)
+			},
+			std::array<sf::IntRect, 6> { //Forward idle
+                sf::IntRect(192, 80, 32, 48),
+                sf::IntRect(224, 80, 32, 48),
+                sf::IntRect(256, 80, 32, 48),
+                sf::IntRect(288, 80, 32, 48),
+                sf::IntRect(320, 80, 32, 48),
+                sf::IntRect(352, 80, 32, 48)
+            }
+		},
+		std::array<std::array<sf::IntRect, 6>, 2> {
+			std::array<sf::IntRect, 6> { //Player Down walking
+				sf::IntRect(576, 144, 32, 48),
+				sf::IntRect(608, 144, 32, 48),
+				sf::IntRect(640, 144, 32, 48),
+				sf::IntRect(672, 144, 32, 48),
+				sf::IntRect(704, 144, 32, 48),
+				sf::IntRect(736, 144, 32, 48)
+			},
+            std::array<sf::IntRect, 6> { //Player Down idle
+                sf::IntRect(576, 80, 32, 48),
+                sf::IntRect(608, 80, 32, 48),
+                sf::IntRect(640, 80, 32, 48),
+                sf::IntRect(672, 80, 32, 48),
+                sf::IntRect(704, 80, 32, 48),
+                sf::IntRect(736, 80, 32, 48)
+            }
+		},
+		std::array<std::array<sf::IntRect, 6>, 2> {
+			std::array<sf::IntRect, 6> { //Player left walking
+				sf::IntRect(384, 144, 32, 48),
+                sf::IntRect(416, 144, 32, 48),
+                sf::IntRect(448, 144, 32, 48),
+                sf::IntRect(480, 144, 32, 48),
+                sf::IntRect(512, 144, 32, 48),
+                sf::IntRect(544, 144, 32, 48)
+			},
+			std::array<sf::IntRect, 6> { //Player left idle
+                sf::IntRect(384, 80, 32, 48),
+                sf::IntRect(416, 80, 32, 48),
+                sf::IntRect(448, 80, 32, 48),
+                sf::IntRect(480, 80, 32, 48),
+                sf::IntRect(512, 80, 32, 48),
+                sf::IntRect(544, 80, 32, 48)
+            }
+		},
+		std::array<std::array<sf::IntRect, 6>, 2> {
+			std::array<sf::IntRect, 6> { //Player right walking
+				sf::IntRect(0, 144, 32, 48),
+                sf::IntRect(32, 144, 32, 48),
+                sf::IntRect(64, 144, 32, 48),
+                sf::IntRect(96, 144, 32, 48),
+                sf::IntRect(128, 144, 32, 48),
+                sf::IntRect(160, 144, 32, 48)
+			},
+            std::array<sf::IntRect, 6> {//Player right idle
+                sf::IntRect(0, 80, 32, 48),
+                sf::IntRect(32, 80, 32, 48),
+                sf::IntRect(64, 80, 32, 48),
+                sf::IntRect(96, 80, 32, 48),
+                sf::IntRect(128, 80, 32, 48),
+                sf::IntRect(160, 80, 32, 48)
+            }
+		}
 	};
-
-	this->playerDown = {
-		sf::IntRect(17,  143, 30, 47),
-		sf::IntRect(81,  143, 30, 47),
-		sf::IntRect(145, 143, 30, 47),
-		sf::IntRect(209, 143, 30, 47),
-		sf::IntRect(273, 143, 30, 47),
-		sf::IntRect(337, 143, 30, 47),
-		sf::IntRect(401, 143, 30, 47),
-		sf::IntRect(465, 143, 30, 47),
-		sf::IntRect(529, 143, 30, 47)
-	};
-
-	this->playerLeft = {
-		sf::IntRect(23,  79, 20, 47),
-		sf::IntRect(83,  80, 25, 46),
-		sf::IntRect(149, 79, 21, 46),
-		sf::IntRect(215, 79, 22, 46),
-		sf::IntRect(278, 79, 24, 47),
-		sf::IntRect(340, 80, 28, 46),
-		sf::IntRect(407, 79, 23, 47),
-		sf::IntRect(471, 79, 22, 47),
-		sf::IntRect(535, 79, 21, 47)
-	};
-
-	this->playerRight = {
-		sf::IntRect(21,  207, 20, 47),
-		sf::IntRect(84,  208, 25, 46),
-		sf::IntRect(150, 207, 21, 46),
-		sf::IntRect(211, 207, 22, 46),
-		sf::IntRect(274, 207, 24, 47),
-		sf::IntRect(336, 208, 28, 46),
-		sf::IntRect(402, 207, 23, 47),
-		sf::IntRect(467, 207, 22, 47),
-		sf::IntRect(532, 207, 21, 47)
-	};
+	
 }
 
 void Player::move(sf::Vector2f delta)
@@ -71,20 +99,25 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 
 	if (anglediff <= 45 && anglediff >= -45) {
 		// facing right
-		this->sprite.setTextureRect(this->playerRight[counter]);
+		direction = 3;
+		//this->sprite.setTextureRect(this->playerRight[][counter]);
 	}
 	else if (anglediff <= -45 && anglediff >= -145) {
 		// facing up
-		this->sprite.setTextureRect(this->playerForward[counter]);
+		direction = 0;
+		//this->sprite.setTextureRect(this->playerWalkingForward[counter]);
 	}
 	else if (anglediff <= 145 && anglediff >= -145) {
 		// facing down
-		this->sprite.setTextureRect(this->playerDown[counter]);
+		direction = 1;
+		//this->sprite.setTextureRect(this->playerWalkingDown[counter]);
 	}
 	else {
 		// facing left
-		this->sprite.setTextureRect(this->playerLeft[counter]);
+		direction = 2;
+		//this->sprite.setTextureRect(this->playerWalkingLeft[counter]);
 	}
+	this->sprite.setTextureRect(this->playerAnimation[direction][mode][counter]);
 
 	this->sprite.setOrigin(this->sprite.getOrigin().x / 2.f, this->sprite.getOrigin().y / 2.f);
 	this->sprite.setPosition(this->getPos());
@@ -94,14 +127,17 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	window.setView(view);
 
 	currentTime += deltaTime;
+	
 	if (currentTime >= 0.05f && delta != sf::Vector2f(0.f, 0.f)) {
+		mode = 0;
 		currentTime = 0.f;
 		counter++;
-		if (counter >= 9) {
+		if (counter >= 6) {
 			counter = 0;
 		}
 	}
 	else if (this->delta == sf::Vector2f(0.f, 0.f)) {
-		counter = 0;
+		mode = 1;
 	}
+	
 }
