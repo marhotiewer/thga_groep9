@@ -83,6 +83,10 @@ Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 	};
 }
 
+void Player::getScore() {
+
+}
+
 void Player::move(sf::Vector2f delta)
 {
 	this->delta = delta;

@@ -10,6 +10,7 @@ class Player : public Entity
 {
 	public:
 		Player(AssetManager& assets, sf::Vector2f pos);
+		void getScore();
 		void update(sf::RenderWindow& window, float deltaTime);
 		void move(sf::Vector2f delta);
 	private:
