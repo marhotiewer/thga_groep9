@@ -8,6 +8,8 @@ class Tree : public Static
 {
 public:
 	Tree(AssetManager& assets, sf::Vector2f pos);
+	sf::Vector2f getHitBoxPos() override;
+	sf::Vector2i getHitBoxSize() override;
 };
 
 #endif
