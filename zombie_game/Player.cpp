@@ -4,7 +4,6 @@ Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(576, 80, 32, 48));
-	this->sprite.setOrigin(this->sprite.getTextureRect().width / 2.f, this->sprite.getTextureRect().height / 2.f);
 	this->sprite.setPosition(pos);
 
 	this->playerAnimation = {
@@ -91,7 +90,7 @@ void Player::move(sf::Vector2f delta)
 void Player::update(sf::RenderWindow& window, float deltaTime)
 {
 	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-	sf::Vector2f playerPos = (this->getPos() - this->delta);
+	sf::Vector2f playerPos = (this->getPos() - this->delta) + sf::Vector2f(this->getSize()) / 2.f;
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
 	int direction, mode = 0;
@@ -130,7 +129,6 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	}
 
 	this->sprite.setTextureRect(this->playerAnimation[direction][mode][playerAnimationIndex]);
-	this->sprite.setOrigin(this->sprite.getTextureRect().width / 2.f, this->sprite.getTextureRect().height / 2.f);
 	this->sprite.setPosition(this->getPos());
 	
 	sf::View view = window.getView();
