@@ -127,17 +127,18 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	window.setView(view);
 
 	currentTime += deltaTime;
-	
-	if (currentTime >= 0.05f && delta != sf::Vector2f(0.f, 0.f)) {
+
+	if (this->delta == sf::Vector2f(0.f, 0.f)) {
+		mode = 1;
+	}
+	else {
 		mode = 0;
+	}
+	if (currentTime >= 0.05f ) {
 		currentTime = 0.f;
 		counter++;
 		if (counter >= 6) {
 			counter = 0;
 		}
 	}
-	else if (this->delta == sf::Vector2f(0.f, 0.f)) {
-		mode = 1;
-	}
-	
 }

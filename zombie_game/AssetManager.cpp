@@ -1863,9 +1863,6 @@ AssetManager::AssetManager()
 
     this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
     this->floorTexture.setRepeated(true);
-    this->floorTexture.loadFromMemory(grass_map, sizeof(grass_map));
     
     this->adamSpriteMap.loadFromFile("Adam_32x32.png");
-
-    this->skeletonSpriteMap.loadFromMemory(skeleton_sprite, sizeof(skeleton_sprite));
 }
