@@ -91,17 +91,12 @@ void Player::move(sf::Vector2f delta)
 	this->delta = delta;
 }
 
-sf::Vector2f Player::getHitBoxPos()
+sf::FloatRect Player::getHitbox()
 {
 	sf::Vector2f spritePos = this->getPos();
 	sf::Vector2f spriteSize = sf::Vector2f(this->getSize());
-	sf::Vector2f hitBoxSize = sf::Vector2f(this->getHitBoxSize());
-	return sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y);
-}
-
-sf::Vector2i Player::getHitBoxSize()
-{
-	return sf::Vector2i(25, 15);
+	sf::Vector2f hitBoxSize = sf::Vector2f(25, 15);
+	return sf::FloatRect(sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y), hitBoxSize);
 }
 
 void Player::update(sf::RenderWindow& window, float deltaTime)

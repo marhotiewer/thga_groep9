@@ -105,8 +105,8 @@ void Game::render()
 	};
 
 	std::multimap<float, Drawable*> drawables;
-	for (Static* _static : this->statics) drawables.insert(std::make_pair(_static->getHitBoxPos().y, _static));
-	for (Entity* _entity : this->entities) drawables.insert(std::make_pair(_entity->getHitBoxPos().y, _entity));
+	for (Static* _static : this->statics) drawables.insert(std::make_pair(_static->getHitbox().top, _static));
+	for (Entity* _entity : this->entities) drawables.insert(std::make_pair(_entity->getHitbox().top, _entity));
 
 	this->window->clear();
 	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);

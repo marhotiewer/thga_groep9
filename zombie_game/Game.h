@@ -17,10 +17,9 @@ class Game {
 	public:
 		Game();
 		~Game();
-
-		bool running();
-		void pollEvents();
 		void update(float deltaTime);
+		void pollEvents();
+		bool running();
 		void render();
 	private:
 		std::vector<Entity*> entities;
