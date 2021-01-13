@@ -1,8 +1,7 @@
 #include "Tree.h"
 
-Tree::Tree(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size) : Static(assets)
+Tree::Tree(AssetManager& assets, sf::Vector2f pos) : Static(assets)
 {
-	this->sprite.setTexture(assets.wallTexture);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, size.x, size.y));
+	this->sprite.setTexture(assets.treeTexture);
 	this->sprite.setPosition(pos);
 }

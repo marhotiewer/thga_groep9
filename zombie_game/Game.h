@@ -11,6 +11,7 @@
 #include "Wall.h"
 #include "Floor.h"
 #include "Player.h"
+#include "Tree.h"
 
 class Game {
 	public:

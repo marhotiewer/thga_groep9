@@ -7,7 +7,7 @@
 class Tree : public Static
 {
 public:
-	Tree(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
+	Tree(AssetManager& assets, sf::Vector2f pos);
 };
 
 #endif
