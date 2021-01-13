@@ -38,10 +38,17 @@ void Game::pollEvents()
 		case sf::Event::Closed:
 			this->window->close();
 			break;
-		case sf::Event::Resized:
+		case sf::Event::Resized: {
 			sf::View view = this->window->getView();
 			view.setSize(sf::Vector2f(this->window->getSize()));
 			this->window->setView(view);
+			break;
+		}
+		case sf::Event::KeyPressed:
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+				// enter fullscreen mode (close the game for now)
+				window->close();
+			}
 			break;
 		}
 	}
