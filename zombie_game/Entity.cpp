@@ -12,7 +12,7 @@ void Entity::draw(sf::RenderWindow* window)
 
 sf::Vector2f Entity::getPos()
 {
-	return this->sprite.getPosition();
+	return this->sprite.getPosition() + this->delta;
 }
 
 sf::Vector2i Entity::getSize()

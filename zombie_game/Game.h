@@ -19,14 +19,14 @@ class Game {
 
 		bool running();
 		void pollEvents();
-		void update();
+		void update(float deltaTime);
 		void render();
-
-		std::vector<Drawable*> drawables;
 	private:
+		std::vector<Entity*> entities;
+		std::vector<Static*> statics;
+		bool noKeyPressed = false;
 		sf::RenderWindow* window;
 		AssetManager assets;
-		sf::View viewport;
 		sf::Event event;
 		Player *player;
 };
