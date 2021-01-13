@@ -6,11 +6,11 @@ Game::Game()
 	this->window->setVerticalSyncEnabled(true);
 	this->event = sf::Event();
 
-	this->drawables.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));
-	this->drawables.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));
+	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));
 	
 	this->player = new Player(this->assets, sf::Vector2f(100, 100));
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(640, 480)));
@@ -19,12 +19,8 @@ Game::Game()
 
 Game::~Game()
 {
-	for (Entity* entity : this->entities) {
-		delete entity;
-	}
-	for (Drawable* drawable : this->drawables) {
-		delete drawable;
-	}
+	for (Entity* entity : this->entities) delete entity;
+	for (Static* drawable : this->statics) delete drawable;
 	delete this->window;
 }
 
@@ -75,7 +71,7 @@ void Game::update(float deltaTime)
 
 	for (Entity* entity : this->entities) {
 		bool colliding = false;
-		for (Drawable* drawable : this->drawables) {
+		for (Static* drawable : this->statics) {
 			if (drawable->isColliding(*entity)) {
 				colliding = true;
 				break;
@@ -100,7 +96,7 @@ void Game::render()
 	};
 
 	this->window->clear();
-	for (Drawable *drawable : this->drawables) drawable->draw(this->window);
+	for (Static *drawable : this->statics) drawable->draw(this->window);
 	for (Entity* entity : this->entities) entity->draw(this->window);
 	for (const sf::Vertex *vertex : vertexes) this->window->draw(vertex, 2, sf::Lines);
 	this->window->display();

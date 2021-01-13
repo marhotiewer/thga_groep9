@@ -22,8 +22,8 @@ class Game {
 		void update(float deltaTime);
 		void render();
 	private:
-		std::vector<Drawable*> drawables;
 		std::vector<Entity*> entities;
+		std::vector<Static*> statics;
 		bool noKeyPressed = false;
 		sf::RenderWindow* window;
 		AssetManager assets;
