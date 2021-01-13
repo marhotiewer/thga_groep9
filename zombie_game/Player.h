@@ -13,13 +13,9 @@ class Player : public Entity
 		void update(sf::RenderWindow& window, float deltaTime);
 		void move(sf::Vector2f delta);
 	private:
-		float currentTime = 0;
-		int counter = 0;
-
-		int direction = 0;
-		int mode = 0;
-
 		std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> playerAnimation;
+		int playerAnimationIndex = 0;
+		float currentTime = 0;
 };
 
 #endif
