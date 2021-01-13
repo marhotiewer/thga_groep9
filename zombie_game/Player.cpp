@@ -84,15 +84,7 @@ Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 
 void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
 {
-	sf::FloatRect rect = this->getHitbox();
-
-	sf::Vertex lines[5] = {
-		sf::Vertex(sf::Vector2f(rect.left, rect.top), color),
-		sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top), color),
-		sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top + rect.height), color),
-		sf::Vertex(sf::Vector2f(rect.left, rect.top + rect.height), color),
-		sf::Vertex(sf::Vector2f(rect.left, rect.top), color)
-	};
+	Drawable::debug_draw(window, color);
 
 	const sf::Vertex vertexes[][2] = {
 		{
@@ -106,7 +98,6 @@ void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
 	};
 
 	for (const sf::Vertex* vertex : vertexes) window->draw(vertex, 2, sf::Lines);
-	window->draw(lines, 5, sf::LinesStrip);
 }
 
 void Player::move(sf::Vector2f delta)
