@@ -3,7 +3,7 @@
 Game::Game()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
-	this->window->setVerticalSyncEnabled(true);
+	this->window->setFramerateLimit(144);
 	this->event = sf::Event();
 
 	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));

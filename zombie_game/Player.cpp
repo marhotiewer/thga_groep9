@@ -95,6 +95,7 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
 	int direction, mode = 0;
+	float timeStep = 0.f;
 
 	if (anglediff <= 45 && anglediff >= -45)
 		direction = 3; // facing right
@@ -105,13 +106,21 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	else
 		direction = 2; //facing left
 
-	if (this->delta == sf::Vector2f(0.f, 0.f))
+	if (this->delta == sf::Vector2f(0.f, 0.f)) {
 		mode = 1; // idle animation
-	else
+		timeStep = 0.15f;
+	}
+	else {
 		mode = 0; // moving animation
 
+		if (this->delta.x > 1.f || this->delta.y > 1.f || this->delta.x < -1.f || this->delta.y < -1.f)
+			timeStep = 0.025f; // running
+		else
+			timeStep = 0.05f; // walking
+	}
+
 	this->currentTime += deltaTime;
-	if (this->currentTime >= 0.05f ) {
+	if (this->currentTime >= timeStep) {
 		this->currentTime = 0.f;
 		this->playerAnimationIndex++;
 		
