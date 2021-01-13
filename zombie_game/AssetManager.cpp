@@ -2002,9 +2002,11 @@ AssetManager::AssetManager()
 	this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->wallTexture.setRepeated(true);
 
-    this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
-    this->floorTexture.setRepeated(true);
+    //this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
+    //this->floorTexture.setRepeated(true);
     
+    this->floorTexture.loadFromFile("Map.png");
+
     this->treeTexture.loadFromFile("Tree.png");
 
     this->adamSpriteMap.loadFromMemory(player_sprite_map, sizeof(player_sprite_map));

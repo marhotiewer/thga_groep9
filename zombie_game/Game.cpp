@@ -6,14 +6,14 @@ Game::Game()
 	this->window->setFramerateLimit(144);
 	this->event = sf::Event();
 
-	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));
-	this->statics.push_back(new Tree(this->assets, sf::Vector2f(20, 250)));
+	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(3000, 2250)));
+	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));
+	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));
+	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));
+	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));
+	//this->statics.push_back(new Tree(this->assets, sf::Vector2f(20, 250)));
 	
-	this->player = new Player(this->assets, sf::Vector2f(100, 100));
+	this->player = new Player(this->assets, sf::Vector2f(200, 2000));
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(640, 480)));
 	this->entities.push_back(this->player);
 }
