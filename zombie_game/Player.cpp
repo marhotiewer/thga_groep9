@@ -9,11 +9,11 @@ Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
 
 	this->playerForward = {
 		sf::IntRect(17,  15, 30, 47),
-		sf::IntRect(81,  15, 30, 47),
-		sf::IntRect(145, 15, 30, 47),
-		sf::IntRect(209, 15, 30, 47),
+		sf::IntRect(81,  15, 30, 46),
+		sf::IntRect(145, 15, 30, 46),
+		sf::IntRect(209, 15, 30, 46),
 		sf::IntRect(273, 15, 30, 47),
-		sf::IntRect(337, 15, 30, 47),
+		sf::IntRect(337, 15, 30, 46),
 		sf::IntRect(401, 15, 30, 47),
 		sf::IntRect(465, 15, 30, 47),
 		sf::IntRect(529, 15, 30, 47)
