@@ -12,7 +12,7 @@ class Entity : public Drawable
 	public:
 		Entity(AssetManager& assets, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Drawable(assets), entities(entities), statics(statics) {}
 		virtual void update(sf::RenderWindow& window, float deltaTime) = 0;
-		virtual void move(sf::Vector2f delta);
+		virtual bool move(sf::Vector2f delta);
 	protected:
 		std::vector<Entity*>& entities;
 		std::vector<Static*>& statics;
