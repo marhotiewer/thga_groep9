@@ -76,6 +76,9 @@
     <ClInclude Include="Wall.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="class_diagram.cd" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

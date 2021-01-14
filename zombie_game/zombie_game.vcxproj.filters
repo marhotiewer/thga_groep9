@@ -86,4 +86,7 @@
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="class_diagram.cd" />
+  </ItemGroup>
 </Project>

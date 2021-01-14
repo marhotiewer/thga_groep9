@@ -18,7 +18,6 @@ class Zombie : public Entity
 	private:
 		std::array<std::array<sf::IntRect, 3>, 4> zombieAnimation;
 		int zombieAnimationIndex = 0;
-		float currentTime = 0;
 		Player* player;
 };
 

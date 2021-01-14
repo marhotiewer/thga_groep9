@@ -19,6 +19,7 @@ class Entity : public Drawable
 	protected:
 		std::vector<Entity*>& entities;
 		std::vector<Static*>& statics;
+		float currentTime = 0;
 		sf::Vector2f delta;
 		bool alive = true;
 		int health = 1;

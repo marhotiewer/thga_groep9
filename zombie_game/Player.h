@@ -19,7 +19,6 @@ class Player : public Entity
 	private:
 		std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> playerAnimation;
 		int playerAnimationIndex = 0;
-		float currentTime = 0;
 };
 
 #endif
