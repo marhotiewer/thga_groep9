@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-//#include "cScreen.h"
 #include "MainMenu.h"
 
 int main()
