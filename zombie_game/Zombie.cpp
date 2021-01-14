@@ -3,29 +3,29 @@
 Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, 27, 47));
+	this->sprite.setTextureRect(sf::IntRect(23, 99, 23, 33));
 	this->sprite.setPosition(pos);
 
 	this->zombieAnimation = {
 		std::array<sf::IntRect, 3> { //up
-			sf::IntRect(0, 0, 27, 47),
-			sf::IntRect(28, 95, 27, 47),
-			sf::IntRect(28, 46, 27, 47)
+			sf::IntRect(0, 99, 23, 33),
+			sf::IntRect(23, 99, 23, 33),
+			sf::IntRect(46, 99, 23, 33)
 		},
 		std::array<sf::IntRect, 3> { //down
-			sf::IntRect(55, 0, 24, 47),
-			sf::IntRect(78, 0, 24, 47),
-			sf::IntRect(55, 46, 24, 47)
+			sf::IntRect(0, 0, 23, 33),
+			sf::IntRect(23, 0, 23, 33),
+			sf::IntRect(46, 0, 23, 33)
 		},
 		std::array<sf::IntRect, 3> { //left
-			sf::IntRect(102, 93, 29, 47),
-			sf::IntRect(102, 46, 29, 47),
-			sf::IntRect(102, 0, 29, 47)
+			sf::IntRect(0, 33, 23, 33),
+			sf::IntRect(23, 33, 23, 33),
+			sf::IntRect(46, 33, 23, 33)
 		},
 		std::array<sf::IntRect, 3> { //right
-			sf::IntRect(132, 93, 29, 47),
-			sf::IntRect(132, 46, 29, 47),
-			sf::IntRect(132, 0, 29, 47)
+			sf::IntRect(0, 66, 23, 33),
+			sf::IntRect(23, 66, 23, 33),
+			sf::IntRect(46, 66, 23, 33)
 		}
 	};
 }
