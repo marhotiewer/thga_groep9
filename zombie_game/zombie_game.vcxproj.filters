@@ -44,9 +44,6 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Source Files\Static</Filter>
     </ClCompile>
-    <ClCompile Include="Static.cpp">
-      <Filter>Source Files\Static</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>

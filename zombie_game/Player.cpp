@@ -100,21 +100,6 @@ void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
 	for (const sf::Vertex* vertex : vertexes) window->draw(vertex, 2, sf::Lines);
 }
 
-void Player::move(sf::Vector2f delta)
-{
-	for (Static* _static : this->statics) {
-		if (_static->isColliding(*this, delta)) {
-			return;
-		}
-	};
-	for (Entity* _entity : this->entities) {
-		if (_entity->isColliding(*this, delta) && _entity != this) {
-			return;
-		}
-	};
-	this->delta = delta;
-}
-
 sf::FloatRect Player::getHitbox()
 {
 	sf::Vector2f spritePos = this->getPos();

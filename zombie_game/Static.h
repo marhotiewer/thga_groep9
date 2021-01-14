@@ -7,12 +7,7 @@
 class Static : public Drawable
 {
 	public:
-		Static(AssetManager &assets);
-		void draw(sf::RenderWindow *window) override;
-		sf::Vector2i getSize() override;
-		sf::Vector2f getPos() override;
-	protected:
-		sf::Sprite sprite;
+		Static(AssetManager& assets) : Drawable(assets) {}
 };
 
 #endif

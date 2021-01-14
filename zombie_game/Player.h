@@ -13,7 +13,6 @@ class Player : public Entity
 		void debug_draw(sf::RenderWindow* window, sf::Color color) override;
 		void update(sf::RenderWindow& window, float deltaTime);
 		sf::FloatRect getHitbox() override;
-		void move(sf::Vector2f delta);
 	private:
 		std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> playerAnimation;
 		int playerAnimationIndex = 0;

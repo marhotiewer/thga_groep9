@@ -30,3 +30,18 @@ void Drawable::debug_draw(sf::RenderWindow* window, sf::Color color)
 
     window->draw(lines, 5, sf::LinesStrip);
 }
+
+void Drawable::draw(sf::RenderWindow* window)
+{
+    window->draw(this->sprite);
+}
+
+sf::Vector2f Drawable::getPos()
+{
+    return this->sprite.getPosition();
+}
+
+sf::Vector2i Drawable::getSize()
+{
+    return this->sprite.getTextureRect().getSize();
+}

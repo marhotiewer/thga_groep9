@@ -5,17 +5,17 @@ Entity::Entity(AssetManager& assets, std::vector<Entity*>& entities, std::vector
 	// init
 }
 
-void Entity::draw(sf::RenderWindow* window)
+void Entity::move(sf::Vector2f delta)
 {
-	window->draw(this->sprite);
-}
-
-sf::Vector2f Entity::getPos()
-{
-	return this->sprite.getPosition();
-}
-
-sf::Vector2i Entity::getSize()
-{
-	return this->sprite.getTextureRect().getSize();
+	for (Static* _static : this->statics) {
+		if (_static->isColliding(*this, delta)) {
+			return;
+		}
+	};
+	for (Entity* _entity : this->entities) {
+		if (_entity->isColliding(*this, delta) && _entity != this) {
+			return;
+		}
+	};
+	this->delta = delta;
 }

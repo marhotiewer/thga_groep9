@@ -11,14 +11,11 @@ class Entity : public Drawable
 	public:
 		Entity(AssetManager &assets, std::vector<Entity*>& entities, std::vector<Static*>& statics);
 		virtual void update(sf::RenderWindow& window, float deltaTime) = 0;
-		virtual void draw(sf::RenderWindow *window) override;
-		sf::Vector2i getSize() override;
-		sf::Vector2f getPos() override;
+		virtual void move(sf::Vector2f delta);
 	protected:
 		std::vector<Entity*>& entities;
 		std::vector<Static*>& statics;
 		sf::Vector2f delta;
-		sf::Sprite sprite;
 };
 
 #endif
