@@ -30,16 +30,17 @@ Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 	};
 }
 
-void Zombie::debug_draw(sf::RenderWindow* window, sf::Color color)
+void Zombie::debug_draw(sf::RenderWindow* window)
 {
-	Drawable::debug_draw(window, color);
+	if (!this->alive) return;
+	Drawable::debug_draw(window);
 
-	sf::Vertex vertex[] = {
-		sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Blue),
-		sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Blue)
+	sf::Vertex line1[] = {
+		sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Cyan),
+		sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Cyan)
 	};
 
-	window->draw(vertex, 2, sf::Lines);
+	window->draw(line1, 2, sf::Lines);
 }
 
 void Zombie::update(sf::RenderWindow& window, float deltaTime)
@@ -51,25 +52,12 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 	sf::Vector2f AB((B - A) / 1.f);
 	this->move(A + (0.01f * AB) - A);
 
-	{
-		// Walking animation test
-		//static bool toggle = false;
-		//if (this->getPos().x < 600 && !toggle) this->move(sf::Vector2f(1.0f, 0.f));
-		//else if (!toggle) toggle = !toggle;
-		//if (this->getPos().x > 15 && toggle) this->move(sf::Vector2f(-1.0f, 0.f));
-		//else if (toggle) toggle = !toggle;
-	}
-
 	int direction = -1;
 
-	if (this->delta.x < 0.f)
-		direction = 2;
-	else if (this->delta.x > 0.f)
-		direction = 3;
-	else if (this->delta.y < 0.f)
-		direction = 0;
-	else if (this->delta.y > 0.f)
-		direction = 1;
+	if (this->delta.x < 0.f)		direction = 2; // facing left
+	else if (this->delta.x > 0.f)	direction = 3; // facing right
+	else if (this->delta.y < 0.f)	direction = 0; // facing up
+	else if (this->delta.y > 0.f)	direction = 1; // facing down
 
 	this->currentTime += deltaTime;
 	if (this->currentTime >= 0.05f) {
@@ -81,10 +69,8 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 		}
 	}
 
-	if(direction != -1)
-		this->sprite.setTextureRect(this->zombieAnimation[direction][zombieAnimationIndex]);
-	else
-		this->sprite.setTextureRect(this->zombieAnimation[1][0]);
+	if(direction != -1) this->sprite.setTextureRect(this->zombieAnimation[direction][zombieAnimationIndex]);
+	else this->sprite.setTextureRect(this->zombieAnimation[1][0]);
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
 		this->sprite.setPosition(this->getPos() + this->delta);
@@ -102,8 +88,9 @@ Entity* Zombie::move(sf::Vector2f delta)
 
 sf::FloatRect Zombie::getHitbox()
 {
-	sf::Vector2f spritePos = this->getPos();
-	sf::Vector2f spriteSize = sf::Vector2f(this->getSize());
-	sf::Vector2f hitBoxSize = sf::Vector2f(25, 15);
+	sf::Vector2f spriteSize(this->getSize());
+	sf::Vector2f spritePos(this->getPos());
+	sf::Vector2f hitBoxSize(25, 15);
+
 	return sf::FloatRect(sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y), hitBoxSize);
 }

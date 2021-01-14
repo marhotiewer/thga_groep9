@@ -11,7 +11,7 @@ class Zombie : public Entity
 {
 	public:
 		Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics, Player* player);
-		void debug_draw(sf::RenderWindow* window, sf::Color color) override;
+		void debug_draw(sf::RenderWindow* window) override;
 		void update(sf::RenderWindow& window, float deltaTime) override;
 		Entity* move(sf::Vector2f delta) override;
 		sf::FloatRect getHitbox() override;

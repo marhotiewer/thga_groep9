@@ -83,21 +83,22 @@ Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 	};
 }
 
-void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
+void Player::debug_draw(sf::RenderWindow* window)
 {
 	if (!this->alive) return;
-	Drawable::debug_draw(window, color);
-	const sf::Vertex vertexes[][2] = {
-		{
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, 0)).x, window->mapPixelToCoords(sf::Vector2i(0, 0)).y), sf::Color::Red),
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(window->getSize().x, window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(window->getSize().x, window->getSize().y)).y), sf::Color::Red)
-		},
-		{
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(window->getSize().x, 0)).x, window->mapPixelToCoords(sf::Vector2i(window->getSize().x, 0)).y), sf::Color::Red),
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).y), sf::Color::Red)
-		}
+	Drawable::debug_draw(window);
+
+	sf::Vertex line1[] = {
+		sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, 0)).x, window->mapPixelToCoords(sf::Vector2i(0, 0)).y), sf::Color::Red),
+		sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(window->getSize().x, window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(window->getSize().x, window->getSize().y)).y), sf::Color::Red)
 	};
-	for (const sf::Vertex* vertex : vertexes) window->draw(vertex, 2, sf::Lines);
+	sf::Vertex line2[] = {
+		sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(window->getSize().x, 0)).x, window->mapPixelToCoords(sf::Vector2i(window->getSize().x, 0)).y), sf::Color::Red),
+		sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).y), sf::Color::Red)
+	};
+
+	window->draw(line1, 2, sf::Lines);
+	window->draw(line2, 2, sf::Lines);
 }
 
 sf::FloatRect Player::getHitbox()
@@ -112,21 +113,17 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 {
 	if (!this->alive) return;
 
+	sf::Vector2f playerPos = (this->getPos()) + sf::Vector2f(this->getSize()) / 2.f;
 	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-	sf::Vector2f playerPos = (this->getPos() - this->delta) + sf::Vector2f(this->getSize()) / 2.f;
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
-	int direction, mode = 0;
+	int direction = 1, mode = 0;
 	float timeStep = 0.f;
 
-	if (anglediff <= 45 && anglediff >= -45)
-		direction = 3; // facing right
-	else if (anglediff <= -45 && anglediff >= -145)
-		direction = 0; // facing up
-	else if (anglediff <= 145 && anglediff >= -145)
-		direction = 1; // facing down
-	else
-		direction = 2; //facing left
+	if (anglediff <= 45 && anglediff >= -45)		direction = 3; // facing right
+	else if (anglediff <= -45 && anglediff >= -145) direction = 0; // facing up
+	else if (anglediff <= 145 && anglediff >= -145)	direction = 1; // facing down
+	else											direction = 2; // facing left
 
 	if (this->delta == sf::Vector2f(0.f, 0.f)) {
 		mode = 1; // idle animation
@@ -162,12 +159,4 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 
 		this->delta = sf::Vector2f(0.f, 0.f);
 	}
-}
-
-Entity* Player::move(sf::Vector2f delta)
-{
-	if (!this->alive) return nullptr;
-	Entity* entity = Entity::move(delta);
-	if (entity != nullptr) this->damage(1);
-	return entity;
 }

@@ -19,7 +19,7 @@ class Game {
 		Game();
 		~Game();
 		void update(float deltaTime);
-		void toggleFullScreen();
+		void toggleFullscreen();
 		void pollEvents();
 		bool running();
 		void render();
@@ -27,12 +27,12 @@ class Game {
 		std::vector<Entity*> entities;
 		std::vector<Static*> statics;
 		bool noKeyPressed = false;
+		bool isFullScreen = false;
 		sf::RenderWindow* window;
 		AssetManager assets;
-		bool isFullScreen;
+		bool debug = false;
 		sf::Event event;
 		Player *player;
-		bool debug;
 };
 
 #endif

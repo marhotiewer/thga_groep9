@@ -9,19 +9,29 @@ bool Drawable::isColliding(Drawable& drawable, sf::Vector2f delta)
     return h1.intersects(this->getHitbox());
 }
 
-void Drawable::debug_draw(sf::RenderWindow* window, sf::Color color)
+void Drawable::debug_draw(sf::RenderWindow* window)
 {
-    sf::FloatRect rect = this->getHitbox();
+    sf::FloatRect _texture(this->getPos(), sf::Vector2f(this->getSize()));
+    sf::FloatRect _hitbox(this->getHitbox());
 
-    sf::Vertex lines[5] = {
-        sf::Vertex(sf::Vector2f(rect.left, rect.top), color),
-        sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top), color),
-        sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top + rect.height), color),
-        sf::Vertex(sf::Vector2f(rect.left, rect.top + rect.height), color),
-        sf::Vertex(sf::Vector2f(rect.left, rect.top), color)
+    sf::Vertex texture[5] = {
+        sf::Vertex(sf::Vector2f(_texture.left, _texture.top), sf::Color::Blue),
+        sf::Vertex(sf::Vector2f(_texture.left + _texture.width, _texture.top), sf::Color::Blue),
+        sf::Vertex(sf::Vector2f(_texture.left + _texture.width, _texture.top + _texture.height), sf::Color::Blue),
+        sf::Vertex(sf::Vector2f(_texture.left, _texture.top + _texture.height), sf::Color::Blue),
+        sf::Vertex(sf::Vector2f(_texture.left, _texture.top), sf::Color::Blue)
     };
 
-    window->draw(lines, 5, sf::LinesStrip);
+    sf::Vertex hitbox[5] = {
+        sf::Vertex(sf::Vector2f(_hitbox.left, _hitbox.top), sf::Color::Green),
+        sf::Vertex(sf::Vector2f(_hitbox.left + _hitbox.width, _hitbox.top), sf::Color::Green),
+        sf::Vertex(sf::Vector2f(_hitbox.left + _hitbox.width, _hitbox.top + _hitbox.height), sf::Color::Green),
+        sf::Vertex(sf::Vector2f(_hitbox.left, _hitbox.top + _hitbox.height), sf::Color::Green),
+        sf::Vertex(sf::Vector2f(_hitbox.left, _hitbox.top), sf::Color::Green)
+    };
+
+    window->draw(hitbox, 5, sf::LinesStrip);
+    if (_texture != _hitbox) window->draw(texture, 5, sf::LinesStrip);
 }
 
 void Drawable::draw(sf::RenderWindow* window)

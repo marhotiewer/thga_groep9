@@ -12,12 +12,10 @@ Entity* Entity::move(sf::Vector2f delta)
 		for (Entity* _entity : this->entities) {
 			if (_entity != this) {
 				if (_entity->isColliding(*this, sf::Vector2f(delta.x, 0.f))) {
-					//if (_entity->move(sf::Vector2f(delta.x, 0.f))) return false;
 					drawable = _entity;
 					delta.x = 0.f;
 				}
 				if (_entity->isColliding(*this, sf::Vector2f(0.f, delta.y))) {
-					//if (_entity->move(sf::Vector2f(0.f, delta.y))) return false;
 					drawable = _entity;
 					delta.y = 0.f;
 				}
@@ -25,7 +23,6 @@ Entity* Entity::move(sf::Vector2f delta)
 		};
 		this->delta = delta;
 	}
-
 	return drawable;
 }
 
