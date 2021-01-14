@@ -8,24 +8,24 @@ Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 
 	this->zombieAnimation = {
 		std::array<sf::IntRect, 3> { //up
-			sf::IntRect(0, 99, 23, 33),
-			sf::IntRect(23, 99, 23, 33),
-			sf::IntRect(46, 99, 23, 33)
+			sf::IntRect(0, 148, 34, 49),
+			sf::IntRect(34, 148, 34, 49),
+			sf::IntRect(69, 148, 34, 49)
 		},
 		std::array<sf::IntRect, 3> { //down
-			sf::IntRect(0, 0, 23, 33),
-			sf::IntRect(23, 0, 23, 33),
-			sf::IntRect(46, 0, 23, 33)
+			sf::IntRect(0, 0, 34, 49),
+			sf::IntRect(34, 0, 34, 49),
+			sf::IntRect(69, 0, 34, 49)
 		},
 		std::array<sf::IntRect, 3> { //left
-			sf::IntRect(0, 33, 23, 33),
-			sf::IntRect(23, 33, 23, 33),
-			sf::IntRect(46, 33, 23, 33)
+			sf::IntRect(0, 49, 34, 49),
+			sf::IntRect(34, 49, 34, 49),
+			sf::IntRect(69, 49, 34, 49)
 		},
 		std::array<sf::IntRect, 3> { //right
-			sf::IntRect(0, 66, 23, 33),
-			sf::IntRect(23, 66, 23, 33),
-			sf::IntRect(46, 66, 23, 33)
+			sf::IntRect(0, 99, 34, 49),
+			sf::IntRect(34, 99, 34, 49),
+			sf::IntRect(69, 99, 34, 49)
 		}
 	};
 }
