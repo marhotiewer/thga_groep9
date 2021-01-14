@@ -5,6 +5,7 @@ Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(576, 80, 32, 48));
 	this->sprite.setPosition(pos);
+	this->health = 10;
 
 	this->playerAnimation = {
 		std::array<std::array<sf::IntRect, 6>, 2> {
@@ -84,8 +85,8 @@ Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 
 void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
 {
+	if (!this->alive) return;
 	Drawable::debug_draw(window, color);
-
 	const sf::Vertex vertexes[][2] = {
 		{
 			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, 0)).x, window->mapPixelToCoords(sf::Vector2i(0, 0)).y), sf::Color::Red),
@@ -96,7 +97,6 @@ void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
 			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(0, window->getSize().y)).y), sf::Color::Red)
 		}
 	};
-
 	for (const sf::Vertex* vertex : vertexes) window->draw(vertex, 2, sf::Lines);
 }
 
@@ -110,6 +110,8 @@ sf::FloatRect Player::getHitbox()
 
 void Player::update(sf::RenderWindow& window, float deltaTime)
 {
+	if (!this->alive) return;
+
 	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 	sf::Vector2f playerPos = (this->getPos() - this->delta) + sf::Vector2f(this->getSize()) / 2.f;
 
@@ -160,4 +162,12 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 
 		this->delta = sf::Vector2f(0.f, 0.f);
 	}
+}
+
+Entity* Player::move(sf::Vector2f delta)
+{
+	if (!this->alive) return nullptr;
+	Entity* entity = Entity::move(delta);
+	if (entity != nullptr) this->damage(1);
+	return entity;
 }

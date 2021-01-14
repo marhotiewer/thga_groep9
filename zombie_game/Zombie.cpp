@@ -32,6 +32,8 @@ Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 
 void Zombie::update(sf::RenderWindow& window, float deltaTime)
 {
+	if (!this->alive) return;
+
 	{
 		// Walking animation test
 		static bool toggle = false;
@@ -71,4 +73,12 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 		this->sprite.setPosition(this->getPos() + this->delta);
 		this->delta = sf::Vector2f(0.f, 0.f);
 	}
+}
+
+Entity* Zombie::move(sf::Vector2f delta)
+{
+	if (!this->alive) return nullptr;
+	Entity* entity = Entity::move(delta);
+	if(entity != nullptr) entity->damage(1);
+	return entity;
 }

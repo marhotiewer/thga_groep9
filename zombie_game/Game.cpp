@@ -33,28 +33,30 @@ void Game::update(float deltaTime)
 {
 	this->pollEvents();
 
-	sf::Vector2f delta(0.f, 0.f);
-	float speed = 1.f;
+	if (this->player->isAlive()) {
+		sf::Vector2f delta(0.f, 0.f);
+		float speed = 1.f;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-		speed = 1.5f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		delta += sf::Vector2f(0.f, -speed);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		delta += sf::Vector2f(-speed, 0.0f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		delta += sf::Vector2f(0.f, speed);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		delta += sf::Vector2f(speed, 0.0f);
-	if (delta.x != 0.f && delta.y != 0.f)
-		delta *= 0.75f;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+			speed = 1.5f;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			delta += sf::Vector2f(0.f, -speed);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			delta += sf::Vector2f(-speed, 0.0f);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			delta += sf::Vector2f(0.f, speed);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			delta += sf::Vector2f(speed, 0.0f);
+		if (delta.x != 0.f && delta.y != 0.f)
+			delta *= 0.75f;
 
-	if (delta != sf::Vector2f(0.f, 0.f)) {
-		this->player->move(delta);
-	}
+		if (delta != sf::Vector2f(0.f, 0.f)) {
+			this->player->move(delta);
+		}
 
-	for (Entity* entity : this->entities) {
-		entity->update(*this->window, deltaTime);
+		for (Entity* entity : this->entities) {
+			entity->update(*this->window, deltaTime);
+		}
 	}
 }
 

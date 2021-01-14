@@ -12,11 +12,16 @@ class Entity : public Drawable
 	public:
 		Entity(AssetManager& assets, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Drawable(assets), entities(entities), statics(statics) {}
 		virtual void update(sf::RenderWindow& window, float deltaTime) = 0;
-		virtual bool move(sf::Vector2f delta);
+		void draw(sf::RenderWindow* window) override;
+		virtual Entity* move(sf::Vector2f delta);
+		void damage(int dmg);
+		bool isAlive();
 	protected:
 		std::vector<Entity*>& entities;
 		std::vector<Static*>& statics;
 		sf::Vector2f delta;
+		bool alive = true;
+		int health = 1;
 };
 
 #endif
