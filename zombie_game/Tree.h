@@ -2,6 +2,7 @@
 #define TREE_H
 
 #include <SFML/Graphics.hpp>
+
 #include "Static.h"
 
 class Tree : public Static

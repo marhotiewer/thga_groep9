@@ -2,6 +2,7 @@
 #define FLOOR_H
 
 #include <SFML/Graphics.hpp>
+
 #include "Static.h"
 
 class Floor : public Static

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <array>
+
 #include "AssetManager.h"
 #include "Entity.h"
 

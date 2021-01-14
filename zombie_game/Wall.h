@@ -2,6 +2,7 @@
 #define WALL_H
 
 #include <SFML/Graphics.hpp>
+
 #include "Static.h"
 
 class Wall : public Static

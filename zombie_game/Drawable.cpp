@@ -1,12 +1,5 @@
 #include "Drawable.h"
 
-Drawable::Drawable(AssetManager& assets) : assets(assets) {}
-
-sf::FloatRect Drawable::getHitbox()
-{
-    return sf::FloatRect(this->getPos(), sf::Vector2f(this->getSize()));
-}
-
 bool Drawable::isColliding(Drawable& drawable, sf::Vector2f delta)
 {
     sf::FloatRect h1 = drawable.getHitbox();
@@ -36,12 +29,18 @@ void Drawable::draw(sf::RenderWindow* window)
     window->draw(this->sprite);
 }
 
-sf::Vector2f Drawable::getPos()
+sf::FloatRect Drawable::getHitbox()
 {
-    return this->sprite.getPosition();
+    return sf::FloatRect(this->getPos(), sf::Vector2f(this->getSize()));
 }
 
 sf::Vector2i Drawable::getSize()
 {
     return this->sprite.getTextureRect().getSize();
+}
+
+
+sf::Vector2f Drawable::getPos()
+{
+    return this->sprite.getPosition();
 }

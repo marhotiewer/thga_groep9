@@ -8,9 +8,9 @@
 #include <vector>
 
 #include "Drawable.h"
-#include "Wall.h"
-#include "Floor.h"
 #include "Player.h"
+#include "Floor.h"
+#include "Wall.h"
 #include "Tree.h"
 
 class Game {
