@@ -1,9 +1,8 @@
 #include "Game.h"
 
-Game::Game()
+Game::Game(sf::RenderWindow &window):
+	window(window)
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
-	this->window->setFramerateLimit(144);
 	this->event = sf::Event();
 
 	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(3000, 2250)));
@@ -108,4 +107,19 @@ void Game::render()
 	for (Entity* entity : this->entities) entity->draw(this->window);
 	for (const sf::Vertex *vertex : vertexes) this->window->draw(vertex, 2, sf::Lines);
 	this->window->display();
+}
+
+int Game::Run(sf::RenderWindow& window)
+{
+	 sf::Clock clock;
+	 //this->window = window
+	 float deltaTime;
+	 while (this->running())
+	 {
+		 deltaTime = clock.getElapsedTime().asSeconds();
+		 clock.restart();
+		 this->update(deltaTime);
+		 this->render();
+	 }
+	 return -1;
 }

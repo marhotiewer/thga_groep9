@@ -12,21 +12,24 @@
 #include "Floor.h"
 #include "Player.h"
 #include "Tree.h"
+#include "cScreen.h"
 
-class Game {
+class Game : public cScreen {
 	public:
-		Game();
+		Game(sf::RenderWindow &window);
 		~Game();
 
 		bool running();
 		void pollEvents();
 		void update(float deltaTime);
 		void render();
+		virtual int Run(sf::RenderWindow &window);
+
 	private:
 		std::vector<Entity*> entities;
 		std::vector<Static*> statics;
 		bool noKeyPressed = false;
-		sf::RenderWindow* window;
+		sf::RenderWindow *window;
 		AssetManager assets;
 		sf::Event event;
 		Player *player;
