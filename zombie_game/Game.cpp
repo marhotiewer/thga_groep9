@@ -35,7 +35,7 @@ void Game::update(float deltaTime)
 	float speed = 1.f;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-		speed = 2.f;
+		speed = 1.5f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		delta += sf::Vector2f(0.f, -speed);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))

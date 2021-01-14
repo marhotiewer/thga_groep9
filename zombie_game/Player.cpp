@@ -134,7 +134,7 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 		mode = 0; // moving animation
 
 		if (this->delta.x > 1.f || this->delta.y > 1.f || this->delta.x < -1.f || this->delta.y < -1.f)
-			timeStep = 0.025f; // running
+			timeStep = 0.04f; // running
 		else
 			timeStep = 0.05f; // walking
 	}
