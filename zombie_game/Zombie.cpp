@@ -47,10 +47,9 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 {
 	if (!this->alive) return;
 
-	sf::Vector2f A = this->getPos();
-	sf::Vector2f B = this->player->getPos();
-	sf::Vector2f AB((B - A) / 1.f);
-	this->move(A + (0.01f * AB) - A);
+	sf::Vector2f distance(this->player->getPos() - this->getPos());
+	float length = sqrt((distance.x * distance.x) + (distance.y * distance.y));
+	this->move({distance.x / length, distance.y / length});
 
 	int direction = -1;
 
