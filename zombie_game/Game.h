@@ -30,6 +30,7 @@ class Game {
 		sf::Event event;
 		Player *player;
 		bool debug;
+		bool isFullScreen;
 };
 
 #endif GAME_H
