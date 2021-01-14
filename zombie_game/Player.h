@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
 #include <array>
 
 #include "AssetManager.h"

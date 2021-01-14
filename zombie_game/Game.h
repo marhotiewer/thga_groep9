@@ -35,4 +35,4 @@ class Game {
 		bool debug;
 };
 
-#endif GAME_H
+#endif
