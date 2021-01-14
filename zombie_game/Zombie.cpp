@@ -1,6 +1,6 @@
 #include "Zombie.h"
 
-Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
+Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics, Player* player) : Entity(assets, entities, statics), player(player)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(0, 0, 27, 47));
@@ -30,17 +30,34 @@ Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 	};
 }
 
+void Zombie::debug_draw(sf::RenderWindow* window, sf::Color color)
+{
+	Drawable::debug_draw(window, color);
+
+	sf::Vertex vertex[] = {
+		sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Blue),
+		sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Blue)
+	};
+
+	window->draw(vertex, 2, sf::Lines);
+}
+
 void Zombie::update(sf::RenderWindow& window, float deltaTime)
 {
 	if (!this->alive) return;
 
+	sf::Vector2f A = this->getPos();
+	sf::Vector2f B = this->player->getPos();
+	sf::Vector2f AB((B - A) / 1.f);
+	this->move(A + (0.01f * AB) - A);
+
 	{
 		// Walking animation test
-		static bool toggle = false;
-		if (this->getPos().x < 600 && !toggle) this->move(sf::Vector2f(1.0f, 0.f));
-		else if (!toggle) toggle = !toggle;
-		if (this->getPos().x > 15 && toggle) this->move(sf::Vector2f(-1.0f, 0.f));
-		else if (toggle) toggle = !toggle;
+		//static bool toggle = false;
+		//if (this->getPos().x < 600 && !toggle) this->move(sf::Vector2f(1.0f, 0.f));
+		//else if (!toggle) toggle = !toggle;
+		//if (this->getPos().x > 15 && toggle) this->move(sf::Vector2f(-1.0f, 0.f));
+		//else if (toggle) toggle = !toggle;
 	}
 
 	int direction = -1;
@@ -79,7 +96,7 @@ Entity* Zombie::move(sf::Vector2f delta)
 {
 	if (!this->alive) return nullptr;
 	Entity* entity = Entity::move(delta);
-	if(entity != nullptr) entity->damage(1);
+	if(entity == this->player) entity->damage(1);
 	return entity;
 }
 

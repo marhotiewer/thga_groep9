@@ -20,7 +20,8 @@ Game::Game()
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f{ this->player->getSize() } / 2.f, sf::Vector2f{ this->window->getSize() }));
 	this->entities.push_back(this->player);
 
-	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(50, 50), this->entities, this->statics));
+	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(50, 50), this->entities, this->statics, this->player));
+	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(50, 400), this->entities, this->statics, this->player));
 }
 
 Game::~Game()
