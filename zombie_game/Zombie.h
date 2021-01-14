@@ -12,6 +12,7 @@ class Zombie : public Entity
 		Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics);
 		void update(sf::RenderWindow& window, float deltaTime) override;
 		Entity* move(sf::Vector2f delta) override;
+		sf::FloatRect getHitbox() override;
 	private:
 		std::array<std::array<sf::IntRect, 3>, 4> zombieAnimation;
 		int zombieAnimationIndex = 0;

@@ -3,7 +3,8 @@
 Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
-	this->sprite.setTextureRect(sf::IntRect(23, 99, 23, 33));
+	this->sprite.setScale({ 1.5f, 1.5f });
+	this->sprite.setTextureRect(sf::IntRect(0, 0, 27, 47));
 	this->sprite.setPosition(pos);
 
 	this->zombieAnimation = {
@@ -81,4 +82,12 @@ Entity* Zombie::move(sf::Vector2f delta)
 	Entity* entity = Entity::move(delta);
 	if(entity != nullptr) entity->damage(1);
 	return entity;
+}
+
+sf::FloatRect Zombie::getHitbox()
+{
+	sf::Vector2f spritePos = this->getPos();
+	sf::Vector2f spriteSize = sf::Vector2f(this->getSize());
+	sf::Vector2f hitBoxSize = sf::Vector2f(25, 15);
+	return sf::FloatRect(sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y), hitBoxSize);
 }
