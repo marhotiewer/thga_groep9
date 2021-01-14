@@ -4,6 +4,7 @@ Game::Game()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
 	this->window->setFramerateLimit(144);
+	this->isFullScreen = false;
 	this->event = sf::Event();
 	this->debug = false;
 
@@ -16,7 +17,7 @@ Game::Game()
 	this->statics.push_back(new Tree(this->assets, sf::Vector2f(100, 50)));
 	
 	this->player = new Player(this->assets, sf::Vector2f(100, 100), this->entities, this->statics);
-	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f{ this->player->getSize() } / 2.f, sf::Vector2f{ this->window->getSize() }));
 	this->entities.push_back(this->player);
 
 	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(50, 50), this->entities, this->statics));
@@ -60,6 +61,15 @@ void Game::update(float deltaTime)
 	}
 }
 
+void Game::toggleFullScreen() {
+	if (isFullScreen) window->create(sf::VideoMode(640, 480), "Zombie Game");
+	else window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);
+
+	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f{ this->player->getSize() } / 2.f, sf::Vector2f{ this->window->getSize() }));
+	this->window->setFramerateLimit(144);
+	isFullScreen = !isFullScreen;
+}
+
 void Game::pollEvents()
 {
 	while (this->window->pollEvent(event))
@@ -76,12 +86,17 @@ void Game::pollEvents()
 			break;
 		}
 		case sf::Event::KeyPressed:
+			// toggle fullscreen mode
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				// enter fullscreen mode (close the game for now)
-				window->close();
+				toggleFullScreen();
 			}
+			// toggle debugging info
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
 				this->debug = !this->debug;
+			}
+			// close the game
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+				this->window->close();
 			}
 			break;
 		}
