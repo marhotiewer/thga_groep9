@@ -7,6 +7,7 @@ class AssetManager
 {
 	public:
 		AssetManager();
+		sf::Texture zombieSpriteMap;
 		sf::Texture adamSpriteMap;
 		sf::Texture floorTexture;
 		sf::Texture wallTexture;

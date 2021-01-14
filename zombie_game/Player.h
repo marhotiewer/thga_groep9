@@ -12,7 +12,7 @@ class Player : public Entity
 	public:
 		Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics);
 		void debug_draw(sf::RenderWindow* window, sf::Color color) override;
-		void update(sf::RenderWindow& window, float deltaTime);
+		void update(sf::RenderWindow& window, float deltaTime) override;
 		sf::FloatRect getHitbox() override;
 	private:
 		std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> playerAnimation;

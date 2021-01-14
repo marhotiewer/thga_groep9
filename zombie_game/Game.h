@@ -9,6 +9,7 @@
 
 #include "Drawable.h"
 #include "Player.h"
+#include "Zombie.h"
 #include "Floor.h"
 #include "Wall.h"
 #include "Tree.h"
