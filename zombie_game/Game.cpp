@@ -17,6 +17,7 @@ Game::Game()
 	
 	this->player = new Player(this->assets, sf::Vector2f(100, 100), this->entities, this->statics);
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+	this->entities.push_back(this->player);
 }
 
 Game::~Game()
