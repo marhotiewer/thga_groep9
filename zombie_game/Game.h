@@ -27,10 +27,10 @@ class Game {
 		bool noKeyPressed = false;
 		sf::RenderWindow* window;
 		AssetManager assets;
+		bool isFullScreen;
 		sf::Event event;
 		Player *player;
 		bool debug;
-		bool isFullScreen;
 };
 
 #endif GAME_H
