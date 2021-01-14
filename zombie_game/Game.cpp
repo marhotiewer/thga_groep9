@@ -15,9 +15,8 @@ Game::Game()
 	this->statics.push_back(new Tree(this->assets, sf::Vector2f(300, 50)));
 	this->statics.push_back(new Tree(this->assets, sf::Vector2f(100, 50)));
 	
-	this->player = new Player(this->assets, sf::Vector2f(100, 100));
+	this->player = new Player(this->assets, sf::Vector2f(100, 100), this->entities, this->statics);
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	this->entities.push_back(this->player);
 }
 
 Game::~Game()
@@ -80,17 +79,11 @@ void Game::update(float deltaTime)
 	if (delta.x != 0.f && delta.y != 0.f)
 		delta *= 0.75f;
 	
-	this->player->move(delta);
+	if (delta != sf::Vector2f(0.f, 0.f)) {
+		this->player->move(delta);
+	}
 
 	for (Entity* entity : this->entities) {
-		bool colliding = false;
-		for (Static* drawable : this->statics) {
-			if (drawable->isColliding(*entity)) {
-				colliding = true;
-				break;
-			}
-		}
-		if (colliding) continue;
 		entity->update(*this->window, deltaTime);
 	}
 }

@@ -9,7 +9,7 @@
 class Player : public Entity
 {
 	public:
-		Player(AssetManager& assets, sf::Vector2f pos);
+		Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics);
 		void debug_draw(sf::RenderWindow* window, sf::Color color) override;
 		void update(sf::RenderWindow& window, float deltaTime);
 		sf::FloatRect getHitbox() override;

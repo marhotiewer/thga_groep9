@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(AssetManager& assets, sf::Vector2f pos) : Entity(assets)
+Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(576, 80, 32, 48));
@@ -102,6 +102,16 @@ void Player::debug_draw(sf::RenderWindow* window, sf::Color color)
 
 void Player::move(sf::Vector2f delta)
 {
+	for (Static* _static : this->statics) {
+		if (_static->isColliding(*this, delta)) {
+			return;
+		}
+	};
+	for (Entity* _entity : this->entities) {
+		if (_entity->isColliding(*this, delta) && _entity != this) {
+			return;
+		}
+	};
 	this->delta = delta;
 }
 
@@ -155,9 +165,14 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	}
 
 	this->sprite.setTextureRect(this->playerAnimation[direction][mode][playerAnimationIndex]);
-	this->sprite.setPosition(this->getPos());
 	
-	sf::View view = window.getView();
-	view.move(this->delta);
-	window.setView(view);
+	if (this->delta != sf::Vector2f(0.f, 0.f)) {
+		this->sprite.setPosition(this->getPos()+this->delta);
+
+		sf::View view = window.getView();
+		view.move(this->delta);
+		window.setView(view);
+
+		this->delta = sf::Vector2f(0.f, 0.f);
+	}
 }

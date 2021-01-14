@@ -7,9 +7,13 @@ sf::FloatRect Drawable::getHitbox()
     return sf::FloatRect(this->getPos(), sf::Vector2f(this->getSize()));
 }
 
-bool Drawable::isColliding(Drawable& drawable)
+bool Drawable::isColliding(Drawable& drawable, sf::Vector2f delta)
 {
-    return drawable.getHitbox().intersects(this->getHitbox());
+    sf::FloatRect h1 = drawable.getHitbox();
+    h1.left += delta.x;
+    h1.top += delta.y;
+
+    return h1.intersects(this->getHitbox());
 }
 
 void Drawable::debug_draw(sf::RenderWindow* window, sf::Color color)

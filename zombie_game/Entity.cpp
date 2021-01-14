@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(AssetManager& assets) : Drawable(assets)
+Entity::Entity(AssetManager& assets, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Drawable(assets), entities(entities), statics(statics)
 {
 	// init
 }
@@ -12,7 +12,7 @@ void Entity::draw(sf::RenderWindow* window)
 
 sf::Vector2f Entity::getPos()
 {
-	return this->sprite.getPosition() + this->delta;
+	return this->sprite.getPosition();
 }
 
 sf::Vector2i Entity::getSize()

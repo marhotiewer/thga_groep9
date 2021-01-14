@@ -8,7 +8,7 @@ class Floor : public Static
 {
 	public:
 		Floor(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
-		bool isColliding(Drawable& drawable) override;
+		bool isColliding(Drawable& drawable, sf::Vector2f delta = sf::Vector2f(0.f, 0.f)) override;
 };
 
 #endif
