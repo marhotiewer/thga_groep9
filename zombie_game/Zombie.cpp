@@ -3,7 +3,6 @@
 Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
-	this->sprite.setScale({ 1.5f, 1.5f });
 	this->sprite.setTextureRect(sf::IntRect(0, 0, 27, 47));
 	this->sprite.setPosition(pos);
 
