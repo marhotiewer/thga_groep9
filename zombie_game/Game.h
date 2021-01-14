@@ -19,6 +19,7 @@ class Game {
 		Game();
 		~Game();
 		void update(float deltaTime);
+		void toggleFullScreen();
 		void pollEvents();
 		bool running();
 		void render();
@@ -28,6 +29,7 @@ class Game {
 		bool noKeyPressed = false;
 		sf::RenderWindow* window;
 		AssetManager assets;
+		bool isFullScreen;
 		sf::Event event;
 		Player *player;
 		bool debug;
