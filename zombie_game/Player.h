@@ -15,6 +15,8 @@ class Player : public Entity
 		void debug_draw(sf::RenderWindow* window) override;
 		void update(sf::RenderWindow& window, float deltaTime) override;
 		sf::FloatRect getHitbox() override;
+private:
+	sf::Sound walkingSound;
 };
 
 #endif

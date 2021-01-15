@@ -18,8 +18,8 @@ Game::Game()
 
 	this->player = new Player(this->assets, sf::Vector2f(320, 240), this->entities, this->statics);	// the player duh
 
-	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(25, 25), this->entities, this->statics, this->player));	// left zombie
-	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(455, 25), this->entities, this->statics, this->player));	// right zombie
+	//this->entities.push_back(new Zombie(this->assets, sf::Vector2f(25, 25), this->entities, this->statics, this->player));	// left zombie
+	//this->entities.push_back(new Zombie(this->assets, sf::Vector2f(455, 25), this->entities, this->statics, this->player));	// right zombie
 	this->entities.push_back(this->player);
 
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
@@ -29,7 +29,6 @@ Game::~Game()
 {
 	for (Entity* entity : this->entities) delete entity;
 	for (Static* drawable : this->statics) delete drawable;
-	delete this->window;
 }
 
 void Game::update(float deltaTime)

@@ -7449,4 +7449,5 @@ AssetManager::AssetManager()
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->floorTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);
+	this->walkingSound.loadFromFile("Footsteps.wav");
 }

@@ -2,6 +2,7 @@
 #define ASSETMANAGER_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class AssetManager
 {
@@ -12,6 +13,7 @@ class AssetManager
 		sf::Texture floorTexture;
 		sf::Texture wallTexture;
 		sf::Texture treeTexture;
+		sf::SoundBuffer walkingSound;
 };
 
 #endif

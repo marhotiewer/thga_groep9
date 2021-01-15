@@ -6,6 +6,8 @@ Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 	this->sprite.setTextureRect({ (0 * 192) + this->frame * 32, 80, 32, 48 });
 	this->sprite.setPosition(pos);
 	this->health = 10;
+	this->walkingSound = sf::Sound(this->assets.walkingSound);
+	this->walkingSound.setVolume(50.f);
 }
 
 void Player::debug_draw(sf::RenderWindow* window)
@@ -52,20 +54,24 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	else											direction = 2; // facing left
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		timeStep = 0.05f;	// walking speed
+		timeStep = 0.06f;	// walking speed
 		mode = 144;			// walking animation
 
 		if (this->delta.x >  1.f || this->delta.y >	 1.f ||
 			this->delta.x < -1.f || this->delta.y < -1.f)
-				timeStep = 0.04f; // running speed
+				timeStep = 0.045f; // running speed
 	}
 
 	if ((this->deltaTime+=deltaTime) >= timeStep) {
 		if (++this->frame == 6) this->frame = 0;
 		this->deltaTime = 0.f;
+		if ((frame == 0 || frame == 3) && mode == 144) {
+			float pitch = (rand() % 20 + 90) / 100.f;
+			walkingSound.setPitch(pitch);
+			walkingSound.play();
+		}
+		this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 	}
-
-	this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
 		sf::View view = window.getView();
