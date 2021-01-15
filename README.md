@@ -6,3 +6,6 @@
 ## Dependencies
 
 * [SFML-2.5.1 Visual C++ 15 (2017) - 32-bit](https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip)
+
+## Versions
+* [Sprint 1](https://github.com/marhotiewer/thga_groep9/tree/2d9a553fa842836b5736cf02cdb9ca7b3522b521)

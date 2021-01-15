@@ -10,6 +10,7 @@
 #include "Drawable.h"
 #include "Player.h"
 #include "Zombie.h"
+#include "Bullet.h"
 #include "Floor.h"
 #include "Wall.h"
 #include "Tree.h"
@@ -24,8 +25,7 @@ class Game {
 		bool running();
 		void render();
 	private:
-		std::vector<Entity*> entities;
-		std::vector<Static*> statics;
+		std::vector<Drawable*> objects;
 		bool noKeyPressed = false;
 		bool isFullScreen = false;
 		sf::RenderWindow* window;

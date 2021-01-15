@@ -1,10 +1,11 @@
 #include "Player.h"
 
-Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
+Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects) : Entity(assets, objects)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect({ (0 * 192) + this->frame * 32, 80, 32, 48 });
 	this->sprite.setPosition(pos);
+	this->type = Type::Player;
 	this->health = 10;
 	this->walkingSound = sf::Sound(this->assets.walkingSound);
 	this->walkingSound.setVolume(50.f);
@@ -12,7 +13,6 @@ Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 
 void Player::debug_draw(sf::RenderWindow* window)
 {
-	if (!this->alive) return;
 	Drawable::debug_draw(window);
 
 	sf::Vertex cross_line1[] = {
@@ -37,12 +37,15 @@ sf::FloatRect Player::getHitbox()
 	return sf::FloatRect(sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y), hitBoxSize);
 }
 
-void Player::update(sf::RenderWindow& window, float deltaTime)
+void Player::shoot(sf::Vector2f direction)
 {
-	if (!this->alive) return;
+	this->objects.push_back(new Bullet(this->assets, this->objects, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction));
+}
 
+void Player::update(sf::RenderWindow* window, float deltaTime)
+{
 	sf::Vector2f playerPos = (this->getPos()) + sf::Vector2f(this->getSize()) / 2.f;
-	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+	sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
 	int direction = 3, mode = 80;	// default = idle, facing towards you
@@ -64,6 +67,7 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 
 	if ((this->deltaTime+=deltaTime) >= timeStep) {
 		if (++this->frame == 6) this->frame = 0;
+		this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 		this->deltaTime = 0.f;
 		if ((frame == 0 || frame == 3) && mode == 144) {
 			float pitch = (rand() % 20 + 90) / 100.f;
@@ -74,10 +78,10 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	}
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		sf::View view = window.getView();
+		sf::View view = window->getView();
 		this->sprite.move(this->delta);
 		view.move(this->delta);
-		window.setView(view);
+		window->setView(view);
 		this->delta = { 0.f, 0.f };
 	}
 }

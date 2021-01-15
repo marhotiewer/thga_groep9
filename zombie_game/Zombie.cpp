@@ -1,30 +1,29 @@
 #include "Zombie.h"
 
-Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics, Player* player) : Entity(assets, entities, statics), player(player)
+Zombie::Zombie(sf::Vector2f pos, Player* player, AssetManager& assets, std::vector<Drawable*>& objects) : Entity(assets, objects), player(player)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	this->sprite.setPosition(pos);
+	this->type = Type::Enemy;
+	this->health = 10;
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
 {
-	if (!this->alive) return;
 	Drawable::debug_draw(window);
 
-	if (!this->player->isAlive())return;
-	sf::Vertex line1[] = {
-		sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Cyan),
-		sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Cyan)
-	};
-
-	window->draw(line1, 2, sf::Lines);
+	if (this->player->isActive()) {
+		sf::Vertex line1[] = {
+			sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Cyan),
+			sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Cyan)
+		};
+		window->draw(line1, 2, sf::Lines);
+	}
 }
 
-void Zombie::update(sf::RenderWindow& window, float deltaTime)
+void Zombie::update(sf::RenderWindow* window, float deltaTime)
 {
-	if (!this->alive) return;
-
 	sf::Vector2f distance(this->player->getPos() - this->getPos());
 	float length = sqrt((distance.x * distance.x) + (distance.y * distance.y));
 	this->move({distance.x / length, distance.y / length});
@@ -38,10 +37,9 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 
 	if ((this->deltaTime += deltaTime) >= 0.05f) {
 		if (++this->frame == 3) this->frame = 0;
+		this->sprite.setTextureRect({ this->frame * 35, direction * 50, 34, 49 });
 		this->deltaTime = 0.f;
 	}
-
-	this->sprite.setTextureRect({ this->frame*35, direction*50, 34, 49 });
 	
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
 		this->sprite.move(this->delta);
@@ -49,12 +47,11 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 	}
 }
 
-Entity* Zombie::move(sf::Vector2f delta)
+Drawable* Zombie::move(sf::Vector2f delta)
 {
-	if (!this->alive) return nullptr;
-	Entity* entity = Entity::move(delta);
-	if(entity == this->player) entity->damage(1);
-	return entity;
+	Drawable* object = Entity::move(delta);
+	if(object == this->player) object->damage(1);
+	return object;
 }
 
 sf::FloatRect Zombie::getHitbox()
@@ -62,6 +59,5 @@ sf::FloatRect Zombie::getHitbox()
 	sf::Vector2f spriteSize(this->getSize());
 	sf::Vector2f spritePos(this->getPos());
 	sf::Vector2f hitBoxSize(25, 15);
-
 	return sf::FloatRect(sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y), hitBoxSize);
 }
