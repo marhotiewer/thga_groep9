@@ -3,7 +3,7 @@
 Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
+	this->sprite.setTextureRect({ (0 * 192) + this->frame * 32, 80, 32, 48 });
 	this->sprite.setPosition(pos);
 	this->health = 10;
 }
@@ -43,7 +43,7 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
-	int direction = 3, mode = 80;	// default = facing towards you
+	int direction = 3, mode = 80;	// default = idle, facing towards you
 	float timeStep = 0.15f;			// default = idle speed
 
 	if (anglediff <= 45 && anglediff >= -45)		direction = 0; // facing right
@@ -68,12 +68,10 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 	this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		this->sprite.setPosition(this->getPos()+this->delta);
-
 		sf::View view = window.getView();
+		this->sprite.move(this->delta);
 		view.move(this->delta);
 		window.setView(view);
-
-		this->delta = sf::Vector2f(0.f, 0.f);
+		this->delta = { 0.f, 0.f };
 	}
 }

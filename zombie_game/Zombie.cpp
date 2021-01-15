@@ -12,6 +12,7 @@ void Zombie::debug_draw(sf::RenderWindow* window)
 	if (!this->alive) return;
 	Drawable::debug_draw(window);
 
+	if (!this->player->isAlive())return;
 	sf::Vertex line1[] = {
 		sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Cyan),
 		sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Cyan)
@@ -43,8 +44,8 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 	this->sprite.setTextureRect({ this->frame*35, direction*50, 34, 49 });
 	
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		this->sprite.setPosition(this->getPos() + this->delta);
-		this->delta = sf::Vector2f(0.f, 0.f);
+		this->sprite.move(this->delta);
+		this->delta = { 0.f, 0.f };
 	}
 }
 
