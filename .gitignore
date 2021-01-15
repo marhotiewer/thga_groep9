@@ -340,3 +340,5 @@ ASALocalRun/
 healthchecksdb
 
 enc_temp_folder/
+
+Doxygen/
