@@ -18,8 +18,8 @@ Game::Game()
 
 	this->player = new Player(this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
 
-	this->objects.push_back(new Zombie(this->assets, sf::Vector2f(25, 25), this->objects, this->player));	// left zombie
-	this->objects.push_back(new Zombie(this->assets, sf::Vector2f(455, 25), this->objects, this->player));	// right zombie
+	this->objects.push_back(new Zombie(sf::Vector2f(25, 25), this->player, this->assets, this->objects));	// left zombie
+	this->objects.push_back(new Zombie(sf::Vector2f(455, 25), this->player, this->assets, this->objects));	// right zombie
 	this->objects.push_back(this->player);
 
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
@@ -39,7 +39,7 @@ void Game::update(float deltaTime)
 		sf::Vector2f delta(0.f, 0.f);
 		float speed = 1.f;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed = 1.5f;										// running
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed += 0.5f;										// running
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta += sf::Vector2f(0.f, -speed);					// up
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta += sf::Vector2f(-speed, 0.0f);				// left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta += sf::Vector2f(0.f, speed);					// right

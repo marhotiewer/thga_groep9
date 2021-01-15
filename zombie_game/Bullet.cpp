@@ -25,12 +25,13 @@ void Bullet::update(sf::RenderWindow* window, float deltaTime)
 
 Drawable* Bullet::move(sf::Vector2f delta)
 {
+	this->delta = delta;
 	for (Drawable* object : this->objects) {
 		if (object->type != Type::Player && object != this && object->isActive() && object->isColliding(*this, this->delta)) {
 			object->damage(1);
 			this->damage(1);
+			return object;
 		}
 	};
-	this->delta = delta;
 	return nullptr;
 }

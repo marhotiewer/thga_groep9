@@ -1,6 +1,6 @@
 #include "Zombie.h"
 
-Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects, Player* player) : Entity(assets, objects), player(player)
+Zombie::Zombie(sf::Vector2f pos, Player* player, AssetManager& assets, std::vector<Drawable*>& objects) : Entity(assets, objects), player(player)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
@@ -13,13 +13,13 @@ void Zombie::debug_draw(sf::RenderWindow* window)
 {
 	Drawable::debug_draw(window);
 
-	if (!this->player->isActive())return;
-	sf::Vertex line1[] = {
-		sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Cyan),
-		sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Cyan)
-	};
-
-	window->draw(line1, 2, sf::Lines);
+	if (this->player->isActive()) {
+		sf::Vertex line1[] = {
+			sf::Vertex(this->getPos() + sf::Vector2f(this->getSize()) / 2.f, sf::Color::Cyan),
+			sf::Vertex(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Color::Cyan)
+		};
+		window->draw(line1, 2, sf::Lines);
+	}
 }
 
 void Zombie::update(sf::RenderWindow* window, float deltaTime)
