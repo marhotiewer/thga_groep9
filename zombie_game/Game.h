@@ -25,8 +25,7 @@ class Game {
 		bool running();
 		void render();
 	private:
-		std::vector<Entity*> entities;
-		std::vector<Static*> statics;
+		std::vector<Drawable*> objects;
 		bool noKeyPressed = false;
 		bool isFullScreen = false;
 		sf::RenderWindow* window;

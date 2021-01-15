@@ -1,23 +1,12 @@
 #include "Player.h"
 
-// forward declaration
-class Bullet : public Entity
-{
-	public:
-		Bullet(AssetManager& assets, std::vector<Entity*>& entities, std::vector<Static*>& statics, sf::Vector2f startPos, sf::Vector2f direction, Player* player);
-		void update(sf::RenderWindow& window, float deltaTime) override;
-		Drawable* move(sf::Vector2f delta) override;
-	private:
-		sf::Vector2f direction;
-		Player* owner;
-};
-
-Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
+Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects) : Entity(assets, objects)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect({ (0 * 192) + this->frame * 32, 80, 32, 48 });
 	this->sprite.setPosition(pos);
-	this->health = 1;
+	this->type = Type::Player;
+	this->health = 10;
 }
 
 void Player::debug_draw(sf::RenderWindow* window)
@@ -48,14 +37,13 @@ sf::FloatRect Player::getHitbox()
 
 void Player::shoot(sf::Vector2f direction)
 {
-
-	this->entities.push_back(new Bullet(this->assets, this->entities, this->statics, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction, this));
+	this->objects.push_back(new Bullet(this->assets, this->objects, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction));
 }
 
-void Player::update(sf::RenderWindow& window, float deltaTime)
+void Player::update(sf::RenderWindow* window, float deltaTime)
 {
 	sf::Vector2f playerPos = (this->getPos()) + sf::Vector2f(this->getSize()) / 2.f;
-	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+	sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
 	int direction = 3, mode = 80;	// default = idle, facing towards you
@@ -77,16 +65,15 @@ void Player::update(sf::RenderWindow& window, float deltaTime)
 
 	if ((this->deltaTime+=deltaTime) >= timeStep) {
 		if (++this->frame == 6) this->frame = 0;
+		this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 		this->deltaTime = 0.f;
 	}
 
-	this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
-
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		sf::View view = window.getView();
+		sf::View view = window->getView();
 		this->sprite.move(this->delta);
 		view.move(this->delta);
-		window.setView(view);
+		window->setView(view);
 		this->delta = { 0.f, 0.f };
 	}
 }

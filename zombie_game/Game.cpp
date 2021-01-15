@@ -6,29 +6,28 @@ Game::Game()
 	this->window->setFramerateLimit(144);
 	this->event = sf::Event();
 
-	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
+	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
 
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));		// left wall
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
-	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));		// left wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
 
-	this->statics.push_back(new Tree(this->assets, sf::Vector2f(100, 50))); // left tree
-	this->statics.push_back(new Tree(this->assets, sf::Vector2f(300, 50))); // right tree
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(100, 50))); // left tree
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(300, 50))); // right tree
 
-	this->player = new Player(this->assets, sf::Vector2f(320, 240), this->entities, this->statics);	// the player duh
+	this->player = new Player(this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
 
-	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(25, 25), this->entities, this->statics, this->player));	// left zombie
-	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(455, 25), this->entities, this->statics, this->player));	// right zombie
-	this->entities.push_back(this->player);
+	this->objects.push_back(new Zombie(this->assets, sf::Vector2f(25, 25), this->objects, this->player));	// left zombie
+	this->objects.push_back(new Zombie(this->assets, sf::Vector2f(455, 25), this->objects, this->player));	// right zombie
+	this->objects.push_back(this->player);
 
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 }
 
 Game::~Game()
 {
-	for (Entity* entity : this->entities) delete entity;
-	for (Static* drawable : this->statics) delete drawable;
+	for (Drawable* entity : this->objects) delete entity;
 	delete this->window;
 }
 
@@ -36,7 +35,7 @@ void Game::update(float deltaTime)
 {
 	this->pollEvents();
 
-	if (this->player->isAlive()) {
+	if (this->player->isActive()) {
 		sf::Vector2f delta(0.f, 0.f);
 		float speed = 1.f;
 
@@ -48,7 +47,7 @@ void Game::update(float deltaTime)
 		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;										// decrease speed 25% when going sideways
 
 		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);												// move the player
-		for (Entity* entity : this->entities) if (entity->isAlive()) { entity->update(*this->window, deltaTime); }	// update all the entities
+		for (Drawable* entity : this->objects) if (entity->isActive()) { entity->update(this->window, deltaTime); }	// update all the entities
 	}
 }
 
@@ -107,12 +106,11 @@ bool Game::running()
 void Game::render()
 {
 	std::multimap<float, Drawable*> drawables;
-	for (Static* _static : this->statics) drawables.insert(std::make_pair(_static->getHitbox().top, _static));
-	for (Entity* _entity : this->entities) if(_entity->isAlive()) drawables.insert(std::make_pair(_entity->getHitbox().top, _entity));
+	for (Drawable* object : this->objects) if(object->isActive()) drawables.insert(std::make_pair(object->getHitbox().top, object));
 
 	this->window->clear();
 	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);
 	// if debugging is enabled draw debugging info
-	if (this->debug) for (std::pair<float, Drawable*> drawable : drawables) drawable.second->debug_draw(this->window);
+	if (this->debug) for (std::pair<float, Drawable*> drawable : drawables) if(drawable.second->isActive()) drawable.second->debug_draw(this->window);
 	this->window->display();
 }
