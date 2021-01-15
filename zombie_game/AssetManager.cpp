@@ -7447,6 +7447,7 @@ AssetManager::AssetManager()
     this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
     this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
+    this->bulletSprite.loadFromFile("bullet.png");
     this->floorTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);
 }

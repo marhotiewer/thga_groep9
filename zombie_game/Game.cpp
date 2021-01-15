@@ -40,15 +40,15 @@ void Game::update(float deltaTime)
 		sf::Vector2f delta(0.f, 0.f);
 		float speed = 1.f;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed = 1.5f;							// running
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta += sf::Vector2f(0.f, -speed);		// up
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta += sf::Vector2f(-speed, 0.0f);	// left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta += sf::Vector2f(0.f, speed);		// right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta += sf::Vector2f(speed, 0.0f);		// right
-		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;							// decrease speed 25% when going sideways
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed = 1.5f;										// running
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta += sf::Vector2f(0.f, -speed);					// up
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta += sf::Vector2f(-speed, 0.0f);				// left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta += sf::Vector2f(0.f, speed);					// right
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta += sf::Vector2f(speed, 0.0f);					// right
+		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;										// decrease speed 25% when going sideways
 
-		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);									// move the player
-		for (Entity* entity : this->entities) entity->update(*this->window, deltaTime);					// update all the entities
+		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);												// move the player
+		for (Entity* entity : this->entities) if (entity->isAlive()) { entity->update(*this->window, deltaTime); }	// update all the entities
 	}
 }
 
@@ -92,6 +92,9 @@ void Game::pollEvents()
 				this->window->close();
 			}
 			break;
+		case sf::Event::MouseButtonPressed:
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
+			break;
 		}
 	}
 }
@@ -105,7 +108,7 @@ void Game::render()
 {
 	std::multimap<float, Drawable*> drawables;
 	for (Static* _static : this->statics) drawables.insert(std::make_pair(_static->getHitbox().top, _static));
-	for (Entity* _entity : this->entities) drawables.insert(std::make_pair(_entity->getHitbox().top, _entity));
+	for (Entity* _entity : this->entities) if(_entity->isAlive()) drawables.insert(std::make_pair(_entity->getHitbox().top, _entity));
 
 	this->window->clear();
 	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);

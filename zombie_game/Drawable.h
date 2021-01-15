@@ -13,6 +13,7 @@ class Drawable
 		virtual void debug_draw(sf::RenderWindow* window);
 		virtual void draw(sf::RenderWindow *window);
 		virtual sf::FloatRect getHitbox();
+		virtual void damage(int dmg) {};
 		virtual sf::Vector2i getSize();
 		virtual sf::Vector2f getPos();
 	protected:

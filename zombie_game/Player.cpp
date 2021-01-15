@@ -1,16 +1,27 @@
 #include "Player.h"
 
+// forward declaration
+class Bullet : public Entity
+{
+	public:
+		Bullet(AssetManager& assets, std::vector<Entity*>& entities, std::vector<Static*>& statics, sf::Vector2f startPos, sf::Vector2f direction, Player* player);
+		void update(sf::RenderWindow& window, float deltaTime) override;
+		Drawable* move(sf::Vector2f delta) override;
+	private:
+		sf::Vector2f direction;
+		Player* owner;
+};
+
 Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Entity(assets, entities, statics)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect({ (0 * 192) + this->frame * 32, 80, 32, 48 });
 	this->sprite.setPosition(pos);
-	this->health = 10;
+	this->health = 1;
 }
 
 void Player::debug_draw(sf::RenderWindow* window)
 {
-	if (!this->alive) return;
 	Drawable::debug_draw(window);
 
 	sf::Vertex cross_line1[] = {
@@ -35,10 +46,14 @@ sf::FloatRect Player::getHitbox()
 	return sf::FloatRect(sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y), hitBoxSize);
 }
 
+void Player::shoot(sf::Vector2f direction)
+{
+
+	this->entities.push_back(new Bullet(this->assets, this->entities, this->statics, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction, this));
+}
+
 void Player::update(sf::RenderWindow& window, float deltaTime)
 {
-	if (!this->alive) return;
-
 	sf::Vector2f playerPos = (this->getPos()) + sf::Vector2f(this->getSize()) / 2.f;
 	sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 

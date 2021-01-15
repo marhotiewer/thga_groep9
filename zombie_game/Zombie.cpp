@@ -5,6 +5,7 @@ Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& ent
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	this->sprite.setPosition(pos);
+	this->health = 100;
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
@@ -23,8 +24,6 @@ void Zombie::debug_draw(sf::RenderWindow* window)
 
 void Zombie::update(sf::RenderWindow& window, float deltaTime)
 {
-	if (!this->alive) return;
-
 	sf::Vector2f distance(this->player->getPos() - this->getPos());
 	float length = sqrt((distance.x * distance.x) + (distance.y * distance.y));
 	this->move({distance.x / length, distance.y / length});
@@ -49,10 +48,9 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 	}
 }
 
-Entity* Zombie::move(sf::Vector2f delta)
+Drawable* Zombie::move(sf::Vector2f delta)
 {
-	if (!this->alive) return nullptr;
-	Entity* entity = Entity::move(delta);
+	Drawable* entity = Entity::move(delta);
 	if(entity == this->player) entity->damage(1);
 	return entity;
 }

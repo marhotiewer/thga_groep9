@@ -13,8 +13,8 @@ class Entity : public Drawable
 		Entity(AssetManager& assets, std::vector<Entity*>& entities, std::vector<Static*>& statics) : Drawable(assets), entities(entities), statics(statics) {}
 		virtual void update(sf::RenderWindow& window, float deltaTime) = 0;
 		void draw(sf::RenderWindow* window) override;
-		virtual Entity* move(sf::Vector2f delta);
-		void damage(int dmg);
+		virtual Drawable* move(sf::Vector2f delta);
+		virtual void damage(int dmg) override;
 		bool isAlive();
 	protected:
 		std::vector<Entity*>& entities;

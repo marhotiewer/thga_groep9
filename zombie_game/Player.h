@@ -12,9 +12,10 @@ class Player : public Entity
 {
 	public:
 		Player(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics);
-		void debug_draw(sf::RenderWindow* window) override;
 		void update(sf::RenderWindow& window, float deltaTime) override;
+		void debug_draw(sf::RenderWindow* window) override;
 		sf::FloatRect getHitbox() override;
+		void shoot(sf::Vector2f direction);
 };
 
 #endif
