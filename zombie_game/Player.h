@@ -15,9 +15,6 @@ class Player : public Entity
 		void debug_draw(sf::RenderWindow* window) override;
 		void update(sf::RenderWindow& window, float deltaTime) override;
 		sf::FloatRect getHitbox() override;
-	private:
-		std::array<std::array<std::array<sf::IntRect, 6>, 2>, 4> playerAnimation;
-		int playerAnimationIndex = 0;
 };
 
 #endif

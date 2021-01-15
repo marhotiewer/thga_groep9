@@ -3,31 +3,8 @@
 Zombie::Zombie(AssetManager& assets, sf::Vector2f pos, std::vector<Entity*>& entities, std::vector<Static*>& statics, Player* player) : Entity(assets, entities, statics), player(player)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, 27, 47));
+	this->sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	this->sprite.setPosition(pos);
-
-	this->zombieAnimation = {
-		std::array<sf::IntRect, 3> { //up
-			sf::IntRect(0, 148, 34, 49),
-			sf::IntRect(34, 148, 34, 49),
-			sf::IntRect(69, 148, 34, 49)
-		},
-		std::array<sf::IntRect, 3> { //down
-			sf::IntRect(0, 0, 34, 49),
-			sf::IntRect(34, 0, 34, 49),
-			sf::IntRect(69, 0, 34, 49)
-		},
-		std::array<sf::IntRect, 3> { //left
-			sf::IntRect(0, 49, 34, 49),
-			sf::IntRect(34, 49, 34, 49),
-			sf::IntRect(69, 49, 34, 49)
-		},
-		std::array<sf::IntRect, 3> { //right
-			sf::IntRect(0, 99, 34, 49),
-			sf::IntRect(34, 99, 34, 49),
-			sf::IntRect(69, 99, 34, 49)
-		}
-	};
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
@@ -51,26 +28,20 @@ void Zombie::update(sf::RenderWindow& window, float deltaTime)
 	float length = sqrt((distance.x * distance.x) + (distance.y * distance.y));
 	this->move({distance.x / length, distance.y / length});
 
-	int direction = -1;
+	int direction = 0;	// default = facing towards you
 
-	if (this->delta.x < 0.f)		direction = 2; // facing left
-	else if (this->delta.x > 0.f)	direction = 3; // facing right
-	else if (this->delta.y < 0.f)	direction = 0; // facing up
-	else if (this->delta.y > 0.f)	direction = 1; // facing down
+	if (this->delta.x < 0.f)		direction = 1; // facing left
+	else if (this->delta.x > 0.f)	direction = 2; // facing right
+	else if (this->delta.y < 0.f)	direction = 3; // facing up
+	else if (this->delta.y > 0.f)	direction = 0; // facing down
 
-	this->currentTime += deltaTime;
-	if (this->currentTime >= 0.05f) {
-		this->currentTime = 0.f;
-		this->zombieAnimationIndex++;
-
-		if (this->zombieAnimationIndex == 3) {
-			this->zombieAnimationIndex = 0;
-		}
+	if ((this->deltaTime += deltaTime) >= 0.05f) {
+		if (++this->frame == 3) this->frame = 0;
+		this->deltaTime = 0.f;
 	}
 
-	if(direction != -1) this->sprite.setTextureRect(this->zombieAnimation[direction][zombieAnimationIndex]);
-	else this->sprite.setTextureRect(this->zombieAnimation[1][0]);
-
+	this->sprite.setTextureRect({ this->frame*35, direction*50, 34, 49 });
+	
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
 		this->sprite.setPosition(this->getPos() + this->delta);
 		this->delta = sf::Vector2f(0.f, 0.f);
