@@ -1,8 +1,6 @@
 #include "Game.h"
 
-Game::Game(sf::RenderWindow &window):
-	window(window)
-{
+Game::Game(sf::RenderWindow &window): window(&window) {
 	this->event = sf::Event();
 
 	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
