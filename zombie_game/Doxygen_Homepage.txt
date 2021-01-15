@@ -30,7 +30,12 @@
 * \section Map Game map
 * \image html Map.png
 * 
-*
+* \authors
+* - Calvin Carter
+* - Nicky Hagens
+* - Mark Verburg
+* - Pim Goes
 *
 * \version version: 0.1
+* \date 15-1-2021
 */
