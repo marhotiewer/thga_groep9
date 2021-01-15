@@ -3,7 +3,7 @@
 *\section Introduction Game Introduction
 *
 * Your home is infested with zombies and it is your responsibility to survive and to protect your home.
-* Earn points, to buy stronger gear and try to survive as long as possible.
+* Earn points, to buy stronger gear and try to survive as long as possible!
 *
 *\section Github Github Page
 *
@@ -18,6 +18,8 @@
 * <tr><td rowspan="1">A<td>Player moves to the left               
 * <tr><td rowspan="1">S<td>Player moves down                          
 * <tr><td rowspan="1">D<td>Player moves right
+* <tr><td rowspan="1">Num1<td>Select weapon 1
+* <tr><td rowspan="1">Num2<td>Select weapon 2
 * <tr><td rowspan="1">R<td>Player reload weapon  
 * <tr><td rowspan="1">Left mouse button<td>Player shoots with current weapon
 * </table>
@@ -28,7 +30,7 @@
 * 	- Raygun
 *
 * \section Map Game map
-* \image html Map.png
+* \image html Map.png width=800px 
 * 
 * \authors
 * - Calvin Carter
