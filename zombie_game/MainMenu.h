@@ -15,8 +15,8 @@ public:
 
 MainMenu::MainMenu(void)
 {
-	alpha_max = 3 * 255;
-	alpha_div = 3;
+	alpha_max = 1 * 255;
+	alpha_div = 1;
 	playing = false;
 }
 
@@ -24,41 +24,63 @@ int MainMenu::Run(sf::RenderWindow& window)
 {
 	sf::Event Event;
 	bool Running = true;
-	sf::Texture Texture;
-	sf::Sprite Sprite;
-	int alpha = 0;
-	sf::Font Font;
-	sf::Text Menu1;
-	sf::Text Menu2;
+	sf::Texture TitleTexture;
+	sf::Texture BackgroundTexture;
+	sf::Texture ButtonTexture;
+	sf::Texture PlayTexture;
+	sf::Texture QuitTexture;
+	sf::Texture OptionsTexture;
+	sf::Texture ScoresTexture;
+	sf::Sprite Title;
+	sf::Sprite Background;
+	sf::Sprite Buttons;
+	sf::Sprite PlayButton;
+	sf::Sprite QuitButton;
+	sf::Sprite OptionsButton;
+	sf::Sprite ScoresButton;
 	sf::Text Menu3;
 	int menu = 0;
+	int alpha = 0;
 
-	if (!Texture.loadFromFile("MenuImage.png"))
-	{
-		std::cerr << "Image not found" << std::endl;
-		return (-1);
-	}
-	Sprite.setTexture(Texture);
-	Sprite.setColor(sf::Color(255, 255, 255, alpha));
-	if (!Font.loadFromFile("arial.ttf"))
-	{
-		std::cerr << "Font not found" << std::endl;
-		return (-1);
-	}
-	Menu1.setFont(Font);
-	Menu1.setCharacterSize(20);
-	Menu1.setString("Play");
-	Menu1.setPosition({ 280.f, 160.f });
+	TitleTexture.loadFromFile("title.png");
+	Title.setTexture(TitleTexture);
+	Title.setScale({ 0.3,0.3 });
+	Title.setPosition({ 180.f, 20.f });
 
-	Menu2.setFont(Font);
-	Menu2.setCharacterSize(20);
-	Menu2.setString("Exit");
-	Menu2.setPosition({ 280.f, 220.f });
+	BackgroundTexture.loadFromFile("MenuImage.png");
+	Background.setTexture(BackgroundTexture);
+	Background.setColor(sf::Color(255, 255, 255, alpha));
+	Background.setPosition({ 15.f, 24.f });
 
-	Menu3.setFont(Font);
-	Menu3.setCharacterSize(20);
-	Menu3.setString("Continue");
-	Menu3.setPosition({ 280.f, 200.f });
+	ButtonTexture.loadFromFile("buttons.png");
+	Buttons.setTexture(ButtonTexture);
+	Buttons.setColor(sf::Color(255, 255, 255, alpha));
+	Buttons.setScale({ 0.5,0.5 });
+	Buttons.setPosition({ 280.f,230.f });
+
+	PlayTexture.loadFromFile("play.png");
+	PlayButton.setTexture(PlayTexture);
+	PlayButton.setColor(sf::Color(255, 255, 255, alpha));
+	PlayButton.setScale({ 0.5,0.5 });
+	PlayButton.setPosition({ 310.f, 242.f });
+
+	QuitTexture.loadFromFile("quit.png");
+	QuitButton.setTexture(QuitTexture);
+	QuitButton.setColor(sf::Color(255, 255, 255, alpha));
+	QuitButton.setScale({ 0.5,0.5 });
+	QuitButton.setPosition({ 310.f, 296.f });
+
+	OptionsTexture.loadFromFile("options.png");
+	OptionsButton.setTexture(OptionsTexture);
+	OptionsButton.setColor(sf::Color(255, 255, 255, alpha));
+	OptionsButton.setScale({ 0.5,0.5 });
+	OptionsButton.setPosition({ 292.f, 350.f });
+
+	ScoresTexture.loadFromFile("scores.png");
+	ScoresButton.setTexture(ScoresTexture);
+	ScoresButton.setColor(sf::Color(255, 255, 255, alpha));
+	ScoresButton.setScale({ 0.5,0.5 });
+	ScoresButton.setPosition({ 296.5f, 405.f });
 
 	if (playing)
 	{
@@ -81,24 +103,33 @@ int MainMenu::Run(sf::RenderWindow& window)
 				switch (Event.key.code)
 				{
 				case sf::Keyboard::Up:
-					menu = 0;
+					if (menu > 0) {
+						menu--;
+					}
 					break;
 				case sf::Keyboard::Down:
-					menu = 1;
+					if (menu == 4) {
+						menu = 0;
+					}
+					else {
+						menu++;
+					}
 					break;
 				case sf::Keyboard::Return:
 					if (menu == 0)
 					{
-						//Let's get play !
 						playing = true;
 						return (1);
 					}
+					else if (menu == 1) {
+						return -1;
+					}
 					else
 					{
-						//Let's get work...
 						return (-1);
 					}
 					break;
+
 				default:
 					break;
 				}
@@ -109,24 +140,44 @@ int MainMenu::Run(sf::RenderWindow& window)
 		{
 			alpha++;
 		}
-		Sprite.setColor(sf::Color(255, 255, 255, alpha / alpha_div));
+		Background.setColor(sf::Color(255, 255, 255, alpha / alpha_div));
+		Buttons.setColor(sf::Color(255, 255, 255, alpha / alpha_div));
 		if (menu == 0)
 		{
-			Menu1.setFillColor(sf::Color(255, 0, 0, 255));
-			Menu2.setFillColor(sf::Color(255, 255, 255, 255));
-			Menu3.setFillColor(sf::Color(255, 0, 0, 255));
+			PlayButton.setColor(sf::Color(255, 0, 0, 255));
+			QuitButton.setColor(sf::Color(255, 255, 255, 255));
+			OptionsButton.setColor(sf::Color(255, 255, 255, 255));
+			ScoresButton.setColor(sf::Color(255, 255, 255, 255));
+		}
+		else if (menu == 1)
+		{
+			PlayButton.setColor(sf::Color(255, 255, 255, 255));
+			QuitButton.setColor(sf::Color(255, 0, 0, 255));
+			OptionsButton.setColor(sf::Color(255, 255, 255, 255));
+			ScoresButton.setColor(sf::Color(255, 255, 255, 255));
+		}
+		else if (menu == 2)
+		{
+			PlayButton.setColor(sf::Color(255, 255, 255, 255));
+			QuitButton.setColor(sf::Color(255, 255, 255, 255));
+			OptionsButton.setColor(sf::Color(255, 0, 0, 255));
+			ScoresButton.setColor(sf::Color(255, 255, 255, 255));
+		}
+		else if (menu == 3)
+		{
+			PlayButton.setColor(sf::Color(255, 255, 255, 255));
+			QuitButton.setColor(sf::Color(255, 255, 255, 255));
+			OptionsButton.setColor(sf::Color(255, 255, 255, 255));
+			ScoresButton.setColor(sf::Color(255, 0, 0, 255));
 		}
 		else
-		{
-			Menu1.setFillColor(sf::Color(255, 255, 255, 255));
-			Menu2.setFillColor(sf::Color(255, 0, 0, 255));
-			Menu3.setFillColor(sf::Color(255, 255, 255, 255));
-		}
 
 		//Clearing screen
 		window.clear();
 		//Drawing
-		window.draw(Sprite);
+		window.draw(Background);
+		window.draw(Buttons);
+		window.draw(Title);
 		if (alpha == alpha_max)
 		{
 			if (playing)
@@ -135,9 +186,11 @@ int MainMenu::Run(sf::RenderWindow& window)
 			}
 			else
 			{
-				window.draw(Menu1);
+				window.draw(PlayButton);
+				window.draw(QuitButton);
+				window.draw(OptionsButton);
+				window.draw(ScoresButton);
 			}
-			window.draw(Menu2);
 		}
 		window.display();
 	}

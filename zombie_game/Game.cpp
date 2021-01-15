@@ -26,7 +26,7 @@ Game::~Game()
 {
 	for (Entity* entity : this->entities) delete entity;
 	for (Static* drawable : this->statics) delete drawable;
-	delete this->window;
+	//delete this->window;
 }
 
 void Game::update(float deltaTime)
