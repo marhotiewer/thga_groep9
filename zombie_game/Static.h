@@ -7,7 +7,7 @@
 class Static : public Drawable
 {
 	public:
-		Static(AssetManager& assets) : Drawable(assets) {}
+		Static(AssetManager& assets) : Drawable(assets) { this->type = Type::Static; }
 };
 
 #endif

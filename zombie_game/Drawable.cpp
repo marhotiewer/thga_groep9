@@ -5,7 +5,6 @@ bool Drawable::isColliding(Drawable& drawable, sf::Vector2f delta)
     sf::FloatRect h1 = drawable.getHitbox();
     h1.left += delta.x;
     h1.top += delta.y;
-
     return h1.intersects(this->getHitbox());
 }
 
@@ -53,4 +52,9 @@ sf::Vector2i Drawable::getSize()
 sf::Vector2f Drawable::getPos()
 {
     return this->sprite.getPosition();
+}
+
+bool Drawable::isActive()
+{
+    return this->active;
 }

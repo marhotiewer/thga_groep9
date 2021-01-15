@@ -1,47 +1,27 @@
 #include "Entity.h"
 
-Entity* Entity::move(sf::Vector2f delta)
+Drawable* Entity::move(sf::Vector2f delta)
 {
-	Entity* drawable = nullptr;
-
-	if (this->alive) {
-		for (Static* _static : this->statics) {
-			if (_static->isColliding(*this, sf::Vector2f(delta.x, 0.f))) delta.x = 0.f;
-			if (_static->isColliding(*this, sf::Vector2f(0.f, delta.y))) delta.y = 0.f;
-		};
-		for (Entity* _entity : this->entities) {
-			if (_entity != this) {
-				if (_entity->isColliding(*this, sf::Vector2f(delta.x, 0.f))) {
-					drawable = _entity;
-					delta.x = 0.f;
-				}
-				if (_entity->isColliding(*this, sf::Vector2f(0.f, delta.y))) {
-					drawable = _entity;
-					delta.y = 0.f;
-				}
-			}
-		};
-		this->delta = delta;
-	}
+	Drawable* drawable = nullptr;
+	for (Drawable* object : this->objects) {
+		if (object != this && object->isActive() && object->type != Type::Projectile && object->isColliding(*this, delta)) {
+			if (object->isColliding(*this, sf::Vector2f(delta.x, 0.f))) delta.x = 0.f;
+			if (object->isColliding(*this, sf::Vector2f(0.f, delta.y))) delta.y = 0.f;
+			drawable = object;
+		}
+	};
+	this->delta = delta;
 	return drawable;
-}
-
-void Entity::draw(sf::RenderWindow* window)
-{
-	if (this->alive) {
-		Drawable::draw(window);
-	}
 }
 
 void Entity::damage(int dmg)
 {
-	if (this->alive) {
-		this->health -= dmg;
-		this->alive = health >= 0;
+	if ((this->health -= dmg) <= 0) {
+		this->active = false;
 	}
 }
 
-bool Entity::isAlive()
+void Entity::draw(sf::RenderWindow* window)
 {
-	return this->alive;
+	Drawable::draw(window);
 }
