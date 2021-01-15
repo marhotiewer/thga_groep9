@@ -8,9 +8,10 @@
 #include <vector>
 
 #include "Drawable.h"
-#include "Wall.h"
-#include "Floor.h"
 #include "Player.h"
+#include "Zombie.h"
+#include "Floor.h"
+#include "Wall.h"
 #include "Tree.h"
 #include "cScreen.h"
 
@@ -18,21 +19,22 @@ class Game : public cScreen {
 	public:
 		Game(sf::RenderWindow &window);
 		~Game();
-
-		bool running();
-		void pollEvents();
 		void update(float deltaTime);
+		void toggleFullscreen();
+		void pollEvents();
+		bool running();
 		void render();
 		virtual int Run(sf::RenderWindow &window);
-
 	private:
 		std::vector<Entity*> entities;
 		std::vector<Static*> statics;
 		bool noKeyPressed = false;
-		sf::RenderWindow *window;
+		bool isFullScreen = false;
+		sf::RenderWindow* window;
 		AssetManager assets;
+		bool debug = false;
 		sf::Event event;
 		Player *player;
 };
 
-#endif GAME_H
+#endif

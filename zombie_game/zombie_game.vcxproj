@@ -60,9 +60,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Static.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allScreens.h" />
@@ -78,6 +78,10 @@
     <ClInclude Include="Static.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Zombie.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="class_diagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

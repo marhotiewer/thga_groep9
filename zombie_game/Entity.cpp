@@ -1,21 +1,47 @@
 #include "Entity.h"
 
-Entity::Entity(AssetManager& assets) : Drawable(assets)
+Entity* Entity::move(sf::Vector2f delta)
 {
-	// init
+	Entity* drawable = nullptr;
+
+	if (this->alive) {
+		for (Static* _static : this->statics) {
+			if (_static->isColliding(*this, sf::Vector2f(delta.x, 0.f))) delta.x = 0.f;
+			if (_static->isColliding(*this, sf::Vector2f(0.f, delta.y))) delta.y = 0.f;
+		};
+		for (Entity* _entity : this->entities) {
+			if (_entity != this) {
+				if (_entity->isColliding(*this, sf::Vector2f(delta.x, 0.f))) {
+					drawable = _entity;
+					delta.x = 0.f;
+				}
+				if (_entity->isColliding(*this, sf::Vector2f(0.f, delta.y))) {
+					drawable = _entity;
+					delta.y = 0.f;
+				}
+			}
+		};
+		this->delta = delta;
+	}
+	return drawable;
 }
 
 void Entity::draw(sf::RenderWindow* window)
 {
-	window->draw(this->sprite);
+	if (this->alive) {
+		Drawable::draw(window);
+	}
 }
 
-sf::Vector2f Entity::getPos()
+void Entity::damage(int dmg)
 {
-	return this->sprite.getPosition() + this->delta;
+	if (this->alive) {
+		this->health -= dmg;
+		this->alive = health >= 0;
+	}
 }
 
-sf::Vector2i Entity::getSize()
+bool Entity::isAlive()
 {
-	return this->sprite.getTextureRect().getSize();
+	return this->alive;
 }

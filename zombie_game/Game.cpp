@@ -5,16 +5,23 @@ Game::Game(sf::RenderWindow &window):
 {
 	this->event = sf::Event();
 
-	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(3000, 2250)));
-	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));
-	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));
-	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));
-	//this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));
-	//this->statics.push_back(new Tree(this->assets, sf::Vector2f(20, 250)));
-	
-	this->player = new Player(this->assets, sf::Vector2f(200, 2000));
-	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(640, 480)));
+	this->statics.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
+
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));		// left wall
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
+	this->statics.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
+
+	this->statics.push_back(new Tree(this->assets, sf::Vector2f(100, 50))); // left tree
+	this->statics.push_back(new Tree(this->assets, sf::Vector2f(300, 50))); // right tree
+
+	this->player = new Player(this->assets, sf::Vector2f(320, 240), this->entities, this->statics);	// the player duh
+
+	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(25, 25), this->entities, this->statics, this->player));	// left zombie
+	this->entities.push_back(new Zombie(this->assets, sf::Vector2f(455, 25), this->entities, this->statics, this->player));	// right zombie
 	this->entities.push_back(this->player);
+
+	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 }
 
 Game::~Game()
@@ -24,9 +31,35 @@ Game::~Game()
 	delete this->window;
 }
 
-bool Game::running()
+void Game::update(float deltaTime)
 {
-	return this->window->isOpen();
+	this->pollEvents();
+
+	if (this->player->isAlive()) {
+		sf::Vector2f delta(0.f, 0.f);
+		float speed = 1.f;
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed = 1.5f;							// running
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta += sf::Vector2f(0.f, -speed);		// up
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta += sf::Vector2f(-speed, 0.0f);	// left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta += sf::Vector2f(0.f, speed);		// right
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta += sf::Vector2f(speed, 0.0f);		// right
+		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;							// decrease speed 25% when going sideways
+
+		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);									// move the player
+		for (Entity* entity : this->entities) entity->update(*this->window, deltaTime);					// update all the entities
+	}
+}
+
+void Game::toggleFullscreen() {
+	if (isFullScreen) window->create(sf::VideoMode(640, 480), "Zombie Game");						// windowed
+	else window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);		// fullscreen
+
+	// after creating a new windows we have to set the settings again
+	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+	this->window->setFramerateLimit(144);
+
+	isFullScreen = !isFullScreen;
 }
 
 void Game::pollEvents()
@@ -45,67 +78,38 @@ void Game::pollEvents()
 			break;
 		}
 		case sf::Event::KeyPressed:
+			// toggle fullscreen mode
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				// enter fullscreen mode (close the game for now)
-				window->close();
+				toggleFullscreen();
+			}
+			// toggle debugging info
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
+				this->debug = !this->debug;
+			}
+			// close the game
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+				this->window->close();
 			}
 			break;
 		}
 	}
 }
 
-void Game::update(float deltaTime)
+bool Game::running()
 {
-	this->pollEvents();
-
-	sf::Vector2f delta(0.f, 0.f);
-	float speed = 1.f;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
-		speed = 2.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		delta += sf::Vector2f(0.f, -speed);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		delta += sf::Vector2f(-speed, 0.0f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		delta += sf::Vector2f(0.f, speed);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		delta += sf::Vector2f(speed, 0.0f);
-	if (delta.x != 0.f && delta.y != 0.f)
-		delta *= 0.75f;
-	
-	this->player->move(delta);
-
-	for (Entity* entity : this->entities) {
-		bool colliding = false;
-		for (Static* drawable : this->statics) {
-			if (drawable->isColliding(*entity)) {
-				colliding = true;
-				break;
-			}
-		}
-		if (colliding) continue;
-		entity->update(*this->window, deltaTime);
-	}
+	return this->window->isOpen();
 }
 
 void Game::render()
 {
-	const sf::Vertex vertexes[][2] = {
-		{
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, 0)).x, window->mapPixelToCoords(sf::Vector2i(0, 0)).y), sf::Color::Red),
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, this->window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, this->window->getSize().y)).y), sf::Color::Red)
-		},
-		{
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, 0)).x, window->mapPixelToCoords(sf::Vector2i(this->window->getSize().x, 0)).y), sf::Color::Red),
-			sf::Vertex(sf::Vector2f(window->mapPixelToCoords(sf::Vector2i(0, this->window->getSize().y)).x, window->mapPixelToCoords(sf::Vector2i(0, this->window->getSize().y)).y), sf::Color::Red)
-		}
-	};
+	std::multimap<float, Drawable*> drawables;
+	for (Static* _static : this->statics) drawables.insert(std::make_pair(_static->getHitbox().top, _static));
+	for (Entity* _entity : this->entities) drawables.insert(std::make_pair(_entity->getHitbox().top, _entity));
 
 	this->window->clear();
-	for (Static *drawable : this->statics) drawable->draw(this->window);
-	for (Entity* entity : this->entities) entity->draw(this->window);
-	for (const sf::Vertex *vertex : vertexes) this->window->draw(vertex, 2, sf::Lines);
+	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);
+	// if debugging is enabled draw debugging info
+	if (this->debug) for (std::pair<float, Drawable*> drawable : drawables) drawable.second->debug_draw(this->window);
 	this->window->display();
 }
 

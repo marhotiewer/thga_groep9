@@ -7,10 +7,11 @@ class AssetManager
 {
 	public:
 		AssetManager();
+		sf::Texture zombieSpriteMap;
+		sf::Texture adamSpriteMap;
+		sf::Texture floorTexture;
 		sf::Texture wallTexture;
 		sf::Texture treeTexture;
-		sf::Texture floorTexture;
-		sf::Texture adamSpriteMap;
 };
 
 #endif

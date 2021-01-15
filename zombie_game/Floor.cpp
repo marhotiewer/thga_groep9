@@ -7,7 +7,7 @@ Floor::Floor(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size) : Static
 	this->sprite.setPosition(pos);
 }
 
-bool Floor::isColliding(Drawable& drawable)
+bool Floor::isColliding(Drawable& drawable, sf::Vector2f delta)
 {
 	return false;
 }
