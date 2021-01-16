@@ -45,14 +45,14 @@ void Game::update(float deltaTime)
 		sf::Vector2f delta(0.f, 0.f);
 		float speed = 1.f;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed += 0.5f;										// running
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta += sf::Vector2f(0.f, -speed);					// up
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta += sf::Vector2f(-speed, 0.0f);				// left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta += sf::Vector2f(0.f, speed);					// right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta += sf::Vector2f(speed, 0.0f);					// right
-		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;										// decrease speed 25% when going sideways
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed += 0.5f;			// running
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta.y -= speed;		// up
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta.x -= speed;		// left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta.y += speed;		// down
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta.x += speed;		// right
+		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;			// decrease speed 25% when going sideways
 
-		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);												// move the player
+		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);					// move the player if delta isn't 0
 
 		// if the entity is active update, else if entity is not a player delete object
 		for (auto entity = begin(this->objects); entity != end(this->objects); ++entity) {
