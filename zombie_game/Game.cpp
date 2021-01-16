@@ -53,7 +53,17 @@ void Game::update(float deltaTime)
 		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;										// decrease speed 25% when going sideways
 
 		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);												// move the player
-		for (Drawable* entity : this->objects) if (entity->isActive()) { entity->update(this->window, deltaTime); }	// update all the entities
+
+		// if the entity is active update, else if entity is not a player delete object
+		for (auto entity = begin(this->objects); entity != end(this->objects); ++entity) {
+			if ((*entity)->isActive()) {
+				(*entity)->update(this->window, deltaTime);
+			}
+			else if((*entity)->type != Drawable::Type::Player) {
+				delete (*entity);
+				entity = this->objects.erase(entity);
+			}
+		}
 	}
 
 	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
