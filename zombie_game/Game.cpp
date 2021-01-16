@@ -1,5 +1,11 @@
 #include "Game.h"
 
+struct Z_Index {
+	inline bool operator() (Drawable* one, Drawable* two) {
+		return (one->getHitbox().top < two->getHitbox().top);
+	}
+};
+
 Game::Game()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
@@ -49,6 +55,8 @@ void Game::update(float deltaTime)
 		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);												// move the player
 		for (Drawable* entity : this->objects) if (entity->isActive()) { entity->update(this->window, deltaTime); }	// update all the entities
 	}
+
+	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
 }
 
 void Game::toggleFullscreen() {
@@ -105,12 +113,8 @@ bool Game::running()
 
 void Game::render()
 {
-	std::multimap<float, Drawable*> drawables;
-	for (Drawable* object : this->objects) if(object->isActive()) drawables.insert(std::make_pair(object->getHitbox().top, object));
-
 	this->window->clear();
-	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);
-	// if debugging is enabled draw debugging info
-	if (this->debug) for (std::pair<float, Drawable*> drawable : drawables) if(drawable.second->isActive()) drawable.second->debug_draw(this->window);
+	for (Drawable* object : this->objects) if (object->isActive()) object->draw(this->window);
+	for (Drawable* object : this->objects) if (object->isActive() && this->debug) object->debug_draw(this->window);
 	this->window->display();
 }
