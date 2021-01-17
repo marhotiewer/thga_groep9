@@ -18,7 +18,7 @@ void Bullet::update(sf::RenderWindow* window, float deltaTime)
 	this->move(displacement);
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		this->sprite.move(this->delta);
+		this->sprite.move(deltaTime * this->delta * 100.f);
 		this->delta = { 0.f, 0.f };
 	}
 }

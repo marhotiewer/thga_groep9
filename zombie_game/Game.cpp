@@ -9,7 +9,6 @@ struct Z_Index {
 Game::Game()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
-	this->window->setFramerateLimit(144);
 	this->event = sf::Event();
 
 	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
@@ -39,6 +38,12 @@ Game::~Game()
 
 void Game::update(float deltaTime)
 {
+	if ((this->elapsedTime += deltaTime) >= 1.f) {
+		if (this->debug) this->window->setTitle("Zombie Game (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
+		else this->window->setTitle("Zombie Game");
+		this->elapsedTime = 0.f;
+	}
+
 	this->pollEvents();
 
 	if (this->player->isActive()) {
@@ -75,7 +80,6 @@ void Game::toggleFullscreen() {
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	this->window->setFramerateLimit(144);
 
 	isFullScreen = !isFullScreen;
 }
