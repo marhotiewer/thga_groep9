@@ -103,12 +103,15 @@ int MainMenu::Run(sf::RenderWindow& window)
 				switch (Event.key.code)
 				{
 				case sf::Keyboard::Up:
-					if (menu > 0) {
+					if (menu == 0) {
+						menu = 3;
+					}
+					else {
 						menu--;
 					}
 					break;
 				case sf::Keyboard::Down:
-					if (menu == 4) {
+					if (menu == 3) {
 						menu = 0;
 					}
 					else {
