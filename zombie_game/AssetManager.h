@@ -13,6 +13,9 @@ class AssetManager
 		sf::Texture bulletSprite;
 		sf::Texture wallTexture;
 		sf::Texture treeTexture;
+		sf::Texture buttonTexture;
+		sf::Texture gameLogoTexture;
+		sf::Texture homescreenBackgroundTexture;
 };
 
 #endif

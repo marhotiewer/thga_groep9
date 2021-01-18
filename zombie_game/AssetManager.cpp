@@ -7492,7 +7492,10 @@ AssetManager::AssetManager()
     this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
+	this->buttonTexture.loadFromFile("buttons.png");
+	this->gameLogoTexture.loadFromFile("logo.png");
+	this->homescreenBackgroundTexture.loadFromFile("menuImage.png");
 
     this->floorTexture.setRepeated(true);
-    this->wallTexture.setRepeated(true);
+	this->wallTexture.setRepeated(true);
 }

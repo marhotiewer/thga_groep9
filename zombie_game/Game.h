@@ -18,7 +18,7 @@
 
 class Game : public cScreen {
 	public:
-		Game(sf::RenderWindow *window);
+		Game(sf::RenderWindow *window, AssetManager *assets);
 		~Game();
 		void update(float deltaTime);
 		void toggleFullscreen();
@@ -32,7 +32,7 @@ class Game : public cScreen {
 		bool isFullScreen = false;
 		sf::RenderWindow* window;
 		float elapsedTime = 0.f;
-		AssetManager assets;
+		AssetManager* assets;
 		bool debug = false;
 		sf::Event event;
 		Player *player;

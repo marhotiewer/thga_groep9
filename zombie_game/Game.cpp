@@ -6,29 +6,28 @@ struct Z_Index {
 	}
 };
 
-Game::Game(sf::RenderWindow *window):
-	window(window)
+Game::Game(sf::RenderWindow *window, AssetManager *assets):
+	window(window),
+	assets(assets)
 {
 	//this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
 	this->event = sf::Event();
 
-	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
+	this->objects.push_back(new Floor(*this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
 
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));		// left wall
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
+	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));		// left wall
+	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
+	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
+	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
 
-	this->objects.push_back(new Tree(this->assets, sf::Vector2f(100, 50))); // left tree
-	this->objects.push_back(new Tree(this->assets, sf::Vector2f(300, 50))); // right tree
+	this->objects.push_back(new Tree(*this->assets, sf::Vector2f(100, 50))); // left tree
+	this->objects.push_back(new Tree(*this->assets, sf::Vector2f(300, 50))); // right tree
 
-	this->player = new Player(this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
+	this->player = new Player(*this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
 
-	this->objects.push_back(new Zombie(sf::Vector2f(25, 25), this->player, this->assets, this->objects));	// left zombie
-	this->objects.push_back(new Zombie(sf::Vector2f(455, 25), this->player, this->assets, this->objects));	// right zombie
+	this->objects.push_back(new Zombie(sf::Vector2f(25, 25), this->player, *this->assets, this->objects));	// left zombie
+	this->objects.push_back(new Zombie(sf::Vector2f(455, 25), this->player, *this->assets, this->objects));	// right zombie
 	this->objects.push_back(this->player);
-
-	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 }
 
 Game::~Game()
@@ -55,7 +54,7 @@ void Game::update(float deltaTime)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta.x -= speed;		// left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta.y += speed;		// down
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta.x += speed;		// right
-		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;			// decrease speed 25% when going sideways
+		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;			// decrease speed 25% when going skewed
 
 		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);					// move the player if delta isn't 0
 
@@ -75,18 +74,18 @@ void Game::update(float deltaTime)
 }
 
 void Game::toggleFullscreen() {
-	if (isFullScreen) window->create(sf::VideoMode(640, 480), "Zombie Game");						// windowed
-	else window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);		// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");						// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);		// fullscreen
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 
-	isFullScreen = !isFullScreen;
+	this->isFullScreen = !this->isFullScreen;
 }
 
 void Game::pollEvents()
 {
-	while (this->window->pollEvent(event))
+	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
 		{
@@ -135,6 +134,7 @@ void Game::render()
 
 screen Game::Run()
 {
+	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 	 sf::Clock clock;
 	 //this->window = window
 	 float deltaTime;
