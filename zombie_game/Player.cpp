@@ -46,7 +46,7 @@ void Player::update(sf::RenderWindow* window, float deltaTime)
 	sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
-	int direction = 3, mode = 80;	// default = idle, facing towards you
+	int direction = 3, mode = 0;	// default = idle, facing towards you
 	float timeStep = 0.15f;			// default = idle speed
 
 	if (anglediff <= 45 && anglediff >= -45)		direction = 0; // facing right
@@ -56,7 +56,7 @@ void Player::update(sf::RenderWindow* window, float deltaTime)
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
 		timeStep = 0.05f;	// walking speed
-		mode = 144;			// walking animation
+		mode = 48;			// walking animation
 
 		if (this->delta.x >  1.f || this->delta.y >	 1.f ||
 			this->delta.x < -1.f || this->delta.y < -1.f)
