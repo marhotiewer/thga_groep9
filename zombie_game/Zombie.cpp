@@ -26,7 +26,7 @@ void Zombie::update(sf::RenderWindow* window, float deltaTime)
 {
 	sf::Vector2f distance(this->player->getPos() - this->getPos());
 	float length = sqrt((distance.x * distance.x) + (distance.y * distance.y));
-	this->move({distance.x / length, distance.y / length});
+	this->move({ distance.x / length, distance.y / length });
 
 	int direction = 0;	// default = facing towards you
 
@@ -42,7 +42,7 @@ void Zombie::update(sf::RenderWindow* window, float deltaTime)
 	}
 	
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		this->sprite.move(this->delta);
+		this->sprite.move(deltaTime * this->delta * 100.f);
 		this->delta = { 0.f, 0.f };
 	}
 }

@@ -31,6 +31,7 @@ class Game : public cScreen {
 		bool noKeyPressed = false;
 		bool isFullScreen = false;
 		sf::RenderWindow* window;
+		float elapsedTime = 0.f;
 		AssetManager assets;
 		bool debug = false;
 		sf::Event event;

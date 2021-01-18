@@ -71,8 +71,8 @@ void Player::update(sf::RenderWindow* window, float deltaTime)
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
 		sf::View view = window->getView();
-		this->sprite.move(this->delta);
-		view.move(this->delta);
+		this->sprite.move(deltaTime * this->delta * 100.f);
+		view.move(deltaTime * this->delta * 100.f);
 		window->setView(view);
 		this->delta = { 0.f, 0.f };
 	}

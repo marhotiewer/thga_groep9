@@ -1,8 +1,15 @@
 #include "Game.h"
 
+struct Z_Index {
+	inline bool operator() (Drawable* one, Drawable* two) {
+		return (one->getHitbox().top < two->getHitbox().top);
+	}
+};
+
 Game::Game(sf::RenderWindow *window):
 	window(window)
 {
+	//this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
 	this->event = sf::Event();
 
 	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
@@ -31,22 +38,40 @@ Game::~Game()
 
 void Game::update(float deltaTime)
 {
+	if ((this->elapsedTime += deltaTime) >= 1.f) {
+		if (this->debug) this->window->setTitle("Zombie Game (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
+		else this->window->setTitle("Zombie Game");
+		this->elapsedTime = 0.f;
+	}
+
 	this->pollEvents();
 
 	if (this->player->isActive()) {
 		sf::Vector2f delta(0.f, 0.f);
 		float speed = 1.f;
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed += 0.5f;										// running
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta += sf::Vector2f(0.f, -speed);					// up
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta += sf::Vector2f(-speed, 0.0f);				// left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta += sf::Vector2f(0.f, speed);					// right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta += sf::Vector2f(speed, 0.0f);					// right
-		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;										// decrease speed 25% when going sideways
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))	speed += 0.5f;			// running
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))		delta.y -= speed;		// up
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta.x -= speed;		// left
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta.y += speed;		// down
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta.x += speed;		// right
+		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;			// decrease speed 25% when going sideways
 
-		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);												// move the player
-		for (Drawable* entity : this->objects) if (entity->isActive()) { entity->update(this->window, deltaTime); }	// update all the entities
+		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);					// move the player if delta isn't 0
+
+		// if the entity is active update, else if entity is not a player delete object
+		for (auto entity = begin(this->objects); entity != end(this->objects); ++entity) {
+			if ((*entity)->isActive()) {
+				(*entity)->update(this->window, deltaTime);
+			}
+			else if((*entity)->type != Drawable::Type::Player) {
+				delete (*entity);
+				entity = this->objects.erase(entity);
+			}
+		}
 	}
+
+	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
 }
 
 void Game::toggleFullscreen() {
@@ -55,7 +80,6 @@ void Game::toggleFullscreen() {
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	this->window->setFramerateLimit(144);
 
 	isFullScreen = !isFullScreen;
 }
@@ -103,13 +127,9 @@ bool Game::running()
 
 void Game::render()
 {
-	std::multimap<float, Drawable*> drawables;
-	for (Drawable* object : this->objects) if(object->isActive()) drawables.insert(std::make_pair(object->getHitbox().top, object));
-
 	this->window->clear();
-	for (std::pair<float, Drawable*> drawable : drawables) drawable.second->draw(this->window);
-	// if debugging is enabled draw debugging info
-	if (this->debug) for (std::pair<float, Drawable*> drawable : drawables) if(drawable.second->isActive()) drawable.second->debug_draw(this->window);
+	for (Drawable* object : this->objects) if (object->isActive()) object->draw(this->window);
+	for (Drawable* object : this->objects) if (object->isActive() && this->debug) object->debug_draw(this->window);
 	this->window->display();
 }
 
