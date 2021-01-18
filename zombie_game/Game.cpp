@@ -133,7 +133,7 @@ void Game::render()
 	this->window->display();
 }
 
-int Game::Run()
+screen Game::Run()
 {
 	 sf::Clock clock;
 	 //this->window = window
@@ -145,5 +145,5 @@ int Game::Run()
 		 this->update(deltaTime);
 		 this->render();
 	 }
-	 return -1;
+	 return screen::none;
 }

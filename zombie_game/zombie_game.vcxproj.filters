@@ -94,9 +94,6 @@
     <ClInclude Include="cScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="allScreens.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Settings.h">
       <Filter>Header Files</Filter>
     </ClInclude>

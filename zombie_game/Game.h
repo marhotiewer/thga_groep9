@@ -25,7 +25,7 @@ class Game : public cScreen {
 		void pollEvents();
 		bool running();
 		void render();
-		virtual int Run();
+		virtual screen Run();
 	private:
 		std::vector<Drawable*> objects;
 		bool noKeyPressed = false;

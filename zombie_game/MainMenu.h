@@ -11,7 +11,7 @@ private:
 	sf::RenderWindow* window;
 public:
 	MainMenu(sf::RenderWindow* window);
-	int Run() override;
+	screen Run() override;
 };
 
 MainMenu::MainMenu( sf::RenderWindow* window ):
@@ -22,7 +22,7 @@ MainMenu::MainMenu( sf::RenderWindow* window ):
 	playing = false;
 }
 
-int MainMenu::Run()
+screen MainMenu::Run()
 {
 	sf::Event Event;
 	bool Running = true;
@@ -46,7 +46,7 @@ int MainMenu::Run()
 
 	TitleTexture.loadFromFile("title.png");
 	Title.setTexture(TitleTexture);
-	Title.setScale({ 0.3,0.3 });
+	Title.setScale({ .3f,.3f });
 	Title.setPosition({ 180.f, 20.f });
 
 	BackgroundTexture.loadFromFile("MenuImage.png");
@@ -97,7 +97,7 @@ int MainMenu::Run()
 			// Window closed
 			if (Event.type == sf::Event::Closed)
 			{
-				return (-1);
+				return screen::none;
 			}
 			//Key pressed
 			if (Event.type == sf::Event::KeyPressed)
@@ -124,14 +124,14 @@ int MainMenu::Run()
 					if (menu == 0)
 					{
 						playing = true;
-						return (1);
+						return screen::inGame;
 					}
 					else if (menu == 1) {
-						return -1;
+						return screen::none;
 					}
 					else
 					{
-						return (-1);
+						return screen::none;
 					}
 					break;
 
@@ -201,5 +201,5 @@ int MainMenu::Run()
 	}
 
 	//Never reaching this point normally, but just in case, exit the windowlication
-	return (-1);
+	return screen::none;
 }
