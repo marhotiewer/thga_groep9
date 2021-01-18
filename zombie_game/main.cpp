@@ -16,7 +16,6 @@ int main()
     while (currentScreen != screen::none)
     {
 		currentScreen = Screens[int(currentScreen)]->Run();
-        std::cout << int(currentScreen) << std::endl;
     }
     return 0;
 }
