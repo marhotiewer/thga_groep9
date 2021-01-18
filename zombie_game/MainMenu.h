@@ -8,19 +8,21 @@ private:
 	int alpha_max;
 	int alpha_div;
 	bool playing;
+	sf::RenderWindow* window;
 public:
-	MainMenu(void);
-	int Run(sf::RenderWindow& window) override;
+	MainMenu(sf::RenderWindow* window);
+	int Run() override;
 };
 
-MainMenu::MainMenu(void)
+MainMenu::MainMenu( sf::RenderWindow* window ):
+	window(window)
 {
 	alpha_max = 1 * 255;
 	alpha_div = 1;
 	playing = false;
 }
 
-int MainMenu::Run(sf::RenderWindow& window)
+int MainMenu::Run()
 {
 	sf::Event Event;
 	bool Running = true;
@@ -90,7 +92,7 @@ int MainMenu::Run(sf::RenderWindow& window)
 	while (Running)
 	{
 		//Verifying events
-		while (window.pollEvent(Event))
+		while (this->window->pollEvent(Event))
 		{
 			// Window closed
 			if (Event.type == sf::Event::Closed)
@@ -176,26 +178,26 @@ int MainMenu::Run(sf::RenderWindow& window)
 		else
 
 		//Clearing screen
-		window.clear();
+		window->clear();
 		//Drawing
-		window.draw(Background);
-		window.draw(Buttons);
-		window.draw(Title);
+		window->draw(Background);
+		window->draw(Buttons);
+		window->draw(Title);
 		if (alpha == alpha_max)
 		{
 			if (playing)
 			{
-				window.draw(Menu3);
+				window->draw(Menu3);
 			}
 			else
 			{
-				window.draw(PlayButton);
-				window.draw(QuitButton);
-				window.draw(OptionsButton);
-				window.draw(ScoresButton);
+				window->draw(PlayButton);
+				window->draw(QuitButton);
+				window->draw(OptionsButton);
+				window->draw(ScoresButton);
 			}
 		}
-		window.display();
+		window->display();
 	}
 
 	//Never reaching this point normally, but just in case, exit the windowlication

@@ -3,7 +3,7 @@
 
 class cScreen {
 public:
-	virtual int Run(sf::RenderWindow& window) = 0;
+	virtual int Run() = 0;
 };
 
 #endif

@@ -1,6 +1,8 @@
 #include "Game.h"
 
-Game::Game(sf::RenderWindow &window): window(&window) {
+Game::Game(sf::RenderWindow *window):
+	window(window)
+{
 	this->event = sf::Event();
 
 	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
@@ -25,7 +27,6 @@ Game::Game(sf::RenderWindow &window): window(&window) {
 Game::~Game()
 {
 	for (Drawable* entity : this->objects) delete entity;
-	delete this->window;
 }
 
 void Game::update(float deltaTime)
@@ -112,7 +113,7 @@ void Game::render()
 	this->window->display();
 }
 
-int Game::Run(sf::RenderWindow& window)
+int Game::Run()
 {
 	 sf::Clock clock;
 	 //this->window = window

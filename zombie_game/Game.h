@@ -18,14 +18,14 @@
 
 class Game : public cScreen {
 	public:
-		Game(sf::RenderWindow &window);
+		Game(sf::RenderWindow *window);
 		~Game();
 		void update(float deltaTime);
 		void toggleFullscreen();
 		void pollEvents();
 		bool running();
 		void render();
-		virtual int Run(sf::RenderWindow &window);
+		virtual int Run();
 	private:
 		std::vector<Drawable*> objects;
 		bool noKeyPressed = false;
