@@ -14,23 +14,25 @@
 #include "Floor.h"
 #include "Wall.h"
 #include "Tree.h"
+#include "cScreen.h"
 
-class Game {
+class Game : public cScreen {
 	public:
-		Game();
+		Game(sf::RenderWindow *window, AssetManager *assets);
 		~Game();
 		void update(float deltaTime);
 		void toggleFullscreen();
 		void pollEvents();
 		bool running();
 		void render();
+		virtual screen Run();
 	private:
 		std::vector<Drawable*> objects;
 		bool noKeyPressed = false;
 		bool isFullScreen = false;
 		sf::RenderWindow* window;
 		float elapsedTime = 0.f;
-		AssetManager assets;
+		AssetManager* assets;
 		bool debug = false;
 		sf::Event event;
 		Player *player;

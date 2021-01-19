@@ -15,6 +15,9 @@ class AssetManager
 		sf::Texture wallTexture;
 		sf::Texture treeTexture;
 		sf::SoundBuffer walkingSound;
+		sf::Texture buttonTexture;
+		sf::Texture gameLogoTexture;
+		sf::Texture homescreenBackgroundTexture;
 };
 
 #endif

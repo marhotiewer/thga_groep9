@@ -55,11 +55,13 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -68,11 +70,16 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="cScreen.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MainMenuOld.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="Static.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Wall.h" />
