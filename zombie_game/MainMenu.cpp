@@ -19,6 +19,9 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager* assets) :
 	this->background.setTexture(assets->homescreenBackgroundTexture);
 	this->background.setPosition({ 0.f, 0.f });
 	//this->background.setColor(sf::Color(255, 255, 255, alpha))
+	this->backgroundMusic = &this->assets->mainMenuSoundtrack;
+	this->clickSound = sf::Sound(this->assets->mainMenuClickSound);
+	this->clickSound.setVolume(50.f);
 }
 
 screen MainMenu::update(float deltaTimeSeconds) {
@@ -80,9 +83,11 @@ screen MainMenu::pollEvents()
 						buttonPressed = button->buttonPressed();
 						if (buttonPressed != buttonType::none) {
 							// A button was pressed
+							this->clickSound.play();
 							switch (buttonPressed) {
 								case buttonType::play: {
 									// Play the game!
+									backgroundMusic->stop();
 									returnValue = screen::inGame;
 									break;
 								}
@@ -121,6 +126,7 @@ void MainMenu::render()
 
 screen MainMenu::Run()
 {
+	backgroundMusic->play();
 	sf::Clock clock;
 	float deltaTimeSeconds;
 	screen nextScreen = screen::none;

@@ -69,7 +69,7 @@ void Player::update(sf::RenderWindow* window, float deltaTime)
 		if (++this->frame == 6) this->frame = 0;
 		this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 		this->deltaTime = 0.f;
-		if ((frame == 0 || frame == 3) && mode == 144) {
+		if ((frame == 0 || frame == 3) && mode == 48) {
 			float pitch = (rand() % 20 + 90) / 100.f;
 			walkingSound.setPitch(pitch);
 			walkingSound.play();

@@ -135,15 +135,18 @@ void Game::render()
 screen Game::Run()
 {
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	 sf::Clock clock;
-	 //this->window = window
-	 float deltaTime;
-	 while (this->running())
-	 {
-		 deltaTime = clock.getElapsedTime().asSeconds();
-		 clock.restart();
-		 this->update(deltaTime);
-		 this->render();
-	 }
-	 return screen::none;
+	sf::Clock clock;
+	//this->window = window
+	float deltaTime;
+	this->ingameBreeze = &this->assets->ingameBreezeSound;
+	this->ingameBreeze->play();
+
+	while (this->running())
+	{
+		deltaTime = clock.getElapsedTime().asSeconds();
+		clock.restart();
+		this->update(deltaTime);
+		this->render();
+	}
+	return screen::none;
 }

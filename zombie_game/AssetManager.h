@@ -14,10 +14,13 @@ class AssetManager
 		sf::Texture bulletSprite;
 		sf::Texture wallTexture;
 		sf::Texture treeTexture;
-		sf::SoundBuffer walkingSound;
 		sf::Texture buttonTexture;
 		sf::Texture gameLogoTexture;
 		sf::Texture homescreenBackgroundTexture;
+		sf::SoundBuffer walkingSound;
+		sf::Music ingameBreezeSound;
+		sf::Music mainMenuSoundtrack;
+		sf::SoundBuffer mainMenuClickSound;
 };
 
 #endif

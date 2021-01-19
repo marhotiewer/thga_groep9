@@ -36,6 +36,7 @@ class Game : public cScreen {
 		bool debug = false;
 		sf::Event event;
 		Player *player;
+		sf::Music* ingameBreeze;
 };
 
 #endif

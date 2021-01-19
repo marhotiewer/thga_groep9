@@ -19,6 +19,8 @@ private:
 	std::vector<Button*> buttons;
 	sf::Sprite logo;
 	sf::Sprite background;
+	sf::Music *backgroundMusic;
+	sf::Sound clickSound;
 public:
 	MainMenu(sf::RenderWindow* window, AssetManager* assets);
 	screen update(float deltaTime);
