@@ -7,7 +7,7 @@
 *
 *\section GitHub GitHub Page
 *
-* GitHub: <https://github.com/marhotiewer/thga_groep9>
+* GitHub: [Github](https://github.com/marhotiewer/thga_groep9)
 *
 *\section Controls Controls
 *
