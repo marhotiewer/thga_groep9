@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "Static.h"
+/// @file
+
 
 /// \class Tree
 /// \brief

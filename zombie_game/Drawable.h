@@ -4,10 +4,20 @@
 #include <SFML/Graphics.hpp>
 
 #include "AssetManager.h"
+/// @file
 
+/// \class Drawable
+/// \brief
+/// Drawable
+/// \details
+/// The class Drawable 
+/// If a class need a texture from the asset manager, the asset manager need to given by the class by reference. 
+/// The image files are in the AssetManager.cpp file. 
+/// The asset manager is created in Game.cpp.
 class Drawable
 {
 	public:
+		/// \enum
 		enum class Type
 		{
 			Projectile,

@@ -6,7 +6,14 @@
 #include "AssetManager.h"
 #include "Drawable.h"
 #include "Static.h"
+/// @file
 
+// \class Entity
+/// \brief
+/// Entity Class
+/// \details
+/// This class inhert from Drawable.
+/// This class exists for other classes to inhert for movable items.
 class Entity : public Drawable
 {
 	public:
