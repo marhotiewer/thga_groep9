@@ -15,6 +15,7 @@
 /// All functions are inherited from Static, and Static inherited it's functions from Drawable. 
 /// The function getHitbox is overrided because the hitbox is different because the Player and Zombie can walk behind a tree.
 /// The Texture used for the Tree is the TreeTexture and is loaded from the AssetManager class. 
+/// \image html tree.png
 class Tree : public Static
 {
 public:

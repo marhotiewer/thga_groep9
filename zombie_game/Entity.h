@@ -12,7 +12,7 @@
 /// \brief
 /// Entity Class for movable items
 /// \details
-/// This class inhert from Drawable.
+/// This class inhert from Drawable. And is a abstract class.
 /// This class exists for other classes to inhert for movable items.
 /// This class can be a Drawable Type Projectile, Player & Enemy.
 class Entity : public Drawable
@@ -22,40 +22,40 @@ class Entity : public Drawable
 		/// 
 		/// </summary>
 		/// <param name="assets">AssetManager required for textures</param>
-		/// <param name="objects">A vector of pointers of all the objects that are of one type.</param>
+		/// <param name="objects">A vector of pointers of all the Drawable, is used for collision detection.</param>
 		Entity(AssetManager& assets, std::vector<Drawable*>& objects) : Drawable(assets), objects(objects) {}	
 		
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="window"></param>
-		/// <param name="deltaTime"></param>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
+		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		virtual void update(sf::RenderWindow* window, float deltaTime) = 0;
 		
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="window"></param>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		void draw(sf::RenderWindow* window) override;
 		
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="delta"></param>
+		/// <param name="delta">Delta is now much difference to new position</param>
 		/// <returns></returns>
 		virtual Drawable* move(sf::Vector2f delta);
 
 		/// <summary>
-		/// 
+		/// Function to receive damage. And set the class to not active if health is zero. 
 		/// </summary>
-		/// <param name="dmg"></param>
+		/// <param name="dmg">Number of damage</param>
 		virtual void damage(int dmg) override;
 	protected:
-		std::vector<Drawable*>& objects;///<
-		float deltaTime = 0;///<
-		sf::Vector2f delta;///<
-		int health = 1;///<
-		int frame = 0;///<
+		std::vector<Drawable*>& objects;///<Vector of all Drawable Objects. Is used for collision detection. 
+		float deltaTime = 0;///<The time elapsed for one frame.
+		sf::Vector2f delta;///<New difference to move to new position. example is x+=1 and y+=1 the newpostion is y+1 and x+1.
+		int health = 1;///<lives for the object. 
+		int frame = 0;///<Is used in Zombie class and Player class to select to current frame for the animation of the Zombie and Player.
 };
 
 #endif

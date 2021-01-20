@@ -14,13 +14,13 @@
 class AssetManager
 {
 	public:
-		AssetManager();
+		AssetManager();///< \brief Constructor load all the textures of variables into memory.
 		sf::Texture zombieSpriteMap;///< \brief Zombie sprite map  \image html zombie.png
 		sf::Texture adamSpriteMap;///< \brief Player sprite map \image html player.png
 		sf::Texture floorTexture;///< \brief Texture of a Floor.
 		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
 		sf::Texture wallTexture;///< \brief Texture of a Wall.
-		sf::Texture treeTexture;///< \brief Texture for one Tree.
+		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
 };
 
 #endif //ASSETMANAGER_H
