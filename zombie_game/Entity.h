@@ -19,30 +19,31 @@ class Entity : public Drawable
 {
 	public:
 		/// <summary>
-		/// 
+		/// Constructor is empty. Class is used to inhert functions.
 		/// </summary>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="objects">A vector of pointers of all the Drawable, is used for collision detection.</param>
 		Entity(AssetManager& assets, std::vector<Drawable*>& objects) : Drawable(assets), objects(objects) {}	
 		
 		/// <summary>
-		/// 
+		/// Function to update class.
+		/// All class that inhert from Entity, need this function.
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		virtual void update(sf::RenderWindow* window, float deltaTime) = 0;
 		
 		/// <summary>
-		/// 
+		/// Draw the item on the screen. 
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		void draw(sf::RenderWindow* window) override;
 		
 		/// <summary>
-		/// 
+		/// Function to check if a Entity can move to a new position(old position+deta).
 		/// </summary>
 		/// <param name="delta">Delta is now much difference to new position</param>
-		/// <returns></returns>
+		/// <returns>Pointer to drawable if colliding.</returns>
 		virtual Drawable* move(sf::Vector2f delta);
 
 		/// <summary>
@@ -54,7 +55,7 @@ class Entity : public Drawable
 		std::vector<Drawable*>& objects;///<Vector of all Drawable Objects. Is used for collision detection. 
 		float deltaTime = 0;///<The time elapsed for one frame.
 		sf::Vector2f delta;///<New difference to move to new position. example is x+=1 and y+=1 the newpostion is y+1 and x+1.
-		int health = 1;///<lives for the object. 
+		int health = 1;///Lives for the object. 
 		int frame = 0;///<Is used in Zombie class and Player class to select to current frame for the animation of the Zombie and Player.
 };
 
