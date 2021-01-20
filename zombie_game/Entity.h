@@ -55,7 +55,7 @@ class Entity : public Drawable
 		std::vector<Drawable*>& objects;///<Vector of all Drawable Objects. Is used for collision detection. 
 		float deltaTime = 0;///<The time elapsed for one frame.
 		sf::Vector2f delta;///<New difference to move to new position. example is x+=1 and y+=1 the newpostion is y+1 and x+1.
-		int health = 1;///Lives for the object. 
+		int health = 1;///<Lives for the object. 
 		int frame = 0;///<Is used in Zombie class and Player class to select to current frame for the animation of the Zombie and Player.
 };
 

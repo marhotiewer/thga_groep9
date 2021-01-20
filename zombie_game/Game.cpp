@@ -1,5 +1,9 @@
 #include "Game.h"
+///@file
 
+
+/// \struct Z_Index
+/// \brief struct for draw order.
 struct Z_Index {
 	inline bool operator() (Drawable* one, Drawable* two) {
 		return (one->getHitbox().top < two->getHitbox().top);
