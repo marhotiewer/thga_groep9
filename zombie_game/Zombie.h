@@ -15,8 +15,11 @@ class Zombie : public Entity
 		void debug_draw(sf::RenderWindow* window) override;
 		Drawable* move(sf::Vector2f delta) override;
 		sf::FloatRect getHitbox() override;
+		void playAttackSound();
 	private:
 		Player* player;
+		sf::Sound* attackSounds[4];
+		int randomSoundTime;
 };
 
 #endif

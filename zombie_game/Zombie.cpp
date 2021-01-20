@@ -7,6 +7,13 @@ Zombie::Zombie(sf::Vector2f pos, Player* player, AssetManager& assets, std::vect
 	this->sprite.setPosition(pos);
 	this->type = Type::Enemy;
 	this->health = 10;
+
+	this->attackSounds[0] = new sf::Sound(*this->assets.zombieSounds[0]);
+	this->attackSounds[1] = new sf::Sound(*this->assets.zombieSounds[1]);
+	this->attackSounds[2] = new sf::Sound(*this->assets.zombieSounds[2]);
+	this->attackSounds[3] = new sf::Sound(*this->assets.zombieSounds[3]);
+
+	this->randomSoundTime = (rand() % 5);
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
@@ -45,6 +52,12 @@ void Zombie::update(sf::RenderWindow* window, float deltaTime)
 		this->sprite.move(deltaTime * this->delta * 100.f);
 		this->delta = { 0.f, 0.f };
 	}
+
+	sf::Clock clock;
+	if (clock.getElapsedTime().asSeconds() >= randomSoundTime) {
+		randomSoundTime = (rand() % 3) + 3;
+		playAttackSound();
+	}
 }
 
 Drawable* Zombie::move(sf::Vector2f delta)
@@ -60,4 +73,13 @@ sf::FloatRect Zombie::getHitbox()
 	sf::Vector2f spritePos(this->getPos());
 	sf::Vector2f hitBoxSize(25, 15);
 	return sf::FloatRect(sf::Vector2f(spritePos.x + (spriteSize.x / 2.f) - hitBoxSize.x / 2.f, spritePos.y + spriteSize.y - hitBoxSize.y), hitBoxSize);
+}
+
+void Zombie::playAttackSound() {
+	// Positioning will be implemented later
+	int soundToPlay = (rand() % 4) - 1;
+	float pitch = (rand() % 20 + 90) / 100.f;
+	this->attackSounds[soundToPlay]->setPitch(pitch);
+	this->attackSounds[soundToPlay]->setPosition({ this->getPos().x, 0, this->getPos().y });
+	this->attackSounds[soundToPlay]->play();
 }

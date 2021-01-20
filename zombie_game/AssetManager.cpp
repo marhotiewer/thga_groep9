@@ -1499,7 +1499,11 @@ AssetManager::AssetManager()
 	this->walkingSound.loadFromFile("textures_and_sounds\\footsteps.wav");
 	this->ingameBreezeSound.openFromFile("textures_and_sounds\\breeze.wav");
 	this->mainMenuSoundtrack.openFromFile("textures_and_sounds\\mainMenu.wav");
-	this->mainMenuClickSound.loadFromFile("Textures_and_sounds\\mouseClick.wav");
+	this->mainMenuClickSound.loadFromFile("textures_and_sounds\\mouseClick.wav");
+	this->zombieSounds[0]->loadFromFile("textures_and_sounds\\attack1.wav");
+	this->zombieSounds[1]->loadFromFile("textures_and_sounds\\attack2.wav");
+	this->zombieSounds[2]->loadFromFile("textures_and_sounds\\attack3.wav");
+	this->zombieSounds[3]->loadFromFile("textures_and_sounds\\attack4.wav");
 
 	this->mainMenuSoundtrack.setVolume(15.f);
 	this->mainMenuSoundtrack.setLoop(true);

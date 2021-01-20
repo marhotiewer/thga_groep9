@@ -21,6 +21,7 @@ class AssetManager
 		sf::Music ingameBreezeSound;
 		sf::Music mainMenuSoundtrack;
 		sf::SoundBuffer mainMenuClickSound;
+		sf::SoundBuffer* zombieSounds[4];
 };
 
 #endif
