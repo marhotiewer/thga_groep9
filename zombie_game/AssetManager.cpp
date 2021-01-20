@@ -1483,16 +1483,16 @@ const uint8_t wall_tile[] = {
 
 AssetManager::AssetManager()
 {
+    this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
     this->zombieSpriteMap.loadFromFile("textures\\zombie.png");
+    this->buttonTexture.loadFromFile("textures\\buttons.png");
+    this->gameLogoTexture.loadFromFile("textures\\logo.png");
     this->adamSpriteMap.loadFromFile("textures\\player.png");
+
     this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
     this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
-
-	this->buttonTexture.loadFromFile("textures\\buttons.png");
-	this->gameLogoTexture.loadFromFile("textures\\logo.png");
-	this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
 
     this->floorTexture.setRepeated(true);
 	this->wallTexture.setRepeated(true);

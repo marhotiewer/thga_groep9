@@ -78,7 +78,6 @@
     <ClInclude Include="cScreen.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Settings.h" />
     <ClInclude Include="Static.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Wall.h" />

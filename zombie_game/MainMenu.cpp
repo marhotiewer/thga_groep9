@@ -119,7 +119,7 @@ void MainMenu::render()
 	this->window->display();
 }
 
-screen MainMenu::Run()
+screen MainMenu::run()
 {
 	sf::Clock clock;
 	float deltaTimeSeconds;

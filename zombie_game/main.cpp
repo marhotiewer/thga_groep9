@@ -15,7 +15,7 @@ int main()
     screen currentScreen = screen::mainMenu;
     while (currentScreen != screen::none)
     {
-		currentScreen = Screens[int(currentScreen)]->Run();
+		currentScreen = Screens[int(currentScreen)]->run();
     }
     return 0;
 }

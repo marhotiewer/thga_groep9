@@ -19,22 +19,22 @@
 class Game : public cScreen {
 	public:
 		Game(sf::RenderWindow *window, AssetManager *assets);
-		~Game();
 		void update(float deltaTime);
 		void toggleFullscreen();
+		screen run() override;
 		void pollEvents();
 		bool running();
 		void render();
-		virtual screen Run();
+		~Game();
 	private:
 		std::vector<Drawable*> objects;
+		sf::Event event = sf::Event();
 		bool noKeyPressed = false;
 		bool isFullScreen = false;
 		sf::RenderWindow* window;
 		float elapsedTime = 0.f;
 		AssetManager* assets;
 		bool debug = false;
-		sf::Event event;
 		Player *player;
 };
 

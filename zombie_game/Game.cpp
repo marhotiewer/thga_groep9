@@ -6,16 +6,11 @@ struct Z_Index {
 	}
 };
 
-Game::Game(sf::RenderWindow *window, AssetManager *assets):
-	window(window),
-	assets(assets)
+Game::Game(sf::RenderWindow *window, AssetManager *assets) : window(window), assets(assets)
 {
-	//this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
-	this->event = sf::Event();
-
 	this->objects.push_back(new Floor(*this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
 
-	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));		// left wall
+	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));	// left wall
 	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
 	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
 	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
@@ -69,13 +64,12 @@ void Game::update(float deltaTime)
 			}
 		}
 	}
-
 	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
 }
 
 void Game::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");						// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);		// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
@@ -132,12 +126,13 @@ void Game::render()
 	this->window->display();
 }
 
-screen Game::Run()
+screen Game::run()
 {
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+
 	 sf::Clock clock;
-	 //this->window = window
 	 float deltaTime;
+
 	 while (this->running())
 	 {
 		 deltaTime = clock.getElapsedTime().asSeconds();
@@ -145,5 +140,5 @@ screen Game::Run()
 		 this->update(deltaTime);
 		 this->render();
 	 }
-	 return screen::none;
+	 return screen::mainMenu;
 }

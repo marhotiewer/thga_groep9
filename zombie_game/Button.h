@@ -4,21 +4,22 @@
 #include "Static.h"
 
 enum class buttonType {
-	play, quit, options, scores, none
+	play,
+	quit,
+	options,
+	scores,
+	none
 };
 
 class Button : public Drawable
 {
-private:
-	sf::Sprite sprite;
-	buttonType type;
-	sf::FloatRect position;
-	bool isButtonSelected;
-public:
-	Button(AssetManager& assets, sf::Vector2f pos, buttonType type);
-	void buttonSelected(sf::Vector2f mousePos);
-	buttonType buttonPressed();
-	void draw(sf::RenderWindow* window) override;
+	public:
+		Button(AssetManager& assets, sf::Vector2f pos, buttonType type);
+		void buttonSelected(sf::Vector2f mousePos);
+		buttonType buttonPressed();
+	private:
+		bool isButtonSelected = false;
+		buttonType type;
 };
 
 #endif

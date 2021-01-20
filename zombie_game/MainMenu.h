@@ -26,7 +26,7 @@ public:
 	screen pollEvents();
 	bool running();
 	void render();
-	screen Run() override;
+	screen run() override;
 };
 
 #endif
