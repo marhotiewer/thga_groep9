@@ -30,7 +30,7 @@ class Drawable
 		/// <summary>
 		/// The Drawable required a AssetManager. 
 		/// </summary>
-		/// <param name="assets"></param>
+		/// <param name="assets">AssetManager required for textures</param>
 		Drawable(AssetManager& assets) : assets(assets) {}
 		/// <summary>
 		/// 
@@ -63,7 +63,7 @@ class Drawable
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="dmg"></param>
+		/// <param name="dmg">int</param>
 		virtual void damage(int dmg) {};
 		/// <summary>
 		/// 
@@ -73,10 +73,10 @@ class Drawable
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>return position of the current drawable</returns>
 		virtual sf::Vector2f getPos();
 		/// <summary>
-		/// 
+		/// If the Type of the Drawable is not currently set. Set the Type to Type::Empty.
 		/// </summary>
 		Type type = Type::Empty;
 		/// <summary>

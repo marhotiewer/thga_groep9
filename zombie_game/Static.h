@@ -18,7 +18,7 @@ class Static : public Drawable
 		/// <summary>
 		/// The static class need the AssetManager for textures
 		/// </summary>
-		/// <param name="AssetManager"></param>
+		/// <param name="assets">AssetManager required for textures</param>
 		Static(AssetManager& assets) : Drawable(assets) { this->type = Type::Static; }
 };
 

@@ -21,14 +21,14 @@ class Floor : public Static
 		/// The floor needs a AssetManager to load the texture of the floor. 
 		/// The floor also needs a position and a size. To place the floor on the correct spot. 
 		/// </summary>
-		/// <param name="AssetManager"></param>
-		/// <param name="position"></param>
-		/// <param name="size"></param>
+		/// <param name="assets">AssetManager required for textures</param>
+		/// <param name="pos">Position to place the Floor</param>
+		/// <param name="size">Size of the Floor to be placed</param>
 		Floor(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 		/// <summary>
-		/// overrideing isColliding function Floor
+		/// overriding isColliding function Floor.
 		/// </summary>
-		/// <param name="Drawable"></param>
+		/// <param name="drawable"></param>
 		/// <param name="delta"></param>
 		/// <returns>bool if colliding with other object.</returns>
 		bool isColliding(Drawable& drawable, sf::Vector2f delta = sf::Vector2f(0.f, 0.f)) override;

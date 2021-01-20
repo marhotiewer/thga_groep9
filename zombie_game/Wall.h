@@ -21,9 +21,9 @@ class Wall : public Static
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="AssetManager"></param>
-		/// <param name="position"></param>
-		/// <param name="size"></param>
+		/// <param name="assets">AssetManager required for textures</param>
+		/// <param name="pos">position of the wall</param>
+		/// <param name="size">size of the wall</param>
 		Wall(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 };
 
