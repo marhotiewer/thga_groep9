@@ -38,7 +38,7 @@ class MainMenu : public cScreen
 		/// <summary>
 		/// Function that checks if a next screen need to show.
 		/// </summary>
-		/// <param name="deltaTime"></param>
+		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		/// <returns></returns>
 		Screen update(float deltaTime);
 
@@ -49,7 +49,7 @@ class MainMenu : public cScreen
 
 		/// <summary>
 		/// Main loop of the MainMenu class. 
-		/// This function will be exicuted for showing the main menu.
+		/// This function will be executed for showing the main menu.
 		/// This function will return if a next screen need to show or the application need to exit. 
 		/// </summary>
 		/// <returns>Next screen to run(probably the game).</returns>

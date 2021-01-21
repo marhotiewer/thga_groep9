@@ -75,7 +75,7 @@ class Game : public cScreen {
 		std::vector<Drawable*> objects;///< vector of pointers of all drawable pointers 
 		bool noKeyPressed = false;///< bool if no key is pressed.
 		bool isFullScreen = false;///<bool used for used full screen.
-		sf::RenderWindow* window;///< Pointer to the SFML window 
+		sf::RenderWindow* window;///< Pointer to the SFML window.
 		float elapsedTime = 0.f;///<Time used for elapsed a frame.
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 		bool debug = false;///< bool used for debug intentions.

@@ -8,6 +8,7 @@
 #include "Player.h"
 /// @file
 
+
 // \class Zombie
 /// \brief
 /// Zombie class 
@@ -27,9 +28,9 @@ class Zombie : public Entity
 		Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, Player* player, std::vector<Drawable*>& objects);
 		
 		/// <summary>
-		/// 
+		/// Updates the location and animation of the Zombie
 		/// </summary>
-		/// <param name="deltaTime"></param>
+		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		void update(float deltaTime) override;
 		
 		/// <summary>
@@ -46,12 +47,12 @@ class Zombie : public Entity
 		Drawable* move(sf::Vector2f delta) override;
 		
 		/// <summary>
-		/// 
+		/// Hitbox
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>SFML FloatRect of the Zombie</returns>
 		sf::FloatRect getHitbox() override;
 	private:
-		Player* player;///<
+		Player* player;///<Pointer to the player class.
 };
 
 #endif
