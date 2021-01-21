@@ -31,6 +31,7 @@
 #include "Perk1.h"
 #include "Bush.h"
 #include "BushRotated.h"
+#include "Sandbag.h"
 
 class Game {
 	public:

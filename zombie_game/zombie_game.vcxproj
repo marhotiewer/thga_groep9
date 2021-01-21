@@ -74,6 +74,7 @@
     <ClCompile Include="PoliceAgent.cpp" />
     <ClCompile Include="Invisible.cpp" />
     <ClCompile Include="Rocks.cpp" />
+    <ClCompile Include="Sandbag.cpp" />
     <ClCompile Include="Shed.cpp" />
     <ClCompile Include="Tent.cpp" />
     <ClCompile Include="Tree.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="PoliceAgent.h" />
     <ClInclude Include="Invisible.h" />
     <ClInclude Include="Rocks.h" />
+    <ClInclude Include="Sandbag.h" />
     <ClInclude Include="Shed.h" />
     <ClInclude Include="Static.h" />
     <ClInclude Include="Tent.h" />

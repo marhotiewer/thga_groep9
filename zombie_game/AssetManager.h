@@ -30,6 +30,7 @@ class AssetManager
 		sf::Texture perk1Texture;
 		sf::Texture bushTexture;
 		sf::Texture bushRotatedTexture;
+		sf::Texture sandbagTexture;
 };
 
 #endif

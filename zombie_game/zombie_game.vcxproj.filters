@@ -107,6 +107,9 @@
     <ClCompile Include="BushRotated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -191,6 +194,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BushRotated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbag.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

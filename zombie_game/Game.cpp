@@ -87,7 +87,14 @@ Game::Game()
 
 	this->objects.push_back(new Perk1(this->assets, sf::Vector2f(2775, 360), sf::Vector2i(60, 200)));
 
-	this->player = new Player(this->assets, sf::Vector2f(2000, 1600), this->objects);	// the player duh
+	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1200, 1600)));
+	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1300, 1600)));
+	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1700, 1600)));
+	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1800, 1600)));
+	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1800, 800)));
+	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
+
+	this->player = new Player(this->assets, sf::Vector2f(175, 2200), this->objects);	// the player duh
 	//this->objects.push_back(new Zombie(sf::Vector2f(500, 500), this->player, this->assets, this->objects));	// left zombie
 	this->objects.push_back(this->player);
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));

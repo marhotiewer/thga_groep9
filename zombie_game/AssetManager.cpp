@@ -1478,6 +1478,7 @@ AssetManager::AssetManager()
     this->perk1Texture.loadFromFile("textures\\perk1.png");
     this->bushTexture.loadFromFile("textures\\bush.png");
     this->bushRotatedTexture.loadFromFile("textures\\bushRotated.png");
+    this->sandbagTexture.loadFromFile("textures\\sandbag.png");
     this->floorTexture.setRepeated(true);
     this->fenceTexture.setRepeated(true);
     this->houseTexture.setRepeated(true);
