@@ -17,6 +17,7 @@
 #include "cScreen.h"
 /// @file
 
+
 /// \class Game
 /// \brief 
 /// class for the Game.
@@ -59,7 +60,7 @@ class Game : public cScreen {
 		void pollEvents();
 
 		/// <summary>
-		/// Function that checks if the SFML window is running
+		/// Function that checks if the SFML window is running.
 		/// [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
 		/// </summary>
 		/// <returns>If SFML window is running</returns>
