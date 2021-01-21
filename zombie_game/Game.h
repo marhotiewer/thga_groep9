@@ -30,7 +30,9 @@ class Game : public cScreen {
 		/// 
 		/// </summary>
 		void toggleFullscreen();
+
 		screen run() override;
+		
 		void pollEvents();
 
 		/// <summary>

@@ -1484,6 +1484,7 @@ const uint8_t wall_tile[] = {
 AssetManager::AssetManager()
 {
     this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
+    this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");
     this->zombieSpriteMap.loadFromFile("textures\\zombie.png");
     this->buttonTexture.loadFromFile("textures\\buttons.png");
     this->gameLogoTexture.loadFromFile("textures\\logo.png");
@@ -1494,8 +1495,6 @@ AssetManager::AssetManager()
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
 
-    this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");
-
-    this->floorTexture.setRepeated(true);//One floor is repeated to fill the ground.
+    this->floorTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);
 }

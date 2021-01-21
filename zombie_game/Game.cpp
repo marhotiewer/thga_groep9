@@ -10,18 +10,18 @@ struct Z_Index {
 	}
 };
 
-Game::Game(sf::RenderWindow *window, AssetManager *assets) : window(window), assets(assets)
+Game::Game(sf::RenderWindow *window, AssetManager *assets) : window(window), assets(*assets)
 {
 	this->event = sf::Event();
-	this->objects.push_back(new Floor(*this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
+	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
 
-	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));	// left wall
-	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
-	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
-	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));	// left wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
 
-	this->objects.push_back(new Tree(*this->assets, sf::Vector2f(100, 50))); // left tree
-	this->objects.push_back(new Tree(*this->assets, sf::Vector2f(300, 50))); // right tree
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(100, 50))); // left tree
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(300, 50))); // right tree
 
 	this->player = new Player(this->window, this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
 
