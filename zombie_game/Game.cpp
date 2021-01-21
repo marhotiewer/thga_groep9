@@ -10,7 +10,7 @@ struct Z_Index {
 	}
 };
 
-Game::Game(sf::RenderWindow *window, AssetManager *assets) : window(window), assets(*assets)
+Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), assets(assets)
 {
 	this->event = sf::Event();
 	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
@@ -132,7 +132,7 @@ void Game::render()
 	this->window->display();
 }
 
-screen Game::run()
+Screen Game::run()
 {
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 
@@ -146,5 +146,5 @@ screen Game::run()
 		 this->update(deltaTime);
 		 this->render();
 	 }
-	 return screen::mainMenu;
+	 return Screen::MainMenu;
 }
