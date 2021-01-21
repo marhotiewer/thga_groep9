@@ -15,12 +15,12 @@ class AssetManager
 {
 	public:
 		AssetManager();///< \brief Constructor load all the textures of variables into memory.
-		sf::Texture homescreenBackgroundTexture;
-		sf::Texture HUD_bottom_right;
-		sf::Texture gameLogoTexture;
-		sf::Texture zombieSpriteMap;///< \brief Zombie sprite map  \image html zombie.png
-		sf::Texture adamSpriteMap;///< \brief Player sprite map \image html player.png
-		sf::Texture buttonTexture;
+		sf::Texture homescreenBackgroundTexture;///< \brief home screen background. \image html menu_image.png 
+		sf::Texture HUD_bottom_right;///< \brief hud of the game. \image html hud_bottom_right.png
+		sf::Texture gameLogoTexture;///< \brief logo of the game. \image html logo.png
+		sf::Texture zombieSpriteMap;///< \brief Zombie sprite map.  \image html zombie.png
+		sf::Texture adamSpriteMap;///< \brief Player sprite map. \image html player.png
+		sf::Texture buttonTexture;///< \brief Texture of a button. \image html buttons.png
 		sf::Texture floorTexture;///< \brief Texture of a Floor.
 		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
 		sf::Texture wallTexture;///< \brief Texture of a Wall.

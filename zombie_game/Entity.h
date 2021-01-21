@@ -21,6 +21,7 @@ class Entity : public Drawable
 		/// <summary>
 		/// Constructor is empty. Class is used to inhert functions.
 		/// </summary>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="objects">A vector of pointers of all the Drawable, is used for collision detection.</param>
 		Entity(sf::RenderWindow* window, AssetManager& assets, std::vector<Drawable*>& objects) : Drawable(assets), objects(objects), window(window) {}

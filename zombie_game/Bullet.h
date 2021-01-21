@@ -24,6 +24,7 @@ class Bullet : public Entity
 		/// <summary>
 		/// In the constructor the texture will be loaded from AssetManager the texture: bulletSprite. 
 		/// </summary>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="objects">Vector of all the drawables, is used for collision detection.</param>
 		/// <param name="startPos">The start position of the bullet(spawn location bullet)</param>
@@ -33,7 +34,6 @@ class Bullet : public Entity
 		/// <summary>
 		/// This function updates the position on the screen. And runs the Bullet::move function to check if it can move to the new location. 
 		/// </summary>
-		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		void update(float deltaTime) override;
 		

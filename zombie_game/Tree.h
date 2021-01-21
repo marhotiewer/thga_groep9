@@ -26,6 +26,7 @@ public:
 	/// <param name="assets">AssetManager required for textures</param>
 	/// <param name="pos">The position of the Tree.</param>
 	Tree(AssetManager& assets, sf::Vector2f pos);
+	
 	/// <summary>
 	/// The function return a SFML hitbox for the Tree. 
 	/// This hitbox differed from the inherited hitbox function from Static. Because the Player and the Zombie can walk behind a tree. 

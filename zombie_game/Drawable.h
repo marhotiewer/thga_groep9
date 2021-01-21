@@ -21,7 +21,7 @@ class Drawable
 		/// /brief Enum that state the state of that drawable, like it is a Static item or a Zombie, etc. 
 		enum class Type
 		{
-			Projectile,///<Can things be like a bullet. 
+			Projectile,///<Can be things like a bullet. 
 			Player,///<The player is the player on the screen.
 			Static,///<Static items are items that can't move. 
 			Enemy,///<Enemy's must be beaten by the player.
@@ -46,7 +46,6 @@ class Drawable
 		/// Virtual function used for updating a position, animation, or other things. 
 		/// Default function is nothing. Need to be overrided to do something.
 		/// </summary>
-		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		virtual void update(float deltaTime) {}
 		

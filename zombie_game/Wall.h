@@ -19,7 +19,7 @@ class Wall : public Static
 {
 	public:
 		/// <summary>
-		/// Constructor
+		/// Constructor for wall.
 		/// </summary>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">position of the wall</param>

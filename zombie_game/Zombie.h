@@ -19,16 +19,16 @@ class Zombie : public Entity
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
+		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Spawn position of the zombie</param>
 		/// <param name="player">Pointer to the player.(to get to location to follow to player).</param>
-		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="objects">A vector of pointers of all the Drawable, is used for collision detection.</param>
 		Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, Player* player, std::vector<Drawable*>& objects);
 		
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime"></param>
 		void update(float deltaTime) override;
 		
