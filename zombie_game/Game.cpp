@@ -141,8 +141,7 @@ Screen Game::run()
 
 	 while (this->running())
 	 {
-		 deltaTime = clock.getElapsedTime().asSeconds();
-		 clock.restart();
+		 deltaTime = clock.restart().asSeconds();
 		 this->update(deltaTime);
 		 this->render();
 	 }
