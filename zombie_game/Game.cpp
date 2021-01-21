@@ -138,7 +138,7 @@ Screen Game::run()
 
 	sf::Clock clock;
 	float deltaTime;
-	this->ingameBreeze = &this->assets->ingameBreezeSound;
+	this->ingameBreeze = &this->assets.ingameBreezeSound;
 	this->ingameBreeze->play();
 
 	 while (this->running())

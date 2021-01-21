@@ -54,6 +54,7 @@ class Zombie : public Entity
 	private:
 		Player* player;///<
 		sf::Sound* attackSounds[4];
+		sf::Clock* zombieClock;
 		int randomSoundTime;
 };
 

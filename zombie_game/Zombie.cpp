@@ -1,4 +1,5 @@
 #include "Zombie.h"
+#include <iostream>
 
 Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, Player* player, std::vector<Drawable*>& objects) : Entity(window, assets, objects), player(player)
 {
@@ -8,12 +9,14 @@ Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	this->type = Type::Enemy;
 	this->health = 10;
 
-	this->attackSounds[0] = new sf::Sound(*this->assets.zombieSounds[0]);
-	this->attackSounds[1] = new sf::Sound(*this->assets.zombieSounds[1]);
-	this->attackSounds[2] = new sf::Sound(*this->assets.zombieSounds[2]);
-	this->attackSounds[3] = new sf::Sound(*this->assets.zombieSounds[3]);
+	for (unsigned int i = 0; i < 4; i++) {
+		this->attackSounds[i] = new sf::Sound(*this->assets.zombieSounds[i]);
+		this->attackSounds[i]->setVolume(15.f);
+	}
 
 	this->randomSoundTime = (rand() % 5);
+	this->zombieClock = new sf::Clock;
+	this->zombieClock->restart();
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
@@ -53,9 +56,9 @@ void Zombie::update(float deltaTime)
 		this->delta = { 0.f, 0.f };
 	}
 
-	sf::Clock clock;
-	if (clock.getElapsedTime().asSeconds() >= randomSoundTime) {
-		randomSoundTime = (rand() % 3) + 3;
+	if (this->zombieClock->getElapsedTime().asSeconds() >= randomSoundTime) {
+		randomSoundTime = (rand() % 5) + 5;
+		this->zombieClock->restart();
 		playAttackSound();
 	}
 }
@@ -77,7 +80,7 @@ sf::FloatRect Zombie::getHitbox()
 
 void Zombie::playAttackSound() {
 	// Positioning will be implemented later
-	int soundToPlay = (rand() % 4) - 1;
+	int soundToPlay = (rand() % 4);
 	float pitch = (rand() % 20 + 90) / 100.f;
 	this->attackSounds[soundToPlay]->setPitch(pitch);
 	this->attackSounds[soundToPlay]->setPosition({ this->getPos().x, 0, this->getPos().y });
