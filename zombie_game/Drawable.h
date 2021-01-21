@@ -48,7 +48,7 @@ class Drawable
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
-		virtual void update(sf::RenderWindow* window, float deltaTime) {}
+		virtual void update(float deltaTime) {}
 		
 		/// <summary>
 		/// Draws to the window the outlines of objects, used for debugging purpose.

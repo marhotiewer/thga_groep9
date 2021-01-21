@@ -15,6 +15,7 @@ class AssetManager
 {
 	public:
 		AssetManager();///< \brief Constructor load all the textures of variables into memory.
+		sf::Texture HUD_bottom_right;
 		sf::Texture zombieSpriteMap;///< \brief Zombie sprite map  \image html zombie.png
 		sf::Texture adamSpriteMap;///< \brief Player sprite map \image html player.png
 		sf::Texture floorTexture;///< \brief Texture of a Floor.

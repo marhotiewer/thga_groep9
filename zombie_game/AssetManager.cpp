@@ -1490,6 +1490,8 @@ AssetManager::AssetManager()
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
 
+    this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");
+
     this->floorTexture.setRepeated(true);//One floor is repeated to fill the ground.
     this->wallTexture.setRepeated(true);
 }

@@ -28,14 +28,14 @@ class Bullet : public Entity
 		/// <param name="objects">Vector of all the drawables, is used for collision detection.</param>
 		/// <param name="startPos">The start position of the bullet(spawn location bullet)</param>
 		/// <param name="direction">Direction in SFML Vector2f. For example if x = +1 and y =+1. The bullet will go to bottom right corner.</param>
-		Bullet(AssetManager& assets, std::vector<Drawable*>& objects, sf::Vector2f startPos, sf::Vector2f direction);
+		Bullet(sf::RenderWindow* window, AssetManager& assets, std::vector<Drawable*>& objects, sf::Vector2f startPos, sf::Vector2f direction);
 		
 		/// <summary>
 		/// This function updates the position on the screen. And runs the Bullet::move function to check if it can move to the new location. 
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
-		void update(sf::RenderWindow* window, float deltaTime) override;
+		void update(float deltaTime) override;
 		
 		/// <summary>
 		/// This function checks if the bullet can move to currentposition + delta. If a Zombie is detected, the zombie will get one damage. 

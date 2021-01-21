@@ -8,6 +8,7 @@
 #include "AssetManager.h"
 #include "Entity.h"
 #include "Bullet.h"
+#include "HUD.h"
 /// @file
 
 
@@ -27,7 +28,7 @@ class Player : public Entity
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Spawn position of the player.{x,y}</param>
 		/// <param name="object">A vector of pointers of all the Drawable, is used for collision detection.</param>
-		Player(AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& object);
+		Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& object);
 		
 		/// <summary>
 		/// Updates the direction of the player to set the correct texture of the player on the screen.
@@ -35,7 +36,7 @@ class Player : public Entity
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
-		void update(sf::RenderWindow* window, float deltaTime) override;
+		void update(float deltaTime) override;
 		
 		/// <summary>
 		/// Draws to the window the outlines of objects, used for debugging purpose.
@@ -54,6 +55,10 @@ class Player : public Entity
 		/// </summary>
 		/// <param name="direction">Direction to shoot{x,y}</param>
 		void shoot(sf::Vector2f direction);
+
+		void draw_hud(sf::RenderWindow* window);
+	private:
+		HUD hud;
 };
 
 #endif
