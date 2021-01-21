@@ -1,5 +1,9 @@
 #include "Game.h"
+///@file
 
+
+/// \struct Z_Index
+/// \brief struct for draw order.
 struct Z_Index {
 	inline bool operator() (Drawable* one, Drawable* two) {
 		return (one->getHitbox().top < two->getHitbox().top);
@@ -8,6 +12,7 @@ struct Z_Index {
 
 Game::Game(sf::RenderWindow *window, AssetManager *assets) : window(window), assets(assets)
 {
+	this->event = sf::Event();
 	this->objects.push_back(new Floor(*this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
 
 	this->objects.push_back(new Wall(*this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));	// left wall
@@ -18,10 +23,10 @@ Game::Game(sf::RenderWindow *window, AssetManager *assets) : window(window), ass
 	this->objects.push_back(new Tree(*this->assets, sf::Vector2f(100, 50))); // left tree
 	this->objects.push_back(new Tree(*this->assets, sf::Vector2f(300, 50))); // right tree
 
-	this->player = new Player(*this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
+	this->player = new Player(this->window, this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
 
-	this->objects.push_back(new Zombie(sf::Vector2f(25, 25), this->player, *this->assets, this->objects));	// left zombie
-	this->objects.push_back(new Zombie(sf::Vector2f(455, 25), this->player, *this->assets, this->objects));	// right zombie
+	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(25, 25), this->player, this->objects));	// left zombie
+	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(455, 25), this->player, this->objects));	// right zombie
 	this->objects.push_back(this->player);
 }
 
@@ -56,7 +61,7 @@ void Game::update(float deltaTime)
 		// if the entity is active update, else if entity is not a player delete object
 		for (auto entity = begin(this->objects); entity != end(this->objects); ++entity) {
 			if ((*entity)->isActive()) {
-				(*entity)->update(this->window, deltaTime);
+				(*entity)->update(deltaTime);
 			}
 			else if((*entity)->type != Drawable::Type::Player) {
 				delete (*entity);
@@ -120,9 +125,10 @@ bool Game::running()
 
 void Game::render()
 {
-	this->window->clear();
+	this->window->clear(sf::Color::White);
 	for (Drawable* object : this->objects) if (object->isActive()) object->draw(this->window);
 	for (Drawable* object : this->objects) if (object->isActive() && this->debug) object->debug_draw(this->window);
+	this->player->draw_hud(this->window);
 	this->window->display();
 }
 

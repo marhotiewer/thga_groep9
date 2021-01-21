@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-Bullet::Bullet(AssetManager& assets, std::vector<Drawable*>& objects, sf::Vector2f startPos, sf::Vector2f direction) : Entity(assets, objects)
+Bullet::Bullet(sf::RenderWindow* window, AssetManager& assets, std::vector<Drawable*>& objects, sf::Vector2f startPos, sf::Vector2f direction) : Entity(window, assets, objects)
 {
 	this->sprite.setTexture(assets.bulletSprite);
 	this->sprite.setPosition(startPos);
@@ -8,7 +8,7 @@ Bullet::Bullet(AssetManager& assets, std::vector<Drawable*>& objects, sf::Vector
 	this->direction = direction;
 }
 
-void Bullet::update(sf::RenderWindow* window, float deltaTime)
+void Bullet::update(float deltaTime)
 {
 	sf::Vector2f distance(this->direction - this->getPos());
 	float length = sqrt((distance.x * distance.x) + (distance.y * distance.y));
