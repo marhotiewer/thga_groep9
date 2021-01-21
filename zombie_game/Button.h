@@ -5,7 +5,7 @@
 /// @file
 
 
-/// \enum buttonType
+/// \enum ButtonType
 /// \brief modes for buttons for the main menu. 
 enum class ButtonType {
 	Play,///<If pressed, the game wil start.

@@ -2,6 +2,9 @@
 #define CSCREEN_H
 /// @file
 
+
+/// \enum Screen
+/// \brief Enum of all the different screen modes
 enum class Screen {
 	MainMenu,///< Startup screen.
 	Game,///< The screen with the game.
@@ -23,7 +26,7 @@ class cScreen {
 		/// <summary>
 		/// Function that contains the loop of the window. 
 		/// </summary>
-		/// <returns>The screen to switch to from enum type screen</returns>
+		/// <returns>The screen to switch to from enum type Screen</returns>
 		virtual Screen run() = 0;
 };
 

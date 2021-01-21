@@ -5,9 +5,10 @@
 * Your home is infested with zombies and it is your responsibility to survive and to protect your home.
 * Earn points, to buy stronger gear and try to survive as long as possible!
 *
-*\section GitHub GitHub Page
+*\section Links Handy links
 *
-* GitHub: [Github](https://github.com/marhotiewer/thga_groep9)
+* - [Github](https://github.com/marhotiewer/thga_groep9)
+* - [SFML Documentation](https://www.sfml-dev.org/documentation/2.5.1/annotated.php)
 *
 *\section Controls Controls
 *
