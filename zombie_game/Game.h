@@ -18,7 +18,7 @@
 
 class Game : public cScreen {
 	public:
-		Game(sf::RenderWindow *window, AssetManager *assets);
+		Game(sf::RenderWindow* window, AssetManager& assets);
 
 		/// <summary>
 		/// 
@@ -31,7 +31,7 @@ class Game : public cScreen {
 		/// </summary>
 		void toggleFullscreen();
 
-		screen run() override;
+		Screen run() override;
 		
 		void pollEvents();
 
@@ -52,7 +52,7 @@ class Game : public cScreen {
 		bool isFullScreen = false;///<
 		sf::RenderWindow* window;///< Pointer to the SFML window 
 		float elapsedTime = 0.f;///<
-		AssetManager* assets;///<
+		AssetManager& assets;///<
 		bool debug = false;///<
 		sf::Event event;///<
 		Player *player;///<

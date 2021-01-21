@@ -1,22 +1,20 @@
 #include "MainMenu.h"
 
-MainMenu::MainMenu(sf::RenderWindow* window, AssetManager* assets) :
-	window(window),
-	assets(assets)
+MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(window), assets(assets)
 {
 	// Creating buttons
-	this->buttons.push_back(new Button(*this->assets, { 264.5f, 230.f }, buttonType::play));
-	this->buttons.push_back(new Button(*this->assets, { 264.5f, 284.f }, buttonType::quit));
-	this->buttons.push_back(new Button(*this->assets, { 264.5f, 338.f }, buttonType::options));
-	this->buttons.push_back(new Button(*this->assets, { 264.5f, 392.f }, buttonType::scores));
+	this->buttons.push_back(new Button(this->assets, { 264.5f, 230.f }, ButtonType::Play));
+	this->buttons.push_back(new Button(this->assets, { 264.5f, 284.f }, ButtonType::Quit));
+	this->buttons.push_back(new Button(this->assets, { 264.5f, 338.f }, ButtonType::Options));
+	this->buttons.push_back(new Button(this->assets, { 264.5f, 392.f }, ButtonType::Scores));
 
 	this->event = sf::Event();
 
 	this->alpha_max = 1 * 255;
 	this->alpha_div = 1;
-	this->logo.setTexture(assets->gameLogoTexture);
+	this->logo.setTexture(assets.gameLogoTexture);
 	this->logo.setPosition({ 231.f, 20.f });
-	this->background.setTexture(assets->homescreenBackgroundTexture);
+	this->background.setTexture(assets.homescreenBackgroundTexture);
 	this->background.setPosition({ 0.f, 0.f });
 	//this->background.setColor(sf::Color(255, 255, 255, alpha))
 	this->backgroundMusic = &this->assets->mainMenuSoundtrack;
@@ -24,24 +22,20 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager* assets) :
 	this->clickSound.setVolume(50.f);
 }
 
-screen MainMenu::update(float deltaTimeSeconds) {
-	screen nextScreen = this->pollEvents();
+Screen MainMenu::update(float deltaTimeSeconds) {
+	Screen nextScreen = this->pollEvents();
 	return nextScreen;
 }
 
 void MainMenu::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");						// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);		// fullscreen
-
-	// after creating a new window we have to set the settings again
-	//this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
 	this->isFullScreen = !this->isFullScreen;
 }
 
-screen MainMenu::pollEvents()
+Screen MainMenu::pollEvents()
 {
-	screen returnValue = screen::none;
+	Screen returnValue = Screen::None;
 	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
@@ -77,21 +71,20 @@ screen MainMenu::pollEvents()
 			}
 			case sf::Event::MouseButtonPressed: {
 				if (event.mouseButton.button == sf::Mouse::Left) {
-					buttonType buttonPressed = buttonType::none;
+					ButtonType buttonPressed = ButtonType::None;
 					// Check if a button was pressed
 					for (Button* button : buttons) {
 						buttonPressed = button->buttonPressed();
-						if (buttonPressed != buttonType::none) {
+						if (buttonPressed != ButtonType::None) {
 							// A button was pressed
 							this->clickSound.play();
 							switch (buttonPressed) {
-								case buttonType::play: {
+								case ButtonType::Play: {
 									// Play the game!
-									backgroundMusic->stop();
-									returnValue = screen::inGame;
+									returnValue = Screen::Game;
 									break;
 								}
-								case buttonType::quit: {
+								case ButtonType::Quit: {
 									// Quit the game :(
 									window->close();
 								}
@@ -124,13 +117,13 @@ void MainMenu::render()
 	this->window->display();
 }
 
-screen MainMenu::run()
+Screen MainMenu::run()
 {
 	backgroundMusic->play();
 	sf::Clock clock;
 	float deltaTimeSeconds;
-	screen nextScreen = screen::none;
-	while ( nextScreen == screen::none && this->running() ) {
+	Screen nextScreen = Screen::None;
+	while ( nextScreen == Screen::None && this->running() ) {
 		deltaTimeSeconds = clock.getElapsedTime().asSeconds();
 		clock.restart();
 		nextScreen = this->update(deltaTimeSeconds);

@@ -1,18 +1,18 @@
 #ifndef CSCREEN_H
 #define CSCREEN_H
 
-enum class screen {
-	mainMenu,
-	inGame,
-	pauseMenu,
-	optionsMenu,
-	scores,
-	none
+enum class Screen {
+	MainMenu,
+	Game,
+	OptionsMenu,
+	PauseMenu,
+	Scores,
+	None
 };
 
 class cScreen {
-public:
-	virtual screen run() = 0;
+	public:
+		virtual Screen run() = 0;
 };
 
 #endif

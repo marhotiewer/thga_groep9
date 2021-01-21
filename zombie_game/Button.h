@@ -3,23 +3,23 @@
 
 #include "Static.h"
 
-enum class buttonType {
-	play,
-	quit,
-	options,
-	scores,
-	none
+enum class ButtonType {
+	Play,
+	Quit,
+	Options,
+	Scores,
+	None
 };
 
 class Button : public Drawable
 {
 	public:
-		Button(AssetManager& assets, sf::Vector2f pos, buttonType type);
+		Button(AssetManager& assets, sf::Vector2f pos, ButtonType type);
 		void buttonSelected(sf::Vector2f mousePos);
-		buttonType buttonPressed();
+		ButtonType buttonPressed();
 	private:
 		bool isButtonSelected = false;
-		buttonType type;
+		ButtonType type;
 };
 
 #endif

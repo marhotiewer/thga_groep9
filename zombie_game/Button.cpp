@@ -1,22 +1,22 @@
 #include "Button.h"
 #include <iostream>
 
-Button::Button(AssetManager& assets, sf::Vector2f pos, buttonType type) : Drawable(assets), type(type)
+Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawable(assets), type(type)
 {
 	this->sprite.setTexture(assets.buttonTexture);
 	this->sprite.setPosition(pos);
 
 	switch (type) {
-		case buttonType::play:
+		case ButtonType::Play:
 			this->sprite.setTextureRect({ 0, 0, 111, 54 });
 			break;
-		case buttonType::quit:
+		case ButtonType::Quit:
 			this->sprite.setTextureRect({ 0, 54, 111, 54 });
 			break;
-		case buttonType::options:
+		case ButtonType::Options:
 			this->sprite.setTextureRect({ 0, 108, 111, 54 });
 			break;
-		case buttonType::scores:
+		case ButtonType::Scores:
 			this->sprite.setTextureRect({ 0, 162, 111, 54 });
 			break;
 		default: 
@@ -43,9 +43,9 @@ void Button::buttonSelected(sf::Vector2f mousePos) {
 	}
 }
 
-buttonType Button::buttonPressed() {
+ButtonType Button::buttonPressed() {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && this->isButtonSelected) {
 		return this->type;
 	}
-	else return buttonType::none;
+	else return ButtonType::None;
 }

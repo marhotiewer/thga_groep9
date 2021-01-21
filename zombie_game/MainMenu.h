@@ -9,26 +9,26 @@
 
 class MainMenu : public cScreen
 {
-private:
-	int alpha_max;
-	int alpha_div;
-	bool isFullScreen = false;
-	AssetManager* assets;
-	sf::RenderWindow* window;
-	sf::Event event;
-	std::vector<Button*> buttons;
-	sf::Sprite logo;
-	sf::Sprite background;
-	sf::Music *backgroundMusic;
-	sf::Sound clickSound;
-public:
-	MainMenu(sf::RenderWindow* window, AssetManager* assets);
-	screen update(float deltaTime);
-	void toggleFullscreen();
-	screen pollEvents();
-	bool running();
-	void render();
-	screen run() override;
+	private:
+		std::vector<Button*> buttons;
+		bool isFullScreen = false;
+		sf::RenderWindow* window;
+		sf::Sprite background;
+		AssetManager& assets;
+		sf::Event event;
+		sf::Sprite logo;
+		int alpha_max;
+		int alpha_div;
+		sf::Music* backgroundMusic;
+		sf::Sound clickSound;
+	public:
+		MainMenu(sf::RenderWindow* window, AssetManager& assets);
+		Screen update(float deltaTime);
+		void toggleFullscreen();
+		Screen run() override;
+		Screen pollEvents();
+		bool running();
+		void render();
 };
 
 #endif
