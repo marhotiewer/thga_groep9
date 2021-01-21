@@ -13,6 +13,18 @@ class AssetManager
 		sf::Texture bulletSprite;
 		sf::Texture wallTexture;
 		sf::Texture treeTexture;
+		sf::Texture fenceTexture;
+		sf::Texture houseTexture;
+		sf::Texture waterTexture;
+		sf::Texture shedTexture;
+		sf::Texture fountainTexture;
+		sf::Texture tentTexture;
+		sf::Texture woodTexture;
+		sf::Texture campfireTexture;
+		sf::Texture hills1Texture;
+		sf::Texture hills2Texture;
+		sf::Texture policeagentTexture;
+		sf::Texture lampTexture;
 };
 
 #endif

@@ -8,25 +8,65 @@ struct Z_Index {
 
 Game::Game()
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(640, 480), "Zombie Game");
+	this->window = new sf::RenderWindow(sf::VideoMode(1000, 600), "Zombie Game");
 	this->event = sf::Event();
 
-	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(620, 460)));
+	this->objects.push_back(new Floor(this->assets, sf::Vector2f(10, 10), sf::Vector2i(3000, 2250)));
+	
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 10), sf::Vector2i(10, 2250)));		// left wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(3010, 10), sf::Vector2i(10, 2250)));	// right wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(3020, 10)));	// top wall
+	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 2260), sf::Vector2i(3020, 10)));	// right wall
 
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 0), sf::Vector2i(10, 480)));		// left wall
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(630, 0), sf::Vector2i(10, 480)));	// right wall
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 0), sf::Vector2i(620, 10)));	// top wall
-	this->objects.push_back(new Wall(this->assets, sf::Vector2f(10, 470), sf::Vector2i(620, 10)));	// right wall
+	this->objects.push_back(new Fence(this->assets, sf::Vector2f(400, 1775), sf::Vector2i(1109, 40))); //left part fence
+	this->objects.push_back(new Fence(this->assets, sf::Vector2f(1640, 1775), sf::Vector2i(1206, 40))); //right part fence
+	this->objects.push_back(new Fence(this->assets, sf::Vector2f(400, 10), sf::Vector2i(10, 1800))); //left top part fence
+	this->objects.push_back(new Fence(this->assets, sf::Vector2f(2840, 10), sf::Vector2i(10, 1800))); //right top part fence
+	
+	this->objects.push_back(new HouseFence(this->assets, sf::Vector2f(1108, 540), sf::Vector2i(932, 70)));
+	this->objects.push_back(new HouseFence(this->assets, sf::Vector2f(1108, 10), sf::Vector2i(10, 540)));
+	this->objects.push_back(new HouseFence(this->assets, sf::Vector2f(2031, 10), sf::Vector2i(10, 540)));
 
-	this->objects.push_back(new Tree(this->assets, sf::Vector2f(100, 50))); // left tree
-	this->objects.push_back(new Tree(this->assets, sf::Vector2f(300, 50))); // right tree
+	this->objects.push_back(new Water(this->assets, sf::Vector2f(2300, 445), sf::Vector2i(135, 561)));
+	this->objects.push_back(new Water(this->assets, sf::Vector2f(2300, 1088), sf::Vector2i(135, 600)));
 
-	this->player = new Player(this->assets, sf::Vector2f(320, 240), this->objects);	// the player duh
+	this->objects.push_back(new Shed(this->assets, sf::Vector2f(625, 320)));
+	
+	this->objects.push_back(new Fountain(this->assets, sf::Vector2f(920, 920)));
 
-	this->objects.push_back(new Zombie(sf::Vector2f(25, 25), this->player, this->assets, this->objects));	// left zombie
-	this->objects.push_back(new Zombie(sf::Vector2f(455, 25), this->player, this->assets, this->objects));	// right zombie
+	this->objects.push_back(new Tent(this->assets, sf::Vector2f(625, 1020)));
+
+	this->objects.push_back(new Campfire(this->assets, sf::Vector2f(900, 1500)));
+
+	this->objects.push_back(new Wood(this->assets, sf::Vector2f(1050, 1500), sf::Vector2i(40, 140)));
+	this->objects.push_back(new Wood(this->assets, sf::Vector2f(885, 1650), sf::Vector2i(140, 40)));
+
+	this->objects.push_back(new Wood(this->assets, sf::Vector2f(885, 1650), sf::Vector2i(140, 40)));
+
+	this->objects.push_back(new Hills1(this->assets, sf::Vector2f(410, 100)));
+	this->objects.push_back(new Hills2(this->assets, sf::Vector2f(2040, 100)));
+
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(1800, 1000)));
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(1100, 1200)));
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(1300, 650)));
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(600, 750)));
+	this->objects.push_back(new Tree(this->assets, sf::Vector2f(550, 1450)));
+
+	this->objects.push_back(new PoliceAgent(this->assets, sf::Vector2f(475, 1840)));
+	this->objects.push_back(new PoliceAgent(this->assets, sf::Vector2f(905, 1840)));
+	this->objects.push_back(new PoliceAgent(this->assets, sf::Vector2f(1335, 1840)));
+	this->objects.push_back(new PoliceAgent(this->assets, sf::Vector2f(1767, 1840)));
+
+	this->objects.push_back(new Lamp(this->assets, sf::Vector2f(2850, 1700)));
+	this->objects.push_back(new Lamp(this->assets, sf::Vector2f(2415, 1700)));
+	this->objects.push_back(new Lamp(this->assets, sf::Vector2f(1985, 1700)));
+	this->objects.push_back(new Lamp(this->assets, sf::Vector2f(1125, 1700)));
+	this->objects.push_back(new Lamp(this->assets, sf::Vector2f(690, 1700)));
+	this->objects.push_back(new Lamp(this->assets, sf::Vector2f(288, 1700)));
+
+	this->player = new Player(this->assets, sf::Vector2f(2000, 2000), this->objects);	// the player duh
+	//this->objects.push_back(new Zombie(sf::Vector2f(500, 500), this->player, this->assets, this->objects));	// left zombie
 	this->objects.push_back(this->player);
-
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 }
 

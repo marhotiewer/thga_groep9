@@ -55,12 +55,12 @@ void Player::update(sf::RenderWindow* window, float deltaTime)
 	else											direction = 2; // facing left
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {
-		timeStep = 0.05f;	// walking speed
+		timeStep = 0.045f;	// walking speed
 		mode = 48;			// walking animation
 
 		if (this->delta.x >  1.f || this->delta.y >	 1.f ||
 			this->delta.x < -1.f || this->delta.y < -1.f)
-				timeStep = 0.04f; // running speed
+				timeStep = 0.03f; // running speed
 	}
 
 	if ((this->deltaTime+=deltaTime) >= timeStep) {

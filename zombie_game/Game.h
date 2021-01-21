@@ -14,6 +14,18 @@
 #include "Floor.h"
 #include "Wall.h"
 #include "Tree.h"
+#include "Fence.h"
+#include "HouseFence.h"
+#include "Water.h"
+#include "Shed.h"
+#include "Tent.h"
+#include "Fountain.h"
+#include "Wood.h"
+#include "Campfire.h"
+#include "Hills1.h"
+#include "Hills2.h"
+#include "PoliceAgent.h"
+#include "Lamp.h"
 
 class Game {
 	public:

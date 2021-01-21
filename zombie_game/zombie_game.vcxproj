@@ -55,27 +55,53 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Campfire.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Fence.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Fountain.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Hills1.cpp" />
+    <ClCompile Include="Hills2.cpp" />
+    <ClCompile Include="HouseFence.cpp" />
+    <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PoliceAgent.cpp" />
+    <ClCompile Include="InvisibleWall.cpp" />
+    <ClCompile Include="Shed.cpp" />
+    <ClCompile Include="Tent.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="Water.cpp" />
+    <ClCompile Include="Wood.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Campfire.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Fence.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="Fountain.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Hills1.h" />
+    <ClInclude Include="Hills2.h" />
+    <ClInclude Include="HouseFence.h" />
+    <ClInclude Include="Lamp.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PoliceAgent.h" />
+    <ClInclude Include="Invisible.h" />
+    <ClInclude Include="Shed.h" />
     <ClInclude Include="Static.h" />
+    <ClInclude Include="Tent.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="Water.h" />
+    <ClInclude Include="Wood.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
