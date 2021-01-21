@@ -112,7 +112,7 @@ void Game::pollEvents()
 			}
 			break;
 		case sf::Event::MouseButtonPressed:
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
+			if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
 			break;
 		}
 	}
