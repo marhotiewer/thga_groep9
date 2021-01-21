@@ -1473,6 +1473,11 @@ AssetManager::AssetManager()
     this->hills2Texture.loadFromFile("textures\\hills2.png");
     this->policeagentTexture.loadFromFile("textures\\policeagent.png");
     this->lampTexture.loadFromFile("textures\\lamp.png");
+    this->invisibleTexture.loadFromFile("textures\\invisible.png");
+    this->rockTexture.loadFromFile("textures\\rocks.png");
+    this->perk1Texture.loadFromFile("textures\\perk1.png");
+    this->bushTexture.loadFromFile("textures\\bush.png");
+    this->bushRotatedTexture.loadFromFile("textures\\bushRotated.png");
     this->floorTexture.setRepeated(true);
     this->fenceTexture.setRepeated(true);
     this->houseTexture.setRepeated(true);

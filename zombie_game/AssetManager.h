@@ -25,6 +25,11 @@ class AssetManager
 		sf::Texture hills2Texture;
 		sf::Texture policeagentTexture;
 		sf::Texture lampTexture;
+		sf::Texture invisibleTexture;
+		sf::Texture rockTexture;
+		sf::Texture perk1Texture;
+		sf::Texture bushTexture;
+		sf::Texture bushRotatedTexture;
 };
 
 #endif

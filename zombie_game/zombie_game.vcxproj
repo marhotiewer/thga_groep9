@@ -55,6 +55,8 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Bush.cpp" />
+    <ClCompile Include="BushRotated.cpp" />
     <ClCompile Include="Campfire.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -67,9 +69,11 @@
     <ClCompile Include="HouseFence.cpp" />
     <ClCompile Include="Lamp.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Perk1.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PoliceAgent.cpp" />
-    <ClCompile Include="InvisibleWall.cpp" />
+    <ClCompile Include="Invisible.cpp" />
+    <ClCompile Include="Rocks.cpp" />
     <ClCompile Include="Shed.cpp" />
     <ClCompile Include="Tent.cpp" />
     <ClCompile Include="Tree.cpp" />
@@ -81,6 +85,8 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Bush.h" />
+    <ClInclude Include="BushRotated.h" />
     <ClInclude Include="Campfire.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Entity.h" />
@@ -92,9 +98,11 @@
     <ClInclude Include="Hills2.h" />
     <ClInclude Include="HouseFence.h" />
     <ClInclude Include="Lamp.h" />
+    <ClInclude Include="Perk1.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PoliceAgent.h" />
     <ClInclude Include="Invisible.h" />
+    <ClInclude Include="Rocks.h" />
     <ClInclude Include="Shed.h" />
     <ClInclude Include="Static.h" />
     <ClInclude Include="Tent.h" />

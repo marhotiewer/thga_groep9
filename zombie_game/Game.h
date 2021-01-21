@@ -26,6 +26,11 @@
 #include "Hills2.h"
 #include "PoliceAgent.h"
 #include "Lamp.h"
+#include "Invisible.h"
+#include "Rocks.h"
+#include "Perk1.h"
+#include "Bush.h"
+#include "BushRotated.h"
 
 class Game {
 	public:
