@@ -19,23 +19,43 @@
 class Game : public cScreen {
 	public:
 		Game(sf::RenderWindow *window, AssetManager *assets);
-		~Game();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="deltaTime"></param>
 		void update(float deltaTime);
+		
+		/// <summary>
+		/// 
+		/// </summary>
 		void toggleFullscreen();
+
+		screen run() override;
+		
 		void pollEvents();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
 		bool running();
+
+		/// <summary>
+		/// 
+		/// </summary>
 		void render();
-		virtual screen Run();
+		~Game();
 	private:
-		std::vector<Drawable*> objects;
-		bool noKeyPressed = false;
-		bool isFullScreen = false;
-		sf::RenderWindow* window;
-		float elapsedTime = 0.f;
-		AssetManager* assets;
-		bool debug = false;
-		sf::Event event;
-		Player *player;
+		std::vector<Drawable*> objects;///<
+		bool noKeyPressed = false;///<
+		bool isFullScreen = false;///<
+		sf::RenderWindow* window;///< Pointer to the SFML window 
+		float elapsedTime = 0.f;///<
+		AssetManager* assets;///<
+		bool debug = false;///<
+		sf::Event event;///<
+		Player *player;///<
 		sf::Music* ingameBreeze;
 };
 

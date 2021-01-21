@@ -21,12 +21,15 @@
     <Filter Include="Source Files\Entity">
       <UniqueIdentifier>{3c11079a-7504-448c-8355-e82fb3d4aba1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\cScreen">
+      <UniqueIdentifier>{c9dba868-0ba3-4660-8628-8f9dbf513b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cScreen">
+      <UniqueIdentifier>{9974d7c3-fb23-43cd-8464-a28742756d4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Drawable.cpp">
@@ -56,17 +59,20 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="HUD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\cScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\cScreen</Filter>
+    </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\cScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Drawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -97,20 +103,20 @@
     <ClInclude Include="Bullet.h">
       <Filter>Header Files\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="cScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Settings.h">
+    <ClInclude Include="HUD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuOld.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\cScreen</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\cScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\cScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="cScreen.h">
+      <Filter>Header Files\cScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

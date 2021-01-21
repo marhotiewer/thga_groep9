@@ -1,6 +1,6 @@
 #include "Zombie.h"
 
-Zombie::Zombie(sf::Vector2f pos, Player* player, AssetManager& assets, std::vector<Drawable*>& objects) : Entity(assets, objects), player(player)
+Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, Player* player, std::vector<Drawable*>& objects) : Entity(window, assets, objects), player(player)
 {
 	this->sprite.setTexture(this->assets.zombieSpriteMap);
 	this->sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
@@ -29,7 +29,7 @@ void Zombie::debug_draw(sf::RenderWindow* window)
 	}
 }
 
-void Zombie::update(sf::RenderWindow* window, float deltaTime)
+void Zombie::update(float deltaTime)
 {
 	sf::Vector2f distance(this->player->getPos() - this->getPos());
 	float length = sqrt((distance.x * distance.x) + (distance.y * distance.y));

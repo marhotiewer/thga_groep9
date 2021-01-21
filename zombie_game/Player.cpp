@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects) : Entity(assets, objects)
+Player::Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects) : Entity(window, assets, objects), hud(this->window, assets, pos)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect({ (0 * 192) + this->frame * 32, 80, 32, 48 });
@@ -39,13 +39,18 @@ sf::FloatRect Player::getHitbox()
 
 void Player::shoot(sf::Vector2f direction)
 {
-	this->objects.push_back(new Bullet(this->assets, this->objects, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction));
+	this->objects.push_back(new Bullet(this->window, this->assets, this->objects, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction));
 }
 
-void Player::update(sf::RenderWindow* window, float deltaTime)
+void Player::draw_hud(sf::RenderWindow* window)
+{
+	this->hud.draw(window);
+}
+
+void Player::update(float deltaTime)
 {
 	sf::Vector2f playerPos = (this->getPos()) + sf::Vector2f(this->getSize()) / 2.f;
-	sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
+	sf::Vector2f mousePos = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
 
 	int anglediff = (int(atan2(mousePos.y - playerPos.y, mousePos.x - playerPos.x) * 57.29577951308232286f) + 180 + 360) % 360 - 180;
 	int direction = 3, mode = 0;	// default = idle, facing towards you
@@ -84,4 +89,5 @@ void Player::update(sf::RenderWindow* window, float deltaTime)
 		window->setView(view);
 		this->delta = { 0.f, 0.f };
 	}
+	this->hud.update();
 }

@@ -124,7 +124,7 @@ void MainMenu::render()
 	this->window->display();
 }
 
-screen MainMenu::Run()
+screen MainMenu::run()
 {
 	backgroundMusic->play();
 	sf::Clock clock;

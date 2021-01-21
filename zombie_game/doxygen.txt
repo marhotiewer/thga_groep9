@@ -7,7 +7,7 @@
 *
 *\section GitHub GitHub Page
 *
-* GitHub: <https://github.com/marhotiewer/thga_groep9>
+* GitHub: [Github](https://github.com/marhotiewer/thga_groep9)
 *
 *\section Controls Controls
 *
@@ -38,6 +38,6 @@
 * - Mark Verburg
 * - Pim Goes
 *
-* \version version: 0.1
-* \date 15-1-2021
+* \version version: 0.2
+* \date 20-1-2021
 */

@@ -1483,29 +1483,32 @@ const uint8_t wall_tile[] = {
 
 AssetManager::AssetManager()
 {
-    this->zombieSpriteMap.loadFromFile("textures_and_sounds\\zombie.png");
-    this->adamSpriteMap.loadFromFile("textures_and_sounds\\player.png");
+    this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
+    this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");
+    this->zombieSpriteMap.loadFromFile("textures\\zombie.png");
+    this->buttonTexture.loadFromFile("textures\\buttons.png");
+    this->gameLogoTexture.loadFromFile("textures\\logo.png");
+    this->adamSpriteMap.loadFromFile("textures\\player.png");
+
     this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
     this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
-	this->buttonTexture.loadFromFile("textures_and_sounds\\buttons.png");
-	this->gameLogoTexture.loadFromFile("textures_and_sounds\\logo.png");
-	this->homescreenBackgroundTexture.loadFromFile("textures_and_sounds\\menuImage.png");
 
     this->floorTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);
 
-	this->walkingSound.loadFromFile("textures_and_sounds\\footsteps.wav");
-	this->ingameBreezeSound.openFromFile("textures_and_sounds\\breeze.wav");
-	this->mainMenuSoundtrack.openFromFile("textures_and_sounds\\mainMenu.wav");
-	this->mainMenuClickSound.loadFromFile("textures_and_sounds\\mouseClick.wav");
-	this->zombieSounds[0]->loadFromFile("textures_and_sounds\\attack1.wav");
-	this->zombieSounds[1]->loadFromFile("textures_and_sounds\\attack2.wav");
-	this->zombieSounds[2]->loadFromFile("textures_and_sounds\\attack3.wav");
-	this->zombieSounds[3]->loadFromFile("textures_and_sounds\\attack4.wav");
+	this->walkingSound.loadFromFile("sounds\\footsteps.wav");
+	this->ingameBreezeSound.openFromFile("sounds\\breeze.wav");
+	this->mainMenuSoundtrack.openFromFile("sounds\\mainMenu.wav");
+	this->mainMenuClickSound.loadFromFile("sounds\\mouseClick.wav");
+	this->zombieSounds[0]->loadFromFile("sounds\\attack1.wav");
+	this->zombieSounds[1]->loadFromFile("sounds\\attack2.wav");
+	this->zombieSounds[2]->loadFromFile("sounds\\attack3.wav");
+	this->zombieSounds[3]->loadFromFile("sounds\\attack4.wav");
 
 	this->mainMenuSoundtrack.setVolume(15.f);
 	this->mainMenuSoundtrack.setLoop(true);
 	this->ingameBreezeSound.setLoop(true);
+    this->wallTexture.setRepeated(true);
 }
