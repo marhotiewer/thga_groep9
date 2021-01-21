@@ -61,8 +61,11 @@ class Player : public Entity
 		/// </summary>
 		///<param name="window">The pointer to the current SFML window of the game.</param>
 		void draw_hud(sf::RenderWindow* window);
+
+		void addPoints(int points);
 	private:
 		HUD hud;///<On screen information
+		HudInfo info;
 };
 
 #endif

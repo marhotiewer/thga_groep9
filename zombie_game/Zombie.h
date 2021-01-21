@@ -39,6 +39,9 @@ class Zombie : public Entity
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		void debug_draw(sf::RenderWindow* window) override;
 		
+
+		void damage(int dmg) override;
+
 		/// <summary>
 		/// Function to check Zombie can move to new position(old position+deta).
 		/// </summary>
