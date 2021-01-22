@@ -176,6 +176,7 @@ void Game::pollEvents()
 			break;
 		case sf::Event::MouseButtonPressed:
 			if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
+			else if (event.mouseButton.button ==  sf::Mouse::Right) this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window))), this->player, this->objects));
 			break;
 		}
 	}
