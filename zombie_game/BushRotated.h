@@ -7,9 +7,9 @@
 
 class BushRotated : public Static
 {
-public:
-	BushRotated(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		BushRotated(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif

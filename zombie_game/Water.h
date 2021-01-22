@@ -7,8 +7,8 @@
 
 class Water : public Static
 {
-public:
-	Water(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
+	public:
+		Water(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 };
 
 #endif

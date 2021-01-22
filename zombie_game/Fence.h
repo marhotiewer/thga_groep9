@@ -7,8 +7,8 @@
 
 class Fence : public Static
 {
-public:
-	Fence(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
+	public:
+		Fence(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 };
 
 #endif

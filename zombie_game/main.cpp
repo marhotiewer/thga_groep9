@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include "Game.h"
-#include "MainMenu.h"
+
 #include "AssetManager.h"
-#include <iostream>
+#include "MainMenu.h"
+#include "Game.h"
 
 int main()
 {

@@ -7,9 +7,9 @@
 
 class PoliceAgent : public Static
 {
-public:
-	PoliceAgent(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		PoliceAgent(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif

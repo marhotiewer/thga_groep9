@@ -7,9 +7,9 @@
 
 class Lamp : public Static
 {
-public:
-	Lamp(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		Lamp(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif

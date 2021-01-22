@@ -7,9 +7,9 @@
 
 class Tent : public Static
 {
-public:
-	Tent(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		Tent(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif
