@@ -13,7 +13,7 @@ struct Z_Index {
 Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), assets(assets)
 {
 	this->event = sf::Event();
-
+	
 	this->objects.push_back(new Wall(this->assets, sf::Vector2f(3010, 10), sf::Vector2i(10, 2250)));
 	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 2260), sf::Vector2i(3020, 10)));
 	this->objects.push_back(new Wall(this->assets, sf::Vector2f(0, 10), sf::Vector2i(10, 2250)));
@@ -91,6 +91,11 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
 	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects));
+	
+	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(500, 500), this->player, this->objects));	// left zombie
+	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(800, 800), this->player, this->objects));	// right zombie
+	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(600, 600), this->player, this->objects));	// left zombie
+	//this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(900, 900), this->player, this->objects));	// right zombie
 }
 
 Game::~Game()
