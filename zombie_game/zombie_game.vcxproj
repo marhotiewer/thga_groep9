@@ -72,7 +72,7 @@
     <ClCompile Include="Perk1.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PoliceAgent.cpp" />
-    <ClCompile Include="Invisible.cpp" />
+    <ClCompile Include="InvisibleWall.cpp" />
     <ClCompile Include="Rocks.cpp" />
     <ClCompile Include="Sandbag.cpp" />
     <ClCompile Include="Shed.cpp" />
@@ -102,7 +102,7 @@
     <ClInclude Include="Perk1.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PoliceAgent.h" />
-    <ClInclude Include="Invisible.h" />
+    <ClInclude Include="InvisibleWall.h" />
     <ClInclude Include="Rocks.h" />
     <ClInclude Include="Sandbag.h" />
     <ClInclude Include="Shed.h" />
