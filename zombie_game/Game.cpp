@@ -63,7 +63,7 @@ void Game::update(float deltaTime)
 			if ((*entity)->isActive()) {
 				(*entity)->update(deltaTime);
 			}
-			else if((*entity)->type != Drawable::Type::Player) {
+			else if ((*entity)->type != Drawable::Type::Player) {
 				delete (*entity);
 				entity = this->objects.erase(entity);
 			}
@@ -139,11 +139,11 @@ Screen Game::run()
 	 sf::Clock clock;
 	 float deltaTime;
 
-	 while (this->running())
+	 while (this->running() && this->player->isActive())
 	 {
 		 deltaTime = clock.restart().asSeconds();
 		 this->update(deltaTime);
 		 this->render();
 	 }
-	 return Screen::MainMenu;
+	 return Screen::GameOver;
 }

@@ -71,6 +71,9 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\cScreen</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -117,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="cScreen.h">
       <Filter>Header Files\cScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

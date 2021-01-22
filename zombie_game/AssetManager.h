@@ -26,6 +26,7 @@ class AssetManager
 		sf::Texture wallTexture;///< \brief Texture of a Wall.
 		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
 		sf::Font zombieFont;
+		sf::Texture gameOverTexture;
 };
 
 #endif //ASSETMANAGER_H

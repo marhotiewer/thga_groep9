@@ -1491,6 +1491,7 @@ AssetManager::AssetManager()
     this->buttonTexture.loadFromFile("textures\\buttons.png");
     this->gameLogoTexture.loadFromFile("textures\\logo.png");
     this->adamSpriteMap.loadFromFile("textures\\player.png");
+    this->gameOverTexture.loadFromFile("textures\\gameover.png");
 
     this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
     this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));

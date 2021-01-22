@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 
+#include "cScreen.h"
 #include "Drawable.h"
 #include "Player.h"
 #include "Zombie.h"
