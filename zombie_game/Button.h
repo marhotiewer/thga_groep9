@@ -34,6 +34,8 @@ class Button : public Drawable
 		/// <param name="type">Type of the button of type enum class buttonType.</param>
 		Button(AssetManager& assets, sf::Vector2f pos, ButtonType type);
 		
+		ButtonType type;///<Type of the button of type enum class buttonType.
+
 		/// <summary>
 		/// This function checks if the move hovers above the button. 
 		/// And changes the isButtonSelected bool. 
@@ -54,7 +56,6 @@ class Button : public Drawable
 
 	private:
 		bool isButtonSelected = false;///< Bool if button pressed.
-		ButtonType type;///<Type of the button of type enum class buttonType.
 };
 
 #endif

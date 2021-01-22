@@ -4,10 +4,10 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 {
 	this->event = sf::Event();
 
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 338.f }, ButtonType::Options));
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 392.f }, ButtonType::Scores));
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 284.f }, ButtonType::Quit));
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 230.f }, ButtonType::Play));
+	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) - 70.f }, ButtonType::Play));
+	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) - 16.f }, ButtonType::Quit));
+	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) + 38.f }, ButtonType::Options));
+	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) + 92.f }, ButtonType::Scores));
 
 	this->alpha_max = 1 * 255;
 	this->alpha_div = 1;
@@ -27,9 +27,40 @@ Screen MainMenu::update(float deltaTimeSeconds) {
 void MainMenu::toggleFullscreen() {
 	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
 	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+	sf::View view = this->window->getView();
+	view.setSize(sf::Vector2f(this->window->getSize()));
+	this->window->setView(view);
 	this->isFullScreen = !this->isFullScreen;
-	for (Button *button : buttons) {
-		button->setPos({});
+	matchButtonsToScreen();
+}
+
+void MainMenu::matchButtonsToScreen() {
+	float buttonX = (this->window->getSize().x / 2) - 55.5f;
+	for (Button* button : buttons) {
+		switch (button->type)
+		{
+		case ButtonType::Play:
+		{
+			button->setPos({ buttonX, (this->window->getSize().y / 2) - 70.f });
+			break;
+		}
+		case ButtonType::Quit:
+		{
+			button->setPos({ buttonX, (this->window->getSize().y / 2) - 16.f });
+			break;
+		}
+		case ButtonType::Options:
+		{
+			button->setPos({ buttonX, (this->window->getSize().y / 2) + 38.f });
+			break;
+		}
+		case ButtonType::Scores:
+		{
+			button->setPos({ buttonX, (this->window->getSize().y / 2) + 92.f });
+			break;
+		}
+		}
+		std::cout << button->getPos().x << ", " << button->getPos().y << std::endl;
 	}
 }
 
@@ -48,6 +79,7 @@ Screen MainMenu::pollEvents()
 				sf::View view = this->window->getView();
 				view.setSize(sf::Vector2f(this->window->getSize()));
 				this->window->setView(view);
+				matchButtonsToScreen();
 				break;
 			}
 			case sf::Event::KeyPressed: {

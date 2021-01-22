@@ -26,6 +26,7 @@ class MainMenu : public cScreen
 		sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
 		int alpha_max;///<
 		int alpha_div;///<
+		void matchButtonsToScreen();
 	public:
 		/// <summary>
 		/// Constructor or MainMenu class. 
