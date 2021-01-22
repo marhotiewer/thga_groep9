@@ -192,7 +192,6 @@ const uint8_t tree_sprite[] = {
     0xF8, 0x1B, 0x99, 0x2C, 0xF1, 0xF6, 0x7A, 0x8A, 0x4C, 0x85, 0x00, 0x00, 0x00, 0x00, 0x49,
     0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82, 0x82
 };
-
 const uint8_t wall_tile[] = {
     0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46, 0x49, 0x46, 0x00, 0x01, 0x02, 0x01, 0x00,
     0x48, 0x00, 0x48, 0x00, 0x00, 0xFF, 0xE1, 0x00, 0x6C, 0x45, 0x78, 0x69, 0x66, 0x00, 0x00,
@@ -1455,30 +1454,34 @@ const uint8_t wall_tile[] = {
 
 AssetManager::AssetManager()
 {
-    this->zombieSpriteMap.loadFromFile("textures\\zombie.png");
-    this->adamSpriteMap.loadFromFile("textures\\player.png");
-    this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
-    this->floorTexture.loadFromFile("textures\\background.png");
-    this->fenceTexture.loadFromFile("textures\\fence.png");
-    this->houseTexture.loadFromFile("textures\\fencehouse.png");
-    this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
+    this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
-    this->waterTexture.loadFromFile("textures\\water.png");
-    this->shedTexture.loadFromFile("textures\\shed.png");
+    this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");
+    this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
+    this->policeagentTexture.loadFromFile("textures\\policeagent.png");
+    this->bushRotatedTexture.loadFromFile("textures\\bushRotated.png");
+    this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
+    this->invisibleTexture.loadFromFile("textures\\invisible.png");
     this->fountainTexture.loadFromFile("textures\\fountain.png");
-    this->tentTexture.loadFromFile("textures\\tent.png");
-    this->woodTexture.loadFromFile("textures\\wood.png");
     this->campfireTexture.loadFromFile("textures\\campfire.png");
+    this->floorTexture.loadFromFile("textures\\background.png");
+    this->houseTexture.loadFromFile("textures\\fencehouse.png");
+    this->zombieSpriteMap.loadFromFile("textures\\zombie.png");
+    this->sandbagTexture.loadFromFile("textures\\sandbag.png");
+    this->buttonTexture.loadFromFile("textures\\buttons.png");
+    this->gameLogoTexture.loadFromFile("textures\\logo.png");
+    this->adamSpriteMap.loadFromFile("textures\\player.png");
     this->hills1Texture.loadFromFile("textures\\hills1.png");
     this->hills2Texture.loadFromFile("textures\\hills2.png");
-    this->policeagentTexture.loadFromFile("textures\\policeagent.png");
-    this->lampTexture.loadFromFile("textures\\lamp.png");
-    this->invisibleTexture.loadFromFile("textures\\invisible.png");
-    this->rockTexture.loadFromFile("textures\\rocks.png");
+    this->fenceTexture.loadFromFile("textures\\fence.png");
+    this->waterTexture.loadFromFile("textures\\water.png");
     this->perk1Texture.loadFromFile("textures\\perk1.png");
+    this->rockTexture.loadFromFile("textures\\rocks.png");
+    this->shedTexture.loadFromFile("textures\\shed.png");
+    this->tentTexture.loadFromFile("textures\\tent.png");
+    this->woodTexture.loadFromFile("textures\\wood.png");
+    this->lampTexture.loadFromFile("textures\\lamp.png");
     this->bushTexture.loadFromFile("textures\\bush.png");
-    this->bushRotatedTexture.loadFromFile("textures\\bushRotated.png");
-    this->sandbagTexture.loadFromFile("textures\\sandbag.png");
     this->floorTexture.setRepeated(true);
     this->fenceTexture.setRepeated(true);
     this->houseTexture.setRepeated(true);

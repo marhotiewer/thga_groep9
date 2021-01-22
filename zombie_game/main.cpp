@@ -1,20 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include "MainMenu.h"
+#include "AssetManager.h"
+#include <iostream>
 
 int main()
 {
-    Game game;
+	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window" };
+	AssetManager assets;
 
-    sf::Clock clock;
-    float deltaTime;
+	cScreen* Screens[] = {
+		new MainMenu(&window, assets),
+		new Game(&window, assets)
+	};
 
-    while (game.running())
+    Screen currentScreen = Screen::MainMenu;
+
+    while (currentScreen != Screen::None)
     {
-        deltaTime = clock.getElapsedTime().asSeconds();
-        clock.restart();
-        game.update(deltaTime);
-        game.render();
+		currentScreen = Screens[int(currentScreen)]->run();
     }
-
     return 0;
 }

@@ -11,3 +11,8 @@ bool Floor::isColliding(Drawable& drawable, sf::Vector2f delta)
 {
 	return false;
 }
+
+float Floor::Z_Order()
+{
+	return 0.0f;
+}

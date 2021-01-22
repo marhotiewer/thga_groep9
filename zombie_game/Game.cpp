@@ -1,14 +1,17 @@
 #include "Game.h"
+///@file
 
+
+/// \struct Z_Index
+/// \brief struct for draw order.
 struct Z_Index {
 	inline bool operator() (Drawable* one, Drawable* two) {
-		return (one->getHitbox().top < two->getHitbox().top);
+		return (one->Z_Order() < two->Z_Order());
 	}
 };
 
-Game::Game()
+Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), assets(assets)
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(1000, 600), "Zombie Game");
 	this->event = sf::Event();
 
 	this->objects.push_back(new Wall(this->assets, sf::Vector2f(3010, 10), sf::Vector2i(10, 2250)));
@@ -87,14 +90,12 @@ Game::Game()
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1800, 800)));
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
-	this->objects.push_back(this->player = new Player(this->assets, sf::Vector2f(175, 2200), this->objects));
-	//this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects));
 }
 
 Game::~Game()
 {
 	for (Drawable* entity : this->objects) delete entity;
-	delete this->window;
 }
 
 void Game::update(float deltaTime)
@@ -116,14 +117,14 @@ void Game::update(float deltaTime)
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))		delta.x -= speed;		// left
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))		delta.y += speed;		// down
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))		delta.x += speed;		// right
-		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;			// decrease speed 25% when going sideways
+		if (delta.x != 0.f && delta.y != 0.f)					delta *= 0.75f;			// decrease speed 25% when going skewed
 
 		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);					// move the player if delta isn't 0
 
 		// if the entity is active update, else if entity is not a player delete object
 		for (auto entity = begin(this->objects); entity != end(this->objects); ++entity) {
 			if ((*entity)->isActive()) {
-				(*entity)->update(this->window, deltaTime);
+				(*entity)->update(deltaTime);
 			}
 			else if((*entity)->type != Drawable::Type::Player) {
 				delete (*entity);
@@ -131,23 +132,22 @@ void Game::update(float deltaTime)
 			}
 		}
 	}
-
 	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
 }
 
 void Game::toggleFullscreen() {
-	if (isFullScreen) window->create(sf::VideoMode(640, 480), "Zombie Game");						// windowed
-	else window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);		// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
 
-	isFullScreen = !isFullScreen;
+	this->isFullScreen = !this->isFullScreen;
 }
 
 void Game::pollEvents()
 {
-	while (this->window->pollEvent(event))
+	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
 		{
@@ -175,7 +175,7 @@ void Game::pollEvents()
 			}
 			break;
 		case sf::Event::MouseButtonPressed:
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
+			if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
 			break;
 		}
 	}
@@ -188,8 +188,25 @@ bool Game::running()
 
 void Game::render()
 {
-	this->window->clear();
+	this->window->clear(sf::Color::White);
 	for (Drawable* object : this->objects) if (object->isActive()) object->draw(this->window);
 	for (Drawable* object : this->objects) if (object->isActive() && this->debug) object->debug_draw(this->window);
+	this->player->draw_hud(this->window);
 	this->window->display();
+}
+
+Screen Game::run()
+{
+	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+
+	 sf::Clock clock;
+	 float deltaTime;
+
+	 while (this->running())
+	 {
+		 deltaTime = clock.restart().asSeconds();
+		 this->update(deltaTime);
+		 this->render();
+	 }
+	 return Screen::MainMenu;
 }
