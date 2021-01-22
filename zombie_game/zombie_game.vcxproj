@@ -60,6 +60,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="cScreen.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Player.h" />

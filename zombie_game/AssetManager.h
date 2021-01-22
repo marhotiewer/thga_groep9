@@ -25,6 +25,7 @@ class AssetManager
 		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
 		sf::Texture wallTexture;///< \brief Texture of a Wall.
 		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
+		sf::Texture gameOverTexture;
 };
 
 #endif //ASSETMANAGER_H

@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "MainMenu.h"
+#include "GameOver.h"
 #include "AssetManager.h"
+#include "Drawable.h"
 #include <iostream>
 
 int main()
@@ -11,10 +13,10 @@ int main()
 
 	cScreen* Screens[] = {
 		new MainMenu(&window, assets),
-		new Game(&window, assets)
+		new Game(&window, assets),
+		new GameOver(&window, assets)
 	};
-
-    Screen currentScreen = Screen::MainMenu;
+	Screen currentScreen = Screen::MainMenu;
 
     while (currentScreen != Screen::None)
     {
