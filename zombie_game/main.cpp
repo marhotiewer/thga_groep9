@@ -4,17 +4,19 @@
 #include "GameOver.h"
 #include "AssetManager.h"
 #include "Drawable.h"
+#include "ScoreScreen.h"
 #include <iostream>
 
 int main()
 {
 	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window" };
 	AssetManager assets;
-
+	Game game(&window, assets);
 	cScreen* Screens[] = {
 		new MainMenu(&window, assets),
-		new Game(&window, assets),
-		new GameOver(&window, assets)
+		&game,
+		new GameOver(&window, assets, game),
+		new ScoreScreen(&window, assets)
 	};
 	Screen currentScreen = Screen::MainMenu;
 

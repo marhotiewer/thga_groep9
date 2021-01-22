@@ -65,6 +65,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ScoreScreen.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Zombie.cpp" />
@@ -82,6 +83,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ScoreScreen.h" />
     <ClInclude Include="Static.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="Wall.h" />
@@ -89,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="class_diagram.cd" />
+    <None Include="scores.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

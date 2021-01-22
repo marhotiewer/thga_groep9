@@ -84,6 +84,10 @@ Screen MainMenu::pollEvents()
 									// Quit the game :(
 									window->close();
 								}
+								case ButtonType::Scores:
+									//show the score screen.
+									returnValue = Screen::Scores;
+									break;
 								default: break;
 							}
 						}

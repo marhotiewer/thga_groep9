@@ -97,6 +97,14 @@ void Game::pollEvents()
 			this->window->setView(view);
 			break;
 		}
+		//case sf::Event::TextEntered:
+		//	if (event.text.unicode < 128)
+		//	{
+		//		str += static_cast<char>(event.text.unicode);
+				//text.setText(str);
+		//	}
+		//	break;
+
 		case sf::Event::KeyPressed:
 			// toggle fullscreen mode
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {

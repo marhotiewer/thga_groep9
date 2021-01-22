@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "Bullet.h"
 #include "HUD.h"
+
 /// @file
 
 
@@ -62,7 +63,15 @@ class Player : public Entity
 		///<param name="window">The pointer to the current SFML window of the game.</param>
 		void draw_hud(sf::RenderWindow* window);
 
+
 		void addPoints(int points);
+
+
+		int getPoints();
+
+		void damage(int dmg) override;
+
+
 	private:
 		HUD hud;///<On screen information
 		HudInfo info;

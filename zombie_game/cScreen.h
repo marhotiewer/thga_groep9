@@ -9,9 +9,9 @@ enum class Screen {
 	MainMenu,///< Startup screen.
 	Game,///< The screen with the game.
 	GameOver,
+	Scores,///< Screen with scores
 	OptionsMenu,///< Screen with options.
 	PauseMenu,///< Menu that pause the game.
-	Scores,///< Screen with scores
 	None///< None is exit the application.
 };
 

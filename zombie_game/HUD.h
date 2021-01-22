@@ -25,7 +25,7 @@ class HUD
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="assets">AssetManager required for textures</param>
-		/// <param name="pos">position of the HUD</param>
+		/// <param name="pos">Position of the HUD</param>
 		HUD(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos);
 		
 		/// <summary>

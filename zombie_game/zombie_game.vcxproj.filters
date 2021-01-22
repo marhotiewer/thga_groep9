@@ -72,7 +72,10 @@
       <Filter>Source Files\cScreen</Filter>
     </ClCompile>
     <ClCompile Include="GameOver.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\cScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreScreen.cpp">
+      <Filter>Source Files\cScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,11 +124,15 @@
     <ClInclude Include="cScreen.h">
       <Filter>Header Files\cScreen</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreScreen.h">
+      <Filter>Header Files\cScreen</Filter>
+    </ClInclude>
     <ClInclude Include="GameOver.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\cScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="class_diagram.cd" />
+    <None Include="scores.json" />
   </ItemGroup>
 </Project>

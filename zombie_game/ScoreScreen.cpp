@@ -1,37 +1,39 @@
-#include "GameOver.h"
+#include "ScoreScreen.h"
+#include <sstream>
+//#include <iostream>
+#include <iomanip>
 
-GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) : window(window), assets(assets), game(game)
+ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : window(window), assets(assets)
 {
 	// Creating buttons
-	this->buttons.push_back(new Button(this->assets, { 364.5f, 400.f }, ButtonType::Scores));
-	this->buttons.push_back(new Button(this->assets, { 164.5f, 400.f }, ButtonType::Quit));
-	this->playerText.setFont(assets.zombieFont);
-	this->playerText.setPosition(500, 500);
-	this->playerText.setCharacterSize(40);
-	this->playerText.setFillColor(sf::Color::Green);
+	this->buttons.push_back(new Button(this->assets, { 264.5f, 230.f }, ButtonType::Play));
+	//this->buttons.push_back(new Button(this->assets, { 264.5f, 284.f }, ButtonType::Quit));
+	//this->buttons.push_back(new Button(this->assets, { 264.5f, 338.f }, ButtonType::Options));
+	//this->buttons.push_back(new Button(this->assets, { 264.5f, 392.f }, ButtonType::Scores));
 
 	this->event = sf::Event();
 
 	this->alpha_max = 1 * 255;
 	this->alpha_div = 1;
-	this->logo.setTexture(assets.gameOverTexture);
-	this->logo.setPosition({ 0.f, 150.f });
+	this->logo.setTexture(assets.gameLogoTexture);
+	this->logo.setPosition({ 231.f, 20.f });
 	this->background.setTexture(assets.homescreenBackgroundTexture);
 	this->background.setPosition({ 0.f, 0.f });
+	//this->background.setColor(sf::Color(255, 255, 255, alpha))
 }
 
-Screen GameOver::update(float deltaTimeSeconds) {
+Screen ScoreScreen::update(float deltaTimeSeconds) {
 	Screen nextScreen = this->pollEvents();
 	return nextScreen;
 }
 
-void GameOver::toggleFullscreen() {
+void ScoreScreen::toggleFullscreen() {
 	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
 	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
 	this->isFullScreen = !this->isFullScreen;
 }
 
-Screen GameOver::pollEvents()
+Screen ScoreScreen::pollEvents()
 {
 	Screen returnValue = Screen::None;
 	while (this->window->pollEvent(this->event))
@@ -48,13 +50,6 @@ Screen GameOver::pollEvents()
 			this->window->setView(view);
 			break;
 		}
-		case sf::Event::TextEntered:
-			if (event.text.unicode < 128)
-			{
-				this->playerInput += event.text.unicode;
-				this->playerText.setString(this->playerInput);
-			}
-			break;
 		case sf::Event::KeyPressed: {
 			// toggle fullscreen mode
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
@@ -63,15 +58,6 @@ Screen GameOver::pollEvents()
 			// close the game
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 				this->window->close();
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
-				if (!this->playerInput.empty()) {
-					this->playerInput.erase(this->playerInput.size() - 1);
-					this->playerText.setString(this->playerInput);
-				}
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				this->canSaveScore = true;
 			}
 			break;
 		}
@@ -113,12 +99,12 @@ Screen GameOver::pollEvents()
 	return returnValue;
 }
 
-bool GameOver::running()
+bool ScoreScreen::running()
 {
 	return this->window->isOpen();
 }
 
-void GameOver::render()
+void ScoreScreen::render()
 {
 	this->window->clear();
 	// Draw stuff
@@ -127,15 +113,16 @@ void GameOver::render()
 	for (Button* button : buttons) {
 		button->draw(window);
 	}
-	this->window->draw(this->playerText);
 	this->window->display();
-
 }
 
-Screen GameOver::run()
+Screen ScoreScreen::run()
 {
-	int points = this->game.player->getPoints();
-
+	//std::ifstream test("scores.json", std::ifstream::binary);
+	//nlohmann::json jsonfile;
+	//test >> jsonfile;
+	//std::cout << jsonfile << std::endl;
+	
 	sf::Clock clock;
 	float deltaTimeSeconds;
 	Screen nextScreen = Screen::None;
@@ -143,24 +130,6 @@ Screen GameOver::run()
 		deltaTimeSeconds = clock.restart().asSeconds();
 		nextScreen = this->update(deltaTimeSeconds);
 		this->render();
-		if (canSaveScore) {
-			if (points == 0) {return nextScreen;}
-			std::ifstream iputFile("scores.json");
-			nlohmann::json jsoninput;
-			if (!(iputFile.peek() == std::ifstream::traits_type::eof() ))
-			{
-				iputFile >> jsoninput;//read scores to json library.
-				std::cout << jsoninput << std::endl;
-			}
-			iputFile.close();
-			std::ofstream outputFile("scores.json");
-			nlohmann::json newScore;
-			newScore[playerInput] = this->game.player->getPoints();
-			jsoninput.push_back(newScore);
-			outputFile << jsoninput; //write scores to json scores file.
-			outputFile.close();
-			return nextScreen;
-		}
 	}
 	return nextScreen;
 }
