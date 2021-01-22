@@ -3,6 +3,14 @@
 //#include <iostream>
 #include <iomanip>
 
+namespace scoreTemplate {
+	struct scoreWithName {
+		std::string name;
+		int score;
+	};
+}
+
+
 ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : window(window), assets(assets)
 {
 	// Creating buttons
@@ -118,10 +126,20 @@ void ScoreScreen::render()
 
 Screen ScoreScreen::run()
 {
-	//std::ifstream test("scores.json", std::ifstream::binary);
-	//nlohmann::json jsonfile;
-	//test >> jsonfile;
-	//std::cout << jsonfile << std::endl;
+	std::ifstream iputFile("scores.json");
+	nlohmann::json jsonInput;
+	if (!(iputFile.peek() == std::ifstream::traits_type::eof()))
+	{
+		iputFile >> jsonInput;//read scores to json library if file is not empty.
+		for (const auto item: jsonInput.array()) {
+			
+			std::cout << jsonInput.get<std::string>() << std::endl;
+		}
+	}
+	else {
+		std::cout << "no scores" << std::endl;;
+	}
+	iputFile.close();
 	
 	sf::Clock clock;
 	float deltaTimeSeconds;

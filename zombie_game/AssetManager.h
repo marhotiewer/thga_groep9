@@ -27,6 +27,7 @@ class AssetManager
 		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
 		sf::Font zombieFont;
 		sf::Texture gameOverTexture;
+		sf::Texture scoreBoard;
 };
 
 #endif //ASSETMANAGER_H

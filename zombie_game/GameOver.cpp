@@ -144,22 +144,23 @@ Screen GameOver::run()
 		nextScreen = this->update(deltaTimeSeconds);
 		this->render();
 		if (canSaveScore) {
-			if (points == 0) {return nextScreen;}
+			if (points == 0) {return Screen::MainMenu;}
 			std::ifstream iputFile("scores.json");
 			nlohmann::json jsoninput;
 			if (!(iputFile.peek() == std::ifstream::traits_type::eof() ))
 			{
-				iputFile >> jsoninput;//read scores to json library.
-				std::cout << jsoninput << std::endl;
+				iputFile >> jsoninput;//read scores to json library if file is not empty.
+				//std::cout << jsoninput << std::endl;
 			}
 			iputFile.close();
+			
 			std::ofstream outputFile("scores.json");
 			nlohmann::json newScore;
 			newScore[playerInput] = this->game.player->getPoints();
 			jsoninput.push_back(newScore);
 			outputFile << jsoninput; //write scores to json scores file.
 			outputFile.close();
-			return nextScreen;
+			return Screen::MainMenu;
 		}
 	}
 	return nextScreen;

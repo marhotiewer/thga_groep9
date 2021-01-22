@@ -1492,12 +1492,13 @@ AssetManager::AssetManager()
     this->gameLogoTexture.loadFromFile("textures\\logo.png");
     this->adamSpriteMap.loadFromFile("textures\\player.png");
     this->gameOverTexture.loadFromFile("textures\\gameover.png");
+    this->scoreBoard.loadFromFile("textures\\scoreBoard.png");
 
     this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
     this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
-
+   
     this->floorTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);
 }
