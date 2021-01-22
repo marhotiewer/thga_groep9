@@ -83,6 +83,6 @@ void Zombie::playAttackSound() {
 	int soundToPlay = (rand() % 4);
 	float pitch = (rand() % 20 + 90) / 100.f;
 	this->attackSounds[soundToPlay]->setPitch(pitch);
-	this->attackSounds[soundToPlay]->setPosition({ this->getPos().x, 0, this->getPos().y });
+	//this->attackSounds[soundToPlay]->setPosition({ this->getPos().x, this->getPos().y, 0 });
 	this->attackSounds[soundToPlay]->play();
 }

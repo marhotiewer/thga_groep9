@@ -28,6 +28,7 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(25, 25), this->player, this->objects));	// left zombie
 	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(455, 25), this->player, this->objects));	// right zombie
 	this->objects.push_back(this->player);
+	this->ingameBreeze = &this->assets.ingameBreezeSound;
 }
 
 Game::~Game()
@@ -78,6 +79,7 @@ void Game::toggleFullscreen() {
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+	//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
 
 	this->isFullScreen = !this->isFullScreen;
 }
@@ -95,6 +97,7 @@ void Game::pollEvents()
 			sf::View view = this->window->getView();
 			view.setSize(sf::Vector2f(this->window->getSize()));
 			this->window->setView(view);
+			//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
 			break;
 		}
 		case sf::Event::KeyPressed:
@@ -135,10 +138,10 @@ void Game::render()
 Screen Game::run()
 {
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
+	//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
 
 	sf::Clock clock;
 	float deltaTime;
-	this->ingameBreeze = &this->assets.ingameBreezeSound;
 	this->ingameBreeze->play();
 
 	 while (this->running())
