@@ -9,6 +9,8 @@ Player::Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	this->health = 10;
 	this->walkingSound = sf::Sound(this->assets.walkingSound);
 	this->walkingSound.setVolume(50.f);
+	this->handGunSound = sf::Sound(this->assets.handGunSound);
+	this->handGunSound.setVolume(50.f);
 }
 
 void Player::debug_draw(sf::RenderWindow* window)
@@ -39,6 +41,8 @@ sf::FloatRect Player::getHitbox()
 
 void Player::shoot(sf::Vector2f direction)
 {
+	this->handGunSound.setPitch((rand() % 20 + 90) / 100.f);
+	this->handGunSound.play();
 	this->objects.push_back(new Bullet(this->window, this->assets, this->objects, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction));
 }
 

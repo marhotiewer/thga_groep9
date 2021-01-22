@@ -32,6 +32,7 @@ class AssetManager
 		sf::Music mainMenuSoundtrack;
 		sf::SoundBuffer mainMenuClickSound;
 		sf::SoundBuffer* zombieSounds[4];
+		sf::SoundBuffer handGunSound;
 };
 
 #endif //ASSETMANAGER_H

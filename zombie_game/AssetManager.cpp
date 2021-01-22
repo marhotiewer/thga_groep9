@@ -1510,6 +1510,8 @@ AssetManager::AssetManager()
 	this->zombieSounds[2]->loadFromFile("sounds\\attack3.wav");
 	this->zombieSounds[3]->loadFromFile("sounds\\attack4.wav");
 
+	this->handGunSound.loadFromFile("sounds\\handgun_sound.wav");
+
 	this->mainMenuSoundtrack.setVolume(15.f);
 	this->mainMenuSoundtrack.setLoop(true);
 	this->ingameBreezeSound.setLoop(true);

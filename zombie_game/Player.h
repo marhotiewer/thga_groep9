@@ -60,6 +60,7 @@ class Player : public Entity
 	private:
 		HUD hud;
 		sf::Sound walkingSound;
+		sf::Sound handGunSound;
 };
 
 #endif
