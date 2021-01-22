@@ -49,3 +49,11 @@ ButtonType Button::buttonPressed() {
 	}
 	else return ButtonType::None;
 }
+
+void Button::setScale(float scale) {
+	this->sprite.setScale({ scale, scale });
+}
+
+void Button::setPos(sf::Vector2f position) {
+	this->sprite.setPosition(position);
+}

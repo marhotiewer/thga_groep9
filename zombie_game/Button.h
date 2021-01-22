@@ -47,6 +47,11 @@ class Button : public Drawable
 		/// </summary>
 		/// <returns>What type of enum class buttonType the button is pressed</returns>
 		ButtonType buttonPressed();
+
+		void setScale(float scale);
+
+		void setPos(sf::Vector2f position);
+
 	private:
 		bool isButtonSelected = false;///< Bool if button pressed.
 		ButtonType type;///<Type of the button of type enum class buttonType.

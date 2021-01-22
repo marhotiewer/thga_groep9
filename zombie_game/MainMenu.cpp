@@ -28,6 +28,9 @@ void MainMenu::toggleFullscreen() {
 	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
 	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
 	this->isFullScreen = !this->isFullScreen;
+	for (Button *button : buttons) {
+		button->setPos({});
+	}
 }
 
 Screen MainMenu::pollEvents()
