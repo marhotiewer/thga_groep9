@@ -7,9 +7,9 @@
 
 class Hills1 : public Static
 {
-public:
-	Hills1(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		Hills1(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif

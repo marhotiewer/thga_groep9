@@ -7,9 +7,9 @@
 
 class Bush : public Static
 {
-public:
-	Bush(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		Bush(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif

@@ -1,8 +1,9 @@
 #ifndef ASSETMANAGER_H
 #define ASSETMANAGER_H
 
-#include <SFML/Graphics.hpp> ///needed for sf::Texture
+#include <SFML/Graphics.hpp>
 /// @file
+
 
 /// \brief
 /// AssetManager

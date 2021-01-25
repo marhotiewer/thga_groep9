@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
-#include "Game.h"
-#include "MainMenu.h"
+
 #include "AssetManager.h"
-#include <iostream>
+#include "MainMenu.h"
+#include "Game.h"
 
 int main()
 {
-	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window" };
+	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
 	AssetManager assets;
 
 	cScreen* Screens[] = {

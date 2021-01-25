@@ -7,8 +7,8 @@
 
 class InvisibleWall : public Static
 {
-public:
-	InvisibleWall(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
+	public:
+		InvisibleWall(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 };
 
 #endif

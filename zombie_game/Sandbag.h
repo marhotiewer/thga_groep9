@@ -7,9 +7,9 @@
 
 class Sandbag : public Static
 {
-public:
-	Sandbag(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		Sandbag(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif

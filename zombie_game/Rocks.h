@@ -7,9 +7,9 @@
 
 class Rocks : public Static
 {
-public:
-	Rocks(AssetManager& assets, sf::Vector2f pos);
-	sf::FloatRect getHitbox() override;
+	public:
+		Rocks(AssetManager& assets, sf::Vector2f pos);
+		sf::FloatRect getHitbox() override;
 };
 
 #endif

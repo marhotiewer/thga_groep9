@@ -7,8 +7,8 @@
 
 class Perk1 : public Static
 {
-public:
-	Perk1(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
+	public:
+		Perk1(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 };
 
 #endif

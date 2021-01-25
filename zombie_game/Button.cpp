@@ -1,5 +1,4 @@
 #include "Button.h"
-#include <iostream>
 
 Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawable(assets), type(type)
 {
@@ -21,7 +20,7 @@ Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawab
 			break;
 		default: 
 			// This should never happen
-			std::cout << "Button type not implemented!" << std::endl;
+			//std::cout << "Button type not implemented!" << std::endl;
 			exit(1);
 	}
 	this->sprite.setOrigin({ 55.5f, 27.f });

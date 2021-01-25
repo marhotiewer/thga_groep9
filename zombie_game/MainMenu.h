@@ -1,11 +1,11 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#include <iostream>
-#include "cScreen.h"
-#include "AssetManager.h"
-#include "Button.h"
 #include <SFML/Graphics.hpp>
+
+#include "AssetManager.h"
+#include "cScreen.h"
+#include "Button.h"
 /// @file
 
 

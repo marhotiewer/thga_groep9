@@ -15,6 +15,7 @@
 #include "Fountain.h"
 #include "Campfire.h"
 #include "Sandbag.h"
+#include "cScreen.h"
 #include "Player.h"
 #include "Zombie.h"
 #include "Bullet.h"
@@ -27,13 +28,12 @@
 #include "Perk1.h"
 #include "Wall.h"
 #include "Tree.h"
-#include "cScreen.h"
-/// @file
 #include "Shed.h"
 #include "Tent.h"
 #include "Wood.h"
 #include "Lamp.h"
 #include "Bush.h"
+/// @file
 
 
 /// \class Game

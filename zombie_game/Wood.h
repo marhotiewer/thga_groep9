@@ -7,8 +7,8 @@
 
 class Wood : public Static
 {
-public:
-	Wood(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
+	public:
+		Wood(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 };
 
 #endif
