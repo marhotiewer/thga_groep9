@@ -13,9 +13,6 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 	//this->buttons.push_back(new Button(this->assets, { 264.5f, 284.f }, ButtonType::Quit));
 	//this->buttons.push_back(new Button(this->assets, { 264.5f, 338.f }, ButtonType::Options));
 	//this->buttons.push_back(new Button(this->assets, { 264.5f, 392.f }, ButtonType::Scores));
-	this->scoresText.setFont(assets.zombieFont);
-	this->scoresText.setCharacterSize(20);
-	this->scoresText.setFillColor(sf::Color::Green);
 	this->event = sf::Event();
 
 	this->alpha_max = 1 * 255;
@@ -29,10 +26,10 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 
 Screen ScoreScreen::update(float deltaTimeSeconds) {
 	Screen nextScreen = this->pollEvents();
-	float testx = 200, testy = 200;
+	float testx = 284.5f, testy = 292.f;
 	for (sf::Text &text : scoreTextVector) {
 		text.setPosition(sf::Vector2f(testx, testy));
-		testy += 30;
+		testy += 38;
 	}
 	return nextScreen;
 }
@@ -124,7 +121,6 @@ void ScoreScreen::render()
 		button->draw(this->window);
 	}
 	this->window->draw(this->scoreBoard);
-	this->window->draw(this->scoresText);
 	for (sf::Text text : this->scoreTextVector) {
 		this->window->draw(text);
 	}
@@ -146,7 +142,7 @@ Screen ScoreScreen::run()
 		auto last = std::next(first, scoreMap.size());
 		if (scoreMap.size() < 10) { auto last = std::next(first, scoreMap.size()); }
 		for (auto it = first; it != last; it++) {
-			scoreTextVector.push_back(sf::Text((it->second + ": " + std::to_string(it->first)), assets.zombieFont, 30));
+			scoreTextVector.push_back(sf::Text((it->second + ": " + std::to_string(it->first)), assets.arial, 28));
 			scoreTextVector.back().setFillColor(sf::Color::Green);
 			//std::cout << it->first << " : " << it->second << std::endl;
 		}

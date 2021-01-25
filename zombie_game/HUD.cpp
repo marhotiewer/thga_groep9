@@ -2,14 +2,14 @@
 
 HUD::HUD(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos) : assets(assets), window(window)
 {
-	this->healthText.setFont(assets.zombieFont);
-	this->timeText.setFont(assets.zombieFont);
-	this->pointsText.setFont(assets.zombieFont);
+	this->healthText.setFont(assets.arial);
+	this->timeText.setFont(assets.arial);
+	this->pointsText.setFont(assets.arial);
 	this->bottom_right.setTexture(assets.HUD_bottom_right);
 	this->bottom_right.setPosition(pos);
-	this->healthText.setCharacterSize(38);
-	this->timeText.setCharacterSize(38);
-	this->pointsText.setCharacterSize(38);
+	this->healthText.setCharacterSize(28);
+	this->timeText.setCharacterSize(28);
+	this->pointsText.setCharacterSize(28);
 	this->healthText.setFillColor(sf::Color::Green);
 	this->timeText.setFillColor(sf::Color::Green);
 	this->pointsText.setFillColor(sf::Color::Green);
@@ -33,7 +33,7 @@ void HUD::update(HudInfo info)
 		this->bottom_right.getTexture()->getSize().x * this->bottom_right.getScale().x,
 		this->bottom_right.getTexture()->getSize().y * this->bottom_right.getScale().y);
 	this->healthText.setPosition(this->window->mapPixelToCoords({ 0, int(window_size.y - spriteSize.y) }));
-	this->timeText.setPosition(this->window->mapPixelToCoords({ 0, int(window_size.y - spriteSize.y + 40) }));
-	this->pointsText.setPosition(this->window->mapPixelToCoords({ 0, int(window_size.y - spriteSize.y + 80) }));
+	this->timeText.setPosition(this->window->mapPixelToCoords({ 0, int(window_size.y - spriteSize.y + 30) }));
+	this->pointsText.setPosition(this->window->mapPixelToCoords({ 0, int(window_size.y - spriteSize.y + 60) }));
 	this->bottom_right.setPosition(this->window->mapPixelToCoords({0, int(window_size.y - spriteSize.y)}));
 }

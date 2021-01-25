@@ -1483,7 +1483,7 @@ const uint8_t wall_tile[] = {
 
 AssetManager::AssetManager()
 {
-    this->zombieFont.loadFromFile("Zombified.ttf");
+    this->arial.loadFromFile("font\\arial.ttf");
 
     this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
     this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");

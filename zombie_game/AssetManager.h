@@ -25,7 +25,7 @@ class AssetManager
 		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
 		sf::Texture wallTexture;///< \brief Texture of a Wall.
 		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
-		sf::Font zombieFont;
+		sf::Font arial;
 		sf::Texture gameOverTexture;
 		sf::Texture scoreBoard;
 };

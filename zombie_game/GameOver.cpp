@@ -5,7 +5,7 @@ GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) :
 	// Creating buttons
 	this->buttons.push_back(new Button(this->assets, { 364.5f, 400.f }, ButtonType::Scores));
 	this->buttons.push_back(new Button(this->assets, { 164.5f, 400.f }, ButtonType::Quit));
-	this->playerText.setFont(assets.zombieFont);
+	this->playerText.setFont(assets.arial);
 	this->playerText.setPosition(500, 500);
 	this->playerText.setCharacterSize(40);
 	this->playerText.setFillColor(sf::Color::Green);
@@ -150,7 +150,6 @@ Screen GameOver::run()
 			if (!(iputFile.peek() == std::ifstream::traits_type::eof() ))
 			{
 				iputFile >> jsoninput;//read scores to json library if file is not empty.
-				//std::cout << jsoninput << std::endl;
 			}
 			iputFile.close();
 			
@@ -158,7 +157,6 @@ Screen GameOver::run()
 			nlohmann::json newScore;
 			newScore["name"] = playerInput;
 			newScore["score"] = this->game.player->getPoints();
-			//newScore[playerInput] = this->game.player->getPoints();
 			jsoninput.push_back(newScore);
 			outputFile << jsoninput; //write scores to json scores file.
 			outputFile.close();
