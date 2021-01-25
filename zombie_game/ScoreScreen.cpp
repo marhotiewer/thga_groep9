@@ -29,6 +29,12 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 
 Screen ScoreScreen::update(float deltaTimeSeconds) {
 	Screen nextScreen = this->pollEvents();
+	float testx = 200, testy = 200;
+	for (sf::Text &text : scoreTextVector) {
+		text.setPosition(sf::Vector2f(testx, testy));
+		//testx += 100;
+		testy += 30;
+	}
 	return nextScreen;
 }
 
@@ -116,10 +122,13 @@ void ScoreScreen::render()
 	this->window->draw(this->background);
 	this->window->draw(this->logo);
 	for (Button* button : buttons) {
-		button->draw(window);
+		button->draw(this->window);
 	}
 	this->window->draw(this->scoreBoard);
 	this->window->draw(this->scoresText);
+	for (sf::Text text : this->scoreTextVector) {
+		this->window->draw(text);
+	}
 	this->window->display();
 }
 
@@ -134,9 +143,22 @@ Screen ScoreScreen::run()
 		for (auto& element : jsonInput) {
 			scoreMap.insert(std::pair<int, std::string> (element["score"], element["name"]));
 		}
-		for (auto test : scoreMap) {
-			std::cout << test.first << " : " << test.second << std::endl;
+		//for (auto test : scoreMap) {
+		//	std::cout << test.first << " : " << test.second << std::endl;
+		//}
+		auto first = scoreMap.begin();
+		auto last = std::next(first, scoreMap.size());
+		if (scoreMap.size() < 10) { auto last = std::next(first, scoreMap.size()); }
+		for (auto it = first; it != last; it++) {
+			scoreTextVector.push_back(sf::Text((it->second + ": " + std::to_string(it->first)), assets.zombieFont, 30));
+			scoreTextVector.back().setFillColor(sf::Color::Green);
+			std::cout << it->first << " : " << it->second << std::endl;
 		}
+		
+		
+		//for (unsigned int i = 0; i < 10;i++) {
+		//	scoreTextArray[i] = sf::Text(scoreMap[i].second, assets.zombieFont, 30);
+		//}
 		
 	}
 	else {

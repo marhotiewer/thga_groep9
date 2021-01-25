@@ -29,7 +29,7 @@ private:
 	int alpha_div;///<
 	sf::Text scoresText;
 	sf::Sprite scoreBoard;
-	std::vector<sf::String> scoreTextVector;
+	std::vector<sf::Text> scoreTextVector;
 public:
 	/// <summary>
 	/// Constructor or MainMenu class. 
