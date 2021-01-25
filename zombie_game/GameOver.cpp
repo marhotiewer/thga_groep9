@@ -165,6 +165,10 @@ Screen GameOver::pollEvents()
 							// Quit the game :(
 							window->close();
 						}
+						case ButtonType::Scores: {
+							returnValue = Screen::Scores;
+							break;
+						}
 						default: break;
 						}
 					}
@@ -214,6 +218,7 @@ Screen GameOver::run()
 		nextScreen = this->update(deltaTimeSeconds);
 		this->render();
 		if (this->canSaveScore) {
+			//new(&game) Game(window, assets);
 			return this->saveScoreToFile(points);
 		}
 	}

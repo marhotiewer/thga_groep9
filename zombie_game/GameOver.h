@@ -35,6 +35,8 @@ private:
 	sf::Text playerText;
 	sf::RectangleShape inputBox;
 	sf::Text playerInputPromt;
+	Screen saveScoreToFile(int points);
+	void matchBackground();
 public:
 	/// <summary>
 	/// Constructor or GameOver class. 
@@ -44,9 +46,7 @@ public:
 	/// <param name="assets">AssetManager required for textures</param>
 	GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game);
 
-	Screen saveScoreToFile(int points);
-
-	void matchBackground();
+	
 
 	/// <summary>
 	/// Function that checks if a next screen need to show.

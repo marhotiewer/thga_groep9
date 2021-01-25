@@ -29,6 +29,8 @@ private:
 	int alpha_div;///<
 	sf::Sprite scoreBoard;
 	std::vector<sf::Text> scoreTextVector;
+	void matchBackground();
+	void displayScores();
 public:
 	/// <summary>
 	/// Constructor or MainMenu class. 
@@ -37,10 +39,6 @@ public:
 	/// <param name="window">The pointer to the current SFML window of the game.</param>
 	/// <param name="assets">AssetManager required for textures</param>
 	ScoreScreen(sf::RenderWindow* window, AssetManager& assets);
-
-	void displayScores();
-
-	void matchBackground();
 
 	/// <summary>
 	/// Function that checks if a next screen need to show.

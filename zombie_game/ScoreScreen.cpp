@@ -131,10 +131,8 @@ Screen ScoreScreen::pollEvents()
 		}
 		case sf::Event::MouseMoved: {
 			// Update buttons
-			sf::Vector2i mousePosInt = sf::Mouse::getPosition(*this->window);
-			sf::Vector2f mousePos{ float(mousePosInt.x), float(mousePosInt.y) };
 			for (Button* button : buttons) {
-				button->buttonSelected(mousePos);
+				button->buttonSelected(this->window->mapPixelToCoords({ this->event.mouseMove.x , this->event.mouseMove.y }));
 			}
 		}
 		case sf::Event::MouseButtonPressed: {
@@ -175,10 +173,9 @@ bool ScoreScreen::running()
 void ScoreScreen::render()
 {
 	this->window->clear();
-	// Draw stuff
 	this->window->draw(this->background);
 	this->window->draw(this->logo);
-	for (Button* button : buttons) {
+	for (Button* button : this->buttons) {
 		button->draw(this->window);
 	}
 	this->window->draw(this->scoreBoard);
@@ -198,9 +195,10 @@ Screen ScoreScreen::run()
 	
 	this->displayScores();
 
+	Screen nextScreen = Screen::None;
 	sf::Clock clock;
 	float deltaTimeSeconds;
-	Screen nextScreen = Screen::None;
+
 	while (nextScreen == Screen::None && this->running()) {
 		deltaTimeSeconds = clock.restart().asSeconds();
 		nextScreen = this->update(deltaTimeSeconds);

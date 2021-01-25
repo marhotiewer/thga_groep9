@@ -137,9 +137,9 @@ bool MainMenu::running()
 void MainMenu::render()
 {
 	this->window->clear();
-	this->window->draw(background);
-	this->window->draw(logo);
-	for (Button* button : buttons) button->draw(window);
+	this->window->draw(this->background);
+	this->window->draw(this->logo);
+	for (Button* button : this->buttons) button->draw(this->window);
 	this->window->display();
 }
 
