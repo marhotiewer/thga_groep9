@@ -8,7 +8,7 @@
 
 /// \class Floor
 /// \brief
-/// Floor Class
+/// Class for floor tiles.
 /// \details
 /// The Floor Class is a class for the floors in the game. 
 /// The Floor Class has one overriding functions(isCoolliding). 
@@ -25,6 +25,7 @@ class Floor : public Static
 		/// <param name="pos">Position to place the Floor</param>
 		/// <param name="size">Size of the Floor to be placed</param>
 		Floor(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
+		
 		/// <summary>
 		/// overriding isColliding function Floor.
 		/// </summary>
@@ -32,6 +33,8 @@ class Floor : public Static
 		/// <param name="delta"></param>
 		/// <returns>bool if colliding with other object.</returns>
 		bool isColliding(Drawable& drawable, sf::Vector2f delta = sf::Vector2f(0.f, 0.f)) override;
+
+		float Z_Order() override;
 };
 
 #endif

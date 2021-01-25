@@ -8,6 +8,7 @@
 #include "Player.h"
 /// @file
 
+
 // \class Zombie
 /// \brief
 /// Zombie class 
@@ -19,17 +20,17 @@ class Zombie : public Entity
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
+		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Spawn position of the zombie</param>
 		/// <param name="player">Pointer to the player.(to get to location to follow to player).</param>
-		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="objects">A vector of pointers of all the Drawable, is used for collision detection.</param>
 		Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, Player* player, std::vector<Drawable*>& objects);
 		
 		/// <summary>
-		/// 
+		/// Updates the location and animation of the Zombie
 		/// </summary>
-		/// <param name="window">The pointer to the current SFML window of the game.</param>
-		/// <param name="deltaTime"></param>
+		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		void update(float deltaTime) override;
 		
 		/// <summary>
@@ -46,13 +47,13 @@ class Zombie : public Entity
 		Drawable* move(sf::Vector2f delta) override;
 		
 		/// <summary>
-		/// 
+		/// Hitbox
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>SFML FloatRect of the Zombie</returns>
 		sf::FloatRect getHitbox() override;
 		void playAttackSound();
 	private:
-		Player* player;///<
+		Player* player;///<Pointer to the player class.
 		sf::Sound* attackSounds[4];
 		sf::Clock* zombieClock;
 		int randomSoundTime;

@@ -25,6 +25,7 @@ class Player : public Entity
 		/// The constructor loads the texture from de AssetManager.
 		/// Default health is is 10.
 		/// </summary>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Spawn position of the player.{x,y}</param>
 		/// <param name="object">A vector of pointers of all the Drawable, is used for collision detection.</param>
@@ -34,7 +35,6 @@ class Player : public Entity
 		/// Updates the direction of the player to set the correct texture of the player on the screen.
 		/// This function also updates the correct frame of the animation of the player.
 		/// </summary>
-		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		void update(float deltaTime) override;
 		
@@ -56,9 +56,13 @@ class Player : public Entity
 		/// <param name="direction">Direction to shoot{x,y}</param>
 		void shoot(sf::Vector2f direction);
 
+		/// <summary>
+		/// 
+		/// </summary>
+		///<param name="window">The pointer to the current SFML window of the game.</param>
 		void draw_hud(sf::RenderWindow* window);
 	private:
-		HUD hud;
+		HUD hud;///<On screen information
 		sf::Sound walkingSound;
 		sf::Sound handGunSound;
 };

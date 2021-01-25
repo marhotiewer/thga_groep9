@@ -58,3 +58,8 @@ bool Drawable::isActive()
 {
     return this->active;
 }
+
+float Drawable::Z_Order()
+{
+    return this->getHitbox().top;
+}

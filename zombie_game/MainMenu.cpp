@@ -2,24 +2,48 @@
 
 MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(window), assets(assets)
 {
-	// Creating buttons
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 230.f }, ButtonType::Play));
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 284.f }, ButtonType::Quit));
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 338.f }, ButtonType::Options));
-	this->buttons.push_back(new Button(this->assets, { 264.5f, 392.f }, ButtonType::Scores));
-
 	this->event = sf::Event();
+
+	this->buttons.push_back(new Button(this->assets, { 0.f, 27.f }, ButtonType::Play));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 81.f }, ButtonType::Quit));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 135.f }, ButtonType::Options));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 189.f }, ButtonType::Scores));
 
 	this->alpha_max = 1 * 255;
 	this->alpha_div = 1;
+	
 	this->logo.setTexture(assets.gameLogoTexture);
-	this->logo.setPosition({ 231.f, 20.f });
+	sf::IntRect logoRect = this->logo.getTextureRect();
+	this->logo.setOrigin({ float(logoRect.width) / 2, float(logoRect.height) / 2 }); // center of the sprite
+	this->logo.setPosition({ 0.f, -118.5f });
+
 	this->background.setTexture(assets.homescreenBackgroundTexture);
+	sf::IntRect backgroundRect = this->background.getTextureRect();
+	this->background.setOrigin({ float(backgroundRect.width) / 2, float(backgroundRect.height) / 2 }); // center of the sprite
 	this->background.setPosition({ 0.f, 0.f });
-	//this->background.setColor(sf::Color(255, 255, 255, alpha))
+	this->matchBackground();
+
 	this->backgroundMusic = &this->assets.mainMenuSoundtrack;
 	this->clickSound = sf::Sound(this->assets.mainMenuClickSound);
 	this->clickSound.setVolume(50.f);
+}
+
+void MainMenu::matchBackground() {
+	sf::IntRect textureRect = this->background.getTextureRect();
+	sf::Vector2u windowSize = this->window->getSize();
+	int width = textureRect.width;
+	int height = textureRect.height;
+	// Calculate width scale
+	float widthScale = float(windowSize.x) / width;
+	// Calculate height scale
+	float heightScale = float(windowSize.y) / width;
+	// Change scale to biggest value
+	if (widthScale > heightScale) {
+		this->background.setScale({ widthScale, widthScale });
+	}
+	else {
+		this->background.setScale({ heightScale, heightScale });
+	}
 }
 
 Screen MainMenu::update(float deltaTimeSeconds) {
@@ -30,7 +54,14 @@ Screen MainMenu::update(float deltaTimeSeconds) {
 void MainMenu::toggleFullscreen() {
 	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
 	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+
+	sf::View view = this->window->getView();
+	view.setSize(sf::Vector2f(this->window->getSize()));
+	view.setCenter({ 0.f, 0.f });
+	this->window->setView(view);
+	this->matchBackground();
 	this->isFullScreen = !this->isFullScreen;
+
 }
 
 Screen MainMenu::pollEvents()
@@ -48,6 +79,7 @@ Screen MainMenu::pollEvents()
 				sf::View view = this->window->getView();
 				view.setSize(sf::Vector2f(this->window->getSize()));
 				this->window->setView(view);
+				this->matchBackground();
 				break;
 			}
 			case sf::Event::KeyPressed: {
@@ -63,10 +95,8 @@ Screen MainMenu::pollEvents()
 			}
 			case sf::Event::MouseMoved: {
 				// Update buttons
-				sf::Vector2i mousePosInt = sf::Mouse::getPosition(*this->window);
-				sf::Vector2f mousePos{ float(mousePosInt.x), float(mousePosInt.y) };
 				for (Button* button : buttons) {
-					button->buttonSelected(mousePos);
+					button->buttonSelected(this->window->mapPixelToCoords({ this->event.mouseMove.x , this->event.mouseMove.y }));
 				}
 			}
 			case sf::Event::MouseButtonPressed: {
@@ -109,25 +139,26 @@ bool MainMenu::running()
 void MainMenu::render()
 {
 	this->window->clear();
-	// Draw stuff
 	this->window->draw(background);
 	this->window->draw(logo);
-	for (Button* button : buttons) {
-		button->draw(window);
-	}
+	for (Button* button : buttons) button->draw(window);
 	this->window->display();
 }
 
 Screen MainMenu::run()
 {
-	backgroundMusic->play();
-	sf::Clock clock;
-	float deltaTimeSeconds;
+	sf::View view = this->window->getView();
+	view.setCenter({ 0.f, 0.f });
+	this->window->setView(view);
+
 	Screen nextScreen = Screen::None;
-	while ( nextScreen == Screen::None && this->running() ) {
-		deltaTimeSeconds = clock.getElapsedTime().asSeconds();
-		clock.restart();
-		nextScreen = this->update(deltaTimeSeconds);
+	sf::Clock clock;
+	float deltaTime;
+
+	while (nextScreen == Screen::None && this->running())
+	{
+		deltaTime = clock.restart().asSeconds();
+		nextScreen = this->update(deltaTime);
 		this->render();
 	}
 	return nextScreen;

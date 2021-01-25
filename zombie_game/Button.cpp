@@ -1,5 +1,4 @@
 #include "Button.h"
-#include <iostream>
 
 Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawable(assets), type(type)
 {
@@ -21,19 +20,21 @@ Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawab
 			break;
 		default: 
 			// This should never happen
-			break;
+			//std::cout << "Button type not implemented!" << std::endl;
+			exit(1);
 	}
+	this->sprite.setOrigin({ 55.5f, 27.f });
 }
 
 void Button::buttonSelected(sf::Vector2f mousePos) {
-	if ( this->sprite.getGlobalBounds().contains(mousePos) && !this->isButtonSelected) {
+	if (this->sprite.getGlobalBounds().contains(mousePos) && !this->isButtonSelected) {
 		// Change button to selected state
 		sf::IntRect textureRect = this->sprite.getTextureRect();
 		textureRect.left += 111;
 		this->sprite.setTextureRect(textureRect);
 		this->isButtonSelected = true;
 	}
-	else if( !(this->sprite.getGlobalBounds().contains(mousePos)) && this->isButtonSelected) {
+	else if(!(this->sprite.getGlobalBounds().contains(mousePos)) && this->isButtonSelected) {
 		// Change button to unselected state
 		sf::IntRect textureRect = this->sprite.getTextureRect();
 		textureRect.left -= 111;
@@ -47,4 +48,12 @@ ButtonType Button::buttonPressed() {
 		return this->type;
 	}
 	else return ButtonType::None;
+}
+
+void Button::setScale(float scale) {
+	this->sprite.setScale({ scale, scale });
+}
+
+void Button::setPos(sf::Vector2f position) {
+	this->sprite.setPosition(position);
 }

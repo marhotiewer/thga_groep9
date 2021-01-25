@@ -21,6 +21,7 @@ class Entity : public Drawable
 		/// <summary>
 		/// Constructor is empty. Class is used to inhert functions.
 		/// </summary>
+		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="objects">A vector of pointers of all the Drawable, is used for collision detection.</param>
 		Entity(sf::RenderWindow* window, AssetManager& assets, std::vector<Drawable*>& objects) : Drawable(assets), objects(objects), window(window) {}
@@ -45,7 +46,7 @@ class Entity : public Drawable
 		virtual void damage(int dmg) override;
 	protected:
 		std::vector<Drawable*>& objects;///<Vector of all Drawable Objects. Is used for collision detection. 
-		sf::RenderWindow* window;
+		sf::RenderWindow* window;///<Pointer to the SFML window. [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
 		float deltaTime = 0;///<The time elapsed for one frame.
 		sf::Vector2f delta;///<New difference to move to new position. example is x+=1 and y+=1 the newpostion is y+1 and x+1.
 		int health = 1;///<Lives for the object. 
