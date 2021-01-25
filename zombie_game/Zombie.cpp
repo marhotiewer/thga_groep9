@@ -1,5 +1,4 @@
 #include "Zombie.h"
-#include <iostream>
 
 Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, Player* player, std::vector<Drawable*>& objects) : Entity(window, assets, objects), player(player)
 {
@@ -85,14 +84,12 @@ void Zombie::playAttackSound() {
 	float linearDistance = sqrt((distanceVector.x * distanceVector.x) + (distanceVector.y * distanceVector.y));
 	float regularVolume = 15.f;
 	int maximumDistance = 1000;
-	//std::cout << length << std::endl;
 	if (linearDistance <= maximumDistance) {
 		float volume = ((maximumDistance - linearDistance) / (maximumDistance / 100)) * (regularVolume / 100);
 		int soundToPlay = (rand() % 4);
 		float pitch = (rand() % 20 + 90) / 100.f;
 		this->attackSounds[soundToPlay]->setPitch(pitch);
 		this->attackSounds[soundToPlay]->setVolume(volume);
-		std::cout << volume << std::endl;
 		//this->attackSounds[soundToPlay]->setPosition({ this->getPos().x, this->getPos().y, 0 });
 		this->attackSounds[soundToPlay]->play();
 	}

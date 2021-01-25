@@ -21,8 +21,7 @@ Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawab
 			break;
 		default: 
 			// This should never happen
-			std::cout << "Button type not implemented!" << std::endl;
-			exit(1);
+			break;
 	}
 }
 

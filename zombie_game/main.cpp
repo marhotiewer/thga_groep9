@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "MainMenu.h"
 #include "AssetManager.h"
-#include <iostream>
 
 int main()
 {
