@@ -69,8 +69,6 @@ class Player : public Entity
 
 		int getPoints();
 
-		void damage(int dmg) override;
-
 
 	private:
 		HUD hud;///<On screen information

@@ -55,13 +55,6 @@ int Player::getPoints()
 	return this->info.points;
 }
 
-void Player::damage(int dmg)
-{
-	if ((this->health -= dmg) <= 0) {
-		this->active = false;
-		//this->savePoints();
-	}
-}
 
 void Player::update(float deltaTime)
 {

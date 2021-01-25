@@ -58,7 +58,7 @@ void Zombie::update(float deltaTime)
 Drawable* Zombie::move(sf::Vector2f delta)
 {
 	Drawable* object = Entity::move(delta);
-	if (object == this->player) { object->damage(1); this->move(sf::Vector2f{ -delta.x * 750, -delta.y * 750 }); }//not a real solution
+	if (object == this->player) { object->damage(1); }
 	return object;
 }
 
