@@ -65,6 +65,7 @@
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Fountain.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Hills1.cpp" />
     <ClCompile Include="Hills2.cpp" />
     <ClCompile Include="HouseFence.cpp" />
@@ -78,6 +79,7 @@
     <ClCompile Include="InvisibleWall.cpp" />
     <ClCompile Include="Rocks.cpp" />
     <ClCompile Include="Sandbag.cpp" />
+    <ClCompile Include="ScoreScreen.cpp" />
     <ClCompile Include="Shed.cpp" />
     <ClCompile Include="Tent.cpp" />
     <ClCompile Include="Tree.cpp" />
@@ -99,6 +101,7 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Fountain.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Hills1.h" />
     <ClInclude Include="Hills2.h" />
     <ClInclude Include="HouseFence.h" />
@@ -112,6 +115,7 @@
     <ClInclude Include="InvisibleWall.h" />
     <ClInclude Include="Rocks.h" />
     <ClInclude Include="Sandbag.h" />
+    <ClInclude Include="ScoreScreen.h" />
     <ClInclude Include="Shed.h" />
     <ClInclude Include="Static.h" />
     <ClInclude Include="Tent.h" />

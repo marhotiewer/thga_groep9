@@ -125,10 +125,10 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\cScreen</Filter>
     </ClCompile>
-    <ClCompile Include="GameOver.cpp">
+    <ClCompile Include="ScoreScreen.cpp">
       <Filter>Source Files\cScreen</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreScreen.cpp">
+    <ClCompile Include="GameOver.cpp">
       <Filter>Source Files\cScreen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -241,6 +241,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="class_diagram.cd" />
-    <None Include="scores.json" />
   </ItemGroup>
 </Project>
