@@ -3,22 +3,19 @@
 //#include <iostream>
 #include <iomanip>
 
-namespace scoreTemplate {
-	struct scoreWithName {
-		std::string name;
-		int score;
-	};
-}
-
 
 ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : window(window), assets(assets)
 {
 	// Creating buttons
 	this->buttons.push_back(new Button(this->assets, { 264.5f, 230.f }, ButtonType::Play));
+	this->scoreBoard.setTexture(assets.scoreBoard);
+	this->scoreBoard.setPosition(sf::Vector2f(264.5f, 284.f));
 	//this->buttons.push_back(new Button(this->assets, { 264.5f, 284.f }, ButtonType::Quit));
 	//this->buttons.push_back(new Button(this->assets, { 264.5f, 338.f }, ButtonType::Options));
 	//this->buttons.push_back(new Button(this->assets, { 264.5f, 392.f }, ButtonType::Scores));
-
+	this->scoresText.setFont(assets.zombieFont);
+	this->scoresText.setCharacterSize(20);
+	this->scoresText.setFillColor(sf::Color::Green);
 	this->event = sf::Event();
 
 	this->alpha_max = 1 * 255;
@@ -116,11 +113,13 @@ void ScoreScreen::render()
 {
 	this->window->clear();
 	// Draw stuff
-	this->window->draw(background);
-	this->window->draw(logo);
+	this->window->draw(this->background);
+	this->window->draw(this->logo);
 	for (Button* button : buttons) {
 		button->draw(window);
 	}
+	this->window->draw(this->scoreBoard);
+	this->window->draw(this->scoresText);
 	this->window->display();
 }
 
@@ -130,11 +129,15 @@ Screen ScoreScreen::run()
 	nlohmann::json jsonInput;
 	if (!(iputFile.peek() == std::ifstream::traits_type::eof()))
 	{
+		std::multimap<int, std::string, std::greater<int> > scoreMap;
 		iputFile >> jsonInput;//read scores to json library if file is not empty.
-		for (const auto item: jsonInput.array()) {
-			
-			std::cout << jsonInput.get<std::string>() << std::endl;
+		for (auto& element : jsonInput) {
+			scoreMap.insert(std::pair<int, std::string> (element["score"], element["name"]));
 		}
+		for (auto test : scoreMap) {
+			std::cout << test.first << " : " << test.second << std::endl;
+		}
+		
 	}
 	else {
 		std::cout << "no scores" << std::endl;;

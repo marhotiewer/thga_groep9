@@ -2,11 +2,13 @@
 #define ScoreScreen_H
 
 #include <iostream>
+#include <map>
 #include "cScreen.h"
 #include "AssetManager.h"
 #include "Button.h"
 #include <json.hpp>
 #include <fstream>
+
 
 /// \class MainMenu
 /// \brief
@@ -25,6 +27,9 @@ private:
 	sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
 	int alpha_max;///<
 	int alpha_div;///<
+	sf::Text scoresText;
+	sf::Sprite scoreBoard;
+	std::vector<sf::String> scoreTextVector;
 public:
 	/// <summary>
 	/// Constructor or MainMenu class. 

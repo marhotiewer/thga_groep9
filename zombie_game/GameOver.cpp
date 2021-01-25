@@ -156,7 +156,9 @@ Screen GameOver::run()
 			
 			std::ofstream outputFile("scores.json");
 			nlohmann::json newScore;
-			newScore[playerInput] = this->game.player->getPoints();
+			newScore["name"] = playerInput;
+			newScore["score"] = this->game.player->getPoints();
+			//newScore[playerInput] = this->game.player->getPoints();
 			jsoninput.push_back(newScore);
 			outputFile << jsoninput; //write scores to json scores file.
 			outputFile.close();
