@@ -20,6 +20,46 @@ GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) :
 	this->background.setPosition({ 0.f, 0.f });
 }
 
+Screen GameOver::saveScoreToFile(int points)
+{
+	if (points == 0) { return Screen::MainMenu; }
+	std::ifstream iputFile("scores.json");
+	nlohmann::json jsoninput;
+	if (!(iputFile.peek() == std::ifstream::traits_type::eof()))
+	{
+		iputFile >> jsoninput;//read scores to json library if file is not empty.
+	}
+	iputFile.close();
+
+	std::ofstream outputFile("scores.json");
+	nlohmann::json newScore;
+	newScore["name"] = playerInput;
+	newScore["score"] = this->game.player->getPoints();
+	jsoninput.push_back(newScore);
+	outputFile << jsoninput; //write scores to json scores file.
+	outputFile.close();
+	return Screen::MainMenu;
+}
+
+void GameOver::matchBackground()
+{
+	sf::IntRect textureRect = this->background.getTextureRect();
+	sf::Vector2u windowSize = this->window->getSize();
+	int width = textureRect.width;
+	int height = textureRect.height;
+	// Calculate width scale
+	float widthScale = float(windowSize.x) / width;
+	// Calculate height scale
+	float heightScale = float(windowSize.y) / width;
+	// Change scale to biggest value
+	if (widthScale > heightScale) {
+		this->background.setScale({ widthScale, widthScale });
+	}
+	else {
+		this->background.setScale({ heightScale, heightScale });
+	}
+}
+
 Screen GameOver::update(float deltaTimeSeconds) {
 	Screen nextScreen = this->pollEvents();
 	return nextScreen;
@@ -28,6 +68,12 @@ Screen GameOver::update(float deltaTimeSeconds) {
 void GameOver::toggleFullscreen() {
 	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
 	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+
+	sf::View view = this->window->getView();
+	view.setSize(sf::Vector2f(this->window->getSize()));
+	view.setCenter({ 0.f, 0.f });
+	this->window->setView(view);
+	this->matchBackground();
 	this->isFullScreen = !this->isFullScreen;
 }
 
@@ -46,6 +92,7 @@ Screen GameOver::pollEvents()
 			sf::View view = this->window->getView();
 			view.setSize(sf::Vector2f(this->window->getSize()));
 			this->window->setView(view);
+			this->matchBackground();
 			break;
 		}
 		case sf::Event::TextEntered:
@@ -129,38 +176,26 @@ void GameOver::render()
 	}
 	this->window->draw(this->playerText);
 	this->window->display();
-
 }
 
 Screen GameOver::run()
 {
 	int points = this->game.player->getPoints();
 
+	sf::View view = this->window->getView();
+	view.setCenter({ 0.f, 0.f });
+	this->window->setView(view);
+
 	sf::Clock clock;
 	float deltaTimeSeconds;
 	Screen nextScreen = Screen::None;
+
 	while (nextScreen == Screen::None && this->running()) {
 		deltaTimeSeconds = clock.restart().asSeconds();
 		nextScreen = this->update(deltaTimeSeconds);
 		this->render();
 		if (canSaveScore) {
-			if (points == 0) {return Screen::MainMenu;}
-			std::ifstream iputFile("scores.json");
-			nlohmann::json jsoninput;
-			if (!(iputFile.peek() == std::ifstream::traits_type::eof() ))
-			{
-				iputFile >> jsoninput;//read scores to json library if file is not empty.
-			}
-			iputFile.close();
-			
-			std::ofstream outputFile("scores.json");
-			nlohmann::json newScore;
-			newScore["name"] = playerInput;
-			newScore["score"] = this->game.player->getPoints();
-			jsoninput.push_back(newScore);
-			outputFile << jsoninput; //write scores to json scores file.
-			outputFile.close();
-			return Screen::MainMenu;
+			return this->saveScoreToFile(points);
 		}
 	}
 	return nextScreen;

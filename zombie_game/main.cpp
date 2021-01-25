@@ -9,7 +9,7 @@
 
 int main()
 {
-	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "SFML window" };
+	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
 	AssetManager assets;
 	Game game(&window, assets);
 	cScreen* Screens[] = {
