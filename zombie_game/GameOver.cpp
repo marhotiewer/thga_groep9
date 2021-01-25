@@ -11,6 +11,10 @@ GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) :
 	this->buttons.push_back(new Button(this->assets, { 0.f, 0.f }, ButtonType::Play));
 	this->buttons.push_back(new Button(this->assets, { 0.f, 50.f }, ButtonType::Scores));
 	this->buttons.push_back(new Button(this->assets, { 0.f, 100.f }, ButtonType::Quit));
+
+	this->inputBox.setFillColor(sf::Color::White);
+	this->inputBox.setPosition({ 0.f, 155.f });
+	this->inputBox.setSize({200.f, 32.f});
 	this->playerText.setFont(assets.arial);
 	this->playerText.setPosition(0.f, 150.f);
 	this->playerText.setCharacterSize(30);
@@ -187,6 +191,7 @@ void GameOver::render()
 	for (Button* button : this->buttons) {
 		button->draw(this->window);
 	}
+	this->window->draw(this->inputBox);
 	this->window->draw(this->playerInputPromt);
 	this->window->draw(this->playerText);
 	this->window->display();
