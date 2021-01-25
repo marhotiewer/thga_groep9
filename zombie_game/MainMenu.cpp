@@ -4,19 +4,42 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 {
 	this->event = sf::Event();
 
-	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) - 70.f }, ButtonType::Play));
-	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) - 16.f }, ButtonType::Quit));
-	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) + 38.f }, ButtonType::Options));
-	this->buttons.push_back(new Button(this->assets, { (this->window->getSize().x / 2) - 55.5f, (this->window->getSize().y / 2) + 92.f }, ButtonType::Scores));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 27.f }, ButtonType::Play));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 81.f }, ButtonType::Quit));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 135.f }, ButtonType::Options));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 189.f }, ButtonType::Scores));
 
 	this->alpha_max = 1 * 255;
 	this->alpha_div = 1;
 	
 	this->logo.setTexture(assets.gameLogoTexture);
-	this->logo.setPosition({ 231.f, 20.f });
+	sf::IntRect logoRect = this->logo.getTextureRect();
+	this->logo.setOrigin({ float(logoRect.width) / 2, float(logoRect.height) / 2 }); // center of the sprite
+	this->logo.setPosition({ 0.f, -118.5f });
 
 	this->background.setTexture(assets.homescreenBackgroundTexture);
+	sf::IntRect backgroundRect = this->background.getTextureRect();
+	this->background.setOrigin({ float(backgroundRect.width) / 2, float(backgroundRect.height) / 2 }); // center of the sprite
 	this->background.setPosition({ 0.f, 0.f });
+	this->matchBackground();
+}
+
+void MainMenu::matchBackground() {
+	sf::IntRect textureRect = this->background.getTextureRect();
+	sf::Vector2u windowSize = this->window->getSize();
+	int width = textureRect.width;
+	int height = textureRect.height;
+	// Calculate width scale
+	float widthScale = float(windowSize.x) / width;
+	// Calculate height scale
+	float heightScale = float(windowSize.y) / width;
+	// Change scale to biggest value
+	if (widthScale > heightScale) {
+		this->background.setScale({ widthScale, widthScale });
+	}
+	else {
+		this->background.setScale({ heightScale, heightScale });
+	}
 }
 
 Screen MainMenu::update(float deltaTimeSeconds) {
@@ -30,42 +53,11 @@ void MainMenu::toggleFullscreen() {
 
 	sf::View view = this->window->getView();
 	view.setSize(sf::Vector2f(this->window->getSize()));
-	view.setViewport({ 0.5f, 0.5f, 1, 1 });
+	view.setCenter({ 0.f, 0.f });
 	this->window->setView(view);
-
+	this->matchBackground();
 	this->isFullScreen = !this->isFullScreen;
-	
-	//matchButtonsToScreen();
-}
 
-void MainMenu::matchButtonsToScreen() {
-	float buttonX = (this->window->getSize().x / 2) - 55.5f;
-	for (Button* button : buttons) {
-		switch (button->type)
-		{
-		case ButtonType::Play:
-		{
-			button->setPos({ buttonX, (this->window->getSize().y / 2) - 70.f });
-			break;
-		}
-		case ButtonType::Quit:
-		{
-			button->setPos({ buttonX, (this->window->getSize().y / 2) - 16.f });
-			break;
-		}
-		case ButtonType::Options:
-		{
-			button->setPos({ buttonX, (this->window->getSize().y / 2) + 38.f });
-			break;
-		}
-		case ButtonType::Scores:
-		{
-			button->setPos({ buttonX, (this->window->getSize().y / 2) + 92.f });
-			break;
-		}
-		}
-		std::cout << button->getPos().x << ", " << button->getPos().y << std::endl;
-	}
 }
 
 Screen MainMenu::pollEvents()
@@ -83,8 +75,7 @@ Screen MainMenu::pollEvents()
 				sf::View view = this->window->getView();
 				view.setSize(sf::Vector2f(this->window->getSize()));
 				this->window->setView(view);
-
-				//matchButtonsToScreen();
+				this->matchBackground();
 				break;
 			}
 			case sf::Event::KeyPressed: {
@@ -152,7 +143,9 @@ void MainMenu::render()
 
 Screen MainMenu::run()
 {
-	this->window->setView(this->window->getDefaultView());
+	sf::View view = this->window->getView();
+	view.setCenter({ 0.f, 0.f });
+	this->window->setView(view);
 
 	Screen nextScreen = Screen::None;
 	sf::Clock clock;

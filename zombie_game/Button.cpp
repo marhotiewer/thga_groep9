@@ -24,6 +24,7 @@ Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawab
 			std::cout << "Button type not implemented!" << std::endl;
 			exit(1);
 	}
+	this->sprite.setOrigin({ 55.5f, 27.f });
 }
 
 void Button::buttonSelected(sf::Vector2f mousePos) {

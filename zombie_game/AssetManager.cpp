@@ -1482,6 +1482,7 @@ AssetManager::AssetManager()
     this->woodTexture.loadFromFile("textures\\wood.png");
     this->lampTexture.loadFromFile("textures\\lamp.png");
     this->bushTexture.loadFromFile("textures\\bush.png");
+	this->homescreenBackgroundTexture.setSmooth(true);
     this->floorTexture.setRepeated(true);
     this->fenceTexture.setRepeated(true);
     this->houseTexture.setRepeated(true);
