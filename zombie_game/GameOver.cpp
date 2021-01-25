@@ -124,10 +124,8 @@ Screen GameOver::pollEvents()
 		}
 		case sf::Event::MouseMoved: {
 			// Update buttons
-			sf::Vector2i mousePosInt = sf::Mouse::getPosition(*this->window);
-			sf::Vector2f mousePos{ float(mousePosInt.x), float(mousePosInt.y) };
 			for (Button* button : buttons) {
-				button->buttonSelected(mousePos);
+				button->buttonSelected(this->window->mapPixelToCoords({ this->event.mouseMove.x , this->event.mouseMove.y }));
 			}
 		}
 		case sf::Event::MouseButtonPressed: {
