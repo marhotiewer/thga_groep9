@@ -33,6 +33,7 @@ private:
 	bool canSaveScore = false;
 	std::string playerInput;
 	sf::Text playerText;
+	sf::Text playerInputPromt;
 public:
 	/// <summary>
 	/// Constructor or GameOver class. 

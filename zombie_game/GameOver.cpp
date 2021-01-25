@@ -2,22 +2,37 @@
 
 GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) : window(window), assets(assets), game(game)
 {
-	// Creating buttons
-	this->buttons.push_back(new Button(this->assets, { 364.5f, 400.f }, ButtonType::Scores));
-	this->buttons.push_back(new Button(this->assets, { 164.5f, 400.f }, ButtonType::Quit));
-	this->playerText.setFont(assets.arial);
-	this->playerText.setPosition(500, 500);
-	this->playerText.setCharacterSize(40);
-	this->playerText.setFillColor(sf::Color::Green);
-
 	this->event = sf::Event();
 
 	this->alpha_max = 1 * 255;
 	this->alpha_div = 1;
+
+	// Creating buttons
+	this->buttons.push_back(new Button(this->assets, { 0.f, 0.f }, ButtonType::Play));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 50.f }, ButtonType::Scores));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 100.f }, ButtonType::Quit));
+	this->playerText.setFont(assets.arial);
+	this->playerText.setPosition(0.f, 150.f);
+	this->playerText.setCharacterSize(30);
+	this->playerText.setFillColor(sf::Color::Red);
+
+	this->playerInputPromt.setFont(assets.arial);
+	this->playerInputPromt.setPosition(-190.f, 150.f);
+	this->playerInputPromt.setCharacterSize(30);
+	this->playerInputPromt.setFillColor(sf::Color::Red);
+	this->playerInputPromt.setStyle(sf::Text::Bold);
+	this->playerInputPromt.setString("Player name: ");
+
 	this->logo.setTexture(assets.gameOverTexture);
-	this->logo.setPosition({ 0.f, 150.f });
+	sf::IntRect logoRect = this->logo.getTextureRect();
+	this->logo.setOrigin({ float(logoRect.width) / 2, float(logoRect.height) / 2 }); // center of the sprite
+	this->logo.setPosition({ 0.f, -118.5f });
+
 	this->background.setTexture(assets.homescreenBackgroundTexture);
+	sf::IntRect backgroundRect = this->background.getTextureRect();
+	this->background.setOrigin({ float(backgroundRect.width) / 2, float(backgroundRect.height) / 2 }); // center of the sprite
 	this->background.setPosition({ 0.f, 0.f });
+	this->matchBackground();
 }
 
 Screen GameOver::saveScoreToFile(int points)
@@ -33,8 +48,8 @@ Screen GameOver::saveScoreToFile(int points)
 
 	std::ofstream outputFile("scores.json");
 	nlohmann::json newScore;
-	newScore["name"] = playerInput;
-	newScore["score"] = this->game.player->getPoints();
+	newScore["name"] = this->playerInput;
+	newScore["score"] = points;
 	jsoninput.push_back(newScore);
 	outputFile << jsoninput; //write scores to json scores file.
 	outputFile.close();
@@ -167,11 +182,12 @@ void GameOver::render()
 {
 	this->window->clear();
 	// Draw stuff
-	this->window->draw(background);
-	this->window->draw(logo);
-	for (Button* button : buttons) {
-		button->draw(window);
+	this->window->draw(this->background);
+	this->window->draw(this->logo);
+	for (Button* button : this->buttons) {
+		button->draw(this->window);
 	}
+	this->window->draw(this->playerInputPromt);
 	this->window->draw(this->playerText);
 	this->window->display();
 }
@@ -192,7 +208,7 @@ Screen GameOver::run()
 		deltaTimeSeconds = clock.restart().asSeconds();
 		nextScreen = this->update(deltaTimeSeconds);
 		this->render();
-		if (canSaveScore) {
+		if (this->canSaveScore) {
 			return this->saveScoreToFile(points);
 		}
 	}

@@ -18,7 +18,7 @@ int main()
 		new GameOver(&window, assets, game),
 		new ScoreScreen(&window, assets)
 	};
-	Screen currentScreen = Screen::Scores;
+	Screen currentScreen = Screen::MainMenu;
 	
     while (currentScreen != Screen::None)
     {
