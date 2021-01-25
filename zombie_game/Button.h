@@ -25,37 +25,37 @@ enum class ButtonType {
 /// \image html buttons.png
 class Button : public Drawable
 {
-public:
-	/// <summary>
-	/// The constructor loads the texture of AssetManager the texture: buttonTexture
-	/// </summary>
-	/// <param name="assets">AssetManager required for textures</param>
-	/// <param name="pos">Position of the button</param>
-	/// <param name="type">Type of the button of type enum class buttonType.</param>
-	Button(AssetManager& assets, sf::Vector2f pos, ButtonType type);
+	public:
+		/// <summary>
+		/// The constructor loads the texture of AssetManager the texture: buttonTexture
+		/// </summary>
+		/// <param name="assets">AssetManager required for textures</param>
+		/// <param name="pos">Position of the button</param>
+		/// <param name="type">Type of the button of type enum class buttonType.</param>
+		Button(AssetManager& assets, sf::Vector2f pos, ButtonType type);
+		
+		ButtonType type;///<Type of the button of type enum class buttonType.
 
-	ButtonType type;///<Type of the button of type enum class buttonType.
+		/// <summary>
+		/// This function checks if the move hovers above the button. 
+		/// And changes the isButtonSelected bool. 
+		/// This function also updates the sprite to a texture of a pressed button. 
+		/// </summary>
+		/// <param name="mousePos">SFML position of the mouse.</param>
+		void buttonSelected(sf::Vector2f mousePos);
+		
+		/// <summary>
+		/// Function that checks if mouse is pressed and if true returns, the correct type of the button.
+		/// </summary>
+		/// <returns>What type of enum class buttonType the button is pressed</returns>
+		ButtonType buttonPressed();
 
-	/// <summary>
-	/// This function checks if the move hovers above the button. 
-	/// And changes the isButtonSelected bool. 
-	/// This function also updates the sprite to a texture of a pressed button. 
-	/// </summary>
-	/// <param name="mousePos">SFML position of the mouse.</param>
-	void buttonSelected(sf::Vector2f mousePos);
+		void setScale(float scale);
 
-	/// <summary>
-	/// Function that checks if mouse is pressed and if true returns, the correct type of the button.
-	/// </summary>
-	/// <returns>What type of enum class buttonType the button is pressed</returns>
-	ButtonType buttonPressed();
+		void setPos(sf::Vector2f position);
 
-	void setScale(float scale);
-
-	void setPos(sf::Vector2f position);
-
-private:
-	bool isButtonSelected = false;///< Bool if button pressed.
+	private:
+		bool isButtonSelected = false;///< Bool if button pressed.
 };
 
 #endif

@@ -1,11 +1,11 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#include <iostream>
-#include "cScreen.h"
-#include "AssetManager.h"
-#include "Button.h"
 #include <SFML/Graphics.hpp>
+
+#include "AssetManager.h"
+#include "cScreen.h"
+#include "Button.h"
 /// @file
 
 
@@ -26,6 +26,7 @@ class MainMenu : public cScreen
 		sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
 		int alpha_max;///<
 		int alpha_div;///<
+		void matchBackground();
 	public:
 		/// <summary>
 		/// Constructor or MainMenu class. 

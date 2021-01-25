@@ -33,6 +33,8 @@ class Floor : public Static
 		/// <param name="delta"></param>
 		/// <returns>bool if colliding with other object.</returns>
 		bool isColliding(Drawable& drawable, sf::Vector2f delta = sf::Vector2f(0.f, 0.f)) override;
+
+		float Z_Order() override;
 };
 
 #endif

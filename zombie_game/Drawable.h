@@ -6,6 +6,7 @@
 #include "AssetManager.h"
 /// @file
 
+
 /// \class Drawable
 /// \brief
 /// Drawable
@@ -98,6 +99,8 @@ class Drawable
 		/// </summary>
 		/// <returns>bool if class still active</returns>
 		bool isActive();
+
+		virtual float Z_Order();
 	protected:
 		AssetManager& assets;///<Reference to AssetManager, where all the textures are stored.
 		bool active = true;///<Bool if class still active. Class can become inActive if health is zero.

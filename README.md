@@ -9,3 +9,4 @@
 
 ## Versions
 * [Sprint 1](https://github.com/marhotiewer/thga_groep9/tree/2d9a553fa842836b5736cf02cdb9ca7b3522b521)
+* [Sprint 2](https://github.com/marhotiewer/thga_groep9/tree/e86155d6e42e0ed429212b75a0e9fac23e8c37e8)

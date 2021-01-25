@@ -9,15 +9,33 @@
 #include <fstream>
 #include <vector>
 
-#include "cScreen.h"
+
+#include "InvisibleWall.h"
+#include "PoliceAgent.h"
+#include "BushRotated.h"
+#include "HouseFence.h"
 #include "Drawable.h"
+#include "Fountain.h"
+#include "Campfire.h"
+#include "Sandbag.h"
+#include "cScreen.h"
 #include "Player.h"
 #include "Zombie.h"
 #include "Bullet.h"
+#include "Hills1.h"
+#include "Hills2.h"
 #include "Floor.h"
+#include "Fence.h"
+#include "Water.h"
+#include "Rocks.h"
+#include "Perk1.h"
 #include "Wall.h"
 #include "Tree.h"
-#include "cScreen.h"
+#include "Shed.h"
+#include "Tent.h"
+#include "Wood.h"
+#include "Lamp.h"
+#include "Bush.h"
 /// @file
 
 
