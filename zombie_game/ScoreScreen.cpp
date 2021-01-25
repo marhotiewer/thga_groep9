@@ -32,7 +32,6 @@ Screen ScoreScreen::update(float deltaTimeSeconds) {
 	float testx = 200, testy = 200;
 	for (sf::Text &text : scoreTextVector) {
 		text.setPosition(sf::Vector2f(testx, testy));
-		//testx += 100;
 		testy += 30;
 	}
 	return nextScreen;
@@ -139,27 +138,18 @@ Screen ScoreScreen::run()
 	if (!(iputFile.peek() == std::ifstream::traits_type::eof()))
 	{
 		std::multimap<int, std::string, std::greater<int> > scoreMap;
-		iputFile >> jsonInput;//read scores to json library if file is not empty.
+		iputFile >> jsonInput; //read scores to json library if file is not empty.
 		for (auto& element : jsonInput) {
 			scoreMap.insert(std::pair<int, std::string> (element["score"], element["name"]));
 		}
-		//for (auto test : scoreMap) {
-		//	std::cout << test.first << " : " << test.second << std::endl;
-		//}
 		auto first = scoreMap.begin();
 		auto last = std::next(first, scoreMap.size());
 		if (scoreMap.size() < 10) { auto last = std::next(first, scoreMap.size()); }
 		for (auto it = first; it != last; it++) {
 			scoreTextVector.push_back(sf::Text((it->second + ": " + std::to_string(it->first)), assets.zombieFont, 30));
 			scoreTextVector.back().setFillColor(sf::Color::Green);
-			std::cout << it->first << " : " << it->second << std::endl;
+			//std::cout << it->first << " : " << it->second << std::endl;
 		}
-		
-		
-		//for (unsigned int i = 0; i < 10;i++) {
-		//	scoreTextArray[i] = sf::Text(scoreMap[i].second, assets.zombieFont, 30);
-		//}
-		
 	}
 	else {
 		std::cout << "no scores" << std::endl;;
