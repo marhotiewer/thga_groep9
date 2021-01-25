@@ -27,11 +27,15 @@ Screen MainMenu::update(float deltaTimeSeconds) {
 void MainMenu::toggleFullscreen() {
 	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
 	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+
 	sf::View view = this->window->getView();
 	view.setSize(sf::Vector2f(this->window->getSize()));
+	view.setViewport({ 0.5f, 0.5f, 1, 1 });
 	this->window->setView(view);
+
 	this->isFullScreen = !this->isFullScreen;
-	matchButtonsToScreen();
+	
+	//matchButtonsToScreen();
 }
 
 void MainMenu::matchButtonsToScreen() {
@@ -79,7 +83,8 @@ Screen MainMenu::pollEvents()
 				sf::View view = this->window->getView();
 				view.setSize(sf::Vector2f(this->window->getSize()));
 				this->window->setView(view);
-				matchButtonsToScreen();
+
+				//matchButtonsToScreen();
 				break;
 			}
 			case sf::Event::KeyPressed: {
@@ -98,7 +103,7 @@ Screen MainMenu::pollEvents()
 				sf::Vector2i mousePosInt = sf::Mouse::getPosition(*this->window);
 				sf::Vector2f mousePos{ float(mousePosInt.x), float(mousePosInt.y) };
 				for (Button* button : buttons) {
-					button->buttonSelected(mousePos);
+					button->buttonSelected(this->window->mapPixelToCoords(mousePosInt));
 				}
 			}
 			case sf::Event::MouseButtonPressed: {
