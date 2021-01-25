@@ -111,9 +111,9 @@ Screen GameOver::pollEvents()
 			break;
 		}
 		case sf::Event::TextEntered:
-			if (event.text.unicode < 128)
+			if (((event.text.unicode >= 65) && (event.text.unicode <= 90)) || ((event.text.unicode >= 97) && (event.text.unicode <= 122))) //This checks if the key pressed is alfabetic (A...Z OR a...z).
 			{
-				this->playerInput += event.text.unicode;
+				this->playerInput += static_cast<char>(event.text.unicode);
 				this->playerText.setString(this->playerInput);
 			}
 			break;
@@ -128,7 +128,7 @@ Screen GameOver::pollEvents()
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
 				if (!this->playerInput.empty()) {
-					this->playerInput.erase(this->playerInput.size() - 1);
+					this->playerInput.erase(this->playerInput.length() - 1);
 					this->playerText.setString(this->playerInput);
 				}
 			}
