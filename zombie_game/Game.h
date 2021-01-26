@@ -6,7 +6,10 @@
 #include <functional>
 #include <algorithm>
 #include <iostream>
+#include <json.hpp>
+#include <fstream>
 #include <vector>
+
 
 #include "InvisibleWall.h"
 #include "PoliceAgent.h"
@@ -90,6 +93,12 @@ class Game : public cScreen {
 		/// Uses #window [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
 		/// </summary>
 		void render();
+
+
+		Player* player;///< Pointer to the player. !!!!!!!!!!!!!!!!!
+
+
+
 		~Game();
 	private:
 		std::vector<Drawable*> objects;///< vector of pointers of all drawable pointers 
@@ -101,7 +110,7 @@ class Game : public cScreen {
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 		bool debug = false;///< bool used for debug intentions.
 		sf::Event event;///<SFML Event handeler. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
-		Player *player;///< Pointer to the player. 
+		
 };
 
 #endif

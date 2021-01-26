@@ -1454,6 +1454,8 @@ const uint8_t wall_tile[] = {
 
 AssetManager::AssetManager()
 {
+    this->arial.loadFromFile("font\\arial.ttf");
+
     this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
     this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");
@@ -1471,6 +1473,15 @@ AssetManager::AssetManager()
     this->buttonTexture.loadFromFile("textures\\buttons.png");
     this->gameLogoTexture.loadFromFile("textures\\logo.png");
     this->adamSpriteMap.loadFromFile("textures\\player.png");
+
+    this->gameOverTexture.loadFromFile("textures\\gameover.png");
+    this->scoreBoard.loadFromFile("textures\\scoreBoard.png");
+
+    //this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
+    //this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
+    //this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
+    //this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
+
     this->hills1Texture.loadFromFile("textures\\hills1.png");
     this->hills2Texture.loadFromFile("textures\\hills2.png");
     this->fenceTexture.loadFromFile("textures\\fence.png");
@@ -1483,6 +1494,7 @@ AssetManager::AssetManager()
     this->lampTexture.loadFromFile("textures\\lamp.png");
     this->bushTexture.loadFromFile("textures\\bush.png");
 	this->homescreenBackgroundTexture.setSmooth(true);
+
     this->floorTexture.setRepeated(true);
     this->fenceTexture.setRepeated(true);
     this->houseTexture.setRepeated(true);

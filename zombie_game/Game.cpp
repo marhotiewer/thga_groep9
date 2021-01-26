@@ -133,7 +133,7 @@ void Game::update(float deltaTime)
 			if ((*entity)->isActive()) {
 				(*entity)->update(deltaTime);
 			}
-			else if((*entity)->type != Drawable::Type::Player) {
+			else if ((*entity)->type != Drawable::Type::Player) {
 				delete (*entity);
 				entity = this->objects.erase(entity);
 			}
@@ -169,6 +169,14 @@ void Game::pollEvents()
 			//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
 			break;
 		}
+		//case sf::Event::TextEntered:
+		//	if (event.text.unicode < 128)
+		//	{
+		//		str += static_cast<char>(event.text.unicode);
+				//text.setText(str);
+		//	}
+		//	break;
+
 		case sf::Event::KeyPressed:
 			// toggle fullscreen mode
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
@@ -214,11 +222,11 @@ Screen Game::run()
 	float deltaTime;
 	this->ingameBreeze->play();
 
-	 while (this->running())
+	 while (this->running() && this->player->isActive())
 	 {
 		 deltaTime = clock.restart().asSeconds();
 		 this->update(deltaTime);
 		 this->render();
 	 }
-	 return Screen::MainMenu;
+	 return Screen::GameOver;
 }

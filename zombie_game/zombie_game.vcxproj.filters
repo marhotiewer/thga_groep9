@@ -125,6 +125,12 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\cScreen</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreScreen.cpp">
+      <Filter>Source Files\cScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Source Files\cScreen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawable.h">
@@ -224,6 +230,12 @@
       <Filter>Header Files\cScreen</Filter>
     </ClInclude>
     <ClInclude Include="cScreen.h">
+      <Filter>Header Files\cScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreScreen.h">
+      <Filter>Header Files\cScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
       <Filter>Header Files\cScreen</Filter>
     </ClInclude>
   </ItemGroup>

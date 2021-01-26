@@ -28,6 +28,10 @@ class AssetManager
 		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
 		sf::Texture floorTexture;///< \brief Texture of a Floor.
 		sf::Texture wallTexture;///< \brief Texture of a Wall.
+		//sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
+		sf::Font arial;
+		sf::Texture gameOverTexture;
+		sf::Texture scoreBoard;
 		sf::Texture policeagentTexture;
 		sf::Texture bushRotatedTexture;
 		sf::Texture invisibleTexture;

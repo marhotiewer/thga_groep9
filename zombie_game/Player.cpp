@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include <iostream>
 Player::Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects) : Entity(window, assets, objects), hud(this->window, assets, pos)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
@@ -51,6 +51,17 @@ void Player::draw_hud(sf::RenderWindow* window)
 	this->hud.draw(window);
 }
 
+void Player::addPoints(int points)
+{
+	this->info.points += points;
+}
+
+int Player::getPoints() 
+{
+	return this->info.points;
+}
+
+
 void Player::update(float deltaTime)
 {
 	sf::Vector2f playerPos = (this->getPos()) + sf::Vector2f(this->getSize()) / 2.f;
@@ -93,5 +104,9 @@ void Player::update(float deltaTime)
 		window->setView(view);
 		this->delta = { 0.f, 0.f };
 	}
-	this->hud.update();
+	this->info.health = this->health;
+	this->info.time += deltaTime;
+	this->hud.update(this->info);
+
+	
 }

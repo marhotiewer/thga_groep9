@@ -30,6 +30,14 @@ void Zombie::debug_draw(sf::RenderWindow* window)
 	}
 }
 
+void Zombie::damage(int dmg)
+{
+	if ((this->health -= dmg) <= 0) {
+		this->active = false;
+		this->player->addPoints(50);
+	}
+}
+
 void Zombie::update(float deltaTime)
 {
 	sf::Vector2f distance(this->player->getPos() - this->getPos());
@@ -64,7 +72,7 @@ void Zombie::update(float deltaTime)
 Drawable* Zombie::move(sf::Vector2f delta)
 {
 	Drawable* object = Entity::move(delta);
-	if(object == this->player) object->damage(1);
+	if (object == this->player) { object->damage(1); }
 	return object;
 }
 
