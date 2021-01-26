@@ -10,6 +10,15 @@ struct Z_Index {
 	}
 };
 
+template<typename T>
+T random(std::vector<T> const& v)
+{
+	auto it = v.cbegin();
+	int random = rand() % v.size();
+	std::advance(it, random);
+	return *it;
+}
+
 Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), assets(assets)
 {
 	this->event = sf::Event();
@@ -91,13 +100,12 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
 	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects));
-	
-	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(500, 500), this->player, this->objects));	// left zombie
-	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(800, 800), this->player, this->objects));	// right zombie
-	this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(600, 600), this->player, this->objects));	// left zombie
-	//this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(900, 900), this->player, this->objects));	// right zombie
-
 	this->ingameBreeze = &this->assets.ingameBreezeSound;
+
+	this->spawns = {
+		sf::Vector2f(300, 2200),
+		sf::Vector2f(500, 2200)
+	};
 }
 
 Game::~Game()
@@ -128,15 +136,34 @@ void Game::update(float deltaTime)
 
 		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);					// move the player if delta isn't 0
 
+		bool zombiesAlive = false;
+
 		// if the entity is active update, else if entity is not a player delete object
 		for (auto entity = begin(this->objects); entity != end(this->objects); ++entity) {
 			if ((*entity)->isActive()) {
 				(*entity)->update(deltaTime);
+
+				if (!zombiesAlive)
+					if ((*entity)->type == Drawable::Type::Enemy)
+						zombiesAlive = true;
 			}
 			else if ((*entity)->type != Drawable::Type::Player) {
 				delete (*entity);
 				entity = this->objects.erase(entity);
 			}
+		}
+
+		// spawn zombies
+		if (this->zombiesLeft > 0) {
+			if ((this->spawnTimer += deltaTime) >= 1.f) {
+				this->objects.push_back(new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects));
+				
+				this->spawnTimer = 0.f;
+				this->zombiesLeft--;
+			}
+		}
+		else if (!zombiesAlive && this->zombiesLeft == 0) {
+			this->zombiesLeft = ++this->wave * 5;
 		}
 	}
 	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
@@ -169,13 +196,6 @@ void Game::pollEvents()
 			//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
 			break;
 		}
-		//case sf::Event::TextEntered:
-		//	if (event.text.unicode < 128)
-		//	{
-		//		str += static_cast<char>(event.text.unicode);
-				//text.setText(str);
-		//	}
-		//	break;
 
 		case sf::Event::KeyPressed:
 			// toggle fullscreen mode
@@ -208,7 +228,19 @@ void Game::render()
 {
 	this->window->clear(sf::Color::White);
 	for (Drawable* object : this->objects) if (object->isActive()) object->draw(this->window);
-	for (Drawable* object : this->objects) if (object->isActive() && this->debug) object->debug_draw(this->window);
+	if (this->debug) {
+		for (sf::Vector2f spawn : this->spawns) {
+			sf::Vertex vertices[] = {
+				sf::Vertex(sf::Vector2f(spawn.x, spawn.y), sf::Color::Green),
+				sf::Vertex(sf::Vector2f(spawn.x + 10, spawn.y), sf::Color::Green),
+				sf::Vertex(sf::Vector2f(spawn.x + 10, spawn.y + 10), sf::Color::Green),
+				sf::Vertex(sf::Vector2f(spawn.x, spawn.y + 10), sf::Color::Green),
+				sf::Vertex(sf::Vector2f(spawn.x, spawn.y), sf::Color::Green)
+			};
+			this->window->draw(vertices, 5, sf::LineStrip);
+		}
+		for (Drawable* object : this->objects) if (object->isActive()) object->debug_draw(this->window);
+	}
 	this->player->draw_hud(this->window);
 	this->window->display();
 }

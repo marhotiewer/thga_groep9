@@ -101,16 +101,19 @@ class Game : public cScreen {
 
 		~Game();
 	private:
+		std::vector<sf::Vector2f> spawns;
 		std::vector<Drawable*> objects;///< vector of pointers of all drawable pointers 
 		bool noKeyPressed = false;///< bool if no key is pressed.
 		bool isFullScreen = false;///<bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
 		sf::Music* ingameBreeze;
 		float elapsedTime = 0.f;///<Time used for elapsed a frame.
+		unsigned char wave = 1;
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 		bool debug = false;///< bool used for debug intentions.
 		sf::Event event;///<SFML Event handeler. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
-		
+		unsigned char zombiesLeft = 5;
+		float spawnTimer = 0;
 };
 
 #endif
