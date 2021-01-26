@@ -42,8 +42,8 @@ void ScoreScreen::displayScores()
 			scoreMap.insert(std::pair<int, std::string>(element["score"], element["name"]));
 		}
 		auto first = scoreMap.begin();
-		auto last = std::next(first, scoreMap.size());
-		if (scoreMap.size() < 10) { auto last = std::next(first, scoreMap.size()); }
+		auto last = std::next(first, 8);
+		if (scoreMap.size() < 7) { auto last = std::next(first, scoreMap.size()); }
 		for (auto it = first; it != last; it++) {
 			scoreTextVector.push_back(sf::Text((it->second + ": " + std::to_string(it->first)), assets.arial, 28));
 			scoreTextVector.back().setFillColor(sf::Color::Green);
@@ -200,5 +200,6 @@ Screen ScoreScreen::run()
 		nextScreen = this->update(deltaTimeSeconds);
 		this->render();
 	}
+	scoreTextVector.clear();
 	return nextScreen;
 }

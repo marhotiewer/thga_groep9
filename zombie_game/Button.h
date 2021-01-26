@@ -50,12 +50,20 @@ class Button : public Drawable
 		/// <returns>What type of enum class buttonType the button is pressed</returns>
 		ButtonType buttonPressed();
 
+		/// <summary>
+		/// Function to set the scale of the button.
+		/// </summary>
+		/// <param name="scale">scale in a float of the button.</param>
 		void setScale(float scale);
 
+		/// <summary>
+		/// Function to set the position of the button
+		/// </summary>
+		/// <param name="position">new position of the button.</param>
 		void setPos(sf::Vector2f position);
 
 	private:
-		bool isButtonSelected = false;///< Bool if button pressed.
+		bool isButtonSelected = false;///< \brief Bool if button pressed.
 };
 
 #endif
