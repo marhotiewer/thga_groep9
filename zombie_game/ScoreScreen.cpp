@@ -1,8 +1,4 @@
 #include "ScoreScreen.h"
-#include <sstream>
-//#include <iostream>
-#include <iomanip>
-
 
 ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : window(window), assets(assets)
 {

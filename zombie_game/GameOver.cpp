@@ -219,7 +219,7 @@ Screen GameOver::run()
 		this->render();
 		if (this->canSaveScore) {
 			this->canSaveScore = false;//set to false for next game
-			//new(&game) Game(window, assets);
+			new(&game) Game(window, assets);
 			return this->saveScoreToFile(points);
 		}
 	}
