@@ -1496,4 +1496,23 @@ AssetManager::AssetManager()
     this->waterTexture.setRepeated(true);
     this->woodTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);
+
+	this->walkingSound.loadFromFile("sounds\\footsteps.wav");
+	this->ingameBreezeSound.openFromFile("sounds\\breeze.wav");
+	this->mainMenuSoundtrack.openFromFile("sounds\\main_menu.wav");
+	this->mainMenuClickSound.loadFromFile("sounds\\mouse_click.wav");
+	for (unsigned int i = 0; i < 4; i++) {
+		this->zombieSounds[i] = new sf::SoundBuffer;
+	}
+	this->zombieSounds[0]->loadFromFile("sounds\\attack1.wav");
+	this->zombieSounds[1]->loadFromFile("sounds\\attack2.wav");
+	this->zombieSounds[2]->loadFromFile("sounds\\attack3.wav");
+	this->zombieSounds[3]->loadFromFile("sounds\\attack4.wav");
+
+	this->handGunSound.loadFromFile("sounds\\handgun_sound.wav");
+
+	this->mainMenuSoundtrack.setVolume(15.f);
+	this->mainMenuSoundtrack.setLoop(true);
+	this->ingameBreezeSound.setLoop(true);
+    this->wallTexture.setRepeated(true);
 }

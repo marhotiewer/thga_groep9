@@ -54,8 +54,12 @@ class Zombie : public Entity
 		/// </summary>
 		/// <returns>SFML FloatRect of the Zombie</returns>
 		sf::FloatRect getHitbox() override;
+		void playAttackSound();
 	private:
 		Player* player;///<Pointer to the player class.
+		sf::Sound* attackSounds[4];
+		sf::Clock* zombieClock;
+		int randomSoundTime;
 };
 
 #endif

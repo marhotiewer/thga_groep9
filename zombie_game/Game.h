@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <functional>
 #include <algorithm>
 #include <iostream>
@@ -104,6 +105,7 @@ class Game : public cScreen {
 		bool noKeyPressed = false;///< bool if no key is pressed.
 		bool isFullScreen = false;///<bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
+		sf::Music* ingameBreeze;
 		float elapsedTime = 0.f;///<Time used for elapsed a frame.
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 		bool debug = false;///< bool used for debug intentions.

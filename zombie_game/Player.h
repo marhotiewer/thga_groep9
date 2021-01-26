@@ -72,6 +72,8 @@ class Player : public Entity
 
 	private:
 		HUD hud;///<On screen information
+		sf::Sound walkingSound;
+		sf::Sound handGunSound;
 		HudInfo info;
 };
 

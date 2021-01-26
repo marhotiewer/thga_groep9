@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 /// @file
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 
 /// \brief
@@ -47,6 +49,12 @@ class AssetManager
 		sf::Texture rockTexture;///< \brief Texture of a rocks. Used in the map. \image html rocks.png
 		sf::Texture bushTexture;///< \brief Texture of a bush. Used in the map. \image html bush.png
 		sf::Texture bushRotatedTexture;///< \brief Texture of a rotated bush. Used in the map. \image html bushRotated.png
+		sf::SoundBuffer mainMenuClickSound;
+		sf::SoundBuffer* zombieSounds[4];
+		sf::SoundBuffer walkingSound;
+		sf::Music mainMenuSoundtrack;
+		sf::SoundBuffer handGunSound;
+		sf::Music ingameBreezeSound;
 };
 
 #endif //ASSETMANAGER_H

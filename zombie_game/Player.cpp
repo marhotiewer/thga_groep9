@@ -7,6 +7,10 @@ Player::Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	this->sprite.setPosition(pos);
 	this->type = Type::Player;
 	this->health = 10;
+	this->walkingSound = sf::Sound(this->assets.walkingSound);
+	this->walkingSound.setVolume(50.f);
+	this->handGunSound = sf::Sound(this->assets.handGunSound);
+	this->handGunSound.setVolume(50.f);
 }
 
 void Player::debug_draw(sf::RenderWindow* window)
@@ -37,6 +41,8 @@ sf::FloatRect Player::getHitbox()
 
 void Player::shoot(sf::Vector2f direction)
 {
+	this->handGunSound.setPitch((rand() % 20 + 90) / 100.f);
+	this->handGunSound.play();
 	this->objects.push_back(new Bullet(this->window, this->assets, this->objects, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction));
 }
 
@@ -76,13 +82,19 @@ void Player::update(float deltaTime)
 
 		if (this->delta.x >  1.f || this->delta.y >	 1.f ||
 			this->delta.x < -1.f || this->delta.y < -1.f)
-				timeStep = 0.03f; // running speed
+				timeStep = 0.045f; // running speed
 	}
 
 	if ((this->deltaTime+=deltaTime) >= timeStep) {
 		if (++this->frame == 6) this->frame = 0;
 		this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 		this->deltaTime = 0.f;
+		if ((frame == 0 || frame == 3) && mode == 48) {
+			float pitch = (rand() % 20 + 90) / 100.f;
+			walkingSound.setPitch(pitch);
+			walkingSound.play();
+		}
+		this->sprite.setTextureRect({ (direction * 192) + this->frame * 32, mode, 32, 48 });
 	}
 
 	if (this->delta != sf::Vector2f(0.f, 0.f)) {

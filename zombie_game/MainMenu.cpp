@@ -22,6 +22,10 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->background.setOrigin({ float(backgroundRect.width) / 2, float(backgroundRect.height) / 2 }); // center of the sprite
 	this->background.setPosition({ 0.f, 0.f });
 	this->matchBackground();
+
+	this->backgroundMusic = &this->assets.mainMenuSoundtrack;
+	this->clickSound = sf::Sound(this->assets.mainMenuClickSound);
+	this->clickSound.setVolume(50.f);
 }
 
 void MainMenu::matchBackground() {
@@ -103,10 +107,12 @@ Screen MainMenu::pollEvents()
 						buttonPressed = button->buttonPressed();
 						if (buttonPressed != ButtonType::None) {
 							// A button was pressed
+							this->clickSound.play();
 							switch (buttonPressed) {
 								case ButtonType::Play: {
 									// Play the game!
 									returnValue = Screen::Game;
+									this->backgroundMusic->stop();
 									break;
 								}
 								case ButtonType::Quit: {
@@ -152,6 +158,8 @@ Screen MainMenu::run()
 	Screen nextScreen = Screen::None;
 	sf::Clock clock;
 	float deltaTime;
+
+	this->backgroundMusic->play();
 
 	while (nextScreen == Screen::None && this->running())
 	{
