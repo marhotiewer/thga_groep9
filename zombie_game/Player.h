@@ -77,6 +77,7 @@ class Player : public Entity
 		/// <returns>Amount of points the plays has.</returns>
 		int getPoints();
 
+		~Player();
 	private:
 		HUD hud;///< On screen information.like, points, time and healt.
 		sf::Sound walkingSound;///< sound of the player walking.
