@@ -1467,7 +1467,7 @@ AssetManager::AssetManager()
     this->fountainTexture.loadFromFile("textures\\fountain.png");
     this->campfireTexture.loadFromFile("textures\\campfire.png");
     this->floorTexture.loadFromFile("textures\\background.png");
-    this->houseTexture.loadFromFile("textures\\fencehouse.png");
+    this->houseFenceTexture.loadFromFile("textures\\fenceHouse.png");
     this->zombieSpriteMap.loadFromFile("textures\\zombie.png");
     this->sandbagTexture.loadFromFile("textures\\sandbag.png");
     this->buttonTexture.loadFromFile("textures\\buttons.png");
@@ -1476,11 +1476,6 @@ AssetManager::AssetManager()
 
     this->gameOverTexture.loadFromFile("textures\\gameover.png");
     this->scoreBoard.loadFromFile("textures\\scoreBoard.png");
-
-    //this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
-    //this->floorTexture.loadFromMemory(grass_tile, sizeof(grass_tile));
-    //this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
-    //this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
 
     this->hills1Texture.loadFromFile("textures\\hills1.png");
     this->hills2Texture.loadFromFile("textures\\hills2.png");
@@ -1497,7 +1492,7 @@ AssetManager::AssetManager()
 
     this->floorTexture.setRepeated(true);
     this->fenceTexture.setRepeated(true);
-    this->houseTexture.setRepeated(true);
+    this->houseFenceTexture.setRepeated(true);
     this->waterTexture.setRepeated(true);
     this->woodTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);

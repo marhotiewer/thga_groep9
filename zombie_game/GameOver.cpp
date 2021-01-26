@@ -204,6 +204,7 @@ void GameOver::render()
 Screen GameOver::run()
 {
 	int points = this->game.player->getPoints();
+	new(&game) Game(window, assets);
 
 	sf::View view = this->window->getView();
 	view.setCenter({ 0.f, 0.f });
@@ -219,7 +220,6 @@ Screen GameOver::run()
 		this->render();
 		if (this->canSaveScore) {
 			this->canSaveScore = false;//set to false for next game
-			new(&game) Game(window, assets);
 			return this->saveScoreToFile(points);
 		}
 	}
