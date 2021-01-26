@@ -37,7 +37,7 @@ class Floor : public Static
 		/// <summary>
 		/// Function that return the order of draw order.
 		/// </summary>
-		/// <returns>0.0fs</returns>
+		/// <returns>A 0. Because the floor is always lowest.</returns>
 		float Z_Order() override;
 };
 

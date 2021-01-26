@@ -17,7 +17,7 @@ class Perk1 : public Static
 {
 	public:
 		/// <summary>
-		/// Constructor of Perk1.
+		/// Constructor of Perk shop.
 		/// </summary>
 		/// <param name="assets">AssetManager required for textures.</param>
 		/// <param name="pos">Position of the Perk(1).</param>
