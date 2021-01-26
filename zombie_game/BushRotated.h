@@ -7,7 +7,7 @@
 ///@file
 
 
-/// \class Bush
+/// \class BushRotated
 /// \brief
 /// Class for a rotated Bush.
 /// \details
