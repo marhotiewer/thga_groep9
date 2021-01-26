@@ -13,8 +13,8 @@ Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	}
 
 	this->randomSoundTime = (rand() % 5);
-	this->zombieClock = new sf::Clock;
-	this->zombieClock->restart();
+	this->zombieClock = sf::Clock();
+	this->zombieClock.restart();
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
@@ -62,9 +62,9 @@ void Zombie::update(float deltaTime)
 		this->delta = { 0.f, 0.f };
 	}
 
-	if (this->zombieClock->getElapsedTime().asSeconds() >= randomSoundTime) {
+	if (this->zombieClock.getElapsedTime().asSeconds() >= randomSoundTime) {
 		randomSoundTime = (rand() % 5) + 5;
-		this->zombieClock->restart();
+		this->zombieClock.restart();
 		playAttackSound();
 	}
 }

@@ -136,16 +136,10 @@ void Game::update(float deltaTime)
 
 		if (delta != sf::Vector2f(0.f, 0.f)) this->player->move(delta);					// move the player if delta isn't 0
 
-		bool zombiesAlive = false;
-
-		// if the entity is active update, else if entity is not a player delete object
+		// if the entity is active update, else if entity is inactive and not a player delete object
 		for (auto entity = begin(this->objects); entity != end(this->objects); ++entity) {
 			if ((*entity)->isActive()) {
 				(*entity)->update(deltaTime);
-
-				if (!zombiesAlive)
-					if ((*entity)->type == Drawable::Type::Enemy)
-						zombiesAlive = true;
 			}
 			else if ((*entity)->type != Drawable::Type::Player) {
 				delete (*entity);
@@ -153,15 +147,23 @@ void Game::update(float deltaTime)
 			}
 		}
 
-		// spawn zombies
-		if (this->zombiesLeft > 0) {
-			if ((this->spawnTimer += deltaTime) >= 1.f) {
-				this->objects.push_back(new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects));
-				
-				this->spawnTimer = 0.f;
-				this->zombiesLeft--;
+		bool zombiesAlive = false;
+
+		// check if is there is at least one zombie on the map
+		for (Drawable* entity : this->objects) {
+			if (entity->type == Drawable::Type::Enemy) {
+				zombiesAlive = true;
+				break;
 			}
 		}
+
+		// spawn zombie if the total amount of zombies hasn't been spawned
+		if (this->zombiesLeft > 0 && (this->spawnTimer += deltaTime) >= 1.f) {
+			this->objects.push_back(new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects));
+			this->spawnTimer = 0.f;
+			this->zombiesLeft--;
+		}
+		// start a new round if every zombie has been spawned and killed
 		else if (!zombiesAlive && this->zombiesLeft == 0) {
 			this->zombiesLeft = ++this->wave * 5;
 		}
