@@ -27,13 +27,17 @@ class Floor : public Static
 		Floor(AssetManager& assets, sf::Vector2f pos, sf::Vector2i size);
 		
 		/// <summary>
-		/// overriding isColliding function Floor.
+		/// Overriding isColliding function Floor.
 		/// </summary>
 		/// <param name="drawable"></param>
 		/// <param name="delta"></param>
-		/// <returns>bool if colliding with other object.</returns>
+		/// <returns>Bool if colliding with other object.</returns>
 		bool isColliding(Drawable& drawable, sf::Vector2f delta = sf::Vector2f(0.f, 0.f)) override;
 
+		/// <summary>
+		/// Function that return the order of draw order.
+		/// </summary>
+		/// <returns>0.0fs</returns>
 		float Z_Order() override;
 };
 

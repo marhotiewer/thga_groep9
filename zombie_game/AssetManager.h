@@ -31,7 +31,7 @@ class AssetManager
 		sf::Font arial;///< \brief The font used in the game for text.
 		sf::Texture gameOverTexture;///< \brief Texture of the game over text used in the GameOver screen. \image html gameover.png
 		sf::Texture scoreBoard;///< \brief Texture of the score board used in the screen: ScoreScreen. \image html scoreboard.png
-		sf::Texture policeagentTexture;///< \brief Texture of the police agent(PoliceAgent). Used in the map. \image html policeagent.png
+		sf::Texture policeAgentTexture;///< \brief Texture of the police agent(PoliceAgent). Used in the map. \image html policeAgent.png
 		sf::Texture invisibleTexture;///< \brief Texture of a InvisibleWall. Used in the map. \image html invisible.png
 		sf::Texture fountainTexture;///< \brief Texture of a Fountain. Used in the map. \image html fountain.png
 		sf::Texture campfireTexture;///< \brief Texture of the Campfire. Used in the map. \image html campfire.png

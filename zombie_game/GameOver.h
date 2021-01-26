@@ -28,8 +28,6 @@ private:
 	Game& game;///<Reference to the Game class. Is needed to get the player player points, when the player dies. Also used when the class reconstruct. 
 	sf::Event event;///<SFML Event is for handling for keyboard inputs and window resising. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 	sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
-	int alpha_max;///<
-	int alpha_div;///<
 	bool canSaveScore = false;///< Bool if the player has pressed enter. To save to score. 
 	std::string playerInput;///< String of player input. Contains the player name. 
 	sf::Text playerText; ///< SFML text of the player input. Uses the string: playeInput. 
@@ -47,6 +45,7 @@ private:
 	/// function to reset background placement. 
 	/// </summary>
 	void matchBackground();
+
 public:
 	/// <summary>
 	/// Constructor or GameOver class. 

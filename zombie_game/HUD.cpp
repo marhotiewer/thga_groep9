@@ -26,7 +26,7 @@ void HUD::draw(sf::RenderWindow* window)
 void HUD::update(HudInfo info)
 {
 	const sf::Vector2u window_size(this->window->getSize());
-	healthText.setString("health: " + std::to_string(info.health));
+	healthText.setString("Health: " + std::to_string(info.health));
 	timeText.setString("Time: " + std::to_string(int(info.time)));
 	pointsText.setString("Points: " + std::to_string(info.points));
 	const sf::Vector2f spriteSize(

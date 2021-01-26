@@ -9,12 +9,12 @@
 
 /// \class Bush
 /// \brief
-/// class for a Bush.
+/// Class for a Bush.
 /// \details
 /// This class creates Bushes.
 /// This is a Static class that dont move. 
 /// This class has a override on getHitbox function for it's own hitbox.
-/// \img html bush.png
+/// \image html bush.png
 class Bush : public Static
 {
 	public:

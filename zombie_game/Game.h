@@ -94,7 +94,7 @@ class Game : public cScreen {
 		/// </summary>
 		void render();
 
-		Player* player;///< Pointer to the Player. Is public because the GameOver screen need to get the scores when the player dies.
+		Player* player;///< Pointer to the Player. Is public because the GameOver screen need to get the scores from player class, when the player dies.
 
 		~Game();
 	private:
