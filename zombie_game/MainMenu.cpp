@@ -155,6 +155,8 @@ Screen MainMenu::run()
 	sf::Clock clock;
 	float deltaTime;
 
+	this->backgroundMusic->play();
+
 	while (nextScreen == Screen::None && this->running())
 	{
 		deltaTime = clock.restart().asSeconds();
