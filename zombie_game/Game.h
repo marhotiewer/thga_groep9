@@ -94,10 +94,7 @@ class Game : public cScreen {
 		/// </summary>
 		void render();
 
-
-		Player* player;///< Pointer to the player. !!!!!!!!!!!!!!!!!
-
-
+		Player* player;///< Pointer to the Player. Is public because the GameOver screen need to get the scores when the player dies.
 
 		~Game();
 	private:
@@ -105,7 +102,7 @@ class Game : public cScreen {
 		bool noKeyPressed = false;///< bool if no key is pressed.
 		bool isFullScreen = false;///<bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
-		sf::Music* ingameBreeze;
+		sf::Music* ingameBreeze;///< Pointer to the ingame breeze sound.
 		float elapsedTime = 0.f;///<Time used for elapsed a frame.
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 		bool debug = false;///< bool used for debug intentions.

@@ -8,8 +8,8 @@
 enum class Screen {
 	MainMenu,///< Startup screen.
 	Game,///< The screen with the game.
-	GameOver,
-	Scores,///< Screen with scores
+	GameOver,///< screen when the player dies. Player can enter name to save score. 
+	Scores,///< Screen with top 10 high scores. Loaded from scores.json.
 	OptionsMenu,///< Screen with options.
 	PauseMenu,///< Menu that pause the game.
 	None///< None is exit the application.

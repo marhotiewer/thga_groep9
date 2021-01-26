@@ -25,17 +25,27 @@ private:
 	sf::RenderWindow* window;///<Pointer to the SFML window. [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
 	sf::Sprite background;///<SFML Sprite for the background of the main menu. (is loaded from AssetManager in the constructor of this class). \image html menu_image.png
 	AssetManager& assets;///<Reference to the AssetManager. To load textures. 
-	Game& game;
+	Game& game;///<Reference to the Game class. Is needed to get the player player points, when the player dies. Also used when the class reconstruct. 
 	sf::Event event;///<SFML Event is for handling for keyboard inputs and window resising. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 	sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
 	int alpha_max;///<
 	int alpha_div;///<
-	bool canSaveScore = false;
-	std::string playerInput;
-	sf::Text playerText;
-	sf::RectangleShape inputBox;
-	sf::Text playerInputPromt;
+	bool canSaveScore = false;///< Bool if the player has pressed enter. To save to score. 
+	std::string playerInput;///< String of player input. Contains the player name. 
+	sf::Text playerText; ///< SFML text of the player input. Uses the string: playeInput. 
+	sf::RectangleShape inputBox;///< The white box, where the player can input her/his name.
+	sf::Text playerInputPromt;///< SFML text with the text: "Player name:"
+	
+	/// <summary>
+	/// Function to save the players score to a file. 
+	/// </summary>
+	/// <param name="points">Points of the player.</param>
+	/// <returns>Screen </returns>
 	Screen saveScoreToFile(int points);
+
+	/// <summary>
+	/// function to reset background placement. 
+	/// </summary>
 	void matchBackground();
 public:
 	/// <summary>
@@ -45,8 +55,6 @@ public:
 	/// <param name="window">The pointer to the current SFML window of the game.</param>
 	/// <param name="assets">AssetManager required for textures</param>
 	GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game);
-
-	
 
 	/// <summary>
 	/// Function that checks if a next screen need to show.
