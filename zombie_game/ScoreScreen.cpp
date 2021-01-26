@@ -38,16 +38,16 @@ void ScoreScreen::displayScores()
 		for (auto& element : jsonInput) {
 			scoreMap.insert(std::pair<int, std::string>(element["score"], element["name"]));
 		}
-		auto first = scoreMap.begin();
-		auto last = std::next(first, 8);
-		if (scoreMap.size() < 7) { auto last = std::next(first, scoreMap.size()); }
-		for (auto it = first; it != last; it++) {
+		std::multimap<int, std::string, std::greater<int>>::iterator first = scoreMap.begin();
+		if (scoreMap.size() > 8) { last = std::next(first, 8); } else { last = std::next(first, scoreMap.size()); }
+		for (std::multimap<int, std::string, std::greater<int>>::iterator it = first; it != last; it++) {
 			scoreTextVector.push_back(sf::Text((it->second + ": " + std::to_string(it->first)), assets.arial, 28));
-			scoreTextVector.back().setFillColor(sf::Color::Green);
+			scoreTextVector.back().setFillColor(sf::Color::Red);
 		}
 	}
 	else { //no scores in file: scores.json
 		scoreTextVector.push_back(sf::Text("No scores", assets.arial, 28));
+		scoreTextVector.back().setFillColor(sf::Color::Red);
 	}
 	iputFile.close();
 }
