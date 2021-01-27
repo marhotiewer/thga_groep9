@@ -2,10 +2,8 @@
 #define ASSETMANAGER_H
 
 #include <SFML/Graphics.hpp>
-/// @file
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
+/// @file
 
 /// \brief
 /// AssetManager
@@ -36,7 +34,7 @@ class AssetManager
 		sf::Texture fountainTexture;///< \brief Texture of a Fountain. Used in the map. \image html fountain.png
 		sf::Texture campfireTexture;///< \brief Texture of the Campfire. Used in the map. \image html campfire.png
 		sf::Texture sandbagTexture;///< \brief Texture of the Sandbag. Used in the map. \image html sandbag.png
-		sf::Texture hills1Texture;///< \brief Texture of the normal hill(Hils1). Used in the map. \image html hills.png
+		sf::Texture hills1Texture;///< \brief Texture of the normal hill(Hils1). Used in the map. \image html hills1.png
 		sf::Texture hills2Texture;///< \brief Texture of a hill(Hils2) with a waterfall. Used in the map. \image html hills2.png
 		sf::Texture fenceTexture;///< \brief Texture of the Fence. Used in the map. \image html fence.png
 		sf::Texture houseFenceTexture;///< \brief Texture of the House fence. Used in the map. \image html fenceHouse.png

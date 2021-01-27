@@ -12,7 +12,7 @@
 /// Class of a Campfire
 /// \details
 /// This class creates a Campfire.
-/// This is a Static class that dont move. 
+/// Class is inherited from Static, so it can't move.
 /// This class has a override on getHitbox function for it's own hitbox.
 /// \image html campfire.png
 class Campfire : public Static

@@ -12,6 +12,7 @@
 /// Class for the Rocks in the map.
 /// \details
 /// Class used for a rock.
+/// Class is inherited from Static, so it can't move.
 /// \image html rocks.png
 class Rocks : public Static
 {
@@ -25,7 +26,7 @@ class Rocks : public Static
 
 		/// <summary>
 		/// Function to return the correct hitbox of the Rocks.
-		/// So the Player can walk in front or behind the Rocks.
+		/// So the Player or a Zombie can walk in front or behind the Rocks.
 		/// </summary>
 		/// <returns>SFML FloatRect of the Hitbox of the Rocks.</returns>
 		sf::FloatRect getHitbox() override;

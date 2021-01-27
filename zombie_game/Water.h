@@ -12,6 +12,7 @@
 /// Water class.
 /// \details
 /// Class used for spawning Water.
+/// Class is inherited from Static, so it can't move.
 /// \image html water.png
 class Water : public Static
 {
