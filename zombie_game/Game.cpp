@@ -100,8 +100,6 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
 	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects, this->hud));
-	
-	this->ingameBreeze = &this->assets.ingameBreezeSound;
 
 	this->spawns = {
 		sf::Vector2f(300, 2200),
@@ -268,7 +266,7 @@ Screen Game::run()
 
 	sf::Clock clock;
 	float deltaTime;
-	this->ingameBreeze->play();
+	this->assets.ingameBreezeSound.play();
 
 	 while (this->running() && this->player->isActive())
 	 {

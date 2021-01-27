@@ -26,7 +26,7 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 	this->background.setPosition({ 0.f, 0.f });
 	this->matchBackground();
 
-	this->backgroundMusic = &this->assets.mainMenuSoundtrack;
+	//this->backgroundMusic = this->assets.mainMenuSoundtrack;
 }
 
 void ScoreScreen::displayScores()
@@ -142,7 +142,7 @@ Screen ScoreScreen::pollEvents()
 						case ButtonType::Play: {
 							// Play the game!
 							returnValue = Screen::Game;
-							this->backgroundMusic->stop();
+							this->assets.mainMenuSoundtrack.stop();
 							break;
 						}
 						case ButtonType::Quit: {

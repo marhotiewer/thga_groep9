@@ -104,7 +104,7 @@ class Game : public cScreen {
 		bool noKeyPressed = false;///< bool if no key is pressed.
 		bool isFullScreen = false;///<bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
-		sf::Music* ingameBreeze;///< Pointer to the ingame breeze sound.
+		//sf::Music ingameBreeze;
 		float elapsedTime = 0.f;///<Time used for elapsed a frame.
 		unsigned char wave = 1;
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 

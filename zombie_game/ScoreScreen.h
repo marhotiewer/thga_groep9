@@ -33,7 +33,11 @@ private:
 	void displayScores();///< Function to diplay scores in the scores board.
 	int alpha_max;///<
 	int alpha_div;///<
-	sf::Music* backgroundMusic;
+	sf::Sprite scoreBoard;
+	std::vector<sf::Text> scoreTextVector;
+	void matchBackground();
+	void displayScores();
+	//sf::Music& backgroundMusic;
 public:
 	/// <summary>
 	/// Constructor or MainMenu class. 
