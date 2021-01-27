@@ -73,8 +73,8 @@ Screen ScoreScreen::update(float deltaTimeSeconds) {
 }
 
 void ScoreScreen::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Z-Rush");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Z-Rush", sf::Style::Fullscreen);	// fullscreen
 
 	sf::View view = this->window->getView();
 	view.setSize(sf::Vector2f(this->window->getSize()));
