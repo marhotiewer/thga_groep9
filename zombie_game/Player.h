@@ -31,7 +31,7 @@ class Player : public Entity
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Spawn position of the player.{x,y}</param>
 		/// <param name="object">A vector of pointers of all the Drawable, is used for collision detection.</param>
-		Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& object);
+		Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& object, HUD &hud);
 		
 		/// <summary>
 		/// Updates the direction of the player to set the correct texture of the player on the screen.
@@ -59,12 +59,6 @@ class Player : public Entity
 		void shoot(sf::Vector2f direction);
 
 		/// <summary>
-		/// Function to draw the hud. The hud wil contain: Healt, Time and Points
-		/// </summary>
-		///<param name="window">The pointer to the current SFML window of the game.</param>
-		void draw_hud(sf::RenderWindow* window);
-
-		/// <summary>
 		/// Function to add points to the Player. 
 		/// Function used when zombies 
 		/// </summary>
@@ -79,7 +73,7 @@ class Player : public Entity
 
 		~Player();
 	private:
-		HUD hud;///< On screen information.like, points, time and healt.
+		HUD& hud;///< To update on screen information. Like,: points, time and healt.
 		sf::Sound walkingSound;///< sound of the player walking.
 		sf::Sound handGunSound;///< Sound of the handgun.
 		HudInfo info;///< The struct that contains the player information like, points and time.

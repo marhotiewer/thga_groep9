@@ -10,7 +10,7 @@
 #include <fstream>
 #include <vector>
 
-
+#include "HUD.h"
 #include "InvisibleWall.h"
 #include "PoliceAgent.h"
 #include "BushRotated.h"
@@ -78,7 +78,7 @@ class Game : public cScreen {
 		/// SFML Event handeler.
 		/// [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 		/// </summary>
-		/// <returns>If a next screen need to show. !!!!!</returns>
+		/// <returns>If a next screen need to show.</returns>
 		void pollEvents();
 
 		/// <summary>
@@ -98,6 +98,7 @@ class Game : public cScreen {
 
 		~Game();
 	private:
+		HUD hud;
 		std::vector<sf::Vector2f> spawns;
 		std::vector<Drawable*> objects;///< vector of pointers of all drawable pointers 
 		bool noKeyPressed = false;///< bool if no key is pressed.

@@ -19,7 +19,7 @@ T random(std::vector<T> const& v)
 	return *it;
 }
 
-Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), assets(assets)
+Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), assets(assets), hud(window, assets, sf::Vector2f(175, 2200))
 {
 	this->event = sf::Event();
 	
@@ -99,7 +99,8 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1800, 800)));
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
-	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects));
+	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects, this->hud));
+	
 	this->ingameBreeze = &this->assets.ingameBreezeSound;
 
 	this->spawns = {
@@ -120,7 +121,7 @@ void Game::update(float deltaTime)
 {
 	if ((this->elapsedTime += deltaTime) >= 1.f) {
 		if (this->debug) this->window->setTitle("Zombie Game (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
-		else this->window->setTitle("Zombie Game");
+		else this->window->setTitle("Z-Rush");
 		this->elapsedTime = 0.f;
 	}
 
@@ -177,8 +178,10 @@ void Game::update(float deltaTime)
 		// start a new round if every zombie has been spawned and killed
 		else if (!zombiesAlive && this->zombiesLeft == 0) {
 			this->zombiesLeft = ++this->wave * 5;
+			this->hud.updateWave(int(wave));
 		}
 	}
+	this->hud.update();
 	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
 }
 
@@ -254,7 +257,7 @@ void Game::render()
 		}
 		for (Drawable* object : this->objects) if (object->isActive()) object->debug_draw(this->window);
 	}
-	this->player->draw_hud(this->window);
+	this->hud.draw(this->window);
 	this->window->display();
 }
 
