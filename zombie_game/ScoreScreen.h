@@ -4,11 +4,12 @@
 #include <iostream>
 #include <map>
 #include <iterator>
+#include <json.hpp>
+#include <fstream>
 #include "cScreen.h"
 #include "AssetManager.h"
 #include "Button.h"
-#include <json.hpp>
-#include <fstream>
+
 ///@file
 
 /// \class MainMenu
@@ -28,9 +29,10 @@ private:
 	sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
 	sf::Sprite scoreBoard;///< Sprite of the scoreboard. In the sprite there is place for 8 scores. Used in the displayScores function of this class. \image html scoreboard.png
 	std::vector<sf::Text> scoreTextVector;///< Vector of SFML Text with scores. Is cleaned when the run function ends.
-	std::multimap<int, std::string, std::greater<int>>::iterator last;
+	std::multimap<int, std::string, std::greater<int>>::iterator last;///< Iterator to last item in the multimap. In code the iterator is not greater than 8, because there are 8 places in the score board. 
 	void matchBackground();///< Function to reset background placement. 
 	void displayScores();///< Function to diplay scores in the scores board.
+	void toggleFullscreen();///< Function that as executed will toggle the SFML window to full screen.
 public:
 	/// <summary>
 	/// Constructor or MainMenu class. 
@@ -44,13 +46,8 @@ public:
 	/// Function that checks if a next screen need to show.
 	/// </summary>
 	/// <param name="deltaTime">The time elapsed for one frame.</param>
-	/// <returns></returns>
+	/// <returns>Return a Screen if a next screen need to show. Otherwise return Screen::None</returns>
 	Screen update(float deltaTime);
-
-	/// <summary>
-	/// Function that as executed will toggle the SFML window to full screen.
-	/// </summary>
-	void toggleFullscreen();
 
 	/// <summary>
 	/// Main loop of the MainMenu class. 

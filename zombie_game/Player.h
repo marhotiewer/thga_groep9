@@ -31,6 +31,7 @@ class Player : public Entity
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Spawn position of the player.{x,y}</param>
 		/// <param name="object">A vector of pointers of all the Drawable, is used for collision detection.</param>
+		/// <param name="hud">The information on the screen. Like Points, Health and Time. Used to update the information on the HUD. </param>
 		Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& object, HUD &hud);
 		
 		/// <summary>
@@ -73,7 +74,7 @@ class Player : public Entity
 
 		~Player();
 	private:
-		HUD& hud;///< To update on screen information. Like,: points, time and healt.
+		HUD& hud;///< \brief To update on screen information. Like,: points, time and Health.
 		sf::Sound walkingSound;///< sound of the player walking.
 		sf::Sound handGunSound;///< Sound of the handgun.
 		HudInfo info;///< The struct that contains the player information like, points and time.

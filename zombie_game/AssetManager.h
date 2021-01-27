@@ -22,6 +22,7 @@ class AssetManager
 		sf::Texture buttonTexture;///< \brief Texture of a button. \image html buttons.png
 		sf::Texture adamSpriteMap;///< \brief Player sprite map. \image html player.png
 		sf::Texture gameLogoTexture;///< \brief logo of the game. \image html logo.png
+		sf::Image gameIconWindow;///< \brief The icon of the window of the game. \image html icon.png
 		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
 		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
 		sf::Texture floorTexture;///< \brief Texture of a Floor.
