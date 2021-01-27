@@ -2,7 +2,7 @@
 
 PoliceAgent::PoliceAgent(AssetManager& assets, sf::Vector2f pos) : Static(assets)
 {
-	this->sprite.setTexture(assets.policeagentTexture);
+	this->sprite.setTexture(assets.policeAgentTexture);
 	this->sprite.setPosition(pos);
 }
 

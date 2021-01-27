@@ -33,8 +33,6 @@ class Button : public Drawable
 		/// <param name="pos">Position of the button</param>
 		/// <param name="type">Type of the button of type enum class buttonType.</param>
 		Button(AssetManager& assets, sf::Vector2f pos, ButtonType type);
-		
-		ButtonType type;///<Type of the button of type enum class buttonType.
 
 		/// <summary>
 		/// This function checks if the move hovers above the button. 
@@ -50,12 +48,21 @@ class Button : public Drawable
 		/// <returns>What type of enum class buttonType the button is pressed</returns>
 		ButtonType buttonPressed();
 
+		/// <summary>
+		/// Function to set the scale of the button.
+		/// </summary>
+		/// <param name="scale">scale in a float of the button.</param>
 		void setScale(float scale);
 
+		/// <summary>
+		/// Function to set the position of the button
+		/// </summary>
+		/// <param name="position">new position of the button.</param>
 		void setPos(sf::Vector2f position);
 
 	private:
-		bool isButtonSelected = false;///< Bool if button pressed.
+		ButtonType type;///<Type of the button of type enum class buttonType.
+		bool isButtonSelected = false;///< \brief Bool if button pressed.
 };
 
 #endif

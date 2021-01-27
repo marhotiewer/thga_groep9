@@ -9,8 +9,6 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->buttons.push_back(new Button(this->assets, { 0.f, 135.f }, ButtonType::Options));
 	this->buttons.push_back(new Button(this->assets, { 0.f, 189.f }, ButtonType::Scores));
 
-	this->alpha_max = 1 * 255;
-	this->alpha_div = 1;
 	
 	this->logo.setTexture(assets.gameLogoTexture);
 	sf::IntRect logoRect = this->logo.getTextureRect();
@@ -26,6 +24,11 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->backgroundMusic = &this->assets.mainMenuSoundtrack;
 	this->clickSound = sf::Sound(this->assets.mainMenuClickSound);
 	this->clickSound.setVolume(50.f);
+}
+
+MainMenu::~MainMenu() {
+	this->backgroundMusic->stop();
+	this->clickSound.resetBuffer();
 }
 
 void MainMenu::matchBackground() {

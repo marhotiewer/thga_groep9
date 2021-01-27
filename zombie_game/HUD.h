@@ -29,15 +29,27 @@ class HUD
 		HUD(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos);
 		
 		/// <summary>
-		/// Function to draw the HUD on the screen
+		/// Function to draw the hud. The hud wil contain: Healt, Time and Points
 		/// </summary>
-		/// <param name="window">The pointer to the current SFML window of the game.</param>
+		///<param name="window">The pointer to the current SFML window of the game.</param>
 		void draw(sf::RenderWindow* window);
 
 		/// <summary>
 		/// Function to update the correct size of the HUD.
 		/// </summary>
-		void update(HudInfo info);
+		void update();
+
+		/// <summary>
+		/// Function to update the correct wave to the HUD.
+		/// </summary>
+		/// <param name="newWave">Wave number</param>
+		void updateWave(int newWave);
+
+		/// <summary>
+		/// Function to update the correct information on the HUD.
+		/// </summary>
+		/// <param name="info">Struct HudInfo with player information.</param>
+		void updateText(HudInfo info);
 	private:
 		sf::RenderWindow* window;///<Pointer to the SFML window. [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
 		sf::Sprite bottom_right;///<
@@ -45,6 +57,8 @@ class HUD
 		sf::Text healthText;
 		sf::Text timeText;
 		sf::Text pointsText;
+		sf::Text waveText;
+		int wave = 1;
 };
 
 #endif

@@ -13,6 +13,7 @@ Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	}
 
 	this->randomSoundTime = (rand() % 5);
+	this->zombieClock = sf::Clock();
 	this->zombieClock.restart();
 }
 
@@ -31,9 +32,10 @@ void Zombie::debug_draw(sf::RenderWindow* window)
 
 void Zombie::damage(int dmg)
 {
+	this->player->addPoints(10);
 	if ((this->health -= dmg) <= 0) {
+		this->player->addPoints(100);
 		this->active = false;
-		this->player->addPoints(50);
 	}
 }
 

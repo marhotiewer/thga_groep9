@@ -4,8 +4,6 @@ GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) :
 {
 	this->event = sf::Event();
 
-	this->alpha_max = 1 * 255;
-	this->alpha_div = 1;
 
 	// Creating buttons
 	this->buttons.push_back(new Button(this->assets, { 0.f, 0.f }, ButtonType::Play));

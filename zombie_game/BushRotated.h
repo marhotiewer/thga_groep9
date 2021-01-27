@@ -7,14 +7,14 @@
 ///@file
 
 
-/// \class Bush
+/// \class BushRotated
 /// \brief
-/// class for a rotated Bush.
+/// Class for a rotated Bush.
 /// \details
 /// This class creates rotated Bushes.
 /// This is a Static class that dont move. 
 /// This class has a override on getHitbox function for it's own hitbox.
-/// \img html bushRotated.png
+/// \image html bushRotated.png
 class BushRotated : public Static
 {
 	public:

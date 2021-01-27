@@ -1,6 +1,6 @@
 #include "Player.h"
-#include <iostream>
-Player::Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects) : Entity(window, assets, objects), hud(this->window, assets, pos)
+
+Player::Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& objects, HUD& hud) : Entity(window, assets, objects), hud(hud)
 {
 	this->sprite.setTexture(this->assets.adamSpriteMap);
 	this->sprite.setTextureRect({ (0 * 192) + this->frame * 32, 80, 32, 48 });
@@ -46,19 +46,25 @@ void Player::shoot(sf::Vector2f direction)
 	this->objects.push_back(new Bullet(this->window, this->assets, this->objects, this->getPos() + sf::Vector2f(this->getSize()) / 2.f, direction));
 }
 
-void Player::draw_hud(sf::RenderWindow* window)
-{
-	this->hud.draw(window);
-}
 
 void Player::addPoints(int points)
 {
 	this->info.points += points;
 }
 
+
 int Player::getPoints() 
 {
 	return this->info.points;
+}
+
+
+Player::~Player()
+{
+	this->handGunSound.stop();
+	this->handGunSound.resetBuffer();
+	this->walkingSound.stop();
+	this->walkingSound.resetBuffer();
 }
 
 
@@ -106,7 +112,5 @@ void Player::update(float deltaTime)
 	}
 	this->info.health = this->health;
 	this->info.time += deltaTime;
-	this->hud.update(this->info);
-
-	
+	this->hud.updateText(this->info);
 }

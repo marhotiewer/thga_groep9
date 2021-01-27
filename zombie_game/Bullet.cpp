@@ -28,7 +28,7 @@ Drawable* Bullet::move(sf::Vector2f delta)
 	this->delta = delta;
 	for (Drawable* object : this->objects) {
 		if (object->type != Type::Player && object != this && object->isActive() && object->isColliding(*this, this->delta)) {
-			object->damage(1);
+			object->damage(10);
 			this->damage(1);
 			return object;
 		}

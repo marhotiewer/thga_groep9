@@ -8,7 +8,7 @@
 
 /// \class Static
 /// \brief
-/// Class for the Static items
+/// Class for the Static items.
 /// \details
 /// The Static class inhert from the Drawable class.
 /// This class is used to inhert from static items (items that can not move) like Floor or Wall.

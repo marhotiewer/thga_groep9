@@ -9,28 +9,29 @@
 #include "Entity.h"
 #include "Bullet.h"
 #include "HUD.h"
-
 /// @file
 
 
 /// \class Player
 /// \brief
-/// Player class 
+/// Class of the Player
 /// \details
-/// Class of the player. 
+/// Class used for the player. 
+/// This Class inhert from Entity. 
+/// Default health is 10 lives.
 class Player : public Entity
 {
 	public:
 		/// <summary>
 		/// The constructor of the Player class.
 		/// The constructor loads the texture from de AssetManager.
-		/// Default health is is 10.
+		/// Default health is 10 lives.
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Spawn position of the player.{x,y}</param>
 		/// <param name="object">A vector of pointers of all the Drawable, is used for collision detection.</param>
-		Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& object);
+		Player(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos, std::vector<Drawable*>& object, HUD &hud);
 		
 		/// <summary>
 		/// Updates the direction of the player to set the correct texture of the player on the screen.
@@ -58,23 +59,24 @@ class Player : public Entity
 		void shoot(sf::Vector2f direction);
 
 		/// <summary>
-		/// 
+		/// Function to add points to the Player. 
+		/// Function used when zombies 
 		/// </summary>
-		///<param name="window">The pointer to the current SFML window of the game.</param>
-		void draw_hud(sf::RenderWindow* window);
-
-
+		/// <param name="points">points to add to the player.</param>
 		void addPoints(int points);
 
-
+		/// <summary>
+		/// Function to get the amount of points the plays has. 
+		/// </summary>
+		/// <returns>Amount of points the plays has.</returns>
 		int getPoints();
 
-
+		~Player();
 	private:
-		HUD hud;///<On screen information
-		sf::Sound walkingSound;
-		sf::Sound handGunSound;
-		HudInfo info;
+		HUD& hud;///< To update on screen information. Like,: points, time and healt.
+		sf::Sound walkingSound;///< sound of the player walking.
+		sf::Sound handGunSound;///< Sound of the handgun.
+		HudInfo info;///< The struct that contains the player information like, points and time.
 };
 
 #endif

@@ -31,7 +31,7 @@ class AssetManager
 		sf::Font arial;///< \brief The font used in the game for text.
 		sf::Texture gameOverTexture;///< \brief Texture of the game over text used in the GameOver screen. \image html gameover.png
 		sf::Texture scoreBoard;///< \brief Texture of the score board used in the screen: ScoreScreen. \image html scoreboard.png
-		sf::Texture policeagentTexture;///< \brief Texture of the police agent(PoliceAgent). Used in the map. \image html policeagent.png
+		sf::Texture policeAgentTexture;///< \brief Texture of the police agent(PoliceAgent). Used in the map. \image html policeAgent.png
 		sf::Texture invisibleTexture;///< \brief Texture of a InvisibleWall. Used in the map. \image html invisible.png
 		sf::Texture fountainTexture;///< \brief Texture of a Fountain. Used in the map. \image html fountain.png
 		sf::Texture campfireTexture;///< \brief Texture of the Campfire. Used in the map. \image html campfire.png
@@ -49,12 +49,12 @@ class AssetManager
 		sf::Texture rockTexture;///< \brief Texture of a rocks. Used in the map. \image html rocks.png
 		sf::Texture bushTexture;///< \brief Texture of a bush. Used in the map. \image html bush.png
 		sf::Texture bushRotatedTexture;///< \brief Texture of a rotated bush. Used in the map. \image html bushRotated.png
-		sf::SoundBuffer mainMenuClickSound;
-		sf::SoundBuffer zombieSounds[4];
-		sf::SoundBuffer walkingSound;
-		sf::Music mainMenuSoundtrack;
-		sf::SoundBuffer handGunSound;
-		sf::Music ingameBreezeSound;
+		sf::SoundBuffer mainMenuClickSound;///< \brief Buffer with sound used if a user clicks a button on the main menu. 
+		sf::SoundBuffer zombieSounds[4];///< \brief Array with sounds that a zombie can make. 
+		sf::SoundBuffer walkingSound;///< \brief Sound that the Player makes when walking. Sound is the same on any floor.
+		sf::Music mainMenuSoundtrack;///< \brief Music of the main menu. 
+		sf::SoundBuffer handGunSound;///< \brief Sound of the handgun of the player. Sound plays when the player fires the hand gun.
+		sf::Music ingameBreezeSound;///< \brief Background noise of the game. 
 };
 
 #endif //ASSETMANAGER_H

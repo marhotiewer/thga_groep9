@@ -24,11 +24,10 @@ class MainMenu : public cScreen
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 		sf::Event event;///<SFML Event is for handling for keyboard inputs and window resising. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 		sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
-		int alpha_max;///<
-		int alpha_div;///<
-		sf::Music* backgroundMusic;
-		sf::Sound clickSound;
-		void matchBackground();
+		sf::Music* backgroundMusic;///< Background music of the MainMenu.
+		sf::Sound clickSound;///< Sound plays when the player presses a button.
+		void matchBackground();///< Function to reset background placement. 
+		~MainMenu();
 	public:
 		/// <summary>
 		/// Constructor or MainMenu class. 

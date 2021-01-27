@@ -1460,7 +1460,7 @@ AssetManager::AssetManager()
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
     this->HUD_bottom_right.loadFromFile("textures\\hud_bottom_right.png");
     this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
-    this->policeagentTexture.loadFromFile("textures\\policeagent.png");
+    this->policeAgentTexture.loadFromFile("textures\\policeAgent.png");
     this->bushRotatedTexture.loadFromFile("textures\\bushRotated.png");
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->invisibleTexture.loadFromFile("textures\\invisible.png");

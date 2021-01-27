@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include <map>
+#include <iterator>
 #include "cScreen.h"
 #include "AssetManager.h"
 #include "Button.h"
 #include <json.hpp>
 #include <fstream>
-
+///@file
 
 /// \class MainMenu
 /// \brief
@@ -18,19 +19,20 @@
 class ScoreScreen : public cScreen
 {
 private:
-	std::vector<Button*> buttons;///< A vector of all the buttons on the main screen.
+	std::vector<Button*> buttons;///<A vector of all the buttons on the main screen.
 	bool isFullScreen = false;///< \brief bool if SFML window is full screen. 
 	sf::RenderWindow* window;///<Pointer to the SFML window. [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
 	sf::Sprite background;///<SFML Sprite for the background of the main menu. (is loaded from AssetManager in the constructor of this class). \image html menu_image.png
 	AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 	sf::Event event;///<SFML Event is for handling for keyboard inputs and window resising. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 	sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
+	sf::Sprite scoreBoard;///< Sprite of the scoreboard. In the sprite there is place for 8 scores. Used in the displayScores function of this class. \image html scoreboard.png
+	std::vector<sf::Text> scoreTextVector;///< Vector of SFML Text with scores. Is cleaned when the run function ends.
+	std::multimap<int, std::string, std::greater<int>>::iterator last;
+	void matchBackground();///< Function to reset background placement. 
+	void displayScores();///< Function to diplay scores in the scores board.
 	int alpha_max;///<
 	int alpha_div;///<
-	sf::Sprite scoreBoard;
-	std::vector<sf::Text> scoreTextVector;
-	void matchBackground();
-	void displayScores();
 	sf::Music* backgroundMusic;
 public:
 	/// <summary>
@@ -65,7 +67,7 @@ public:
 	/// SFML Event handeler.
 	/// [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 	/// </summary>
-	/// <returns>If a next screen need to show. !!!!!</returns>
+	/// <returns>If a next screen need to show. returm enum class Screen</returns>
 	Screen pollEvents();
 
 	/// <summary>

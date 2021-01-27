@@ -10,7 +10,7 @@
 #include <fstream>
 #include <vector>
 
-
+#include "HUD.h"
 #include "InvisibleWall.h"
 #include "PoliceAgent.h"
 #include "BushRotated.h"
@@ -78,7 +78,7 @@ class Game : public cScreen {
 		/// SFML Event handeler.
 		/// [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 		/// </summary>
-		/// <returns>If a next screen need to show. !!!!!</returns>
+		/// <returns>If a next screen need to show.</returns>
 		void pollEvents();
 
 		/// <summary>
@@ -94,23 +94,24 @@ class Game : public cScreen {
 		/// </summary>
 		void render();
 
-
-		Player* player;///< Pointer to the player. !!!!!!!!!!!!!!!!!
-
-
+		Player* player;///< Pointer to the Player. Is public because the GameOver screen need to get the scores from player class, when the player dies.
 
 		~Game();
 	private:
+		HUD hud;
+		std::vector<sf::Vector2f> spawns;
 		std::vector<Drawable*> objects;///< vector of pointers of all drawable pointers 
 		bool noKeyPressed = false;///< bool if no key is pressed.
 		bool isFullScreen = false;///<bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
-		sf::Music* ingameBreeze;
+		sf::Music* ingameBreeze;///< Pointer to the ingame breeze sound.
 		float elapsedTime = 0.f;///<Time used for elapsed a frame.
+		unsigned char wave = 1;
 		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
 		bool debug = false;///< bool used for debug intentions.
 		sf::Event event;///<SFML Event handeler. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
-		
+		unsigned char zombiesLeft = 5;
+		float spawnTimer = 0;
 };
 
 #endif
