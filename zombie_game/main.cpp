@@ -23,5 +23,6 @@ int main()
     {
 		currentScreen = Screens[int(currentScreen)]->run();
     }
+	sf::sleep(sf::milliseconds(250));
     return 0;
 }

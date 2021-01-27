@@ -54,6 +54,11 @@ void ScoreScreen::displayScores()
 	iputFile.close();
 }
 
+ScoreScreen::~ScoreScreen()
+{
+	this->assets.mainMenuSoundtrack.stop();
+}
+
 
 void ScoreScreen::matchBackground() {
 	sf::IntRect textureRect = this->background.getTextureRect();

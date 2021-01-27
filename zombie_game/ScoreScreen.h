@@ -31,13 +31,7 @@ private:
 	std::multimap<int, std::string, std::greater<int>>::iterator last;
 	void matchBackground();///< Function to reset background placement. 
 	void displayScores();///< Function to diplay scores in the scores board.
-	int alpha_max;///<
-	int alpha_div;///<
-	sf::Sprite scoreBoard;
-	std::vector<sf::Text> scoreTextVector;
-	void matchBackground();
-	void displayScores();
-	//sf::Music& backgroundMusic;
+	~ScoreScreen();
 public:
 	/// <summary>
 	/// Constructor or MainMenu class. 

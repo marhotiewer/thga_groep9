@@ -26,10 +26,10 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->clickSound.setVolume(50.f);
 }
 
-//MainMenu::~MainMenu() {
-//	this->backgroundMusic->stop();
-//	this->clickSound.resetBuffer();
-//}
+MainMenu::~MainMenu() {
+	this->assets.mainMenuSoundtrack.stop();
+	this->clickSound.resetBuffer();
+}
 
 void MainMenu::matchBackground() {
 	sf::IntRect textureRect = this->background.getTextureRect();

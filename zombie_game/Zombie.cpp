@@ -103,3 +103,11 @@ void Zombie::playAttackSound() {
 		this->attackSounds[soundToPlay].play();
 	}
 }
+
+Zombie::~Zombie()
+{
+	for (sf::Sound& attackSound : attackSounds) {
+		attackSound.stop();
+		attackSound.resetBuffer();
+	}
+}

@@ -109,7 +109,7 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 
 Game::~Game()
 {
-	this->ingameBreeze->stop();
+	this->assets.ingameBreezeSound.stop();
 	//this->ingameBreeze->~Music();
 	this->player->~Player();
 	for (Drawable* entity : this->objects) delete entity;
@@ -118,7 +118,7 @@ Game::~Game()
 void Game::update(float deltaTime)
 {
 	if ((this->elapsedTime += deltaTime) >= 1.f) {
-		if (this->debug) this->window->setTitle("Zombie Game (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
+		if (this->debug) this->window->setTitle("Z-Rush (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
 		else this->window->setTitle("Z-Rush");
 		this->elapsedTime = 0.f;
 	}
