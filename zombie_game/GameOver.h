@@ -32,7 +32,7 @@ private:
 	std::string playerInput;///< String of player input. Contains the player name. 
 	sf::Text playerText; ///< SFML text of the player input. Uses the string: playeInput. 
 	sf::RectangleShape inputBox;///< The white box, where the player can input her/his name.
-	sf::Text playerInputPromt;///< SFML text with the text: "Player name:"
+	sf::Text playerInputPromt;///< SFML text with the text: "Player name:", used to make clear to the Player that the Player can type his name to save the score. 
 	
 	/// <summary>
 	/// Function to save the players score to a file. 
@@ -46,6 +46,11 @@ private:
 	/// </summary>
 	void matchBackground();
 
+	/// <summary>
+	/// Function that as executed will toggle the SFML window to full screen.
+	/// </summary>
+	void toggleFullscreen();
+
 public:
 	/// <summary>
 	/// Constructor or GameOver class. 
@@ -53,19 +58,16 @@ public:
 	/// </summary>
 	/// <param name="window">The pointer to the current SFML window of the game.</param>
 	/// <param name="assets">AssetManager required for textures</param>
+	/// <param name="game">Reference to Game to get player points to save a score.</param>
 	GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game);
 
 	/// <summary>
-	/// Function that checks if a next screen need to show.
+	/// Function that checks if a next screen need to show. 
+	/// And update the SFML Events.
 	/// </summary>
 	/// <param name="deltaTime">The time elapsed for one frame.</param>
-	/// <returns></returns>
+	/// <returns>A screen to go to if a particular button is pressed by the user.</returns>
 	Screen update(float deltaTime);
-
-	/// <summary>
-	/// Function that as executed will toggle the SFML window to full screen.
-	/// </summary>
-	void toggleFullscreen();
 
 	/// <summary>
 	/// Main loop of the GameOver class. 
@@ -79,7 +81,7 @@ public:
 	/// SFML Event handeler.
 	/// [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 	/// </summary>
-	/// <returns>If a next screen need to show. !!!!!</returns>
+	/// <returns>Return a Screen if a next screen need to show. Otherwise return Screen::None</returns>
 	Screen pollEvents();
 
 	/// <summary>

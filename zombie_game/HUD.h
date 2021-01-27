@@ -5,6 +5,8 @@
 #include "AssetManager.h"
 ///@file
 
+/// \struct HudInfo
+/// \brief Information on the screen: Health, points and time.
 struct HudInfo{
 	int health = 10;
 	int points = 0;
@@ -29,7 +31,7 @@ class HUD
 		HUD(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos);
 		
 		/// <summary>
-		/// Function to draw the hud. The hud wil contain: Healt, Time and Points
+		/// Function to draw the hud. The hud wil contain: Health, Time and Points
 		/// </summary>
 		///<param name="window">The pointer to the current SFML window of the game.</param>
 		void draw(sf::RenderWindow* window);

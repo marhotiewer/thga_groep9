@@ -60,11 +60,6 @@ class Game : public cScreen {
 		/// </summary>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
 		void update(float deltaTime);
-		
-		/// <summary>
-		/// Function that as executed will toggle the SFML window to full screen.
-		/// </summary>
-		void toggleFullscreen();
 
 		/// <summary>
 		/// Main loop of the Z-Rush game.
@@ -98,20 +93,25 @@ class Game : public cScreen {
 
 		~Game();
 	private:
-		HUD hud;
-		std::vector<sf::Vector2f> spawns;
-		std::vector<Drawable*> objects;///< vector of pointers of all drawable pointers 
-		bool noKeyPressed = false;///< bool if no key is pressed.
-		bool isFullScreen = false;///<bool used for used full screen.
+		HUD hud;///<Shows the information on the screen. Like Time, Points and Health.
+		std::vector<sf::Vector2f> spawns;///< The places where the zombies can spawn. 
+		std::vector<Drawable*> objects;///< Vector of pointers of all drawable pointers 
+		bool noKeyPressed = false;///< Bool if no key is pressed.
+		bool isFullScreen = false;///< Bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
 		sf::Music* ingameBreeze;///< Pointer to the ingame breeze sound.
-		float elapsedTime = 0.f;///<Time used for elapsed a frame.
-		unsigned char wave = 1;
-		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
-		bool debug = false;///< bool used for debug intentions.
+		float elapsedTime = 0.f;///< Time used for elapsed a frame.
+		unsigned char wave = 1;///< The current wave of the zombies. 
+		AssetManager& assets;///< Reference to the AssetManager. To load textures. 
+		bool debug = false;///< Bool used for debug intentions. If true, debug information will show on screen. 
 		sf::Event event;///<SFML Event handeler. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
-		unsigned char zombiesLeft = 5;
-		float spawnTimer = 0;
+		unsigned char zombiesLeft = 5;///<The Zombies left in the game. 
+		float spawnTimer = 0;///< Timer used for spawning zombies on the correct time. 
+
+		/// <summary>
+		/// Function that as executed will toggle the SFML window to full screen.
+		/// </summary>
+		void toggleFullscreen();
 };
 
 #endif

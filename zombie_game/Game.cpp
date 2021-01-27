@@ -10,6 +10,12 @@ struct Z_Index {
 	}
 };
 
+/// <summary>
+/// Function to get a random item(iterator) of a vector
+/// </summary>
+/// <typeparam name="T">a vector with a type.</typeparam>
+/// <param name="v">The Vector</param>
+/// <returns>A iterator to the random item from the vector.</returns>
 template<typename T>
 T random(std::vector<T> const& v)
 {
@@ -179,8 +185,8 @@ void Game::update(float deltaTime)
 }
 
 void Game::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "R-Rush");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "R-Rush", sf::Style::Fullscreen);	// fullscreen
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));

@@ -10,6 +10,7 @@ int main()
 {
 	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
 	AssetManager assets;
+	window.setIcon(assets.gameIconWindow.getSize().x, assets.gameIconWindow.getSize().y, assets.gameIconWindow.getPixelsPtr());
 	Game game(&window, assets);
 	cScreen* Screens[] = {
 		new MainMenu(&window, assets),

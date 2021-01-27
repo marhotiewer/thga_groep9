@@ -4,7 +4,6 @@ GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) :
 {
 	this->event = sf::Event();
 
-
 	// Creating buttons
 	this->buttons.push_back(new Button(this->assets, { 0.f, 0.f }, ButtonType::Play));
 	this->buttons.push_back(new Button(this->assets, { 0.f, 50.f }, ButtonType::Scores));
@@ -83,8 +82,8 @@ Screen GameOver::update(float deltaTimeSeconds) {
 }
 
 void GameOver::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Z-Rush");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Z-Rush", sf::Style::Fullscreen);	// fullscreen
 
 	sf::View view = this->window->getView();
 	view.setSize(sf::Vector2f(this->window->getSize()));
@@ -201,12 +200,12 @@ void GameOver::render()
 
 Screen GameOver::run()
 {
-	int points = this->game.player->getPoints();
-	new(&game) Game(window, assets);
-
 	sf::View view = this->window->getView();
 	view.setCenter({ 0.f, 0.f });
 	this->window->setView(view);
+
+	int points = this->game.player->getPoints();
+	new(&game) Game(window, assets);
 
 	sf::Clock clock;
 	float deltaTimeSeconds;
