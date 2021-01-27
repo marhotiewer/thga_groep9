@@ -12,7 +12,7 @@
 /// Class for a Street light.
 /// \details
 /// Class used in the map for Static Street lights.
-/// Class is inherted from Static, so it can't move.
+/// Class is inherited from Static, so it can't move.
 /// \image html lamp.png
 class Lamp : public Static
 {
