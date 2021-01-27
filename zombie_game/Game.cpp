@@ -159,9 +159,17 @@ void Game::update(float deltaTime)
 
 		// spawn zombie if the total amount of zombies hasn't been spawned
 		if (this->zombiesLeft > 0 && (this->spawnTimer += deltaTime) >= 1.f) {
-			this->objects.push_back(new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects));
+			Zombie* zombie = new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects);
+			zombie->update(deltaTime);
 			this->spawnTimer = 0.f;
-			this->zombiesLeft--;
+
+			if (zombie->move({}) == nullptr) {
+				this->objects.push_back(new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects));
+				this->zombiesLeft--;
+			}
+			else {
+				delete zombie;
+			}
 		}
 		// start a new round if every zombie has been spawned and killed
 		else if (!zombiesAlive && this->zombiesLeft == 0) {

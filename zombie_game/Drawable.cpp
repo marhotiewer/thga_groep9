@@ -3,8 +3,7 @@
 bool Drawable::isColliding(Drawable& drawable, sf::Vector2f delta)
 {
     sf::FloatRect h1 = drawable.getHitbox();
-    h1.left += delta.x;
-    h1.top += delta.y;
+    h1 = { h1.left + delta.x, h1.top + delta.y, h1.width, h1.height };
     return h1.intersects(this->getHitbox());
 }
 
