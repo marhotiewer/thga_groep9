@@ -27,6 +27,7 @@ class MainMenu : public cScreen
 		sf::Music* backgroundMusic;///< Background music of the MainMenu.
 		sf::Sound clickSound;///< Sound plays when the player presses a button.
 		void matchBackground();///< Function to reset background placement. 
+		~MainMenu();
 	public:
 		/// <summary>
 		/// Constructor or MainMenu class. 

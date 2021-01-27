@@ -19,16 +19,17 @@ class Campfire : public Static
 {
 	public:
 		/// <summary>
-		/// 
+		/// Constructor of the Campfire
 		/// </summary>
 		/// <param name="assets">AssetManager required for textures.</param>
 		/// <param name="pos">position of the Campfire.</param>
 		Campfire(AssetManager& assets, sf::Vector2f pos);
 		
 		/// <summary>
-		/// 
+		/// Function to return the correct hitbox of the Bush.
+		/// So the player can walk behind the campfire.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>SFML FloatRect of the campfire</returns>
 		sf::FloatRect getHitbox() override;
 };
 

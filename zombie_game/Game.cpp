@@ -110,6 +110,9 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 
 Game::~Game()
 {
+	this->ingameBreeze->stop();
+	//this->ingameBreeze->~Music();
+	this->player->~Player();
 	for (Drawable* entity : this->objects) delete entity;
 }
 

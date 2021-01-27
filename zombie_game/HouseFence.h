@@ -17,7 +17,7 @@ class HouseFence : public Static
 {
 	public:
 		/// <summary>
-		/// 
+		/// Constructor of the fence of the house.
 		/// </summary>
 		/// <param name="assets">AssetManager required for textures</param>
 		/// <param name="pos">Position to place the fence of the house.</param>

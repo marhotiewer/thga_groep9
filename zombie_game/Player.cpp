@@ -61,6 +61,14 @@ int Player::getPoints()
 	return this->info.points;
 }
 
+Player::~Player()
+{
+	this->handGunSound.stop();
+	this->handGunSound.resetBuffer();
+	this->walkingSound.stop();
+	this->walkingSound.resetBuffer();
+}
+
 
 void Player::update(float deltaTime)
 {

@@ -24,9 +24,9 @@ class PoliceAgent : public Static
 		PoliceAgent(AssetManager& assets, sf::Vector2f pos);
 
 		/// <summary>
-		/// 
+		/// Return the correct hitbox of the police agent.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>SFML FloatRect of the police agent</returns>
 		sf::FloatRect getHitbox() override;
 };
 
