@@ -12,6 +12,7 @@
 /// Class of a Hills1(normal hills)
 /// \details
 /// Class for the normal hills (with no waterfall).
+/// Class is inherited from Static, so it can't move.
 /// \image html hills1.png
 class Hills1 : public Static
 {

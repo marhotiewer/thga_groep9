@@ -12,6 +12,7 @@
 /// Class of a Fence
 /// \details
 /// Fence class used in the map for a fence.
+/// Class is inherited from Static, so it can't move.
 /// \image html fence.png
 class Fence : public Static
 {

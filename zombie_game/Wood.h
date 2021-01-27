@@ -12,6 +12,7 @@
 /// Wood class.
 /// \details
 /// Class used for spawning Wood.
+/// Class is inherited from Static, so it can't move.
 /// \image html wood.png
 class Wood : public Static
 {

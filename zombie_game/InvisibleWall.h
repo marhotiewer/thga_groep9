@@ -12,6 +12,7 @@
 /// Class of the Invisible Wall.
 /// \details
 /// Class used for invisibe Walls.
+/// Class is inherited from Static, so it can't move.
 /// \image html invisible.png
 class InvisibleWall : public Static
 {
