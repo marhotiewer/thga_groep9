@@ -10,8 +10,8 @@
 enum class ButtonType {
 	Play,///<If pressed, the game wil start.
 	Quit,///<If pressed, the game will close.
-	Options,///<If pressed, The player can edit the options. 
-	Scores,///<If pressed, the scores will show up on the screen. 
+	Scores,///<If pressed, the scores will show up on the screen.
+	Menu,
 	None///<The button is not pressed
 };
 

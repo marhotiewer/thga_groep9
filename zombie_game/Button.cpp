@@ -12,11 +12,11 @@ Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawab
 		case ButtonType::Quit:
 			this->sprite.setTextureRect({ 0, 54, 111, 54 });
 			break;
-		case ButtonType::Options:
-			this->sprite.setTextureRect({ 0, 108, 111, 54 });
-			break;
 		case ButtonType::Scores:
 			this->sprite.setTextureRect({ 0, 162, 111, 54 });
+			break;
+		case ButtonType::Menu:
+			this->sprite.setTextureRect({ 0, 216, 111, 54 });
 			break;
 		default: 
 			// This should never happen

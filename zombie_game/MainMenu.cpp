@@ -7,8 +7,6 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->buttons.push_back(new Button(this->assets, { 0.f, 27.f }, ButtonType::Play));
 	this->buttons.push_back(new Button(this->assets, { 0.f, 81.f }, ButtonType::Scores));
 	this->buttons.push_back(new Button(this->assets, { 0.f, 135.f }, ButtonType::Quit));
-	//this->buttons.push_back(new Button(this->assets, { 0.f, 189.f }, ButtonType::Options));
-
 	
 	this->logo.setTexture(assets.gameLogoTexture);
 	sf::IntRect logoRect = this->logo.getTextureRect();
