@@ -50,7 +50,7 @@ class AssetManager
 		sf::Texture bushTexture;///< \brief Texture of a bush. Used in the map. \image html bush.png
 		sf::Texture bushRotatedTexture;///< \brief Texture of a rotated bush. Used in the map. \image html bushRotated.png
 		sf::SoundBuffer mainMenuClickSound;
-		sf::SoundBuffer* zombieSounds[4];
+		sf::SoundBuffer zombieSounds[4];
 		sf::SoundBuffer walkingSound;
 		sf::Music mainMenuSoundtrack;
 		sf::SoundBuffer handGunSound;

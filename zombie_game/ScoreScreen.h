@@ -31,6 +31,7 @@ private:
 	std::vector<sf::Text> scoreTextVector;
 	void matchBackground();
 	void displayScores();
+	sf::Music* backgroundMusic;
 public:
 	/// <summary>
 	/// Constructor or MainMenu class. 

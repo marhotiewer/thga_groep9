@@ -72,6 +72,7 @@ Screen MainMenu::pollEvents()
 		switch (this->event.type)
 		{
 			case sf::Event::Closed: {
+				this->backgroundMusic->stop();
 				this->window->close();
 				break;
 			}
@@ -89,6 +90,7 @@ Screen MainMenu::pollEvents()
 				}
 				// close the game
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					this->backgroundMusic->stop();
 					this->window->close();
 				}
 				break;
