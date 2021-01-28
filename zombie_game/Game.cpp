@@ -128,6 +128,8 @@ Game::~Game()
 	for (Drawable* entity : this->objects) delete entity;
 }
 
+#include <iostream>
+
 void Game::update(float deltaTime)
 {
 	if ((this->elapsedTime += deltaTime) >= 1.f) {
@@ -156,7 +158,7 @@ void Game::update(float deltaTime)
 			if ((*entity)->isActive()) {
 				(*entity)->update(deltaTime);
 			}
-			else if ((*entity)->type != Drawable::Type::Player) {
+			else {
 				delete (*entity);
 				entity = this->objects.erase(entity);
 			}
@@ -175,9 +177,19 @@ void Game::update(float deltaTime)
 		// spawn zombie if the total amount of zombies hasn't been spawned
 		if (this->zombiesLeft > 0 && (this->spawnTimer += deltaTime) >= 1.f) {
 			Zombie* zombie = new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects);
-			this->objects.push_back(zombie);
+
+			for (Drawable* object : this->objects) {
+				if (object->isColliding(*zombie)) {
+					delete zombie;
+					break;
+				}
+				else {
+					this->objects.push_back(zombie);
+					this->zombiesLeft--;
+					break;
+				}
+			}
 			this->spawnTimer = 0.f;
-			this->zombiesLeft--;
 		}
 		// start a new round if every zombie has been spawned and killed
 		else if (!zombiesAlive && this->zombiesLeft == 0) {
