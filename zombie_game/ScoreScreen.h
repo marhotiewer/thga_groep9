@@ -9,8 +9,8 @@
 #include "cScreen.h"
 #include "AssetManager.h"
 #include "Button.h"
-
 ///@file
+
 
 /// \class MainMenu
 /// \brief
@@ -20,7 +20,7 @@
 class ScoreScreen : public cScreen
 {
 private:
-	std::vector<Button*> buttons;///<A vector of all the buttons on the main screen.
+	std::vector<Button*> buttons;///< A vector of all the buttons on the main screen.
 	bool isFullScreen = false;///< \brief bool if SFML window is full screen. 
 	sf::RenderWindow* window;///<Pointer to the SFML window. [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
 	sf::Sprite background;///<SFML Sprite for the background of the main menu. (is loaded from AssetManager in the constructor of this class). \image html menu_image.png

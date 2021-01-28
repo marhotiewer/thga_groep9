@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <time.h>
 #include "Game.h"
 #include "MainMenu.h"
 #include "GameOver.h"
@@ -8,6 +9,7 @@
 
 int main()
 {
+	srand((unsigned int)time(NULL));
 	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
 	AssetManager assets;
 	window.setIcon(assets.gameIconWindow.getSize().x, assets.gameIconWindow.getSize().y, assets.gameIconWindow.getPixelsPtr());

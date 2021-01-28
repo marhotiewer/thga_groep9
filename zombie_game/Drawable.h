@@ -2,7 +2,6 @@
 #define DRAWABLE_H
 
 #include <SFML/Graphics.hpp>
-
 #include "AssetManager.h"
 /// @file
 
@@ -57,13 +56,13 @@ class Drawable
 		virtual void debug_draw(sf::RenderWindow* window);
 		
 		/// <summary>
-		/// draw's the current sprite to the window. 
+		/// Draw's the current sprite to the window. 
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		virtual void draw(sf::RenderWindow *window);
 		
 		/// <summary>
-		/// 
+		/// Function to return the hitbox of the object.
 		/// </summary>
 		/// <returns>Hitbox of the current object</returns>
 		virtual sf::FloatRect getHitbox();

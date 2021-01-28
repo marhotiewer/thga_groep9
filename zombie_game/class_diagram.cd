@@ -1,28 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Entity">
-    <Position X="1.75" Y="0.5" Width="1.5" />
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAggCAAAIAAAAABAAAAQCAAAAAAEEEAAg=</HashCode>
+      <HashCode>EAAAAAAAAAEAgACAAAIAAAAAAQAAAAAIAAAAAUAAAAg=</HashCode>
       <FileName>Entity.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="window" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Zombie">
     <Position X="3" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAACgQAAAAIAAAAAAAAEBAAAAAAAEAAA=</HashCode>
+      <HashCode>AABAAAAAEAAAiACBQIAAAAAAAAAAAAEBAAAAAAAEABA=</HashCode>
       <FileName>Zombie.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="player" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Floor">
     <Position X="6" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAAAAACgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Floor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Static">
-    <Position X="7.75" Y="1.25" Width="1.5" />
+    <Position X="11.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
       <FileName>Static.h</FileName>
@@ -43,18 +49,306 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Drawable">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Drawable::Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Drawable.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AgAAAAAAAIAAAAAAQAIAAAAAABAIACEAgAAAAAAAAAA=</HashCode>
+      <HashCode>AgAAAAAAAIAAgCAAQAIAABAAABAJACEAgAAAIAAEAAA=</HashCode>
       <FileName>Drawable.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="assets" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Player">
     <Position X="0.5" Y="5" Width="1.5" />
+    <AssociationLine Name="hud" Type="HUD" ManuallyRouted="true">
+      <Path>
+        <Point X="1.25" Y="8.415" />
+        <Point X="1.25" Y="8.938" />
+        <Point X="1.076" Y="8.938" />
+        <Point X="1.076" Y="18.165" />
+        <Point X="4.667" Y="18.165" Type="JumpStart" />
+        <Point X="4.833" Y="18.165" Type="JumpEnd" />
+        <Point X="7.39" Y="18.165" />
+        <Point X="7.39" Y="12.837" />
+        <Point X="10.5" Y="12.837" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAACAwAAAAAAAAAgAAAEAAAAAAQAEAAA=</HashCode>
+      <HashCode>AAAAABgEAAAAAAAAQAAAAAAAAAEAAAEIQAAAAQAEADA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="hud" />
+    </ShowAsAssociation>
   </Class>
+  <Class Name="Bush">
+    <Position X="16.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bush.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BushRotated">
+    <Position X="14.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BushRotated.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Campfire">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Campfire.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fence">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Fence.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fountain">
+    <Position X="18.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Fountain.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hills1">
+    <Position X="20" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Hills1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hills2">
+    <Position X="21.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Hills2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HouseFence">
+    <Position X="23.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HouseFence.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InvisibleWall">
+    <Position X="25.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InvisibleWall.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lamp">
+    <Position X="27" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Lamp.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Perk1">
+    <Position X="28.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Perk1.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PoliceAgent">
+    <Position X="30.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>PoliceAgent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rocks">
+    <Position X="32.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rocks.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sandbag">
+    <Position X="34" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sandbag.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shed">
+    <Position X="35.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Shed.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tent">
+    <Position X="37.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Tent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Water">
+    <Position X="39.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Water.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wood">
+    <Position X="41" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Wood.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bullet">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIACAAAAAAAAAAAAAAAAAAAAAAAAUAAA=</HashCode>
+      <FileName>Bullet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AssetManager">
+    <Position X="2.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIATBIBRAQAhIAAABAECAYIdAhGCjQgIAAAAgAABBAA=</HashCode>
+      <FileName>AssetManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HUD">
+    <Position X="10.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAgDAIAAAAAACQAACAIAAgACAAEAAE=</HashCode>
+      <FileName>HUD.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="window" />
+      <Field Name="assets" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="cScreen">
+    <Position X="14.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>cScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Button">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <InheritanceLine Type="Drawable" ManuallyRouted="true">
+      <Path>
+        <Point X="7.75" Y="4.622" />
+        <Point X="7.75" Y="5.089" />
+        <Point X="5.75" Y="5.089" />
+        <Point X="5.75" Y="7.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAACAAAAAAAAAAAEAAAAAAAABAAACAIAAAAAAQAA=</HashCode>
+      <FileName>Button.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="type" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Game">
+    <Position X="12.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAggAAQgAgAAAAACAAAABAQiAECIJgAkAAAAUBQA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="window" />
+      <Field Name="assets" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameOver">
+    <Position X="16.25" Y="10.5" Width="1.75" />
+    <AssociationLine Name="game" Type="Game" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.615" Y="15.454" />
+        <Point X="16.032" Y="15.454" />
+        <Point X="16.032" Y="15.87" />
+        <Point X="15.722" Y="15.87" Type="JumpStart" />
+        <Point X="15.555" Y="15.87" Type="JumpEnd" />
+        <Point X="15.361" Y="15.87" Type="JumpStart" />
+        <Point X="15.194" Y="15.87" Type="JumpEnd" />
+        <Point X="14.468" Y="15.87" />
+        <Point X="14.468" Y="15.748" />
+        <Point X="14.25" Y="15.748" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAggAAAAsAIAAAIAAAQAAAgAgAECIIggAAAIA0IAA=</HashCode>
+      <FileName>GameOver.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="window" />
+      <Field Name="game" />
+      <Field Name="assets" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MainMenu">
+    <Position X="14.5" Y="10.5" Width="1.5" />
+    <AssociationLine Name="window" Type="sf::RenderWindow" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="15.25" Y="14.877" />
+        <Point X="15.25" Y="15.624" />
+        <Point X="15.277" Y="15.624" />
+        <Point X="15.277" Y="16.195" />
+        <Point X="15.125" Y="16.195" />
+        <Point X="15.125" Y="19.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAkCAAAAIEAAgAAQgAgAECIIgAAAAAAUIAA=</HashCode>
+      <FileName>MainMenu.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="window" />
+      <Field Name="assets" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="sf::RenderWindow" Collapsed="true">
+    <Position X="14" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hAAAAAAAAIBAAAAAAAAAAASAAAAAEAAgAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Programeer Omgeving\Projects\toga_groep9\libs\sfml-2.5.1\include\SFML\Graphics\RenderWindow.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="HudInfo">
+    <Position X="8.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>HUD.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Screen">
+    <Position X="18.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAgAAAAAAAQAgAAAAAAAAQAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>cScreen.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ButtonType">
+    <Position X="7.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAgAAAAAEAAQA=</HashCode>
+      <FileName>Button.h</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
