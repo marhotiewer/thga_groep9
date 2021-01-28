@@ -105,13 +105,18 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1800, 800)));
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
-	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects, this->hud));
+	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(1500, 1500), this->objects, this->hud));
 	
 	this->ingameBreeze = &this->assets.ingameBreezeSound;
 
 	this->spawns = {
-		sf::Vector2f(300, 2200),
-		sf::Vector2f(500, 2200)
+		sf::Vector2f(600, 700),
+		sf::Vector2f(1010, 500),
+		sf::Vector2f(2160, 500),
+		sf::Vector2f(650, 1300),
+		sf::Vector2f(2365, 1030),
+		sf::Vector2f(2160, 1630),
+		sf::Vector2f(1570, 1750)
 	};
 }
 
