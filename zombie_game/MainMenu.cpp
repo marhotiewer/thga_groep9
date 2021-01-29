@@ -19,14 +19,13 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->background.setPosition({ 0.f, 0.f });
 	this->matchBackground();
 
-	this->backgroundMusic = &this->assets.mainMenuSoundtrack;
 	this->clickSound = sf::Sound(this->assets.mainMenuClickSound);
 	this->clickSound.setVolume(50.f);
 }
 
 MainMenu::~MainMenu() {
+	this->assets.mainMenuSoundtrack.stop();
 	for (Button* button : this->buttons) delete button;
-	this->backgroundMusic->stop();
 }
 
 void MainMenu::matchBackground() {
@@ -72,6 +71,7 @@ Screen MainMenu::pollEvents()
 		switch (this->event.type)
 		{
 			case sf::Event::Closed: {
+				this->assets.mainMenuSoundtrack.stop();
 				this->window->close();
 				break;
 			}
@@ -89,6 +89,7 @@ Screen MainMenu::pollEvents()
 				}
 				// close the game
 				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					this->assets.mainMenuSoundtrack.stop();
 					this->window->close();
 				}
 				break;
@@ -112,7 +113,7 @@ Screen MainMenu::pollEvents()
 								case ButtonType::Play: {
 									// Play the game!
 									returnValue = Screen::Game;
-									this->backgroundMusic->stop();
+									this->assets.mainMenuSoundtrack.stop();
 									break;
 								}
 								case ButtonType::Quit: {
@@ -159,7 +160,7 @@ Screen MainMenu::run()
 	sf::Clock clock;
 	float deltaTime;
 
-	this->backgroundMusic->play();
+	this->assets.mainMenuSoundtrack.play();
 
 	while (nextScreen == Screen::None && this->running())
 	{

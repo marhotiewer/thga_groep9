@@ -9,7 +9,7 @@ Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	this->health = 10;
 
 	for (unsigned int i = 0; i < 4; i++) {
-		this->attackSounds[i] = new sf::Sound(*this->assets.zombieSounds[i]);
+		this->attackSounds[i] = sf::Sound(this->assets.zombieSounds[i]);
 	}
 
 	this->randomSoundTime = (rand() % 5);
@@ -97,9 +97,17 @@ void Zombie::playAttackSound() {
 		float volume = ((maximumDistance - linearDistance) / (maximumDistance / 100)) * (regularVolume / 100);
 		int soundToPlay = (rand() % 4);
 		float pitch = (rand() % 20 + 90) / 100.f;
-		this->attackSounds[soundToPlay]->setPitch(pitch);
-		this->attackSounds[soundToPlay]->setVolume(volume);
+		this->attackSounds[soundToPlay].setPitch(pitch);
+		this->attackSounds[soundToPlay].setVolume(volume);
 		//this->attackSounds[soundToPlay]->setPosition({ this->getPos().x, this->getPos().y, 0 });
-		this->attackSounds[soundToPlay]->play();
+		this->attackSounds[soundToPlay].play();
+	}
+}
+
+Zombie::~Zombie()
+{
+	for (sf::Sound& attackSound : attackSounds) {
+		attackSound.stop();
+		attackSound.resetBuffer();
 	}
 }

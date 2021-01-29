@@ -63,9 +63,11 @@ class Zombie : public Entity
 		/// Function to play a sound of a Zombie.
 		/// </summary>
 		void playAttackSound();
+
+		~Zombie();
 	private:
 		Player* player;///<Pointer to the player class.
-		sf::Sound* attackSounds[4];///< Array of sounds that a zombie makes.
+		sf::Sound attackSounds[4];///< Array of sounds that a zombie makes.
 		sf::Clock zombieClock;///< Clock used for Zombie sounds.
 		int randomSoundTime;///< integer containing a random number till 5(0-5). 
 };

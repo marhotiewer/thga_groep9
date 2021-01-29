@@ -49,7 +49,7 @@ class AssetManager
 		sf::Texture bushTexture;///< \brief Texture of a bush. Used in the map. \image html bush.png
 		sf::Texture bushRotatedTexture;///< \brief Texture of a rotated bush. Used in the map. \image html bushRotated.png
 		sf::SoundBuffer mainMenuClickSound;///< \brief Buffer with sound used if a user clicks a button on the main menu. 
-		sf::SoundBuffer* zombieSounds[4];///< \brief Array with sounds that a zombie can make. 
+		sf::SoundBuffer zombieSounds[4];///< \brief Array with sounds that a zombie can make. 
 		sf::SoundBuffer walkingSound;///< \brief Sound that the Player makes when walking. Sound is the same on any floor.
 		sf::Music mainMenuSoundtrack;///< \brief Music of the main menu. 
 		sf::SoundBuffer handGunSound;///< \brief Sound of the handgun of the player. Sound plays when the player fires the hand gun.

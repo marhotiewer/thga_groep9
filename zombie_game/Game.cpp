@@ -127,7 +127,7 @@ Game::~Game()
 Screen Game::update(float deltaTime)
 {
 	if ((this->elapsedTime += deltaTime) >= 1.f) {
-		if (this->debug) this->window->setTitle("Zombie Game (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
+		if (this->debug) this->window->setTitle("Z-Rush (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
 		else this->window->setTitle("Z-Rush");
 		this->elapsedTime = 0.f;
 	}
