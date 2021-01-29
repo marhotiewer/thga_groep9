@@ -8,13 +8,14 @@ Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	this->type = Type::Enemy;
 	this->health = 10;
 
+	/*
 	for (unsigned int i = 0; i < 4; i++) {
 		this->attackSounds[i] = sf::Sound(this->assets.zombieSounds[i]);
 	}
-
 	this->randomSoundTime = (rand() % 5);
 	this->zombieClock = sf::Clock();
 	this->zombieClock.restart();
+	*/
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
@@ -63,11 +64,13 @@ void Zombie::update(float deltaTime)
 		this->delta = { 0.f, 0.f };
 	}
 
+	/*
 	if (this->zombieClock.getElapsedTime().asSeconds() >= randomSoundTime) {
 		randomSoundTime = (rand() % 5) + 5;
 		this->zombieClock.restart();
 		playAttackSound();
 	}
+	*/
 }
 
 Drawable* Zombie::move(sf::Vector2f delta)
@@ -86,28 +89,28 @@ sf::FloatRect Zombie::getHitbox()
 }
 
 void Zombie::playAttackSound() {
-	// Positioning can be implemented later
-
 	// Set volume to match with distance
 	sf::Vector2f distanceVector(this->player->getPos() - this->getPos());
 	float linearDistance = sqrt((distanceVector.x * distanceVector.x) + (distanceVector.y * distanceVector.y));
 	float regularVolume = 15.f;
 	int maximumDistance = 1000;
+
 	if (linearDistance <= maximumDistance) {
 		float volume = ((maximumDistance - linearDistance) / (maximumDistance / 100)) * (regularVolume / 100);
-		int soundToPlay = (rand() % 4);
 		float pitch = (rand() % 20 + 90) / 100.f;
-		this->attackSounds[soundToPlay].setPitch(pitch);
-		this->attackSounds[soundToPlay].setVolume(volume);
-		//this->attackSounds[soundToPlay]->setPosition({ this->getPos().x, this->getPos().y, 0 });
-		this->attackSounds[soundToPlay].play();
+		int soundToPlay = (rand() % 4);
+
+		//this->attackSounds[soundToPlay].setPitch(pitch);
+		//this->attackSounds[soundToPlay].setVolume(volume);
+		//this->attackSounds[soundToPlay].play();
 	}
 }
 
 Zombie::~Zombie()
 {
+	/*
 	for (sf::Sound& attackSound : attackSounds) {
 		attackSound.stop();
-		attackSound.resetBuffer();
 	}
+	*/
 }
