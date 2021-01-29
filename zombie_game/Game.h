@@ -59,7 +59,7 @@ class Game : public cScreen {
 		/// This function updates the position on the screen. And runs the Bullet::move function to check if it can move to the new location. 
 		/// </summary>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
-		void update(float deltaTime);
+		Screen update(float deltaTime);
 
 		/// <summary>
 		/// Main loop of the Z-Rush game.
@@ -74,7 +74,7 @@ class Game : public cScreen {
 		/// [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 		/// </summary>
 		/// <returns>If a next screen need to show.</returns>
-		void pollEvents();
+		Screen pollEvents();
 
 		/// <summary>
 		/// Function that checks if the SFML window is running.

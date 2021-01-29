@@ -122,15 +122,11 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 
 Game::~Game()
 {
-	this->ingameBreeze->stop();
-	//this->ingameBreeze->~Music();
-	this->player->~Player();
 	for (Drawable* entity : this->objects) delete entity;
+	this->ingameBreeze->stop();
 }
 
-#include <iostream>
-
-void Game::update(float deltaTime)
+Screen Game::update(float deltaTime)
 {
 	if ((this->elapsedTime += deltaTime) >= 1.f) {
 		if (this->debug) this->window->setTitle("Zombie Game (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
@@ -138,7 +134,8 @@ void Game::update(float deltaTime)
 		this->elapsedTime = 0.f;
 	}
 
-	this->pollEvents();
+	Screen returnValue = Screen::None;
+	returnValue = this->pollEvents();
 
 	if (this->player->isActive()) {
 		sf::Vector2f delta(0.f, 0.f);
@@ -199,6 +196,7 @@ void Game::update(float deltaTime)
 	}
 	this->hud.update();
 	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
+	return returnValue;
 }
 
 void Game::toggleFullscreen() {
@@ -207,48 +205,46 @@ void Game::toggleFullscreen() {
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
-
 	this->isFullScreen = !this->isFullScreen;
 }
 
-void Game::pollEvents()
+Screen Game::pollEvents()
 {
+	Screen returnValue = Screen::None;
 	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
 		{
-		case sf::Event::Closed:
-			this->window->close();
-			break;
-		case sf::Event::Resized: {
-			sf::View view = this->window->getView();
-			view.setSize(sf::Vector2f(this->window->getSize()));
-			this->window->setView(view);
-			//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
-			break;
-		}
-
-		case sf::Event::KeyPressed:
-			// toggle fullscreen mode
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				toggleFullscreen();
-			}
-			// toggle debugging info
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
-				this->debug = !this->debug;
-			}
-			// close the game
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			case sf::Event::Closed:
 				this->window->close();
+				break;
+			case sf::Event::Resized: {
+				sf::View view = this->window->getView();
+				view.setSize(sf::Vector2f(this->window->getSize()));
+				this->window->setView(view);
+				break;
 			}
-			break;
-		case sf::Event::MouseButtonPressed:
-			if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
-			else if (event.mouseButton.button ==  sf::Mouse::Right) this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window))), this->player, this->objects));
-			break;
+			case sf::Event::KeyPressed:
+				// toggle fullscreen mode
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+					toggleFullscreen();
+				}
+				// toggle debugging info
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
+					this->debug = !this->debug;
+				}
+				// close the game
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					returnValue = Screen::MainMenu;
+				}
+				break;
+			case sf::Event::MouseButtonPressed:
+				if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
+				else if (event.mouseButton.button ==  sf::Mouse::Right) this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window))), this->player, this->objects));
+				break;
 		}
 	}
+	return returnValue;
 }
 
 bool Game::running()
@@ -280,17 +276,21 @@ void Game::render()
 Screen Game::run()
 {
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
-
-	sf::Clock clock;
-	float deltaTime;
 	this->ingameBreeze->play();
 
-	 while (this->running() && this->player->isActive())
+	Screen nextScreen = Screen::None;
+	sf::Clock clock;
+	float deltaTime;
+
+	 while (nextScreen == Screen::None && this->running() && this->player->isActive())
 	 {
 		 deltaTime = clock.restart().asSeconds();
-		 this->update(deltaTime);
+		 nextScreen = this->update(deltaTime);
 		 this->render();
 	 }
-	 return Screen::GameOver;
+
+	 if (!this->player->isActive()) {
+		 return Screen::GameOver;
+	 }
+	 return nextScreen;
 }

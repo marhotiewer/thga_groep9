@@ -171,12 +171,11 @@ Screen ScoreScreen::run()
 	sf::View view = this->window->getView();
 	view.setCenter({ 0.f, 0.f });
 	this->window->setView(view);
-	
 	this->displayScores();
 
 	Screen nextScreen = Screen::None;
-	sf::Clock clock;
 	float deltaTimeSeconds;
+	sf::Clock clock;
 
 	while (nextScreen == Screen::None && this->running()) {
 		deltaTimeSeconds = clock.restart().asSeconds();
