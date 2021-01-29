@@ -158,7 +158,7 @@ void Game::update(float deltaTime)
 			if ((*entity)->isActive()) {
 				(*entity)->update(deltaTime);
 			}
-			else {
+			else if ((*entity)->type != Drawable::Type::Player) {
 				delete (*entity);
 				entity = this->objects.erase(entity);
 			}
