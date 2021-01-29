@@ -237,8 +237,17 @@ Screen Game::pollEvents()
 				}
 				break;
 			case sf::Event::MouseButtonPressed:
-				if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
-				else if (event.mouseButton.button ==  sf::Mouse::Right) this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window))), this->player, this->objects));
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
+				}
+				else if (event.mouseButton.button == sf::Mouse::Right) {
+					sf::Vector2f pos(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f);
+					float angle = -0.99f;
+
+					while ((angle += 0.01f) <= 2) {
+						this->player->shoot({ pos.x + 50.f * float(cos(angle * 3.14159265359)), pos.y + 50.f * float(sin(angle * 3.14159265359)) });
+					}
+				}
 				break;
 		}
 	}
