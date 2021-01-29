@@ -2,6 +2,7 @@
 #define FOUNTAIN_H
 
 #include <SFML/Graphics.hpp>
+
 #include "Static.h"
 //@file
 

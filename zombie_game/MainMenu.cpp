@@ -45,8 +45,7 @@ void MainMenu::matchBackground() {
 }
 
 Screen MainMenu::update(float deltaTimeSeconds) {
-	Screen nextScreen = this->pollEvents();
-	return nextScreen;
+	return this->pollEvents();
 }
 
 void MainMenu::toggleFullscreen() {
@@ -57,14 +56,15 @@ void MainMenu::toggleFullscreen() {
 	view.setSize(sf::Vector2f(this->window->getSize()));
 	view.setCenter({ 0.f, 0.f });
 	this->window->setView(view);
-	this->matchBackground();
-	this->isFullScreen = !this->isFullScreen;
 
+	this->isFullScreen = !this->isFullScreen;
+	this->matchBackground();
 }
 
 Screen MainMenu::pollEvents()
 {
 	Screen returnValue = Screen::None;
+
 	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
@@ -119,17 +119,16 @@ Screen MainMenu::pollEvents()
 									// Quit the game :(
 									window->close();
 								}
-								case ButtonType::Scores:
-									//show the score screen.
+								case ButtonType::Scores: {
+									// Show the score screen.
 									returnValue = Screen::Scores;
 									break;
-								default: break;
+								}
 							}
 						}
 					}
 				}
 			}
-			default: break;
 		}
 	}
 	return returnValue;

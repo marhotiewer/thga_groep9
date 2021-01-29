@@ -213,16 +213,17 @@ Screen Game::pollEvents()
 	{
 		switch (this->event.type)
 		{
-			case sf::Event::Closed:
+			case sf::Event::Closed: {
 				this->window->close();
 				break;
+			}
 			case sf::Event::Resized: {
 				sf::View view = this->window->getView();
 				view.setSize(sf::Vector2f(this->window->getSize()));
 				this->window->setView(view);
 				break;
 			}
-			case sf::Event::KeyPressed:
+			case sf::Event::KeyPressed: {
 				// toggle fullscreen mode
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 					toggleFullscreen();
@@ -236,7 +237,8 @@ Screen Game::pollEvents()
 					returnValue = Screen::MainMenu;
 				}
 				break;
-			case sf::Event::MouseButtonPressed:
+			}
+			case sf::Event::MouseButtonPressed: {
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
 				}
@@ -249,6 +251,7 @@ Screen Game::pollEvents()
 					}
 				}
 				break;
+			}
 		}
 	}
 	return returnValue;
@@ -263,14 +266,16 @@ void Game::render()
 {
 	this->window->clear(sf::Color::White);
 	for (Drawable* object : this->objects) if (object->isActive()) object->draw(this->window);
+
+	// draw spawnpoint outlines for debugging
 	if (this->debug) {
 		for (sf::Vector2f spawn : this->spawns) {
 			sf::Vertex vertices[] = {
-				sf::Vertex(sf::Vector2f(spawn.x, spawn.y), sf::Color::Green),
-				sf::Vertex(sf::Vector2f(spawn.x + 10, spawn.y), sf::Color::Green),
-				sf::Vertex(sf::Vector2f(spawn.x + 10, spawn.y + 10), sf::Color::Green),
-				sf::Vertex(sf::Vector2f(spawn.x, spawn.y + 10), sf::Color::Green),
-				sf::Vertex(sf::Vector2f(spawn.x, spawn.y), sf::Color::Green)
+				sf::Vertex(sf::Vector2f(spawn.x, spawn.y), sf::Color::Red),
+				sf::Vertex(sf::Vector2f(spawn.x + 10, spawn.y), sf::Color::Red),
+				sf::Vertex(sf::Vector2f(spawn.x + 10, spawn.y + 10), sf::Color::Red),
+				sf::Vertex(sf::Vector2f(spawn.x, spawn.y + 10), sf::Color::Red),
+				sf::Vertex(sf::Vector2f(spawn.x, spawn.y), sf::Color::Red)
 			};
 			this->window->draw(vertices, 5, sf::LineStrip);
 		}

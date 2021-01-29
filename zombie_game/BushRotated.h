@@ -2,6 +2,7 @@
 #define BUSHROTATED_H
 
 #include <SFML/Graphics.hpp>
+
 #include "Static.h"
 ///@file
 

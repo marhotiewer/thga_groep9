@@ -2,6 +2,7 @@
 #define BULLET_H
 
 #include <SFML/Graphics.hpp>
+
 #include "Static.h"
 #include "Entity.h"
 /// @file

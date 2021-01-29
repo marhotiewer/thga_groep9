@@ -2,6 +2,7 @@
 #define HUD_H
 
 #include <SFML/Graphics.hpp>
+
 #include "AssetManager.h"
 ///@file
 
@@ -58,8 +59,8 @@ class HUD
 		sf::Sprite bottom_right;///< The background of the hud. 
 		AssetManager& assets;///< Reference to the AssetManager. To load textures. 
 		sf::Text healthText;///< SFML Text used for displaying the Health of the player on screen.
-		sf::Text timeText;///< SFML Text used for displaying the time of the game on screen.
 		sf::Text pointsText;///< SFML Text used for displaying the points of the player on screen.
+		sf::Text timeText;///< SFML Text used for displaying the time of the game on screen.
 		sf::Text waveText;///< SFML Text used for displaying current wave of the game on screen.
 		int wave = 1;///< The wave number of the game.. 
 };

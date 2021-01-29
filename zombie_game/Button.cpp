@@ -18,10 +18,6 @@ Button::Button(AssetManager& assets, sf::Vector2f pos, ButtonType type) : Drawab
 		case ButtonType::Menu:
 			this->sprite.setTextureRect({ 0, 216, 111, 54 });
 			break;
-		default: 
-			// This should never happen
-			//std::cout << "Button type not implemented!" << std::endl;
-			exit(1);
 	}
 	this->sprite.setOrigin({ 55.5f, 27.f });
 }

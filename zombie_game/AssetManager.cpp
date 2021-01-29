@@ -1454,8 +1454,8 @@ const uint8_t wall_tile[] = {
 
 AssetManager::AssetManager()
 {
-    this->arial.loadFromFile("font\\arial.ttf");
     this->gameIconWindow.loadFromFile("textures\\icon.png");
+    this->arial.loadFromFile("font\\arial.ttf");
 
     this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));
@@ -1463,12 +1463,12 @@ AssetManager::AssetManager()
     this->treeTexture.loadFromMemory(tree_sprite, sizeof(tree_sprite));
     this->policeAgentTexture.loadFromFile("textures\\policeAgent.png");
     this->bushRotatedTexture.loadFromFile("textures\\bushRotated.png");
+    this->houseFenceTexture.loadFromFile("textures\\fenceHouse.png");
     this->wallTexture.loadFromMemory(wall_tile, sizeof(wall_tile));
     this->invisibleTexture.loadFromFile("textures\\invisible.png");
     this->fountainTexture.loadFromFile("textures\\fountain.png");
     this->campfireTexture.loadFromFile("textures\\campfire.png");
     this->floorTexture.loadFromFile("textures\\background.png");
-    this->houseFenceTexture.loadFromFile("textures\\fenceHouse.png");
     this->zombieSpriteMap.loadFromFile("textures\\zombie.png");
     this->sandbagTexture.loadFromFile("textures\\sandbag.png");
     this->buttonTexture.loadFromFile("textures\\buttons.png");
@@ -1489,31 +1489,22 @@ AssetManager::AssetManager()
     this->woodTexture.loadFromFile("textures\\wood.png");
     this->lampTexture.loadFromFile("textures\\lamp.png");
     this->bushTexture.loadFromFile("textures\\bush.png");
-	this->homescreenBackgroundTexture.setSmooth(true);
 
+    this->houseFenceTexture.setRepeated(true);
     this->floorTexture.setRepeated(true);
     this->fenceTexture.setRepeated(true);
-    this->houseFenceTexture.setRepeated(true);
     this->waterTexture.setRepeated(true);
     this->woodTexture.setRepeated(true);
     this->wallTexture.setRepeated(true);
 
-	this->walkingSound.loadFromFile("sounds\\footsteps.wav");
-	this->ingameBreezeSound.openFromFile("sounds\\breeze.wav");
-	this->mainMenuSoundtrack.openFromFile("sounds\\main_menu.wav");
-	this->mainMenuClickSound.loadFromFile("sounds\\mouse_click.wav");
-	/*for (unsigned int i = 0; i < 4; i++) {
-		this->zombieSounds[i] = new sf::SoundBuffer;
-	}*/
-	this->zombieSounds[0].loadFromFile("sounds\\attack1.wav");
-	this->zombieSounds[1].loadFromFile("sounds\\attack2.wav");
-	this->zombieSounds[2].loadFromFile("sounds\\attack3.wav");
-	this->zombieSounds[3].loadFromFile("sounds\\attack4.wav");
+    this->mainMenuClickSound.loadFromFile("sounds\\mouse_click.wav");
+    this->mainMenuSoundtrack.openFromFile("sounds\\main_menu.wav");
+    this->handGunSound.loadFromFile("sounds\\handgun_sound.wav");
+    this->ingameBreezeSound.openFromFile("sounds\\breeze.wav");
+    this->walkingSound.loadFromFile("sounds\\footsteps.wav");
 
-	this->handGunSound.loadFromFile("sounds\\handgun_sound.wav");
-
+    this->homescreenBackgroundTexture.setSmooth(true);
 	this->mainMenuSoundtrack.setVolume(15.f);
 	this->mainMenuSoundtrack.setLoop(true);
 	this->ingameBreezeSound.setLoop(true);
-    this->wallTexture.setRepeated(true);
 }

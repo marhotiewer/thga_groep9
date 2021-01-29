@@ -66,12 +66,11 @@ void GameOver::matchBackground()
 {
 	sf::IntRect textureRect = this->background.getTextureRect();
 	sf::Vector2u windowSize = this->window->getSize();
-	int width = textureRect.width;
-	int height = textureRect.height;
-	// Calculate width scale
-	float widthScale = float(windowSize.x) / width;
-	// Calculate height scale
-	float heightScale = float(windowSize.y) / width;
+	
+	// Calculate width, height scales
+	float widthScale = float(windowSize.x) / textureRect.width;
+	float heightScale = float(windowSize.y) / textureRect.width;
+
 	// Change scale to biggest value
 	if (widthScale > heightScale) {
 		this->background.setScale({ widthScale, widthScale });
@@ -82,8 +81,7 @@ void GameOver::matchBackground()
 }
 
 Screen GameOver::update(float deltaTimeSeconds) {
-	Screen nextScreen = this->pollEvents();
-	return nextScreen;
+	return this->pollEvents();
 }
 
 void GameOver::toggleFullscreen() {
@@ -91,93 +89,95 @@ void GameOver::toggleFullscreen() {
 	else this->window->create(sf::VideoMode::getDesktopMode(), "Z-Rush", sf::Style::Fullscreen);	// fullscreen
 
 	sf::View view = this->window->getView();
+	
 	view.setSize(sf::Vector2f(this->window->getSize()));
 	view.setCenter({ 0.f, 0.f });
 	this->window->setView(view);
-	this->matchBackground();
+
 	this->isFullScreen = !this->isFullScreen;
+	this->matchBackground();
 }
 
 Screen GameOver::pollEvents()
 {
 	Screen returnValue = Screen::None;
+
 	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
 		{
-		case sf::Event::Closed: {
-			this->window->close();
-			break;
-		}
-		case sf::Event::Resized: {
-			sf::View view = this->window->getView();
-			view.setSize(sf::Vector2f(this->window->getSize()));
-			this->window->setView(view);
-			this->matchBackground();
-			break;
-		}
-		case sf::Event::TextEntered:
-			if (((event.text.unicode >= 65) && (event.text.unicode <= 90)) || ((event.text.unicode >= 97) && (event.text.unicode <= 122))) //This checks if the key pressed is alfabetic (A...Z OR a...z).
-			{
-				this->playerInput += static_cast<char>(event.text.unicode);
-				this->playerText.setString(this->playerInput);
-			}
-			break;
-		case sf::Event::KeyPressed: {
-			// toggle fullscreen mode
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				toggleFullscreen();
-			}
-			// close the game
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			case sf::Event::Closed: {
 				this->window->close();
+				break;
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
-				if (!this->playerInput.empty()) {
-					this->playerInput.erase(this->playerInput.length() - 1);
+			case sf::Event::Resized: {
+				sf::View view = this->window->getView();
+				view.setSize(sf::Vector2f(this->window->getSize()));
+				this->window->setView(view);
+				this->matchBackground();
+				break;
+			}
+			case sf::Event::TextEntered:
+				if (((event.text.unicode >= 65) && (event.text.unicode <= 90)) || ((event.text.unicode >= 97) && (event.text.unicode <= 122))) //This checks if the key pressed is alfabetic (A...Z OR a...z).
+				{
+					this->playerInput += static_cast<char>(event.text.unicode);
 					this->playerText.setString(this->playerInput);
 				}
+				break;
+			case sf::Event::KeyPressed: {
+				// toggle fullscreen mode
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+					toggleFullscreen();
+				}
+				// close the game
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					this->window->close();
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
+					if (!this->playerInput.empty()) {
+						this->playerInput.erase(this->playerInput.length() - 1);
+						this->playerText.setString(this->playerInput);
+					}
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+					this->canSaveScore = true;
+				}
+				break;
 			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				this->canSaveScore = true;
-			}
-			break;
-		}
-		case sf::Event::MouseMoved: {
-			// Update buttons
-			for (Button* button : buttons) {
-				button->buttonSelected(this->window->mapPixelToCoords({ this->event.mouseMove.x , this->event.mouseMove.y }));
-			}
-		}
-		case sf::Event::MouseButtonPressed: {
-			if (event.mouseButton.button == sf::Mouse::Left) {
-				ButtonType buttonPressed = ButtonType::None;
-				// Check if a button was pressed
+			case sf::Event::MouseMoved: {
+				// Update buttons
 				for (Button* button : buttons) {
-					buttonPressed = button->buttonPressed();
-					if (buttonPressed != ButtonType::None) {
-						// A button was pressed
-						switch (buttonPressed) {
-						case ButtonType::Play: {
-							// Play the game!
-							returnValue = Screen::Game;
-							break;
-						}
-						case ButtonType::Quit: {
-							// Quit the game :(
-							window->close();
-						}
-						case ButtonType::Scores: {
-							returnValue = Screen::Scores;
-							break;
-						}
-						default: break;
+					button->buttonSelected(this->window->mapPixelToCoords({ this->event.mouseMove.x , this->event.mouseMove.y }));
+				}
+			}
+			case sf::Event::MouseButtonPressed: {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					ButtonType buttonPressed = ButtonType::None;
+					// Check if a button was pressed
+					for (Button* button : buttons) {
+						buttonPressed = button->buttonPressed();
+						if (buttonPressed != ButtonType::None) {
+							// A button was pressed
+							switch (buttonPressed) {
+							case ButtonType::Play: {
+								// Play the game!
+								returnValue = Screen::Game;
+								break;
+							}
+							case ButtonType::Quit: {
+								// Quit the game :(
+								window->close();
+							}
+							case ButtonType::Scores: {
+								returnValue = Screen::Scores;
+								break;
+							}
+							default: break;
+							}
 						}
 					}
 				}
 			}
-		}
-		default: break;
 		}
 	}
 	return returnValue;
@@ -191,12 +191,9 @@ bool GameOver::running()
 void GameOver::render()
 {
 	this->window->clear();
-	// Draw stuff
 	this->window->draw(this->background);
 	this->window->draw(this->logo);
-	for (Button* button : this->buttons) {
-		button->draw(this->window);
-	}
+	for (Button* button : this->buttons) button->draw(this->window);
 	this->window->draw(this->inputBox);
 	this->window->draw(this->playerInputPromt);
 	this->window->draw(this->playerText);
@@ -221,7 +218,7 @@ Screen GameOver::run()
 		nextScreen = this->update(deltaTimeSeconds);
 		this->render();
 		if (this->canSaveScore) {
-			this->canSaveScore = false;//set to false for next game
+			this->canSaveScore = false;
 			return this->saveScoreToFile(points);
 		}
 	}

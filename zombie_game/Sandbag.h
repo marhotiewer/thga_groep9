@@ -2,6 +2,7 @@
 #define SANDBAG_H
 
 #include <SFML/Graphics.hpp>
+
 #include "Static.h"
 //@file
 

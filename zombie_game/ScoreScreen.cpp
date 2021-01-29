@@ -16,8 +16,6 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 	this->background.setOrigin({ float(backgroundRect.width) / 2, float(backgroundRect.height) / 2 }); // center of the sprite
 	this->background.setPosition({ 0.f, 0.f });
 	this->matchBackground();
-
-	//this->backgroundMusic = this->assets.mainMenuSoundtrack;
 }
 
 ScoreScreen::~ScoreScreen()
@@ -30,6 +28,7 @@ void ScoreScreen::displayScores()
 {
 	std::ifstream iputFile("scores.json");
 	nlohmann::json jsonInput;
+
 	if (!(iputFile.peek() == std::ifstream::traits_type::eof()))
 	{
 		std::multimap<int, std::string, std::greater<int> > scoreMap;
@@ -54,28 +53,20 @@ void ScoreScreen::displayScores()
 void ScoreScreen::matchBackground() {
 	sf::IntRect textureRect = this->background.getTextureRect();
 	sf::Vector2u windowSize = this->window->getSize();
-	int width = textureRect.width;
-	int height = textureRect.height;
-	// Calculate width scale
-	float widthScale = float(windowSize.x) / width;
-	// Calculate height scale
-	float heightScale = float(windowSize.y) / width;
+	
+	// Calculate width, height scales
+	float widthScale = float(windowSize.x) / textureRect.width;
+	float heightScale = float(windowSize.y) / textureRect.width;
+
 	// Change scale to biggest value
-	if (widthScale > heightScale) {
+	if (widthScale > heightScale)
 		this->background.setScale({ widthScale, widthScale });
-	}
-	else {
+	else
 		this->background.setScale({ heightScale, heightScale });
-	}
 }
 
 Screen ScoreScreen::update(float deltaTimeSeconds) {
 	Screen nextScreen = this->pollEvents();
-	float textx = -100.f, texty = -150.f;
-	for (sf::Text &text : scoreTextVector) {
-		text.setPosition(sf::Vector2f(textx, texty));
-		texty += 38;
-	}
 	return nextScreen;
 }
 
@@ -94,63 +85,59 @@ void ScoreScreen::toggleFullscreen() {
 Screen ScoreScreen::pollEvents()
 {
 	Screen returnValue = Screen::None;
+
 	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
 		{
-		case sf::Event::Closed: {
-			this->window->close();
-			break;
-		}
-		case sf::Event::Resized: {
-			sf::View view = this->window->getView();
-			view.setSize(sf::Vector2f(this->window->getSize()));
-			this->window->setView(view);
-			this->matchBackground();
-			break;
-		}
-		case sf::Event::KeyPressed: {
-			// toggle fullscreen mode
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				toggleFullscreen();
-			}
-			// close the game
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			case sf::Event::Closed: {
 				this->window->close();
+				break;
 			}
-			break;
-		}
-		case sf::Event::MouseMoved: {
-			// Update buttons
-			for (Button* button : buttons) {
-				button->buttonSelected(this->window->mapPixelToCoords({ this->event.mouseMove.x , this->event.mouseMove.y }));
+			case sf::Event::Resized: {
+				sf::View view = this->window->getView();
+				view.setSize(sf::Vector2f(this->window->getSize()));
+				this->window->setView(view);
+				this->matchBackground();
+				break;
 			}
-		}
-		case sf::Event::MouseButtonPressed: {
-			if (event.mouseButton.button == sf::Mouse::Left) {
-				ButtonType buttonPressed = ButtonType::None;
-				// Check if a button was pressed
+			case sf::Event::KeyPressed: {
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+					toggleFullscreen();
+				}
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					returnValue = Screen::MainMenu;
+				}
+				break;
+			}
+			case sf::Event::MouseMoved: {
 				for (Button* button : buttons) {
-					buttonPressed = button->buttonPressed();
-					if (buttonPressed != ButtonType::None) {
-						// A button was pressed
-						switch (buttonPressed) {
-						case ButtonType::Play: {
-							// Play the game!
-							this->assets.mainMenuSoundtrack.stop();
-							returnValue = Screen::Game;
-						}
-						case ButtonType::Menu: {
-							returnValue = Screen::MainMenu;
-							break;
-						}
-						default: break;
+					button->buttonSelected(this->window->mapPixelToCoords({ this->event.mouseMove.x , this->event.mouseMove.y }));
+				}
+			}
+			case sf::Event::MouseButtonPressed: {
+				if (event.mouseButton.button == sf::Mouse::Left) {
+					ButtonType buttonPressed = ButtonType::None;
+					// Check if a button was pressed
+					for (Button* button : buttons) {
+						buttonPressed = button->buttonPressed();
+						if (buttonPressed != ButtonType::None) {
+							// A button was pressed
+							switch (buttonPressed) {
+								case ButtonType::Play: {
+									// Play the game!
+									this->assets.mainMenuSoundtrack.stop();
+									returnValue = Screen::Game;
+								}
+								case ButtonType::Menu: {
+									returnValue = Screen::MainMenu;
+									break;
+								}
+							}
 						}
 					}
 				}
 			}
-		}
-		default: break;
 		}
 	}
 	return returnValue;
@@ -166,17 +153,15 @@ void ScoreScreen::render()
 	this->window->clear();
 	this->window->draw(this->background);
 	this->window->draw(this->logo);
-	for (Button* button : this->buttons) {
-		button->draw(this->window);
-	}
 	this->window->draw(this->scoreBoard);
 	for (sf::Text text : this->scoreTextVector) {
 		this->window->draw(text);
 	}
+	for (Button* button : this->buttons) {
+		button->draw(this->window);
+	}
 	this->window->display();
 }
-
-
 
 Screen ScoreScreen::run()
 {
@@ -186,14 +171,20 @@ Screen ScoreScreen::run()
 	this->displayScores();
 
 	Screen nextScreen = Screen::None;
-	float deltaTimeSeconds;
+	float deltaTime;
 	sf::Clock clock;
 
+	float texty = -150.f;
+	for (sf::Text& text : this->scoreTextVector) {
+		text.setPosition(sf::Vector2f(-100.f, texty));
+		texty += 38;
+	}
+
 	while (nextScreen == Screen::None && this->running()) {
-		deltaTimeSeconds = clock.restart().asSeconds();
-		nextScreen = this->update(deltaTimeSeconds);
+		deltaTime = clock.restart().asSeconds();
+		nextScreen = this->update(deltaTime);
 		this->render();
 	}
-	scoreTextVector.clear();
+	this->scoreTextVector.clear();
 	return nextScreen;
 }

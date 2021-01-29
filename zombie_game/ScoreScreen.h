@@ -1,13 +1,14 @@
 #ifndef ScoreScreen_H
 #define ScoreScreen_H
 
-#include <iostream>
-#include <map>
+#include <SFML/Graphics.hpp>
 #include <iterator>
 #include <json.hpp>
 #include <fstream>
-#include "cScreen.h"
+#include <map>
+
 #include "AssetManager.h"
+#include "cScreen.h"
 #include "Button.h"
 ///@file
 

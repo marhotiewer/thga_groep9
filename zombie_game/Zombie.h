@@ -2,7 +2,6 @@
 #define ZOMBIE_H
 
 #include <SFML/Graphics.hpp>
-#include <array>
 
 #include "Entity.h"
 #include "Player.h"
@@ -58,19 +57,9 @@ class Zombie : public Entity
 		/// </summary>
 		/// <returns>SFML FloatRect of the Zombie</returns>
 		sf::FloatRect getHitbox() override;
-
-		/// <summary>
-		/// Function to play a sound of a Zombie.
-		/// </summary>
-		void playAttackSound();
-
-		~Zombie();
 	private:
-		Player* player;///<Pointer to the player class.
-		//sf::Sound attackSounds[4];///< Array of sounds that a zombie makes.
-		//sf::Clock zombieClock;///< Clock used for Zombie sounds.
-		//int randomSoundTime;///< integer containing a random number till 5(0-5). 
 		sf::Clock attackClock;
+		Player* player;///<Pointer to the player class.
 };
 
 #endif

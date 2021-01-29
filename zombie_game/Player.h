@@ -74,10 +74,10 @@ class Player : public Entity
 
 		~Player();
 	private:
-		HUD& hud;///< \brief To update on screen information. Like,: points, time and Health.
 		sf::Sound walkingSound;///< Sound of the player walking.
 		sf::Sound handGunSound;///< Sound of the handgun.
 		HudInfo info;///< The struct that contains the player information like, points and time.
+		HUD& hud;///< \brief To update on screen information. Like,: points, time and Health.
 };
 
 #endif

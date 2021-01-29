@@ -1,6 +1,8 @@
 #ifndef STATIC_H
 #define STATIC_H
 
+#include <SFML/Graphics.hpp>
+
 #include "AssetManager.h"
 #include "Drawable.h"
 /// @file

@@ -21,18 +21,18 @@ class GameOver : public cScreen
 {
 private:
 	std::vector<Button*> buttons;///< A vector of all the buttons on the main screen.
-	bool isFullScreen = false;///< \brief bool if SFML window is full screen. 
+	sf::RectangleShape inputBox;///< The white box, where the player can input her/his name.
+	sf::Text playerInputPromt;///< SFML text with the text: "Player name:", used to make clear to the Player that the Player can type his name to save the score.
+	bool isFullScreen = false;///< \brief bool if SFML window is full screen.
+	bool canSaveScore = false;///< Bool if the player has pressed enter. To save to score.
 	sf::RenderWindow* window;///<Pointer to the SFML window. [SFML window Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php)
+	std::string playerInput;///< String of player input. Contains the player name.
 	sf::Sprite background;///<SFML Sprite for the background of the main menu. (is loaded from AssetManager in the constructor of this class). \image html menu_image.png
-	AssetManager& assets;///<Reference to the AssetManager. To load textures. 
-	Game& game;///<Reference to the Game class. Is needed to get the player player points, when the player dies. Also used when the class reconstruct. 
+	AssetManager& assets;///<Reference to the AssetManager. To load textures.
+	sf::Text playerText; ///< SFML text of the player input. Uses the string: playeInput.
 	sf::Event event;///<SFML Event is for handling for keyboard inputs and window resising. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 	sf::Sprite logo;///<SFML Sprite of the logo sceen on the main menu(is loaded from AssetManager in the constructor of this class). \image html logo.png
-	bool canSaveScore = false;///< Bool if the player has pressed enter. To save to score. 
-	std::string playerInput;///< String of player input. Contains the player name. 
-	sf::Text playerText; ///< SFML text of the player input. Uses the string: playeInput. 
-	sf::RectangleShape inputBox;///< The white box, where the player can input her/his name.
-	sf::Text playerInputPromt;///< SFML text with the text: "Player name:", used to make clear to the Player that the Player can type his name to save the score. 
+	Game& game;///<Reference to the Game class. Is needed to get the player player points, when the player dies. Also used when the class reconstruct.
 	
 	/// <summary>
 	/// Function to save the players score to a file. 

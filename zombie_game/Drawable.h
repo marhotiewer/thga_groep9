@@ -2,6 +2,7 @@
 #define DRAWABLE_H
 
 #include <SFML/Graphics.hpp>
+
 #include "AssetManager.h"
 /// @file
 

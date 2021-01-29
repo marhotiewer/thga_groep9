@@ -17,28 +17,30 @@ class AssetManager
 	public:
 		AssetManager();///< \brief Constructor load all the textures of variables into memory.
 		sf::Texture homescreenBackgroundTexture;///< \brief home screen background. \image html menu_image.png 
-		sf::Texture HUD_bottom_right;///< \brief hud of the game. \image html hud_bottom_right.png
-		sf::Texture zombieSpriteMap;///< \brief Zombie sprite map.  \image html zombie.png
-		sf::Texture buttonTexture;///< \brief Texture of a button. \image html buttons.png
-		sf::Texture adamSpriteMap;///< \brief Player sprite map. \image html player.png
-		sf::Texture gameLogoTexture;///< \brief logo of the game. \image html logo.png
-		sf::Image gameIconWindow;///< \brief The icon of the window of the game. \image html icon.png
-		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
-		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
-		sf::Texture floorTexture;///< \brief Texture of a Floor.
-		sf::Texture wallTexture;///< \brief Texture of a Wall.
-		sf::Font arial;///< \brief The font used in the game for text.
-		sf::Texture gameOverTexture;///< \brief Texture of the game over text used in the GameOver screen. \image html gameover.png
-		sf::Texture scoreBoard;///< \brief Texture of the score board used in the screen: ScoreScreen. \image html scoreboard.png
+		sf::SoundBuffer mainMenuClickSound;///< \brief Buffer with sound used if a user clicks a button on the main menu.
+		sf::Texture bushRotatedTexture;///< \brief Texture of a rotated bush. Used in the map. \image html bushRotated.png
 		sf::Texture policeAgentTexture;///< \brief Texture of the police agent(PoliceAgent). Used in the map. \image html policeAgent.png
+		sf::Texture houseFenceTexture;///< \brief Texture of the House fence. Used in the map. \image html fenceHouse.png
+		sf::Texture HUD_bottom_right;///< \brief hud of the game. \image html hud_bottom_right.png
+		sf::SoundBuffer walkingSound;///< \brief Sound that the Player makes when walking. Sound is the same on any floor.
+		sf::Music mainMenuSoundtrack;///< \brief Music of the main menu. 
+		sf::SoundBuffer handGunSound;///< \brief Sound of the handgun of the player. Sound plays when the player fires the hand gun.
 		sf::Texture invisibleTexture;///< \brief Texture of a InvisibleWall. Used in the map. \image html invisible.png
+		sf::Texture zombieSpriteMap;///< \brief Zombie sprite map.  \image html zombie.png
+		sf::Texture gameLogoTexture;///< \brief logo of the game. \image html logo.png
+		sf::Texture gameOverTexture;///< \brief Texture of the game over text used in the GameOver screen. \image html gameover.png
+		sf::Music ingameBreezeSound;///< \brief Background noise of the game.
 		sf::Texture fountainTexture;///< \brief Texture of a Fountain. Used in the map. \image html fountain.png
 		sf::Texture campfireTexture;///< \brief Texture of the Campfire. Used in the map. \image html campfire.png
 		sf::Texture sandbagTexture;///< \brief Texture of the Sandbag. Used in the map. \image html sandbag.png
+		sf::Texture buttonTexture;///< \brief Texture of a button. \image html buttons.png
+		sf::Texture adamSpriteMap;///< \brief Player sprite map. \image html player.png
 		sf::Texture hills1Texture;///< \brief Texture of the normal hill(Hils1). Used in the map. \image html hills1.png
 		sf::Texture hills2Texture;///< \brief Texture of a hill(Hils2) with a waterfall. Used in the map. \image html hills2.png
+		sf::Image gameIconWindow;///< \brief The icon of the window of the game. \image html icon.png
+		sf::Texture bulletSprite;///< \brief Texture of a Bullet.
+		sf::Texture floorTexture;///< \brief Texture of a Floor.
 		sf::Texture fenceTexture;///< \brief Texture of the Fence. Used in the map. \image html fence.png
-		sf::Texture houseFenceTexture;///< \brief Texture of the House fence. Used in the map. \image html fenceHouse.png
 		sf::Texture waterTexture;///< \brief Texture of the Water. Used in the map. \image html water.png
 		sf::Texture perk1Texture;///< \brief Texture of the perk(Perk1). Used in the map. \image html perk1.png
 		sf::Texture shedTexture;///< \brief Texture of the shed. Used in the map. \image html shed.png
@@ -47,13 +49,10 @@ class AssetManager
 		sf::Texture lampTexture;///< \brief Texture of a lamp. Used in the map. \image html lamp.png
 		sf::Texture rockTexture;///< \brief Texture of a rocks. Used in the map. \image html rocks.png
 		sf::Texture bushTexture;///< \brief Texture of a bush. Used in the map. \image html bush.png
-		sf::Texture bushRotatedTexture;///< \brief Texture of a rotated bush. Used in the map. \image html bushRotated.png
-		sf::SoundBuffer mainMenuClickSound;///< \brief Buffer with sound used if a user clicks a button on the main menu. 
-		sf::SoundBuffer zombieSounds[4];///< \brief Array with sounds that a zombie can make. 
-		sf::SoundBuffer walkingSound;///< \brief Sound that the Player makes when walking. Sound is the same on any floor.
-		sf::Music mainMenuSoundtrack;///< \brief Music of the main menu. 
-		sf::SoundBuffer handGunSound;///< \brief Sound of the handgun of the player. Sound plays when the player fires the hand gun.
-		sf::Music ingameBreezeSound;///< \brief Background noise of the game. 
+		sf::Texture treeTexture;///< \brief Texture for one Tree. \image html tree.png
+		sf::Texture wallTexture;///< \brief Texture of a Wall.
+		sf::Texture scoreBoard;///< \brief Texture of the score board used in the screen: ScoreScreen. \image html scoreboard.png
+		sf::Font arial;///< \brief The font used in the game for text.
 };
 
 #endif //ASSETMANAGER_H
