@@ -106,8 +106,6 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
 	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(1500, 1500), this->objects, this->hud));
-	
-	this->ingameBreeze = &this->assets.ingameBreezeSound;
 
 	this->spawns = {
 		sf::Vector2f(600, 700),
@@ -123,7 +121,7 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 Game::~Game()
 {
 	for (Drawable* entity : this->objects) delete entity;
-	this->ingameBreeze->stop();
+	this->assets.ingameBreezeSound.stop();
 }
 
 Screen Game::update(float deltaTime)
@@ -276,7 +274,7 @@ void Game::render()
 Screen Game::run()
 {
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	this->ingameBreeze->play();
+	this->assets.ingameBreezeSound.play();
 
 	Screen nextScreen = Screen::None;
 	sf::Clock clock;

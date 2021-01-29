@@ -36,6 +36,11 @@ GameOver::GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game) :
 	this->matchBackground();
 }
 
+GameOver::~GameOver()
+{
+	for (Button* button : this->buttons) delete button;
+}
+
 Screen GameOver::saveScoreToFile(int points)
 {
 	if (points == 0) { return Screen::MainMenu; }

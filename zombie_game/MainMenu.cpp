@@ -25,19 +25,18 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 }
 
 MainMenu::~MainMenu() {
+	for (Button* button : this->buttons) delete button;
 	this->backgroundMusic->stop();
-	this->clickSound.resetBuffer();
 }
 
 void MainMenu::matchBackground() {
 	sf::IntRect textureRect = this->background.getTextureRect();
 	sf::Vector2u windowSize = this->window->getSize();
-	int width = textureRect.width;
-	int height = textureRect.height;
-	// Calculate width scale
-	float widthScale = float(windowSize.x) / width;
-	// Calculate height scale
-	float heightScale = float(windowSize.y) / width;
+
+	// Calculate width, height scales
+	float widthScale = float(windowSize.x) / textureRect.width;
+	float heightScale = float(windowSize.y) / textureRect.width;
+
 	// Change scale to biggest value
 	if (widthScale > heightScale) {
 		this->background.setScale({ widthScale, widthScale });

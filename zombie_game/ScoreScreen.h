@@ -42,6 +42,8 @@ public:
 	/// <param name="assets">AssetManager required for textures</param>
 	ScoreScreen(sf::RenderWindow* window, AssetManager& assets);
 
+	~ScoreScreen();
+
 	/// <summary>
 	/// Function that checks if a next screen need to show.
 	/// </summary>

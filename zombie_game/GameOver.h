@@ -61,6 +61,8 @@ public:
 	/// <param name="game">Reference to Game to get player points to save a score.</param>
 	GameOver(sf::RenderWindow* window, AssetManager& assets, Game &game);
 
+	~GameOver();
+
 	/// <summary>
 	/// Function that checks if a next screen need to show. 
 	/// And update the SFML Events.

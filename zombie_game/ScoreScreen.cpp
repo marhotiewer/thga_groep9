@@ -18,6 +18,11 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 	this->matchBackground();
 }
 
+ScoreScreen::~ScoreScreen()
+{
+	for (Button* button : this->buttons) delete button;
+}
+
 void ScoreScreen::displayScores()
 {
 	std::ifstream iputFile("scores.json");

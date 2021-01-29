@@ -10,21 +10,25 @@
 int main()
 {
 	srand((unsigned int)time(NULL));
-	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
 	AssetManager assets;
+
+	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
 	window.setIcon(assets.gameIconWindow.getSize().x, assets.gameIconWindow.getSize().y, assets.gameIconWindow.getPixelsPtr());
-	Game game(&window, assets);
+	Game* game = new Game(&window, assets);
+
 	cScreen* Screens[] = {
 		new MainMenu(&window, assets),
-		&game,
-		new GameOver(&window, assets, game),
+		game,
+		new GameOver(&window, assets, *game),
 		new ScoreScreen(&window, assets)
 	};
+
 	Screen currentScreen = Screen::MainMenu;
-	
     while (currentScreen != Screen::None)
     {
 		currentScreen = Screens[int(currentScreen)]->run();
     }
+	for (cScreen* screen : Screens) delete screen;
+
     return 0;
 }

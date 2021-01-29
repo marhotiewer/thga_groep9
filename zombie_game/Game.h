@@ -99,7 +99,7 @@ class Game : public cScreen {
 		bool noKeyPressed = false;///< Bool if no key is pressed.
 		bool isFullScreen = false;///< Bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
-		sf::Music* ingameBreeze;///< Pointer to the ingame breeze sound.
+		sf::Music ingameBreeze;///< Pointer to the ingame breeze sound.
 		float elapsedTime = 0.f;///< Time used for elapsed a frame.
 		unsigned char wave = 1;///< The current wave of the zombies. 
 		AssetManager& assets;///< Reference to the AssetManager. To load textures. 
