@@ -19,7 +19,7 @@ struct HudInfo{
 /// \class HUD
 /// \brief 
 /// Class for on screen information
-/// /details
+/// \details
 /// Class used for on screen information.
 class HUD
 {
