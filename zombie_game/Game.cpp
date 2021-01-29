@@ -105,7 +105,7 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1800, 800)));
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
-	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(1500, 1500), this->objects, this->hud));
+	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(200, 2000), this->objects, this->hud));
 
 	this->spawns = {
 		sf::Vector2f(600, 700),
