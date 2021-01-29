@@ -159,7 +159,7 @@ Screen MainMenu::run()
 	Screen nextScreen = Screen::None;
 	sf::Clock clock;
 	float deltaTime;
-	if(!(this->backgroundMusic->getStatus() == this->backgroundMusic->Playing))	this->backgroundMusic->play();
+	if(!(this->assets.mainMenuSoundtrack.getStatus() == this->assets.mainMenuSoundtrack.Playing))	this->assets.mainMenuSoundtrack.play();
 
 	while (nextScreen == Screen::None && this->running())
 	{
