@@ -13,11 +13,12 @@
 ///@file
 
 
-/// \class MainMenu
+/// \class ScoreScreen
 /// \brief
-/// Main Menu class
+/// Screen to show scores. 
 /// \details
-/// The class for the main menu.
+/// The class used to show the top 8 scores of loaded from the file: "scores.json".
+/// If the file "scores.json" does't exist. The text: "No scores" will be displayed.
 class ScoreScreen : public cScreen
 {
 private:
