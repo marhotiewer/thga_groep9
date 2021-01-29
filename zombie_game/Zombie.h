@@ -58,7 +58,7 @@ class Zombie : public Entity
 		/// <returns>SFML FloatRect of the Zombie</returns>
 		sf::FloatRect getHitbox() override;
 	private:
-		sf::Clock attackClock;
+		sf::Clock attackClock;///< The clock used that the Zombies can't damage the Player one once a second.
 		Player* player;///<Pointer to the player class.
 };
 
