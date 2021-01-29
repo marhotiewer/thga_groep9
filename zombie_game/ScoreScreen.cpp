@@ -16,11 +16,14 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 	this->background.setOrigin({ float(backgroundRect.width) / 2, float(backgroundRect.height) / 2 }); // center of the sprite
 	this->background.setPosition({ 0.f, 0.f });
 	this->matchBackground();
+
+	//this->backgroundMusic = this->assets.mainMenuSoundtrack;
 }
 
 ScoreScreen::~ScoreScreen()
 {
 	for (Button* button : this->buttons) delete button;
+	this->assets.mainMenuSoundtrack.stop();
 }
 
 void ScoreScreen::displayScores()
@@ -47,7 +50,6 @@ void ScoreScreen::displayScores()
 	}
 	iputFile.close();
 }
-
 
 void ScoreScreen::matchBackground() {
 	sf::IntRect textureRect = this->background.getTextureRect();
@@ -133,6 +135,11 @@ Screen ScoreScreen::pollEvents()
 					if (buttonPressed != ButtonType::None) {
 						// A button was pressed
 						switch (buttonPressed) {
+						case ButtonType::Play: {
+							// Play the game!
+							this->assets.mainMenuSoundtrack.stop();
+							returnValue = Screen::Game;
+						}
 						case ButtonType::Menu: {
 							returnValue = Screen::MainMenu;
 							break;
