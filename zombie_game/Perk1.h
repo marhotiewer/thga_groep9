@@ -2,7 +2,6 @@
 #define PERK1_H
 
 #include <SFML/Graphics.hpp>
-
 #include "Static.h"
 //@file
 
@@ -12,6 +11,7 @@
 /// Class for a item Perk shop.
 /// \details
 /// Class used in the map for a item Perk shop.
+/// Class is inherited from Static, so it can't move.
 /// \image html perk1.png
 class Perk1 : public Static
 {

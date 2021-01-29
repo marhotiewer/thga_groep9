@@ -2,7 +2,6 @@
 #define FOUNTAIN_H
 
 #include <SFML/Graphics.hpp>
-
 #include "Static.h"
 //@file
 
@@ -12,6 +11,7 @@
 /// Class of a Fountain
 /// \details
 /// Class used to spawn a Fountain.
+/// Class is inherited from Static, so it can't move.
 /// \image html fountain.png
 class Fountain : public Static
 {

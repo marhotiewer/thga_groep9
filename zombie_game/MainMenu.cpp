@@ -5,10 +5,8 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->event = sf::Event();
 
 	this->buttons.push_back(new Button(this->assets, { 0.f, 27.f }, ButtonType::Play));
-	this->buttons.push_back(new Button(this->assets, { 0.f, 81.f }, ButtonType::Quit));
-	this->buttons.push_back(new Button(this->assets, { 0.f, 135.f }, ButtonType::Options));
-	this->buttons.push_back(new Button(this->assets, { 0.f, 189.f }, ButtonType::Scores));
-
+	this->buttons.push_back(new Button(this->assets, { 0.f, 81.f }, ButtonType::Scores));
+	this->buttons.push_back(new Button(this->assets, { 0.f, 135.f }, ButtonType::Quit));
 	
 	this->logo.setTexture(assets.gameLogoTexture);
 	sf::IntRect logoRect = this->logo.getTextureRect();
@@ -21,25 +19,23 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	this->background.setPosition({ 0.f, 0.f });
 	this->matchBackground();
 
-	//this->backgroundMusic = sf::Music(this->assets.mainMenuSoundtrack);
 	this->clickSound = sf::Sound(this->assets.mainMenuClickSound);
 	this->clickSound.setVolume(50.f);
 }
 
 MainMenu::~MainMenu() {
 	this->assets.mainMenuSoundtrack.stop();
-	this->clickSound.resetBuffer();
+	for (Button* button : this->buttons) delete button;
 }
 
 void MainMenu::matchBackground() {
 	sf::IntRect textureRect = this->background.getTextureRect();
 	sf::Vector2u windowSize = this->window->getSize();
-	int width = textureRect.width;
-	int height = textureRect.height;
-	// Calculate width scale
-	float widthScale = float(windowSize.x) / width;
-	// Calculate height scale
-	float heightScale = float(windowSize.y) / width;
+
+	// Calculate width, height scales
+	float widthScale = float(windowSize.x) / textureRect.width;
+	float heightScale = float(windowSize.y) / textureRect.width;
+
 	// Change scale to biggest value
 	if (widthScale > heightScale) {
 		this->background.setScale({ widthScale, widthScale });
@@ -55,8 +51,8 @@ Screen MainMenu::update(float deltaTimeSeconds) {
 }
 
 void MainMenu::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Z-Rush");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Z-Rush", sf::Style::Fullscreen);	// fullscreen
 
 	sf::View view = this->window->getView();
 	view.setSize(sf::Vector2f(this->window->getSize()));

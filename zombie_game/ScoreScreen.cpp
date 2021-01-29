@@ -5,20 +5,11 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 	this->event = sf::Event();
 
 	// Creating buttons
-	this->buttons.push_back(new Button(this->assets, { 200.f, 0.f }, ButtonType::Play));
-	this->buttons.push_back(new Button(this->assets, { 200.f, 80.f }, ButtonType::Quit));
-	//this->buttons.push_back(new Button(this->assets, { 264.5f, 338.f }, ButtonType::Options));
-	//this->buttons.push_back(new Button(this->assets, { 264.5f, 392.f }, ButtonType::Scores));
-
+	this->buttons.push_back(new Button(this->assets, { 0.f, 200.f }, ButtonType::Menu));
 
 	this->scoreBoard.setTexture(assets.scoreBoard);
 	this->scoreBoard.setOrigin({ float(this->scoreBoard.getTextureRect().width ) / 2, float(this->scoreBoard.getTextureRect().height) / 2 }); // center of the sprite
-	this->scoreBoard.setPosition(sf::Vector2f(0.f, 150.f));
-
-	this->logo.setTexture(assets.gameLogoTexture);
-	sf::IntRect logoRect = this->logo.getTextureRect();
-	this->logo.setOrigin({ float(logoRect.width) / 2, float(logoRect.height) / 2 }); // center of the sprite
-	this->logo.setPosition({ 0.f, -118.5f });
+	this->scoreBoard.setPosition(sf::Vector2f(0.f, 0.f));
 
 	this->background.setTexture(assets.homescreenBackgroundTexture);
 	sf::IntRect backgroundRect = this->background.getTextureRect();
@@ -27,6 +18,11 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 	this->matchBackground();
 
 	//this->backgroundMusic = this->assets.mainMenuSoundtrack;
+}
+
+ScoreScreen::~ScoreScreen()
+{
+	for (Button* button : this->buttons) delete button;
 }
 
 void ScoreScreen::displayScores()
@@ -80,7 +76,7 @@ void ScoreScreen::matchBackground() {
 
 Screen ScoreScreen::update(float deltaTimeSeconds) {
 	Screen nextScreen = this->pollEvents();
-	float textx = -100.f, texty = 0.f;
+	float textx = -100.f, texty = -150.f;
 	for (sf::Text &text : scoreTextVector) {
 		text.setPosition(sf::Vector2f(textx, texty));
 		texty += 38;
@@ -89,8 +85,8 @@ Screen ScoreScreen::update(float deltaTimeSeconds) {
 }
 
 void ScoreScreen::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Z-Rush");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "Z-Rush", sf::Style::Fullscreen);	// fullscreen
 
 	sf::View view = this->window->getView();
 	view.setSize(sf::Vector2f(this->window->getSize()));
@@ -146,13 +142,11 @@ Screen ScoreScreen::pollEvents()
 						switch (buttonPressed) {
 						case ButtonType::Play: {
 							// Play the game!
-							returnValue = Screen::Game;
 							this->assets.mainMenuSoundtrack.stop();
+							returnValue = Screen::Game;
+						case ButtonType::Menu: {
+							returnValue = Screen::MainMenu;
 							break;
-						}
-						case ButtonType::Quit: {
-							// Quit the game :(
-							window->close();
 						}
 						default: break;
 						}
@@ -193,12 +187,11 @@ Screen ScoreScreen::run()
 	sf::View view = this->window->getView();
 	view.setCenter({ 0.f, 0.f });
 	this->window->setView(view);
-	
 	this->displayScores();
 
 	Screen nextScreen = Screen::None;
-	sf::Clock clock;
 	float deltaTimeSeconds;
+	sf::Clock clock;
 
 	while (nextScreen == Screen::None && this->running()) {
 		deltaTimeSeconds = clock.restart().asSeconds();

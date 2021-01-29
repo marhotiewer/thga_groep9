@@ -2,7 +2,6 @@
 #define FENCE_H
 
 #include <SFML/Graphics.hpp>
-
 #include "Static.h"
 ///@file
 
@@ -12,6 +11,7 @@
 /// Class of a Fence
 /// \details
 /// Fence class used in the map for a fence.
+/// Class is inherited from Static, so it can't move.
 /// \image html fence.png
 class Fence : public Static
 {

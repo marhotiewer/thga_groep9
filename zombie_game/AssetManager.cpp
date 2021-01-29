@@ -1455,6 +1455,7 @@ const uint8_t wall_tile[] = {
 AssetManager::AssetManager()
 {
     this->arial.loadFromFile("font\\arial.ttf");
+    this->gameIconWindow.loadFromFile("textures\\icon.png");
 
     this->homescreenBackgroundTexture.loadFromFile("textures\\menu_image.png");
     this->bulletSprite.loadFromMemory(bullet_sprite, sizeof(bullet_sprite));

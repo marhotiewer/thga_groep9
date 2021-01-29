@@ -12,6 +12,7 @@
 /// Class of a HouseFence
 /// \details
 /// Class of the fence near the house.
+/// Class is inherited from Static, so it can't move.
 /// \image html fenceHouse.png
 class HouseFence : public Static
 {

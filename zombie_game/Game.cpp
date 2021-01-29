@@ -10,6 +10,12 @@ struct Z_Index {
 	}
 };
 
+/// <summary>
+/// Function to get a random item(iterator) of a vector
+/// </summary>
+/// <typeparam name="T">a vector with a type.</typeparam>
+/// <param name="v">The Vector</param>
+/// <returns>A iterator to the random item from the vector.</returns>
 template<typename T>
 T random(std::vector<T> const& v)
 {
@@ -99,23 +105,26 @@ Game::Game(sf::RenderWindow *window, AssetManager &assets) : window(window), ass
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1800, 800)));
 	this->objects.push_back(new Sandbag(this->assets, sf::Vector2f(1900, 800)));
 
-	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(175, 2200), this->objects, this->hud));
+	this->objects.push_back(this->player = new Player(this->window, this->assets, sf::Vector2f(1500, 1500), this->objects, this->hud));
 
 	this->spawns = {
-		sf::Vector2f(300, 2200),
-		sf::Vector2f(500, 2200)
+		sf::Vector2f(600, 700),
+		sf::Vector2f(1010, 500),
+		sf::Vector2f(2160, 500),
+		sf::Vector2f(650, 1300),
+		sf::Vector2f(2365, 1030),
+		sf::Vector2f(2160, 1630),
+		sf::Vector2f(1570, 1750)
 	};
 }
 
 Game::~Game()
 {
-	this->assets.ingameBreezeSound.stop();
-	//this->ingameBreeze->~Music();
-	this->player->~Player();
 	for (Drawable* entity : this->objects) delete entity;
+	this->assets.ingameBreezeSound.stop();
 }
 
-void Game::update(float deltaTime)
+Screen Game::update(float deltaTime)
 {
 	if ((this->elapsedTime += deltaTime) >= 1.f) {
 		if (this->debug) this->window->setTitle("Z-Rush (frametime: " + std::to_string(deltaTime * 1000.f) + "ms)");
@@ -123,7 +132,8 @@ void Game::update(float deltaTime)
 		this->elapsedTime = 0.f;
 	}
 
-	this->pollEvents();
+	Screen returnValue = Screen::None;
+	returnValue = this->pollEvents();
 
 	if (this->player->isActive()) {
 		sf::Vector2f delta(0.f, 0.f);
@@ -162,16 +172,19 @@ void Game::update(float deltaTime)
 		// spawn zombie if the total amount of zombies hasn't been spawned
 		if (this->zombiesLeft > 0 && (this->spawnTimer += deltaTime) >= 1.f) {
 			Zombie* zombie = new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects);
-			zombie->update(deltaTime);
-			this->spawnTimer = 0.f;
 
-			if (zombie->move({}) == nullptr) {
-				this->objects.push_back(new Zombie(this->window, this->assets, random(this->spawns), this->player, this->objects));
-				this->zombiesLeft--;
+			for (Drawable* object : this->objects) {
+				if (object->isColliding(*zombie)) {
+					delete zombie;
+					break;
+				}
+				else {
+					this->objects.push_back(zombie);
+					this->zombiesLeft--;
+					break;
+				}
 			}
-			else {
-				delete zombie;
-			}
+			this->spawnTimer = 0.f;
 		}
 		// start a new round if every zombie has been spawned and killed
 		else if (!zombiesAlive && this->zombiesLeft == 0) {
@@ -181,56 +194,55 @@ void Game::update(float deltaTime)
 	}
 	this->hud.update();
 	std::sort(this->objects.begin(), this->objects.end(), Z_Index());
+	return returnValue;
 }
 
 void Game::toggleFullscreen() {
-	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "Zombie Game");				// windowed
-	else this->window->create(sf::VideoMode::getDesktopMode(), "Zombie Game", sf::Style::Fullscreen);	// fullscreen
+	if (this->isFullScreen) this->window->create(sf::VideoMode(640, 480), "R-Rush");				// windowed
+	else this->window->create(sf::VideoMode::getDesktopMode(), "R-Rush", sf::Style::Fullscreen);	// fullscreen
 
 	// after creating a new windows we have to set the settings again
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
-
 	this->isFullScreen = !this->isFullScreen;
 }
 
-void Game::pollEvents()
+Screen Game::pollEvents()
 {
+	Screen returnValue = Screen::None;
 	while (this->window->pollEvent(this->event))
 	{
 		switch (this->event.type)
 		{
-		case sf::Event::Closed:
-			this->window->close();
-			break;
-		case sf::Event::Resized: {
-			sf::View view = this->window->getView();
-			view.setSize(sf::Vector2f(this->window->getSize()));
-			this->window->setView(view);
-			//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
-			break;
-		}
-
-		case sf::Event::KeyPressed:
-			// toggle fullscreen mode
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-				toggleFullscreen();
-			}
-			// toggle debugging info
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
-				this->debug = !this->debug;
-			}
-			// close the game
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			case sf::Event::Closed:
 				this->window->close();
+				break;
+			case sf::Event::Resized: {
+				sf::View view = this->window->getView();
+				view.setSize(sf::Vector2f(this->window->getSize()));
+				this->window->setView(view);
+				break;
 			}
-			break;
-		case sf::Event::MouseButtonPressed:
-			if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
-			else if (event.mouseButton.button ==  sf::Mouse::Right) this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window))), this->player, this->objects));
-			break;
+			case sf::Event::KeyPressed:
+				// toggle fullscreen mode
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+					toggleFullscreen();
+				}
+				// toggle debugging info
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5)) {
+					this->debug = !this->debug;
+				}
+				// close the game
+				else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+					returnValue = Screen::MainMenu;
+				}
+				break;
+			case sf::Event::MouseButtonPressed:
+				if (event.mouseButton.button == sf::Mouse::Left) this->player->shoot(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window)));
+				else if (event.mouseButton.button ==  sf::Mouse::Right) this->objects.push_back(new Zombie(this->window, this->assets, sf::Vector2f(this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window))), this->player, this->objects));
+				break;
 		}
 	}
+	return returnValue;
 }
 
 bool Game::running()
@@ -262,17 +274,21 @@ void Game::render()
 Screen Game::run()
 {
 	this->window->setView(sf::View(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f, sf::Vector2f(this->window->getSize())));
-	//sf::Listener::setPosition({ this->player->getPos().x, this->player->getPos().y, 0.f });
-
-	sf::Clock clock;
-	float deltaTime;
 	this->assets.ingameBreezeSound.play();
 
-	 while (this->running() && this->player->isActive())
+	Screen nextScreen = Screen::None;
+	sf::Clock clock;
+	float deltaTime;
+
+	 while (nextScreen == Screen::None && this->running() && this->player->isActive())
 	 {
 		 deltaTime = clock.restart().asSeconds();
-		 this->update(deltaTime);
+		 nextScreen = this->update(deltaTime);
 		 this->render();
 	 }
-	 return Screen::GameOver;
+
+	 if (!this->player->isActive()) {
+		 return Screen::GameOver;
+	 }
+	 return nextScreen;
 }

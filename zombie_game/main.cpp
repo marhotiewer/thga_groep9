@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <time.h>
 #include "Game.h"
 #include "MainMenu.h"
 #include "GameOver.h"
@@ -8,21 +9,26 @@
 
 int main()
 {
-	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
+	srand((unsigned int)time(NULL));
 	AssetManager assets;
-	Game game(&window, assets);
+
+	sf::RenderWindow window{ sf::VideoMode{ 640, 480 }, "Z-Rush" };
+	window.setIcon(assets.gameIconWindow.getSize().x, assets.gameIconWindow.getSize().y, assets.gameIconWindow.getPixelsPtr());
+	Game* game = new Game(&window, assets);
+
 	cScreen* Screens[] = {
 		new MainMenu(&window, assets),
-		&game,
-		new GameOver(&window, assets, game),
+		game,
+		new GameOver(&window, assets, *game),
 		new ScoreScreen(&window, assets)
 	};
+
 	Screen currentScreen = Screen::MainMenu;
-	
     while (currentScreen != Screen::None)
     {
 		currentScreen = Screens[int(currentScreen)]->run();
     }
-	sf::sleep(sf::milliseconds(250));
+	for (cScreen* screen : Screens) delete screen;
+
     return 0;
 }

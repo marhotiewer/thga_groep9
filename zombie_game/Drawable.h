@@ -2,7 +2,6 @@
 #define DRAWABLE_H
 
 #include <SFML/Graphics.hpp>
-
 #include "AssetManager.h"
 /// @file
 
@@ -39,8 +38,8 @@ class Drawable
 		/// This function can check for future moves with the correct delta. 
 		/// </summary>
 		/// <param name="drawable">Needed to check with other objects. </param>
-		/// <param name="delta">diference to new location(futur move). if {0,0}, checks for current position.</param>
-		/// <returns>bool if colliding, if true = the object is colliding with other object, if false, the object is not colliding with other object.</returns>
+		/// <param name="delta">Diference to new location(futur move). if {0,0}, checks for current position.</param>
+		/// <returns>Bool if colliding, if true = the object is colliding with other object, if false, the object is not colliding with other object.</returns>
 		virtual bool isColliding(Drawable& drawable, sf::Vector2f delta = sf::Vector2f(0.f, 0.f));
 		
 		/// <summary>
@@ -57,13 +56,13 @@ class Drawable
 		virtual void debug_draw(sf::RenderWindow* window);
 		
 		/// <summary>
-		/// draw's the current sprite to the window. 
+		/// Draw's the current sprite to the window. 
 		/// </summary>
 		/// <param name="window">The pointer to the current SFML window of the game.</param>
 		virtual void draw(sf::RenderWindow *window);
 		
 		/// <summary>
-		/// 
+		/// Function to return the hitbox of the object.
 		/// </summary>
 		/// <returns>Hitbox of the current object</returns>
 		virtual sf::FloatRect getHitbox();
@@ -100,6 +99,10 @@ class Drawable
 		/// <returns>bool if class still active</returns>
 		bool isActive();
 
+		/// <summary>
+		/// Function to determine the order of the object on screen
+		/// </summary>
+		/// <returns>The priority of the order to render.</returns>
 		virtual float Z_Order();
 	protected:
 		AssetManager& assets;///<Reference to AssetManager, where all the textures are stored.

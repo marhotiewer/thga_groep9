@@ -59,12 +59,7 @@ class Game : public cScreen {
 		/// This function updates the position on the screen. And runs the Bullet::move function to check if it can move to the new location. 
 		/// </summary>
 		/// <param name="deltaTime">The time elapsed for one frame.</param>
-		void update(float deltaTime);
-		
-		/// <summary>
-		/// Function that as executed will toggle the SFML window to full screen.
-		/// </summary>
-		void toggleFullscreen();
+		Screen update(float deltaTime);
 
 		/// <summary>
 		/// Main loop of the Z-Rush game.
@@ -79,7 +74,7 @@ class Game : public cScreen {
 		/// [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 		/// </summary>
 		/// <returns>If a next screen need to show.</returns>
-		void pollEvents();
+		Screen pollEvents();
 
 		/// <summary>
 		/// Function that checks if the SFML window is running.
@@ -98,19 +93,24 @@ class Game : public cScreen {
 
 		~Game();
 	private:
-		HUD hud;
-		std::vector<sf::Vector2f> spawns;
-		std::vector<Drawable*> objects;///< vector of pointers of all drawable pointers 
-		bool noKeyPressed = false;///< bool if no key is pressed.
-		bool isFullScreen = false;///<bool used for used full screen.
+		HUD hud;///<Shows the information on the screen. Like Time, Points and Health.
+		std::vector<sf::Vector2f> spawns;///< The places where the zombies can spawn. 
+		std::vector<Drawable*> objects;///< Vector of pointers of all drawable pointers 
+		bool noKeyPressed = false;///< Bool if no key is pressed.
+		bool isFullScreen = false;///< Bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
 		float elapsedTime = 0.f;///<Time used for elapsed a frame.
-		unsigned char wave = 1;
-		AssetManager& assets;///<Reference to the AssetManager. To load textures. 
+		unsigned char wave = 1;///< The current wave of the zombies.
+		AssetManager& assets;///<Reference to the AssetManager. To load textures.
 		bool debug = false;///< bool used for debug intentions.
 		sf::Event event;///<SFML Event handeler. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
-		unsigned char zombiesLeft = 5;
-		float spawnTimer = 0;
+		unsigned char zombiesLeft = 5;///<The Zombies left in the game. 
+		float spawnTimer = 0;///< Timer used for spawning zombies on the correct time. 
+
+		/// <summary>
+		/// Function that as executed will toggle the SFML window to full screen.
+		/// </summary>
+		void toggleFullscreen();
 };
 
 #endif

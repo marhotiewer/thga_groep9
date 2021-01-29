@@ -12,12 +12,13 @@
 /// Class for a PoliceAgent.
 /// \details
 /// Class used in the map to spawn a PoliceAgent.
+/// Class is inherited from Static, so it can't move.
 /// \image html policeAgent.png
 class PoliceAgent : public Static
 {
 	public:
 		/// <summary>
-		/// 
+		/// Constructor of the Police agent.
 		/// </summary>
 		/// <param name="assets">AssetManager required for textures.</param>
 		/// <param name="pos">Position of the Police agent.</param>
