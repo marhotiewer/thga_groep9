@@ -99,11 +99,10 @@ class Game : public cScreen {
 		bool noKeyPressed = false;///< Bool if no key is pressed.
 		bool isFullScreen = false;///< Bool used for used full screen.
 		sf::RenderWindow* window;///< Pointer to the SFML window.
-		sf::Music ingameBreeze;///< Pointer to the ingame breeze sound.
-		float elapsedTime = 0.f;///< Time used for elapsed a frame.
-		unsigned char wave = 1;///< The current wave of the zombies. 
-		AssetManager& assets;///< Reference to the AssetManager. To load textures. 
-		bool debug = false;///< Bool used for debug intentions. If true, debug information will show on screen. 
+		float elapsedTime = 0.f;///<Time used for elapsed a frame.
+		unsigned char wave = 1;///< The current wave of the zombies.
+		AssetManager& assets;///<Reference to the AssetManager. To load textures.
+		bool debug = false;///< bool used for debug intentions.
 		sf::Event event;///<SFML Event handeler. [SFML Event Documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Event.php)
 		unsigned char zombiesLeft = 5;///<The Zombies left in the game. 
 		float spawnTimer = 0;///< Timer used for spawning zombies on the correct time. 
