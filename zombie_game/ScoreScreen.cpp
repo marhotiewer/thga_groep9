@@ -23,6 +23,7 @@ ScoreScreen::ScoreScreen(sf::RenderWindow* window, AssetManager& assets) : windo
 ScoreScreen::~ScoreScreen()
 {
 	for (Button* button : this->buttons) delete button;
+	this->assets.mainMenuSoundtrack.stop();
 }
 
 void ScoreScreen::displayScores()
@@ -49,12 +50,6 @@ void ScoreScreen::displayScores()
 	}
 	iputFile.close();
 }
-
-ScoreScreen::~ScoreScreen()
-{
-	this->assets.mainMenuSoundtrack.stop();
-}
-
 
 void ScoreScreen::matchBackground() {
 	sf::IntRect textureRect = this->background.getTextureRect();
@@ -144,6 +139,7 @@ Screen ScoreScreen::pollEvents()
 							// Play the game!
 							this->assets.mainMenuSoundtrack.stop();
 							returnValue = Screen::Game;
+						}
 						case ButtonType::Menu: {
 							returnValue = Screen::MainMenu;
 							break;
