@@ -17,7 +17,6 @@ MainMenu::MainMenu(sf::RenderWindow* window, AssetManager& assets) : window(wind
 	sf::IntRect backgroundRect = this->background.getTextureRect();
 	this->background.setOrigin({ float(backgroundRect.width) / 2, float(backgroundRect.height) / 2 }); // center of the sprite
 	this->background.setPosition({ 0.f, 0.f });
-	this->matchBackground();
 
 	this->clickSound = sf::Sound(this->assets.mainMenuClickSound);
 	this->clickSound.setVolume(50.f);
@@ -156,11 +155,12 @@ Screen MainMenu::run()
 	view.setCenter({ 0.f, 0.f });
 	this->window->setView(view);
 
+	matchBackground();
+
 	Screen nextScreen = Screen::None;
 	sf::Clock clock;
 	float deltaTime;
-
-	this->assets.mainMenuSoundtrack.play();
+	if(!(this->assets.mainMenuSoundtrack.getStatus() == this->assets.mainMenuSoundtrack.Playing))	this->assets.mainMenuSoundtrack.play();
 
 	while (nextScreen == Screen::None && this->running())
 	{

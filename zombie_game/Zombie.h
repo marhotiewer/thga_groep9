@@ -70,6 +70,7 @@ class Zombie : public Entity
 		//sf::Sound attackSounds[4];///< Array of sounds that a zombie makes.
 		//sf::Clock zombieClock;///< Clock used for Zombie sounds.
 		//int randomSoundTime;///< integer containing a random number till 5(0-5). 
+		sf::Clock attackClock;
 };
 
 #endif

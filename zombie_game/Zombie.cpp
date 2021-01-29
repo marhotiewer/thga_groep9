@@ -16,6 +16,9 @@ Zombie::Zombie(sf::RenderWindow* window, AssetManager& assets, sf::Vector2f pos,
 	this->zombieClock = sf::Clock();
 	this->zombieClock.restart();
 	*/
+
+	this->attackClock = sf::Clock();
+	this->attackClock.restart();
 }
 
 void Zombie::debug_draw(sf::RenderWindow* window)
@@ -76,7 +79,11 @@ void Zombie::update(float deltaTime)
 Drawable* Zombie::move(sf::Vector2f delta)
 {
 	Drawable* object = Entity::move(delta);
-	if (object == this->player) { object->damage(1); }
+	if (object == this->player && (this->attackClock.getElapsedTime().asSeconds() >= 1.f)) 
+	{ 
+		object->damage(2); 
+		this->attackClock.restart();
+	}
 	return object;
 }
 
