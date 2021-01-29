@@ -242,9 +242,9 @@ Screen Game::pollEvents()
 				}
 				else if (event.mouseButton.button == sf::Mouse::Right) {
 					sf::Vector2f pos(this->player->getPos() + sf::Vector2f(this->player->getSize()) / 2.f);
-					float angle = -0.99f;
+					float angle = -0.95f;
 
-					while ((angle += 0.01f) <= 2) {
+					while ((angle += 0.05f) <= 2) {
 						this->player->shoot({ pos.x + 50.f * float(cos(angle * 3.14159265359)), pos.y + 50.f * float(sin(angle * 3.14159265359)) });
 					}
 				}
