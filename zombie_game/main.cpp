@@ -29,5 +29,5 @@ int main()
     }
 	for (cScreen* screen : Screens) delete screen;
 
-    return 0;
+	exit(0);
 }
