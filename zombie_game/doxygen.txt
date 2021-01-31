@@ -19,12 +19,10 @@
 * <tr><td rowspan="1">A<td>Player moves to the left               
 * <tr><td rowspan="1">S<td>Player moves down                          
 * <tr><td rowspan="1">D<td>Player moves right
-* <tr><td rowspan="1">SHIFT<td>Player will run. 
-* <tr><td rowspan="1">Num1<td>Select weapon 1
-* <tr><td rowspan="1">Num2<td>Select weapon 2
-* <tr><td rowspan="1">R<td>Player reload weapon  
-* <tr><td rowspan="1">Left mouse button<td>Player shoots with current weapon
+* <tr><td rowspan="1">SHIFT + W OR A OR S OR D<td>Player will run to the selected direction 
+* <tr><td rowspan="1">Left mouse button<td>Player shootS with current weapon
 * <tr><td rowspan="1">Left Alt + Enter buttton<td>Game will toggle full screen
+* <tr><td rowspan="1">ESCAPSE<td>In the game, the game pauses/resumes. In the main menu, the game will exit.
 * </table>
 *
 * \section Items Game Items
@@ -41,6 +39,6 @@
 * - Mark Verburg
 * - Pim Goes
 *
-* \version version: 0.3
-* \date 27-1-2021
+* \version version: V1.0
+* \date 31-1-2021
 */
