@@ -20,7 +20,7 @@
 * <tr><td rowspan="1">S<td>Player moves down                          
 * <tr><td rowspan="1">D<td>Player moves right
 * <tr><td rowspan="1">SHIFT + W OR A OR S OR D<td>Player will run to the selected direction 
-* <tr><td rowspan="1">Left mouse button<td>Player shootS with current weapon
+* <tr><td rowspan="1">Left mouse button<td>Player shoots with current weapon
 * <tr><td rowspan="1">Left Alt + Enter buttton<td>Game will toggle full screen
 * <tr><td rowspan="1">ESCAPSE<td>In the game, the game pauses/resumes. In the main menu, the game will exit.
 * </table>
