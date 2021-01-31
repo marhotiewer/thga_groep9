@@ -9,8 +9,7 @@
 /// AssetManager
 /// \details
 /// The asset manager is responsible for loading images SFML textures(sf::Texture).
-/// If a class need a texture from the asset manager, the asset manager need to given by the class by reference. 
-/// The image files are in the AssetManager.cpp file. 
+/// If a class need a texture, sound or a font from the asset manager, the asset manager need to given by the class by a reference.
 /// The asset manager is created in Game.cpp.
 class AssetManager
 {
